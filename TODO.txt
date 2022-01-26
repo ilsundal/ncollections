@@ -1,0 +1,16 @@
+FEATURES
+- Test Collection with objects, to test equals(), contains(), add(), remove() etc.
+  - all methods that take an element (or elements) as an argument.
+- HashMap is a Map
+- TreeSet is a SortedSet is a Set
+- Improve HashSet iterator to make it incremental
+  - requires that I can iterate incrementally over object keys.
+
+PUBLISH
+- How to get "npm install neatcollections" instead of "npm install @neatcoders/collections"?
+- README.md
+  - Why "neatcollections"?
+    - low foot-print: no other packages
+    - well-tested
+    - equals, compare, hashCode
+    - works in node.js and browsers

@@ -1,0 +1,29 @@
+1.0.3
+-----
+First release.
+
+Instance collections
+- ArrayList
+- Deque
+- HashSet
+- LinkedList
+- PriorityQueue
+- Queue
+- Stack
+
+Super collections:
+- Collection
+- List
+- Set
+
+Exceptions:
+- IndexOutOfBoundsException
+- NoSuchElementException
+- UnsupportedOperationException
+
+Number of test cases: 288
+
+Packages:
+"devDependencies": {
+  "mocha": "^9.2.0"
+}
