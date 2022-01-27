@@ -15,6 +15,6 @@ const COLLECTIONS = {
 module.exports = {};
 
 for (let [collectionName, collectionClass] of Object.entries(COLLECTIONS)) {
-  module.exports[collectionName] = collectionClass;
-  module.exports['new' + collectionName] = function(options) { return new collectionClass(options); };
+  module.exports[collectionName] = collectionClass; // expose class directly
+  module.exports['new' + collectionName] = function(options) { return new collectionClass(options); }; // expose builder function
 }

@@ -2,7 +2,6 @@
 
 const assert = require('assert');
 
-const NoSuchElementException = require(__dirname + '/../main/NoSuchElementException.js');
 const PriorityQueue = require(__dirname + '/../main/PriorityQueue.js');
 const Util = require(__dirname + '/../main/Util.js');
 

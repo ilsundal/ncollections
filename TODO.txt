@@ -1,7 +1,6 @@
 FEATURES
-- Test Collection with objects, to test equals(), contains(), add(), remove() etc.
-  - all methods that take an element (or elements) as an argument.
-- HashMap is a Map
+- New class-based test cases
+- toString(), e.g. <CollectionClass>(#size), e.g. ArrayList(34).
 - TreeSet is a SortedSet is a Set
 - Improve HashSet iterator to make it incremental
   - requires that I can iterate incrementally over object keys.
@@ -14,3 +13,17 @@ PUBLISH
     - well-tested
     - equals, compare, hashCode
     - works in node.js and browsers
+
+Collection
+  Deque*
+  List
+    ArrayList*
+    LinkedList*
+  Map
+    HashMap*
+  Queue*
+    PriorityQueue*
+  Set
+    HashSet*
+  Stack*
+* = instantiable
