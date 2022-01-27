@@ -19,17 +19,31 @@ class Queue extends Collection {
 
   get list() { return this.#list; }
 
-  // implements Collection
-  add(element) {
-    return this.#list.addLast(element);
+  dequeue() {
+    return this.#list.isEmpty() ? undefined : this.#list.removeFirst();
   }
 
-  // implements Collection
   clear() {
     return this.#list.clear();
   }
 
-  // implements Collection
+  clone() {
+    let clone = new this.constructor(this.options);
+    for (let element of this)
+      clone.enqueue(element);
+    return clone;
+  }
+
+  enqueue(element) {
+    return this.#list.addLast(element);
+  }
+
+  equals(collection) {
+    if (!(collection instanceof Queue))
+      return false;
+    return super.equals(collection);
+  }
+
   next() {
     return this.#list.next();
   }
@@ -38,23 +52,12 @@ class Queue extends Collection {
     return this.#list.isEmpty() ? undefined : this.#list.getFirst();
   }
 
-  poll() {
-    return this.#list.isEmpty() ? undefined : this.#list.removeFirst();
-  }
-  
-  // implements Collection (not supported)
-  remove(element) {
-    throw new UnsupportedOperationException();
-  }
-
-  // implements Collection (not supported)
-  removeAll(element) {
-    throw new UnsupportedOperationException();
-  }
-
-  // implements Collection
   size() {
     return this.#list.size();
+  }
+
+  toArray() {
+    return this.#list.toArray();
   }
 }
 

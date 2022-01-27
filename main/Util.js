@@ -63,7 +63,7 @@ function hashCode(obj) {
 
 function isSubClassOf(subClass, parentClass) {
   return subClass.prototype instanceof parentClass || (subClass === parentClass);
-};
+}
 
 function toString(obj) {
   if (obj == null)

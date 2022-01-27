@@ -3,10 +3,9 @@
 const UnsupportedOperationException = require(__dirname + '/UnsupportedOperationException.js');
 const Util = require(__dirname + '/Util.js');
 
-// interface with some default implementations
+// super class of all collections
 class Collection {
 
-  // equals_fn
   static equals_fn = function(element1, element2) {
     if ((typeof element1 == 'object') && (typeof element1.equals == 'function'))
       return element1.equals(element2);
@@ -15,14 +14,12 @@ class Collection {
     return Util.equals(element1, element2);
   }
 
-  // hash_code_fn
   static hash_code_fn = function(element) {
     if ((typeof element == 'object') && (typeof element.hashCode == 'function'))
       return element.hashCode();
     return Util.hashCode(element);
   }
 
-  // compare_to_fn
   static compare_fn = function(element1, element2) {
     if ((typeof element1 == 'object') && (typeof element1.compare == 'function'))
       return element1.compare(element2);
@@ -32,21 +29,11 @@ class Collection {
   }
 
   #options;
+  
+  get options() { return this.#options; }
 
   constructor(options={}) {
     this.#options = options;
-  }
-
-  // returns true if the element was added, and false otherwise
-  add(element) {
-    throw new UnsupportedOperationException();
-  }
-
-  addAll(elements) {
-    let changed = false;
-    for (let element of elements)
-      changed = this.add(element) || changed;
-    return changed;
   }
 
   clear() {
@@ -55,31 +42,26 @@ class Collection {
 
   // returns a shallow clone
   clone() {
-    let clone = new this.constructor(this.#options);
-    clone.addAll(this);
+    throw new UnsupportedOperationException();
+  }
+
+  clone0(add_method_name, iterable) {
+    let clone = new this.constructor(this.options);
+    for (let element of (iterable || this.toArray()))
+      clone[add_method_name](element);
     return clone;
   }
 
-  contains(element) {
-    for (let thisElement of this) {
-      if (Collection.equals_fn(element, thisElement))
-        return true;
-    }
-    return false;
-  }
-
-  containsAll(elements) {
-    for (let element of elements) {
-      if (!this.contains(element))
-        return false;
-    }
-    return true;
+  equals(collection) {
+    return this.equals0(collection, Collection);
   }
 
   // two collections are equal if their iterators return "equal" elements in the same order
-  equals(collection) {
+  equals0(collection, instance_of) {
     if (this == collection)
      return true;
+    if (!(collection instanceof instance_of))
+      return false;
     if (this.size() != collection.size())
       return false;
     let this_iterator = this.next();
@@ -117,19 +99,7 @@ class Collection {
   // see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols
   [Symbol.iterator]() { return this.next(); }
 
-  // returns true if the element was removed, and false otherwise
-  // only a single element instance will be removed
-  remove(element) {
-    throw new UnsupportedOperationException();
-  }
-
-  removeAll(elements) {
-    let removed = false;
-    for (let element of elements)
-      removed = this.remove(element) || removed;
-    return removed;
-  }
-
+  // in principle a basic implementation based on next() could be done here, but that is too inefficient to be useful; so, in practice, this method should always be overridden.
   size() {
     throw new UnsupportedOperationException();
   }

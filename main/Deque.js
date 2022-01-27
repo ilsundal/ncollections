@@ -17,11 +17,6 @@ class Deque extends Collection {
     this.#list = new list_class();
   }
 
-  // implements Collection
-  add(element) {
-    return this.#list.addLast(element);
-  }
-
   addFirst(element) {
     return this.#list.addFirst(element);
   }
@@ -30,12 +25,16 @@ class Deque extends Collection {
     return this.#list.addLast(element);
   }
 
-  // implements Collection
   clear() {
     return this.#list.clear();
   }
 
-  // implements Collection
+  equals(collection) {
+    if (!(collection instanceof Deque))
+      return false;
+    return super.equals(collection);
+  }
+
   next() {
     return this.#list.next();
   }
@@ -55,18 +54,7 @@ class Deque extends Collection {
   pollLast() {
     return this.#list.isEmpty() ? undefined : this.#list.removeLast();
   }
-  
-  // implements Collection (not supported)
-  remove(element) {
-    throw new UnsupportedOperationException();
-  }
 
-  // implements Collection (not supported)
-  removeAll(element) {
-    throw new UnsupportedOperationException();
-  }
-
-  // implements Collection
   size() {
     return this.#list.size();
   }

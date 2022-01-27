@@ -13,26 +13,22 @@ class LinkedList extends List {
     super(options);
   }
 
-  // implements Collection
-  add(element) {
-    this.#insert(element, this.#length);
-    return true;
-  }
-
-  // implements List
   addFirst(element) {
     this.#insert(element, 0);
     return true;
   }
 
-  // implements Collection
+  addLast(element) {
+    this.#insert(element, this.#length);
+    return true;
+  }
+
   clear() {
     this.#first_node = null;
     this.#last_node = null;
     this.#length = 0;
   }
 
-  // implements List
   getAt(index) {
     if ((index < 0) || (index >= this.#length))
       throw new IndexOutOfBoundsException(index);
@@ -81,14 +77,12 @@ class LinkedList extends List {
     this.#length++;
   }
 
-  // implements List
   insertAt(index, element) {
     if ((index < 0) || (index >= this.#length))
       throw new IndexOutOfBoundsException(index);
     this.#insert(element, index);
   }
 
-  // implements Collection
   next() {
     let next_node = this.#first_node;
     return {
@@ -102,7 +96,6 @@ class LinkedList extends List {
     }
   }
 
-  // implements Collection
   remove(element) {
     for (let current_node = this.#first_node; current_node != null; current_node = current_node.next_node) {
       if (Collection.equals_fn(element, current_node.element)) {
@@ -113,7 +106,6 @@ class LinkedList extends List {
     return false;
   }
 
-  // implements List
   removeAt(index) {
     if ((index < 0) || (index >= this.#length))
       throw new IndexOutOfBoundsException(index);
@@ -137,14 +129,12 @@ class LinkedList extends List {
     return node;
   }
 
-  // implements List
   setAt(index, element) {
     if ((index < 0) || (index >= this.#length))
       throw new IndexOutOfBoundsException(index);
     this.#getNode(index).element = element;
   }
 
-  // implements Collection
   size() {
     return this.#length;
   }

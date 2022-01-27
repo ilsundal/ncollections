@@ -3,6 +3,7 @@
 const assert = require('assert');
 
 const Collections = require(__dirname + '/Collections.js');
+const HashSet = require(__dirname + '/../main/HashSet.js');
 const IndexOutOfBoundsException = require(__dirname + '/../main/IndexOutOfBoundsException.js');
 const List = require(__dirname + '/../main/List.js');
 const NoSuchElementException = require(__dirname + '/../main/NoSuchElementException.js');
@@ -49,6 +50,15 @@ function run(listClass, options={}) {
       list.add(1);
       assert(list.addLast(2));
       assert(Util.equals(list.toArray(), [1, 2]));
+    });
+  });
+
+  describe('#equals', function() {
+
+    it('[] equals {} -> false', function() {
+      let list = new listClass();
+      let set = new HashSet();
+      assert(!list.equals(set));
     });
   });
 

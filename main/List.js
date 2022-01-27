@@ -1,13 +1,17 @@
 'use strict'
 
-const Collection = require(__dirname + '/Collection.js');
+const DefaultCollection = require(__dirname + '/DefaultCollection.js');
 const NoSuchElementException = require(__dirname + '/NoSuchElementException.js');
 const UnsupportedOperationException = require(__dirname + '/UnsupportedOperationException.js');
 
-class List extends Collection {
+class List extends DefaultCollection {
 
   constructor(options={}) {
     super(options);
+  }
+
+  add(element) {
+    return this.addLast(element);
   }
 
   addFirst(element) {
@@ -15,7 +19,13 @@ class List extends Collection {
   }
 
   addLast(element) {
-    return this.add(element);
+    throw new UnsupportedOperationException();
+  }
+
+  equals(collection) {
+    if (!(collection instanceof List))
+      return false;
+    return super.equals(collection);
   }
 
   getAt(index) {

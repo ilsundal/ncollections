@@ -12,7 +12,6 @@ class HashSet extends Set {
     super(options);
   }
 
-  // implements Collection
   add(element) {
     let hash_code = Collection.hash_code_fn(element);
     let map_key_list = this.#map[hash_code];
@@ -25,13 +24,11 @@ class HashSet extends Set {
     return true;
   }
 
-  // implements Collection
   clear() {
     this.#map = {};
     this.#size = 0;
   }
 
-  // implements Collection more effectively
   contains(element) {
     let hash_code = Collection.hash_code_fn(element);
     let map_key_list = this.#map[hash_code];
@@ -40,7 +37,6 @@ class HashSet extends Set {
     return map_key_list.contains(element);
   }
 
-  // implements Collection
   // inefficient if only iterating over a few of the elements
   // todo: a more efficient implementation is to iterate over the map values by key
   next() {
@@ -50,7 +46,6 @@ class HashSet extends Set {
     return all.next();
   }
 
-  // implements Collection
   remove(element) {
     let hash_code = Collection.hash_code_fn(element);
     let map_key_list = this.#map[hash_code];
@@ -65,7 +60,6 @@ class HashSet extends Set {
     return true;
   }
 
-  // implements Collection
   size() {
     return this.#size;
   }

@@ -92,7 +92,7 @@ function run(collectionClass, options={}) {
 
   describe('#containsAll', function() {
 
-    it('{1,2} contains {1,2} -> true', function() {
+    it('{1,2} contains {2,1} -> true', function() {
       let collection = new collectionClass();
       collection.addAll([1, 2]);
       assert(collection.containsAll([2, 1]));

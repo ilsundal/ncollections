@@ -4,6 +4,7 @@ const ArrayList = require(__dirname + '/ArrayList.js');
 const Collection = require(__dirname + '/Collection.js');
 const Queue = require(__dirname + '/Queue.js');
 
+// probably the underlying data structure should be changed to a tree-based one
 class PriorityQueue extends Queue {
   #compare_fn;
 
@@ -15,8 +16,8 @@ class PriorityQueue extends Queue {
   }
 
   // O(n) - therefore not suitable for big queues
-  // the implementation searches backwards to reduce the amount of right-shifting on inserts; this also means that if elements are added in order of increasing priority than then time complexity is O(1); also, if two elements have the same priority then the one that was added first will also be first in the underlying list (i.e. FIFO).
-  add(element) {
+  // the implementation searches backwards to reduce the amount of right-shifting on inserts (when backed by an ArrayList, which is the default); this also means that if elements are added in order of increasing priority than then time complexity is O(1); also, if two elements have the same priority then the one that was added first will also be first in the underlying list (i.e. FIFO).
+  enqueue(element) {
     for (let index = this.list.size() - 1; index >= 0; index--) {
       let compareValue = this.#compare_fn(element, this.list.getAt(index));
       if (compareValue >= 0) {

@@ -18,17 +18,18 @@ class Stack extends Collection {
     this.#list = new list_class();
   }
 
-  // implements Collection
-  add(element) {
-    return this.#list.addLast(element);
-  }
-
-  // implements Collection
   clear() {
     return this.#list.clear();
   }
 
-  // implements Collection
+  clone() {
+    return super.clone0('push');
+  }
+
+  equals(collection) {
+    return super.equals0(collection, Stack);
+  }
+
   next() {
     return this.#list.next();
   }
@@ -47,19 +48,12 @@ class Stack extends Collection {
     return this.#list.addLast(element);
   }
 
-  // implements Collection (not supported)
-  remove(element) {
-    throw new UnsupportedOperationException();
-  }
-
-  // implements Collection (not supported)
-  removeAll(element) {
-    throw new UnsupportedOperationException();
-  }
-
-  // implements Collection
   size() {
     return this.#list.size();
+  }
+
+  toArray() {
+    return this.#list.toArray();
   }
 }
 
