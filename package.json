@@ -10,7 +10,7 @@
   "main": "index.js",
   "directories": {
     "main": "main",
-    "test": "test"
+    "test": "test/index.js"
   },
   "scripts": {
     "test": "mocha"

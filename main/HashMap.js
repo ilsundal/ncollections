@@ -64,7 +64,7 @@ class HashMap extends Map {
     let key_hash_code_entry_to_remove_index = -1;
     if (key_hash_code_entries) {
       for (let i = 0; i != key_hash_code_entries.length; i++) {
-        let key_hash_code_entry = key_hash_code_entries[i];
+        let key_hash_code_entry = key_hash_code_entries.getAt(i);
         if (Collection.equals_fn(key, key_hash_code_entry.key)) {
           key_hash_code_entry_to_remove_index = i;
           break;
@@ -72,10 +72,10 @@ class HashMap extends Map {
       }
     }
     if (key_hash_code_entry_to_remove_index >= 0) {
-      let key_hash_code_entry_removed = key_hash_code_entries.removeAt(i);
+      let key_hash_code_entry_removed = key_hash_code_entries.removeAt(key_hash_code_entry_to_remove_index);
       if (key_hash_code_entries.isEmpty())
         delete this.#map[key_hash_code]; // clean up
-      return key_hash_code_entry_removed;
+      return key_hash_code_entry_removed.value;
     }
     return undefined;
   }

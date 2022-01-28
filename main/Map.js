@@ -26,7 +26,7 @@ class Map extends Collection {
     return this.values().contains(value);
   }
 
-  // returns a Collection
+  // returns a Collection of key-value pair objects
   // todo: the returned Collection should not allow any modification (if backed by the map)
   entries() {
     throw new UnsupportedOperationException();
@@ -36,6 +36,7 @@ class Map extends Collection {
     return super.equals0(collection, Map);
   }
 
+  // returns the value at key, or undefined if no value at key
   get(key) {
     throw new UnsupportedOperationException();
   }
@@ -53,16 +54,18 @@ class Map extends Collection {
     return this.entries().next();
   }
 
-  // returns 
+  // returns the previous value at key, or undefined if no value at key
   put(key, value) {
     throw new UnsupportedOperationException();
   }
 
+  // returns nothing
   putAll(kvPairs) {
     for (let kvPair of kvPairs)
       this.put(kvPair.key, kvPair.value);
   }
 
+  // returns the previous value at key, or undefined if no value at key
   remove(key) {
     throw new UnsupportedOperationException();
   }

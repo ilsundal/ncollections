@@ -4,47 +4,94 @@ const assert = require('assert');
 
 const DefaultCollection = require(__dirname + '/../main/DefaultCollection.js');
 const UnsupportedOperationException = require(__dirname + '/../main/UnsupportedOperationException.js');
+const Util = require(__dirname + '/../main/Util.js');
+
+const CollectionTest = require(__dirname + '/CollectionTest.js');
 
 class DefaultCollectionTest extends CollectionTest {
 
   constructor(collectionClass, options) {
     super(collectionClass, options);
-    assert(Util.isSubClassOf(collectionClass, DefaultCollection);
+    assert(Util.isSubClassOf(collectionClass, DefaultCollection));
   }
 
-  run() {
-    super.run();
-    this.test_add(this);
-    this.test_addAll(this);
-    this.test_contains(this);
-    this.test_containsAll(this);
-    this.test_remove(this);
-    this.test_removeAll(this);
-  }
-  
+  class_method_names = this.class_method_names.concat([
+    'add',
+    'addAll',
+    'contains',
+    'containsAll',
+    'remove',
+    'removeAll'
+  ]);
+
+  // default test case implementations below make no assumption about collection ordering or duplicates; thus, they work with both lists and sets.
+
   test_add(test) {
-    throw new Error('Not implemented!');
+    super.test_add_like_method(test);
   }
 
   test_addAll(test) {
-    throw new Error('Not implemented!');
+    it('[] + [1,2] -> true & [1,2]', function() {
+      let collection = test.newInstance();
+      assert(collection.addAll([1,2]));
+      assert(Util.equals(collection.toArray().sort(), [1,2]));
+    });
+    it('[1,2] + [3,4] -> true & [1,2,3,4]', function() {
+      let collection = test.newInstance([1,2]);
+      assert(collection.addAll([3,4]));
+      assert(Util.equals(collection.toArray().sort(), [1,2,3,4]));
+    });
   }
 
   test_contains(test) {
-    throw new Error('Not implemented!');
+    it('[] contains 1 -> false', function() {
+      let collection = test.newInstance();
+      assert(!collection.contains(1));
+    });
+    it('[1,2] contains 3 -> false', function() {
+      let collection = test.newInstance([1,2]);
+      assert(!collection.contains(3));
+    });
+    it('[1,2] contains 2 -> true', function() {
+      let collection = test.newInstance([1,2]);
+      assert(collection.contains(2));
+    });
   }
 
   test_containsAll(test) {
-    throw new Error('Not implemented!');
+    it('[] contains all of [1] -> false', function() {
+      let collection = test.newInstance();
+      assert(!collection.containsAll([1]));
+    });
+    it('[1,2] contains all of [2] -> true', function() {
+      let collection = test.newInstance([1,2]);
+      assert(collection.containsAll([2]));
+    });
+    it('[1,2,3] contains all of [1,3] -> true', function() {
+      let collection = test.newInstance([1,2,3]);
+      assert(collection.containsAll([1,3]));
+    });
   }
 
   test_remove(test) {
-    throw new Error('Not implemented!');
+    it('[] - 1 -> false', function() {
+      let collection = test.newInstance();
+      assert(!collection.remove(1));
+    });
+    it('[1,2,3] - 2 -> true & [1,3]', function() {
+      let collection = test.newInstance([1,2,3]);
+      assert(collection.remove(2));
+      assert(Util.equals(collection.toArray().sort(), [1,3]));
+    });
   }
 
   test_removeAll(test) {
-    throw new Error('Not implemented!');
+    it('[1,2,3,4] - [1,2,5] -> true & [3,4]', function() {
+      let collection = test.newInstance([1,2,3,4]);
+      assert(collection.removeAll([1,2,5]));
+      assert(Util.equals(collection.toArray().sort(), [3,4]));
+    });
   }
 }
 
-module.exports = CollectionTest;
+module.exports = DefaultCollectionTest;
