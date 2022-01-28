@@ -23,9 +23,7 @@ class List extends DefaultCollection {
   }
 
   equals(collection) {
-    if (!(collection instanceof List))
-      return false;
-    return super.equals(collection);
+    return super.equals0(collection, List);
   }
 
   getAt(index) {

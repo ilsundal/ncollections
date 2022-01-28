@@ -70,8 +70,11 @@ class CollectionTest {
   test_toArray(test) {
     throw new Error('Not implemented!');
   }
+
+  // helper methods for use by sub-classes where the elements can be of simple value types, such as integers and strings, and be added as a single argument to a method, e.g. list.add, stack.pull, queue.enqueue, set.add, etc. (thus, this does NOT work for maps where entries are objects with a key and a value.)
+  // to work with both sets and non-sets, duplicate elements are not tested
+  // to work with both ordered (e.g. lists) and unordered (e.g. sets) an option field can be used; default is ordered
   
-  // helper methods for use by sub-classes
   test_add_ordered(test, method_name='add') {
     describe(`#${method_name}`, function() {
       it('[] + 1 -> [1]', function() {
@@ -179,14 +182,16 @@ class CollectionTest {
         for (let element of collection)
           assert(false);
       });
-      it('[1,2] -> (two iterations)', function() {
+      it('[1,2] -> 1 -> 2', function() {
         let collection = test.newInstance();
         collection[add_method_name](1);
         collection[add_method_name](2);
-        let num_iterations = 0;
+        let array =[];
         for (let element of collection)
-          num_iterations++;
-        assert(num_iterations == 2);
+          array.push(element);
+        assert(collection.size() == array.length);
+        assert(array[0] == 1);
+        assert(array[1] == 2);
       });
     });
   }

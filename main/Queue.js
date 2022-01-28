@@ -39,9 +39,7 @@ class Queue extends Collection {
   }
 
   equals(collection) {
-    if (!(collection instanceof Queue))
-      return false;
-    return super.equals(collection);
+    return super.equals0(collection, Queue);
   }
 
   next() {

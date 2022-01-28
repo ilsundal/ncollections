@@ -60,4 +60,4 @@ class DefaultCollection extends Collection {
   }
 }
 
-module.exports = Collection;
+module.exports = DefaultCollection;

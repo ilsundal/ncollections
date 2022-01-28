@@ -1,17 +1,15 @@
 'use strict'
 
-const Collection = require(__dirname + '/Collection.js');
+const DefaultCollection = require(__dirname + '/DefaultCollection.js');
 
-class Set extends Collection {
+class Set extends DefaultCollection {
 
-  constructor(options={}) {
+  constructor(options) {
     super(options);
   }
 
   equals(collection) {
-    if (!(collection instanceof Set))
-      return false;
-    return super.equals(collection);
+    return super.equals0(collection, Set);
   }
 }
 
