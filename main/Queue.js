@@ -38,10 +38,6 @@ class Queue extends Collection {
     return this.#list.addLast(element);
   }
 
-  equals(collection) {
-    return super.equals0(collection, Queue);
-  }
-
   next() {
     return this.#list.next();
   }

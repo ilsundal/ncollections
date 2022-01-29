@@ -29,10 +29,8 @@ class Deque extends Collection {
     return this.#list.clear();
   }
 
-  equals(collection) {
-    if (!(collection instanceof Deque))
-      return false;
-    return super.equals(collection);
+  clone() {
+    return super.clone0('addLast');
   }
 
   next() {

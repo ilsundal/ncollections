@@ -26,14 +26,9 @@ class Map extends Collection {
     return this.values().contains(value);
   }
 
-  // returns a Collection of key-value pair objects
-  // todo: the returned Collection should not allow any modification (if backed by the map)
+  // returns a Collection of key-value pair objects; if the returned Collection is backed by the map then it is wrapped as an UnmodifiableCollection to prevent modification
   entries() {
     throw new UnsupportedOperationException();
-  }
-
-  equals(collection) {
-    return super.equals0(collection, Map);
   }
 
   // returns the value at key, or undefined if no value at key
@@ -41,8 +36,7 @@ class Map extends Collection {
     throw new UnsupportedOperationException();
   }
 
-  // returns a Collection (without duplicates since keys are unique)
-  // todo: the returned Collection should not allow any modification (if backed by the map)
+  // returns a Collection (without duplicates since keys are unique); if the returned Collection is backed by the map then it is wrapped as an UnmodifiableCollection to prevent modification
   keys() {
     let keys = new HashSet();
     for (let entry of this.entries())
@@ -74,8 +68,7 @@ class Map extends Collection {
     return this.entries().size();
   }
 
-  // returns an Collection (which may contain duplicate values) - its size == size()
-  // todo: the returned Collection should not allow any modification (if backed by the map)
+  // returns an Collection (which may contain duplicate values) - its size == size(); if the returned Collection is backed by the map then it is wrapped as an UnmodifiableCollection to prevent modification
   values() {
     let values = new ArrayList(); // duplicates are possible
     for (let entry of this.entries())

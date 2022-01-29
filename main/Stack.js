@@ -26,10 +26,6 @@ class Stack extends Collection {
     return super.clone0('push');
   }
 
-  equals(collection) {
-    return super.equals0(collection, Stack);
-  }
-
   next() {
     return this.#list.next();
   }

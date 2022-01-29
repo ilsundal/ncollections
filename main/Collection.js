@@ -52,15 +52,11 @@ class Collection {
     return clone;
   }
 
+  // two collections are equal if they are both Collections and their iterators return "equal" elements in the same order
   equals(collection) {
-    return this.equals0(collection, Collection);
-  }
-
-  // two collections are equal if their iterators return "equal" elements in the same order
-  equals0(collection, instance_of) {
     if (this == collection)
      return true;
-    if (!(collection instanceof instance_of))
+    if (!(collection instanceof Collection))
       return false;
     if (this.size() != collection.size())
       return false;

@@ -30,8 +30,7 @@ class StackTest extends CollectionTest {
       assert(stack.peek() == undefined);
     });
     it('[1] -> 1', function() {
-      let stack = new Stack();
-      stack.push(1);
+      let stack = test.newInstance([1]);
       assert(stack.peek() == 1);
     });
   }
@@ -45,7 +44,7 @@ class StackTest extends CollectionTest {
       assert(Util.equals(stack.toArray(), [1]));
     });
     it('[] -> NoSuchElementException', function() {
-      let stack = new Stack();
+      let stack = test.newInstance();
       let methodCall = () => stack.pop();
       assert.throws(methodCall, NoSuchElementException);
     });
