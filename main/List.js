@@ -1,5 +1,6 @@
 'use strict'
 
+const Collection = require(__dirname + '/Collection.js');
 const DefaultCollection = require(__dirname + '/DefaultCollection.js');
 const NoSuchElementException = require(__dirname + '/NoSuchElementException.js');
 const UnsupportedOperationException = require(__dirname + '/UnsupportedOperationException.js');
@@ -22,10 +23,6 @@ class List extends DefaultCollection {
     throw new UnsupportedOperationException();
   }
 
-  equals(collection) {
-    return super.equals0(collection, List);
-  }
-
   getAt(index) {
     throw new UnsupportedOperationException();
   }
@@ -42,6 +39,7 @@ class List extends DefaultCollection {
     return this.getAt(this.size() - 1);
   }
 
+  // returns true
   insertAt(index, element) {
     throw new UnsupportedOperationException();
   }
@@ -62,11 +60,13 @@ class List extends DefaultCollection {
     return this.removeAt(this.size() - 1);
   }
 
+  // returns the list itself
   // reverses the list in place
   reverse() {
     let reversedArray = Array.from(this).reverse();
     this.clear();
     this.addAll(reversedArray);
+    return this;
   }
 
   setAt(index, element) {
@@ -85,10 +85,13 @@ class List extends DefaultCollection {
     return this.setAt(this.size() - 1, element);
   }
 
+  // returns the list itself
+  // sorts the list in place
   sort(compare_fn=Collection.compare_fn) {
     let sortedArray = Array.from(this).sort(compare_fn);
     this.clear();
     this.addAll(sortedArray);
+    return this;
   }
 }
 

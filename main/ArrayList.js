@@ -71,6 +71,7 @@ class ArrayList extends List {
 
   reverse() {
     this.#array.reverse();
+    return this;
   }
 
   setAt(index, element) {
@@ -85,6 +86,7 @@ class ArrayList extends List {
 
   sort(compare_fn=Collection.compare_fn) {
     this.#array.sort(compare_fn);
+    return this;
   }
   
   toArray() {
