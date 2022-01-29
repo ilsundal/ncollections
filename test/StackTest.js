@@ -51,7 +51,7 @@ class StackTest extends CollectionTest {
   }
 
   test_push(test) {
-    super.test_add_like_method(test, 'push');
+    super.test_add_like_method(test, { add_method_name: 'push' });
   }
 }
 

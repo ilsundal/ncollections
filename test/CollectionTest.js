@@ -68,7 +68,7 @@ class CollectionTest {
     it('[1] -> (empty)', function() {
       let collection = test.newInstance([1]);
       collection.clear();
-      assert(collection.isEmpty());
+      assert(collection.isEmpty() == true);
     });
   }
 
@@ -114,11 +114,11 @@ class CollectionTest {
   test_isEmpty(test) {
     it('[] -> true', function() {
       let collection = test.newInstance();
-      assert(collection.isEmpty());
+      assert(collection.isEmpty() == true);
     });
     it('[1] -> false', function() {
       let collection = test.newInstance([1]);
-      assert(!collection.isEmpty());
+      assert(collection.isEmpty() == false);
     });
   }
 
@@ -158,10 +158,20 @@ class CollectionTest {
   }
 
   // generic helper method for use by sub-classes with an add method with possibly another name, e.g. 'enqueue' or 'push'. defaults to 'add'.
-  test_add_like_method(test, method_name='add') {
+  // options.add_method_name is the name of the add-like method, i.e. "enqueue" for a Queue, "push" for a Stack, etc. defaults to "add"
+  // options.return_type specifies the type of the return value; it is either "changed" (if the add method returns true if the element was added, and false if not), or "collection" (if the add method returns the collection itself); defaults to "collection"
+  test_add_like_method(test, options={}) {
+    let add_method_name = options.add_method_name || 'add';
+    let assert_return_value_fn = function(collection, element, return_value) {
+       if (options.return_type == 'changed')
+         assert(return_value == true);
+       else
+         assert(return_value === collection);
+    }
     it('[] + 1 -> [1]', function() {
       let collection = test.newInstance();
-      collection[method_name](1);
+      let return_value = collection[add_method_name](1);
+      assert_return_value_fn(collection, 1, return_value);
       assert(Util.equals(collection.toArray(), [1]));
     });
   }

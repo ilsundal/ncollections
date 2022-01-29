@@ -38,7 +38,7 @@ class QueueTest extends CollectionTest {
   }
 
   test_enqueue(test) {
-    super.test_add_like_method(test, 'enqueue');
+    super.test_add_like_method(test, { add_method_name: 'enqueue' });
   }
 
   test_peek(test) {

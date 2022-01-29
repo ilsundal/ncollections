@@ -35,7 +35,8 @@ class Queue extends Collection {
   }
 
   enqueue(element) {
-    return this.#list.addLast(element);
+    this.#list.addLast(element);
+    return this;
   }
 
   next() {

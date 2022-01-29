@@ -26,17 +26,17 @@ class DefaultCollectionTest extends CollectionTest {
 
   // default test case implementations below make no assumption about collection ordering or duplicates; thus, they work with both lists and sets.
 
-  test_add(test) {
-    super.test_add_like_method(test);
+  test_add(test, options) {
+    super.test_add_like_method(test, options);
   }
 
   test_addAll(test) {
-    it('[] + [1,2] -> true & [1,2]', function() {
+    it('[] + [1,2] -> truish & [1,2]', function() {
       let collection = test.newInstance();
       assert(collection.addAll([1,2]));
       assert(Util.equals(collection.toArray().sort(), [1,2]));
     });
-    it('[1,2] + [3,4] -> true & [1,2,3,4]', function() {
+    it('[1,2] + [3,4] -> truish & [1,2,3,4]', function() {
       let collection = test.newInstance([1,2]);
       assert(collection.addAll([3,4]));
       assert(Util.equals(collection.toArray().sort(), [1,2,3,4]));
@@ -50,7 +50,7 @@ class DefaultCollectionTest extends CollectionTest {
     });
     it('[1,2] contains 3 -> false', function() {
       let collection = test.newInstance([1,2]);
-      assert(!collection.contains(3));
+      assert(collection.contains(3) == false);
     });
     it('[1,2] contains 2 -> true', function() {
       let collection = test.newInstance([1,2]);
@@ -61,15 +61,15 @@ class DefaultCollectionTest extends CollectionTest {
   test_containsAll(test) {
     it('[] contains all of [1] -> false', function() {
       let collection = test.newInstance();
-      assert(!collection.containsAll([1]));
+      assert(collection.containsAll([1]) == false);
     });
     it('[1,2] contains all of [2] -> true', function() {
       let collection = test.newInstance([1,2]);
-      assert(collection.containsAll([2]));
+      assert(collection.containsAll([2]) == true);
     });
     it('[1,2,3] contains all of [1,3] -> true', function() {
       let collection = test.newInstance([1,2,3]);
-      assert(collection.containsAll([1,3]));
+      assert(collection.containsAll([1,3]) == true);
     });
   }
 
@@ -78,7 +78,7 @@ class DefaultCollectionTest extends CollectionTest {
       let collection = test.newInstance();
       assert(!collection.remove(1));
     });
-    it('[1,2,3] - 2 -> true & [1,3]', function() {
+    it('[1,2,3] - 2 -> truish & [1,3]', function() {
       let collection = test.newInstance([1,2,3]);
       assert(collection.remove(2));
       assert(Util.equals(collection.toArray().sort(), [1,3]));
@@ -86,7 +86,7 @@ class DefaultCollectionTest extends CollectionTest {
   }
 
   test_removeAll(test) {
-    it('[1,2,3,4] - [1,2,5] -> true & [3,4]', function() {
+    it('[1,2,3,4] - [1,2,5] -> truish & [3,4]', function() {
       let collection = test.newInstance([1,2,3,4]);
       assert(collection.removeAll([1,2,5]));
       assert(Util.equals(collection.toArray().sort(), [3,4]));

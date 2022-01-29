@@ -5,15 +5,18 @@ First release.
 Instance collections
 - ArrayList
 - Deque
+- HashMap
 - HashSet
 - LinkedList
 - PriorityQueue
 - Queue
 - Stack
+- UnmodifiableCollection (hidden)
 
 Super collections:
 - Collection
 - List
+- Map
 - Set
 
 Exceptions:
@@ -21,7 +24,7 @@ Exceptions:
 - NoSuchElementException
 - UnsupportedOperationException
 
-Number of test cases: 288
+Number of test cases: 325
 
 Packages:
 "devDependencies": {

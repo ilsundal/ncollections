@@ -26,23 +26,7 @@ class DequeTest extends CollectionTest {
   add_fn = function(deque, element) {
     deque.addLast(element);
   }
-/*
-  peekFirst() {
-    return this.#list.isEmpty() ? undefined : this.#list.getFirst();
-  }
 
-  peekLast() {
-    return this.#list.isEmpty() ? undefined : this.#list.getLast();
-  }
-
-  pollFirst() {
-    return this.#list.isEmpty() ? undefined : this.#list.removeFirst();
-  }
-
-  pollLast() {
-    return this.#list.isEmpty() ? undefined : this.#list.removeLast();
-  }
-*/
   test_addFirst(test) {
     it('[] + 1 -> true & [1]', function() {
       let deque = test.newInstance();
@@ -56,7 +40,7 @@ class DequeTest extends CollectionTest {
   }
 
   test_addLast(test) {
-    super.test_add_like_method(test, 'addLast');
+    super.test_add_like_method(test, { add_method_name: 'addLast' });
   }
 
   test_peekFirst(test) {

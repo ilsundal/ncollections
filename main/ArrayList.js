@@ -14,12 +14,12 @@ class ArrayList extends List {
 
   addFirst(element) {
     this.#array.splice(0, 0, element);
-    return true;
+    return this;
   }
 
   addLast(element) {
     this.#array.push(element);
-    return true;
+    return this;
   }
 
   clear() {
@@ -36,6 +36,7 @@ class ArrayList extends List {
     if ((index < 0) || (index >= this.#array.length))
       throw new IndexOutOfBoundsException(index);
     this.#array.splice(index, 0, element);
+    return this;
   }
 
   next() {

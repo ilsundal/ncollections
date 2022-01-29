@@ -26,11 +26,11 @@ class PriorityQueue extends Queue {
         } else {
           this.list.insertAt(index + 1, element);
         }
-        return true;
+        return this;
       }
     }
     this.list.addFirst(element);
-    return true;
+    return this;
   }
 }
 

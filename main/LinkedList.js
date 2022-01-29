@@ -15,12 +15,12 @@ class LinkedList extends List {
 
   addFirst(element) {
     this.#insert(element, 0);
-    return true;
+    return this;
   }
 
   addLast(element) {
     this.#insert(element, this.#length);
-    return true;
+    return this;
   }
 
   clear() {
@@ -81,6 +81,7 @@ class LinkedList extends List {
     if ((index < 0) || (index >= this.#length))
       throw new IndexOutOfBoundsException(index);
     this.#insert(element, index);
+    return this;
   }
 
   next() {

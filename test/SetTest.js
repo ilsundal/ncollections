@@ -13,8 +13,8 @@ class SetTest extends DefaultCollectionTest {
   }
 
   test_add(test) {
-    super.test_add(test);
-    it('[1,2] + 1 -> [1,2]', function() {
+    super.test_add(test, { return_type: 'changed' });
+    it('[1,2] + 1 -> false & [1,2]', function() {
       let set = test.newInstance([1,2]);
       assert(!set.add(1));
       assert(Util.equals(set.toArray().sort(), [1,2]));

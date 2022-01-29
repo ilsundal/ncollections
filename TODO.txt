@@ -1,8 +1,5 @@
 FEATURES
-- Lists (and Queue, Stack, Dequeue) to suport add chainging, e.g. new LinkedList().addAll([1,2]).add(1,2);
-  - we can do with add (and perhaps insert?, ...) because they always return true/nothing.
-  - just like we do this reverse and sort
-- New class-based test cases
+- Go through all collections and write a) what it does, b) what it returns, and c) exceptions thrown (if any)
 - toString(), e.g. <CollectionClass>(#size), e.g. ArrayList(34).
 - TreeSet is a SortedSet is a Set
 - Improve HashSet iterator to make it incremental

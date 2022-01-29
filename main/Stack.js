@@ -41,7 +41,8 @@ class Stack extends Collection {
   }
 
   push(element) {
-    return this.#list.addLast(element);
+    this.#list.addLast(element);
+    return this;
   }
 
   size() {

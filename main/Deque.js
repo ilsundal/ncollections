@@ -18,11 +18,13 @@ class Deque extends Collection {
   }
 
   addFirst(element) {
-    return this.#list.addFirst(element);
+    this.#list.addFirst(element);
+    return this;
   }
 
   addLast(element) {
-    return this.#list.addLast(element);
+    this.#list.addLast(element);
+    return this;
   }
 
   clear() {
