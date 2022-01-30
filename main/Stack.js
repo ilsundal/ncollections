@@ -30,16 +30,22 @@ class Stack extends Collection {
     return this.#list.next();
   }
 
+  // Returns the top element of the stack, or undefined if the stack is empty.
   peek() {
     return this.#list.isEmpty() ? undefined : this.#list.getFirst();
   }
 
+  // Removes the top element of the stack.
+  // Returns the removed element.
+  // Throws NoSuchElementException if the stack is empty.
   pop() {
     if (this.#list.isEmpty())
       throw new NoSuchElementException()
     return this.#list.removeLast();
   }
 
+  // Pushes the element to the top of the stack.
+  // Returns the stack itself.
   push(element) {
     this.#list.addLast(element);
     return this;

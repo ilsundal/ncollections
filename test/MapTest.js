@@ -266,6 +266,32 @@ class MapTest extends CollectionTest {
     });
   }
 
+  test_toString(test) {
+    let string_fn = function(map) {
+      let array = map.toArray();
+      let str = '{';
+      for (let i = 0; i != array.length; i++) {
+        let entry = array[i];
+        str += Util.toString(entry.key) + '->' + Util.toString(entry.value);
+        if (i < (array.length - 1))
+          str += ',';
+      }
+      str += '}';
+      return str;
+    }
+    it('(empty) -> (stringified empty)', function() {
+      let map = test.newInstance();
+      assert(map.toString() == string_fn(map));
+    });
+    it('{1->2,"my_string"->"my_value",{a:1}->{b:2}} -> (stringified elements in iteration order)', function() {
+      let map = test.newInstance();
+      map.put(1,2);
+      map.put("my_string","my_value");
+      map.put({a:1},{b:2});
+      assert(map.toString() == string_fn(map));
+    });
+  }
+
   test_values(test) {
     it('{} -> (empty collection)', function() {
       let map = test.newInstance();

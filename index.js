@@ -3,9 +3,11 @@
 const COLLECTIONS = {
   ArrayList: require(__dirname + '/main/ArrayList.js'),
   Deque: require(__dirname + '/main/Deque.js'),
+  HashMap: require(__dirname + '/main/HashMap.js'),
   HashSet: require(__dirname + '/main/HashSet.js'),
   LinkedList: require(__dirname + '/main/LinkedList.js'),
   List: require(__dirname + '/main/ArrayList.js'), // default list: ArrayList
+  Map: require(__dirname + '/main/HashMap.js'), // default map: HashMap
   PriorityQueue: require(__dirname + '/main/PriorityQueue.js'),
   Queue: require(__dirname + '/main/Queue.js'),
   Set: require(__dirname + '/main/HashSet.js'), // default set: HashSet

@@ -19,6 +19,8 @@ class Queue extends Collection {
 
   get list() { return this.#list; }
 
+  // Removes the front element of the queue.
+  // Returns the removed element, or undefined if the queue is empty.
   dequeue() {
     return this.#list.isEmpty() ? undefined : this.#list.removeFirst();
   }
@@ -28,12 +30,11 @@ class Queue extends Collection {
   }
 
   clone() {
-    let clone = new this.constructor(this.options);
-    for (let element of this)
-      clone.enqueue(element);
-    return clone;
+    return super.clone0('enqueue');
   }
 
+  // Adds the element to the end of the queue.
+  // Returns the queue itself.
   enqueue(element) {
     this.#list.addLast(element);
     return this;
@@ -43,6 +44,7 @@ class Queue extends Collection {
     return this.#list.next();
   }
 
+  // Returns the front element of the queue, or undefined if the queue is empty.
   peek() {
     return this.#list.isEmpty() ? undefined : this.#list.getFirst();
   }

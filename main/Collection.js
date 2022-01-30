@@ -3,7 +3,7 @@
 const UnsupportedOperationException = require(__dirname + '/UnsupportedOperationException.js');
 const Util = require(__dirname + '/Util.js');
 
-// super class of all collections
+// Super class of all collections.
 class Collection {
 
   static equals_fn = function(element1, element2) {
@@ -36,23 +36,24 @@ class Collection {
     this.#options = options;
   }
 
+  // Clears the collection, i.e. makes it empty.
   clear() {
     throw new UnsupportedOperationException();
   }
 
-  // returns a shallow clone
+  // Returns a shallow clone of the collection.
   clone() {
     throw new UnsupportedOperationException();
   }
 
-  clone0(add_method_name, iterable) {
+  clone0(add_method_name='add') {
     let clone = new this.constructor(this.options);
-    for (let element of (iterable || this.toArray()))
+    for (let element of this)
       clone[add_method_name](element);
     return clone;
   }
 
-  // two collections are equal if they are both Collections and their iterators return "equal" elements in the same order
+  // Two collections are equal if they are both Collections and their iterators return "equal" elements in the same order.
   equals(collection) {
     if (this == collection)
      return true;
@@ -73,7 +74,7 @@ class Collection {
     return true;
   }
 
-  // source: https://stackoverflow.com/questions/1646807/quick-and-simple-hash-code-combinations
+  // Source: https://stackoverflow.com/questions/1646807/quick-and-simple-hash-code-combinations
   hashCode() {
     let hash = 17;
     for (let element of this)
@@ -81,27 +82,47 @@ class Collection {
     return hash;
   }
 
+  // Returns true if the collection size is 0.
   isEmpty() {
     return this.size() == 0;
   }
 
-  // implement iterator protocol
-  // see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols
+  // Implement iterator protocol.
+  // See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols
   next() {
     throw new UnsupportedOperationException();
   }
 
-  // implement iterable protocol
-  // see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols
+  // Implement iterable protocol.
+  // See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols
   [Symbol.iterator]() { return this.next(); }
 
-  // in principle a basic implementation based on next() could be done here, but that is too inefficient to be useful; so, in practice, this method should always be overridden.
+  // In principle a basic implementation based on next() could be done here, but that is too inefficient to be useful; So, in practice, this method should always be overridden.
   size() {
     throw new UnsupportedOperationException();
   }
 
+  // Returns the collection as an array.
   toArray() {
     return Array.from(this);
+  }
+
+  // Returns a string representation of the collection.
+  toString(options={}) {
+    let start = options.start || '[';
+    let separator = options.separator || ',';
+    let end = options.end || ']';
+    let element_fn = options.element_fn || function(element) { return Util.toString(element); };
+    let str = start;
+    let elements = this.toArray();
+    for (let i = 0; i != elements.length; i++) {
+      let element = elements[i];
+      str += element_fn(element);
+      if (i < (elements.length - 1))
+        str += separator;
+    }
+    str += end;
+    return str;
   }
 }
 

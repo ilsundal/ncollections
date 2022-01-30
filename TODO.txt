@@ -1,18 +1,9 @@
-FEATURES
-- Go through all collections and write a) what it does, b) what it returns, and c) exceptions thrown (if any)
-- toString(), e.g. <CollectionClass>(#size), e.g. ArrayList(34).
+TODO FEATURES
 - TreeSet is a SortedSet is a Set
 - Improve HashSet iterator to make it incremental
   - requires that I can iterate incrementally over object keys.
 
-PUBLISH
-- How to get "npm install neatcollections" instead of "npm install @neatcoders/collections"?
-- README.md
-  - Why "neatcollections"?
-    - low foot-print: no other packages
-    - well-tested
-    - equals, compare, hashCode
-    - works in node.js and browsers
+COLLECTION OVERVIEW
 
 Collection
   Deque*

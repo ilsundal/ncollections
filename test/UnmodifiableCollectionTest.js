@@ -30,6 +30,12 @@ class UnmodifiableCollectionTest extends CollectionTest {
     let methodCall = () => collection.clear();
     assert.throws(methodCall, UnsupportedOperationException);
   }
+
+  test_toString(test) {
+    let collection = test.newInstance([1]);
+    let inner_collection = collection.inner_collection;
+    assert(collection.toString() == inner_collection.toString());
+  }
 }
 
 module.exports = UnmodifiableCollectionTest;

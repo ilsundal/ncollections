@@ -16,7 +16,6 @@ class HashMap extends Map {
     this.#map = {};
   }
 
-  // implements Map
   entries() {
     let entries = new ArrayList();
     for (let values of Object.values(this.#map))
@@ -24,7 +23,6 @@ class HashMap extends Map {
     return entries;
   }
 
-  // implements Map
   get(key) {
     let key_hash_code = Collection.hash_code_fn(key);
     let key_hash_code_entries = this.#map[key_hash_code];
@@ -37,7 +35,6 @@ class HashMap extends Map {
     return undefined;
   }
 
-  // implements Map
   put(key, value) {
     let key_hash_code = Collection.hash_code_fn(key);
     let key_hash_code_entries = this.#map[key_hash_code];
@@ -57,7 +54,6 @@ class HashMap extends Map {
     return undefined;
   }
 
-  // implements Map
   remove(key) {
     let key_hash_code = Collection.hash_code_fn(key);
     let key_hash_code_entries = this.#map[key_hash_code];

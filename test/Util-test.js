@@ -126,20 +126,23 @@ describe('Util', function() {
       assert(Util.hashCode(0) == 48);
     });
 
-    it('"0" -> 48', function() {
-      assert(Util.hashCode('0') == 48);
+    it('"0" -> -1517812140', function() {
+//console.log(Util.hashCode('"0"'));
+      assert(Util.hashCode('"0"') == -1517812140);
     });
 
     it('1.5 -> 48', function() {
       assert(Util.hashCode(1.5) == 48568);
     });
 
-    it('"A" repeated 10**6 times -> 604611584', function() {
-      assert(Util.hashCode('A'.repeat(10**6)) == 604611584);
+    it('"A" repeated 10**6 times -> -338988992', function() {
+//console.log(Util.hashCode('A'.repeat(10**6)));
+      assert(Util.hashCode('A'.repeat(10**6)) == -338988992);
     });
 
-    it('[{a:1},"B",4,[true]] -> 3569038', function() {
-      assert(Util.hashCode([{a:1},"B",4,[true]]) == 13716316);
+    it('[{a:1},"B",4,[true]] -> 32066268', function() {
+//console.log(Util.hashCode([{a:1},"B",4,[true]]));
+      assert(Util.hashCode([{a:1},"B",4,[true]]) == 32066268);
     });
 
     it('hash of [{a:1},"B",4,[true]] == hash of [{a:1},"B",4,[true]]', function() {
@@ -149,8 +152,5 @@ describe('Util', function() {
     it('hash of [{a:1},"B",4,[true]] != hash of [{a:1},"B",4,[false]]', function() {
       assert(Util.hashCode([{a:1},"B",4,[true]]) != Util.hashCode([{a:1},"B",4,[false]]));
     });
-
-//console.log(Util.hashCode('A'.repeat(10**6)));
-
   });
 });

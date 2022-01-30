@@ -20,6 +20,10 @@ class SetTest extends DefaultCollectionTest {
       assert(Util.equals(set.toArray().sort(), [1,2]));
     });
   }
+
+  test_toString(test) {
+    super.test_toString(test, { start: '{', end: '}' });
+  }
 }
 
 module.exports = SetTest;

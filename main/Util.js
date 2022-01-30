@@ -68,8 +68,8 @@ function isSubClassOf(subClass, parentClass) {
 function toString(obj) {
   if (obj == null)
     return null;
-  if (typeof obj == 'string')
-    return obj;
+//  if (typeof obj == 'string')
+//    return obj;
   if ((typeof obj == 'object') && (obj.toString == 'function'))
     return obj.toString();
   return JSON.stringify(obj);

@@ -4,18 +4,21 @@ const Collection = require(__dirname + '/Collection.js');
 const UnsupportedOperationException = require(__dirname + '/UnsupportedOperationException.js');
 const Util = require(__dirname + '/Util.js');
 
-// super class of collections with add, contains, and remove methods, e.g. lists and sets
+// Super class of collections with add, contains, and remove methods, e.g. lists and sets.
 class DefaultCollection extends Collection {
 
   constructor(options={}) {
     super(options);
   }
 
-  // returns true if the element was added, and false otherwise
+  // Adds the element to the collection
+  // Returns true if the collection was changed, and false otherwise. (The return value might be overridden by sub-classes.)
   add(element) {
     throw new UnsupportedOperationException();
   }
 
+  // Adds the elements to the collection
+  // Returns true if the collection was changed, and false otherwise. (The return value might be overridden by sub-classes.)
   addAll(elements) {
     let changed = false;
     for (let element of elements)
@@ -24,12 +27,10 @@ class DefaultCollection extends Collection {
   }
 
   clone() {
-    let clone = new this.constructor(this.options);
-    for (let element of this)
-      clone.add(element);
-    return clone;
+    return super.clone0();
   }
 
+  // Returns true if collection contains the element, and false otherwise.
   contains(element) {
     for (let thisElement of this) {
       if (Collection.equals_fn(element, thisElement))
@@ -38,6 +39,7 @@ class DefaultCollection extends Collection {
     return false;
   }
 
+  // Returns true if collection contains all the elements, and false otherwise.
   containsAll(elements) {
     for (let element of elements) {
       if (!this.contains(element))
@@ -46,12 +48,14 @@ class DefaultCollection extends Collection {
     return true;
   }
 
-  // returns true if the element was removed, and false otherwise
-  // only a single element instance will be removed
+  // Removes the element from the collection. If the collection contains multiple instances of the element then only one instance will be removed.
+  // Returns true if the element was removed, and false otherwise.
   remove(element) {
     throw new UnsupportedOperationException();
   }
 
+  // Removes all the elements from the collection. If the collection contains multiple instances of any of the elements then only one such instance will be removed for each element.
+  // Returns true if any element was removed, and false otherwise.
   removeAll(elements) {
     let removed = false;
     for (let element of elements)

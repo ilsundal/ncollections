@@ -4,6 +4,7 @@ const ArrayList = require(__dirname + '/ArrayList.js');
 const Collection = require(__dirname + '/Collection.js');
 const HashSet = require(__dirname + '/HashSet.js');
 const UnsupportedOperationException = require(__dirname + '/UnsupportedOperationException.js');
+const Util = require(__dirname + '/Util.js');
 
 class Map extends Collection {
 
@@ -18,25 +19,29 @@ class Map extends Collection {
     return clone;
   }
 
+  // Returns true if the key is a map key, and false otherwise.
   containsKey(key) {
     return this.keys().contains(key);
   }
 
+  // Returns true if the value is a map value, i.e. if some key maps to it, and false otherwise.
   containsValue(value) {
     return this.values().contains(value);
   }
 
-  // returns a Collection of key-value pair objects; if the returned Collection is backed by the map then it is wrapped as an UnmodifiableCollection to prevent modification
+  // Returns a Collection of key-value pair objects.
+  // Implementation note: if the returned Collection is backed by the map then it should be wrapped as an UnmodifiableCollection to prevent modification.
   entries() {
     throw new UnsupportedOperationException();
   }
 
-  // returns the value at key, or undefined if no value at key
+  // Returns the value at key, or undefined if no value at key.
   get(key) {
     throw new UnsupportedOperationException();
   }
 
-  // returns a Collection (without duplicates since keys are unique); if the returned Collection is backed by the map then it is wrapped as an UnmodifiableCollection to prevent modification
+  // Returns a Collection (without duplicates since keys are unique).
+  // Implementation note: if the returned Collection is backed by the map then it should be wrapped as an UnmodifiableCollection to prevent modification.
   keys() {
     let keys = new HashSet();
     for (let entry of this.entries())
@@ -48,18 +53,21 @@ class Map extends Collection {
     return this.entries().next();
   }
 
-  // returns the previous value at key, or undefined if no value at key
+  // Puts the key and value into the map.
+  // Returns the previous value at key, or undefined if no value at key.
   put(key, value) {
     throw new UnsupportedOperationException();
   }
 
-  // returns nothing
+  // Puts the (iterable) key-value pairs into the map.
+  // Returns nothing.
   putAll(kvPairs) {
     for (let kvPair of kvPairs)
       this.put(kvPair.key, kvPair.value);
   }
 
-  // returns the previous value at key, or undefined if no value at key
+  // Removes the key and its associated value from the map.
+  // Returns the previous value at key, or undefined if no value at key.
   remove(key) {
     throw new UnsupportedOperationException();
   }
@@ -68,7 +76,14 @@ class Map extends Collection {
     return this.entries().size();
   }
 
-  // returns an Collection (which may contain duplicate values) - its size == size(); if the returned Collection is backed by the map then it is wrapped as an UnmodifiableCollection to prevent modification
+  toString() {
+    return super.toString({ start: '{', end: '}', element_fn: function(element) {
+      return Util.toString(element.key) + '->' + Util.toString(element.value);
+    }});
+  }
+
+  // Returns an Collection (which may contain duplicate values). The collection size will equal size().
+  // Implementation note: if the returned Collection is backed by the map then it should be wrapped as an UnmodifiableCollection to prevent modification,
   values() {
     let values = new ArrayList(); // duplicates are possible
     for (let entry of this.entries())

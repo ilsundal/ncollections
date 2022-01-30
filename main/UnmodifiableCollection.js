@@ -17,7 +17,6 @@ class UnmodifiableCollection extends Collection {
     throw new UnsupportedOperationException();
   }
 
-  // returns a shallow clone
   clone() {
     return this.#inner_collection.clone();
   }
@@ -46,6 +45,10 @@ class UnmodifiableCollection extends Collection {
 
   toArray() {
     return this.#inner_collection.toArray();
+  }
+
+  toString() {
+    return this.#inner_collection.toString();
   }
 }
 

@@ -23,7 +23,8 @@ class CollectionTest {
     'isEmpty',
     'next',
     'size',
-    'toArray'
+    'toArray',
+    'toString'
   ];
 
   test(method_name) {
@@ -153,13 +154,41 @@ class CollectionTest {
   test_toArray(test) {
     it('[1,2] -> [1,2]', function() {
       let collection = test.newInstance([1,2]);
-      assert(Util.equals(collection.toArray(), [1,2]));
+      assert(Util.equals(collection.toArray().sort(), [1,2]));
     });
   }
 
-  // generic helper method for use by sub-classes with an add method with possibly another name, e.g. 'enqueue' or 'push'. defaults to 'add'.
-  // options.add_method_name is the name of the add-like method, i.e. "enqueue" for a Queue, "push" for a Stack, etc. defaults to "add"
-  // options.return_type specifies the type of the return value; it is either "changed" (if the add method returns true if the element was added, and false if not), or "collection" (if the add method returns the collection itself); defaults to "collection"
+  // The test cases below works for list-like collections where elements are in addition order and the default toString() implementation is not overridden. So, this method must be overridden for e.g. Sets and Maps.
+  test_toString(test, options={}) {
+    let string_fn = function(collection) {
+      let start = options.start || '[';
+      let separator = options.separator || ',';
+      let end = options.end || ']';
+      let element_fn = options.element_fn || function(element) { return Util.toString(element); };
+      let str = start;
+      let elements = collection.toArray();
+      for (let i = 0; i != elements.length; i++) {
+        let element = elements[i];
+        str += element_fn(element);
+        if (i < (elements.length - 1))
+          str += separator;
+      }
+      str += end;
+      return str;
+    }
+    it('(empty) -> (stringified collection)', function() {
+      let collection = test.newInstance();
+      assert(collection.toString() == string_fn(collection));
+    });
+    it('[1,"my_string",{some:"value"}] -> (stringified elements in iteration order)', function() {
+      let collection = test.newInstance([1,"my_string",{some:"value"}]);
+      assert(collection.toString() == string_fn(collection));
+    });
+  }
+
+  // Generic helper method for use by sub-classes with an add method with possibly another name, e.g. 'enqueue' or 'push'. defaults to 'add'.
+  // options.add_method_name is the name of the add-like method, i.e. "enqueue" for a Queue, "push" for a Stack, etc. defaults to "add".
+  // options.return_type specifies the type of the return value; it is either "changed" (if the add method returns true if the element was added, and false if not), or "collection" (if the add method returns the collection itself); defaults to "collection".
   test_add_like_method(test, options={}) {
     let add_method_name = options.add_method_name || 'add';
     let assert_return_value_fn = function(collection, element, return_value) {

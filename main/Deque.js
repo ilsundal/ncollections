@@ -17,11 +17,15 @@ class Deque extends Collection {
     this.#list = new list_class();
   }
 
+  // Adds the element so it becomes the first element of the deque.
+  // Returns the deque itself.
   addFirst(element) {
     this.#list.addFirst(element);
     return this;
   }
 
+  // Adds the element so it becomes the last element of the deque.
+  // Returns the deque itself.
   addLast(element) {
     this.#list.addLast(element);
     return this;
@@ -38,19 +42,25 @@ class Deque extends Collection {
   next() {
     return this.#list.next();
   }
-  
+
+  // returns the first element, or undefined if the deque is empty.
   peekFirst() {
     return this.#list.isEmpty() ? undefined : this.#list.getFirst();
   }
 
+  // returns the last element, or undefined if the deque is empty.
   peekLast() {
     return this.#list.isEmpty() ? undefined : this.#list.getLast();
   }
 
+  // removes the first element
+  // returns the removed element, or undefined if the deque is empty.
   pollFirst() {
     return this.#list.isEmpty() ? undefined : this.#list.removeFirst();
   }
 
+  // removes the last element
+  // returns the removed element, or undefined if the deque is empty.
   pollLast() {
     return this.#list.isEmpty() ? undefined : this.#list.removeLast();
   }
