@@ -24,32 +24,6 @@ The design has been inspired by the [Java Collections Framework](https://docs.or
 ```javascript
 const Collections = require('ncollections');
 
-# ncollections - neat collections for JavaScript
-ncollections provides a selection of neatly designed collections for JavaScript.
-
-The collections are
-- ArrayList and LinkedList
-- HashSet
-- HashMap
-- Deque
-- Stack
-- Queue
-- PriorityQueue
-
-Why use ncollections?
-- **More collections** With standard JavaScript, you only have maps (via objects), arrays and sets.
-- **Well-designed** ncollections is small and neat and easy-to-use, flexible and extendable. Works with both simple types and objects.
-- **Small foot-print** ncollections does not use any packages. The main directory is small and can be zipped to 13KB.
-- **Plain JavaScript** Use both in browsers and Node.js.
-- **Equals and hash code** Provide your own custom *equals* and *hashCode* methods for you own objects to boost performance and reliably use objects as keys and in sets.
-
-The design has been inspired by the [Java Collections Framework](https://docs.oracle.com/javase/8/docs/technotes/guides/collections/overview.html). Default and solid implementations are provided for *equals* and *hashcode* to make ncollections even easier to use.
-
-# Example
-
-```javascript
-const Collections = require('ncollections');
-
 // There are two ways to instantiate a new Collection, for example for an ArrayList:
 let array_list1 = new Collections.ArrayList(); // using constructor
 let array_list2 = new Collections.newArrayList(); // using builder function
