@@ -24,7 +24,7 @@ map.put({ some: 'key' }, { some: 'value' }); // note that the key is an object
 map.put('other_key', true);
 console.log(map.get({ some: 'key' })); // outputs { some: 'value' }
 console.log(map.get('other_key')); // outputs true
-console.log(map.toString()); // outputs [{{"some":"key"}:{"some":"value"}},{"other_key":true}]
+console.log(map.toString()); // outputs {{"some":"key"}->{"some":"value"},"other_key"->true}
 
 // Example of using a Set
 let set = Collections.newSet(); // returns a HashSet which is the default Set
@@ -32,7 +32,7 @@ set.add(1);
 set.add('my_object');
 set.add(1); // a duplicate which will thus not be inserted into the set because it is already contained
 console.log(set.size()); // outputs 2
-console.log(set.toString()); // outputs [1,"my_object"]
+console.log(set.toString()); // outputs {1,"my_object"}
 
 // The other Collections (Stack, Dequeu, Queue, etc.) are similarly designed.
 
