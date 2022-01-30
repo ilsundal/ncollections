@@ -130,7 +130,7 @@ describe('Util', function() {
       assert(Util.hashCode('0') == 34196);
     });
 
-    it('1.5 -> 48', function() {
+    it('1.5 -> 48568', function() {
       assert(Util.hashCode(1.5) == 48568);
     });
 
