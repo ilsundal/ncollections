@@ -135,12 +135,10 @@ describe('Util', function() {
     });
 
     it('"A" repeated 10**6 times -> -338988992', function() {
-//console.log(Util.hashCode('A'.repeat(10**6)));
       assert(Util.hashCode('A'.repeat(10**6)) == -338988992);
     });
 
     it('[{a:1},"B",4,[true]] -> 32066268', function() {
-//console.log(Util.hashCode([{a:1},"B",4,[true]]));
       assert(Util.hashCode([{a:1},"B",4,[true]]) == 32066268);
     });
 
