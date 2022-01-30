@@ -126,9 +126,8 @@ describe('Util', function() {
       assert(Util.hashCode(0) == 48);
     });
 
-    it('"0" -> -1517812140', function() {
-//console.log(Util.hashCode('"0"'));
-      assert(Util.hashCode('"0"') == -1517812140);
+    it('"0" -> 34196', function() {
+      assert(Util.hashCode('0') == 34196);
     });
 
     it('1.5 -> 48', function() {

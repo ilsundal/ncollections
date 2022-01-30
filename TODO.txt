@@ -1,4 +1,5 @@
 TODO FEATURES
+- Drop constructor initiation via index?
 - TreeSet is a SortedSet is a Set
 - Improve HashSet iterator to make it incremental
   - requires that I can iterate incrementally over object keys.
