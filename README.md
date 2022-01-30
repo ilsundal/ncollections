@@ -75,43 +75,7 @@ No distributables are yet provided, such as through a CDN.
 
 All collections implements the following methods:
 
-
-
-
-## Lists: ArrayList and LinkedList
-
-## Maps: HashMap
-
-## Sets: HashSet
-
-## Deque
-
-## Stack
-
-## Queue
-
-## PriorityQueue
-
-# A note on *equals*, *hashCode* and *compare*```
-
-# Installation
-
-## Server-side usage
-
-```
-npm install ncollections
-```
-
-## Client-side usage:
-
-No distributables are yet provided, such as through a CDN.
-
-# The Collections
-
-All collections implements the following methods:
-
-
-
+...
 
 ## Lists: ArrayList and LinkedList
 
