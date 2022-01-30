@@ -92,4 +92,4 @@ All collections implements the following methods:
 
 ## PriorityQueue
 
-# A note on *Equals*, *hashCode* and *compare*
+# A note on *equals*, *hashCode* and *compare*
