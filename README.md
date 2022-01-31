@@ -73,11 +73,42 @@ No distributables are yet provided, such as through a CDN.
 
 # The Collections
 
-All collections implements the following methods:
+All Collections implement the following methods:
 
-...
+**clear()** clears (empties) the collection.
+
+**clone()** returns a shallow clone of the collection.
+
+**equals(collection)** returns true if the collection is equal to the argument collection, and false if not.
+
+**hashCode()** returns an integer hash code of the collection.
+
+**isEmpty()** returns true if the collection is empty, and false if not.
+
+**size()** returns the collection size.
+
+**toArray()** returns an array of the collection elements in iteration order.
+
+**toString()** returns a string representation of the collection in iteration order.
+
+All collections implement the [iteration and iterable protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
 
 ## Lists: ArrayList and LinkedList
+
+A List is an ordered collection that allows for duplicates.
+
+There are two List-types: ArrayList and LinkedList.
+- The ArrayList is backed by a JavaScript array. getAt() and add() runs in constant time, while inserting and removing elements within the list runs in linear time (due element shifting).
+- The LinkedList is backed by a double-linked node structure. Adding and retrieving from the front or end of the list runs in constant time, while indexed operations run in linear time.
+
+All Lists implement the following methods:
+
+**add(element)** adds the argument element to the end of the list. The list itself is returned.
+
+**addAll(elements)** adds all the argument elements (an iterable) to the end of the list, in iteration order. The list itself is returned.
+
+
+
 
 ## Maps: HashMap
 
