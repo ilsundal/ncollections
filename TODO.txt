@@ -1,4 +1,7 @@
 TODO FEATURES
+- Drop DefaultCollection
+- Add List.indexOf(element) (first occurance)
+- Add List.lastIndexOf(element) (last occurance)
 - Drop constructor initiation via index?
 - TreeSet is a SortedSet is a Set
 - Improve HashSet iterator to make it incremental

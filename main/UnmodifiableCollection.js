@@ -5,6 +5,8 @@ const List = require(__dirname + '/List.js');
 const Set = require(__dirname + '/Set.js');
 const UnsupportedOperationException = require(__dirname + '/UnsupportedOperationException.js');
 
+// NOT USED CURRENTLY
+
 // Should be sub-classed into UnmodifiableList, UnmodifiableSet, etc.
 class UnmodifiableCollection extends Collection {
   #inner_collection;

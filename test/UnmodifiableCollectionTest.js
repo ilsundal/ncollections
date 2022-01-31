@@ -7,6 +7,8 @@ const UnsupportedOperationException = require(__dirname + '/../main/UnsupportedO
 
 const CollectionTest = require(__dirname + '/CollectionTest.js');
 
+// NOT USED CURRENTLY
+
 class UnmodifiableCollectionTest extends CollectionTest {
   #unmodifiable_collection_class;
 

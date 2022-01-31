@@ -6,17 +6,23 @@ const IndexOutOfBoundsException = require(__dirname + '/../main/IndexOutOfBounds
 const NoSuchElementException = require(__dirname + '/../main/NoSuchElementException.js');
 const Util = require(__dirname + '/../main/Util.js');
 
-const DefaultCollectionTest = require(__dirname + '/DefaultCollectionTest.js');
+const CollectionTest = require(__dirname + '/CollectionTest.js');
 
-class ListTest extends DefaultCollectionTest {
+class ListTest extends CollectionTest {
 
   class_method_names = this.class_method_names.concat([
+    'add',
+    'addAll',
     'addFirst',
     'addLast',
+    'contains',
+    'containsAll',
     'getAt',
     'getFirst',
     'getLast',
     'insertAt',
+    'remove',
+    'removeAll',
     'removeAt',
     'removeFirst',
     'removeLast',
@@ -32,10 +38,24 @@ class ListTest extends DefaultCollectionTest {
   }
 
   test_add(test) {
+    super.test_add_like_method(test);
     it('[1,2] + 3 -> this & [1,2,3]', function() {
       let list = test.newInstance([1,2]);
       assert(list.add(3) === list);
       assert(Util.equals(list.toArray(), [1,2,3]));
+    });
+  }
+
+  test_addAll(test) {
+    it('[] + [1,2] -> this & [1,2]', function() {
+      let list = test.newInstance();
+      assert(list.addAll([1,2]) == list);
+      assert(Util.equals(list.toArray(), [1,2]));
+    });
+    it('[1,2] + [3,4] -> this & [1,2,3,4]', function() {
+      let list = test.newInstance([1,2]);
+      assert(list.addAll([3,4]) == list);
+      assert(Util.equals(list.toArray(), [1,2,3,4]));
     });
   }
 
@@ -62,6 +82,36 @@ class ListTest extends DefaultCollectionTest {
       let list = test.newInstance([2,2]);
       assert(list.addLast(1) === list);
       assert(Util.equals(list.toArray(), [2,2,1]));
+    });
+  }
+
+  test_contains(test) {
+    it('[] contains 1 -> false', function() {
+      let list = test.newInstance();
+      assert(list.contains(1) == false);
+    });
+    it('[1,2] contains 3 -> false', function() {
+      let list = test.newInstance([1,2]);
+      assert(list.contains(3) == false);
+    });
+    it('[1,2] contains 2 -> true', function() {
+      let list = test.newInstance([1,2]);
+      assert(list.contains(2));
+    });
+  }
+
+  test_containsAll(test) {
+    it('[] contains all of [1] -> false', function() {
+      let list = test.newInstance();
+      assert(list.containsAll([1]) == false);
+    });
+    it('[1,2] contains all of [2] -> true', function() {
+      let list = test.newInstance([1,2]);
+      assert(list.containsAll([2]) == true);
+    });
+    it('[1,2,3] contains all of [1,3] -> true', function() {
+      let list = test.newInstance([1,2,3]);
+      assert(list.containsAll([1,3]) == true);
     });
   }
 
@@ -124,6 +174,26 @@ class ListTest extends DefaultCollectionTest {
       let list = test.newInstance([1,2,3]);
       assert(list.removeAt(1) == 2);
       assert(Util.equals(list.toArray(), [1,3]));
+    });
+  }
+
+  test_remove(test) {
+    it('[] - 1 -> false', function() {
+      let list = test.newInstance();
+      assert(list.remove(1) == false);
+    });
+    it('[1,2,3] - 2 -> true & [1,3]', function() {
+      let list = test.newInstance([1,2,3]);
+      assert(list.remove(2) == true);
+      assert(Util.equals(list.toArray(), [1,3]));
+    });
+  }
+
+  test_removeAll(test) {
+    it('[1,2,3,4] - [1,2,5] -> truish & [3,4]', function() {
+      let list = test.newInstance([1,2,3,4]);
+      assert(list.removeAll([1,2,5]));
+      assert(Util.equals(list.toArray(), [3,4]));
     });
   }
 

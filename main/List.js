@@ -1,11 +1,10 @@
 'use strict'
 
 const Collection = require(__dirname + '/Collection.js');
-const DefaultCollection = require(__dirname + '/DefaultCollection.js');
 const NoSuchElementException = require(__dirname + '/NoSuchElementException.js');
 const UnsupportedOperationException = require(__dirname + '/UnsupportedOperationException.js');
 
-class List extends DefaultCollection {
+class List extends Collection {
 
   constructor(options={}) {
     super(options);
@@ -15,6 +14,15 @@ class List extends DefaultCollection {
   // Returns the List itself.
   add(element) {
     return this.addLast(element);
+  }
+
+  // Adds the elements to the end of the list.
+  // Returns the List itself.
+  addAll(elements) {
+    let changed = false;
+    for (let element of elements)
+      changed = this.add(element) || changed;
+    return changed;
   }
 
   // Adds the element so it becomes the first element of the list.
@@ -27,6 +35,28 @@ class List extends DefaultCollection {
   // Returns the List itself.
   addLast(element) {
     throw new UnsupportedOperationException();
+  }
+
+  clone() {
+    return super.clone0();
+  }
+
+  // Returns true if list contains the element, and false otherwise.
+  contains(element) {
+    for (let thisElement of this) {
+      if (Collection.equals_fn(element, thisElement))
+        return true;
+    }
+    return false;
+  }
+
+  // Returns true if list contains all the elements, and false otherwise.
+  containsAll(elements) {
+    for (let element of elements) {
+      if (!this.contains(element))
+        return false;
+    }
+    return true;
   }
 
   equals(collection) {
@@ -59,6 +89,21 @@ class List extends DefaultCollection {
   // Throws IndexOutOfBoundsException if index is not within bounds.
   insertAt(index, element) {
     throw new UnsupportedOperationException();
+  }
+
+  // Removes the element from the list. If the list contains multiple instances of the element then only the first instance will be removed.
+  // Returns true if the element was removed, and false otherwise.
+  remove(element) {
+    throw new UnsupportedOperationException();
+  }
+
+  // Removes all the elements from the list. If the list contains multiple instances of any of the elements then only the first such instance will be removed for each element.
+  // Returns true if any element was removed, and false otherwise.
+  removeAll(elements) {
+    let removed = false;
+    for (let element of elements)
+      removed = this.remove(element) || removed;
+    return removed;
   }
 
   // Returns the removed element previous at index.
