@@ -98,8 +98,8 @@ All collections implement the [iteration and iterable protocols](https://develop
 A List is an ordered collection that allows for duplicates.
 
 There are two List-types: ArrayList and LinkedList.
-- The ArrayList is backed by a JavaScript array. getAt() and add() runs in constant time, while inserting and removing elements within the list runs in linear time (due element shifting).
-- The LinkedList is backed by a double-linked node structure. Adding and retrieving from the front or end of the list runs in constant time, while indexed operations run in linear time.
+- The ArrayList is backed by a JavaScript array. Thus, the *getAt()*, *add()* and *addLast()* operations run in constant time, while inserting and removing elements within the list runs in linear time (due to element shifting).
+- The LinkedList is backed by a next-previous (double-linked) node structure. Thus, adding, retrieving and removing elements from the front or end of the list run in constant time, while indexed operations run in linear time. (Index searching automatically choses whether to search forwards or backwards depending on what is fastest.)
 
 All Lists implement the following methods:
 
@@ -107,7 +107,19 @@ All Lists implement the following methods:
 
 **addAll(elements)** adds all the argument elements (an iterable) to the end of the list, in iteration order. The list itself is returned.
 
+**addFirst(element)** adds the argument element to the front of the list. The list itself is returned.
 
+**addLast(element)** adds the argument element to the end of the list. The list itself is returned.
+
+**contains(element)** returns true if the list contains the argument element, and false if not.
+
+**containsAll(elements)** returns true if the list contains all of the argument elements (an iterable), and false if not.
+
+**getAt(index)** returns the element at the argument index position. An IndexOutOfBoundsException is thrown if the index is out of bounds.
+
+**remove(element)** removes the argument element from the collection. Returns true if an element was removed from the list, and false if not. If the list contains several elements that are equal to the argument element then only the first such element will be removed.
+
+**removeAll(elements)** removes the argument elements (an iterable) from the collection. Returns true if any element was removed from the list, and false if not. If the list contains several elements that are equal to any of argument elements then only the first such element will be removed.
 
 
 ## Maps: HashMap
