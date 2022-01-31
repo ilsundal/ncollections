@@ -6,9 +6,9 @@ const IndexOutOfBoundsException = require(__dirname + '/../main/IndexOutOfBounds
 const NoSuchElementException = require(__dirname + '/../main/NoSuchElementException.js');
 const Util = require(__dirname + '/../main/Util.js');
 
-const CollectionTest = require(__dirname + '/CollectionTest.js');
+const ListishTest = require(__dirname + '/ListishTest.js');
 
-class ListTest extends CollectionTest {
+class ListTest extends ListishTest {
 
   class_method_names = this.class_method_names.concat([
     'add',
@@ -38,7 +38,7 @@ class ListTest extends CollectionTest {
   }
 
   test_add(test) {
-    super.test_add_like_method(test);
+    super.test_add0(test);
     it('[1,2] + 3 -> this & [1,2,3]', function() {
       let list = test.newInstance([1,2]);
       assert(list.add(3) === list);

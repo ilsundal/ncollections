@@ -46,6 +46,14 @@ class Map extends Collection {
     return this.entries().equals(collection.entries());
   }
 
+  // Two maps with the same entries must have the same hash code regardless of iteration order.
+  hashCode() {
+    let hash = 17;
+    for (let entry of this)
+      hash += Collection.hash_code_fn(entry);
+    return hash;
+  }
+
   // Returns the value at key, or undefined if no value at key.
   get(key) {
     throw new UnsupportedOperationException();

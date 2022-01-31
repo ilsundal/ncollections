@@ -28,10 +28,23 @@ class MapTest extends CollectionTest {
     'values'
   ]);
 
+  newInstance(entries=[]) {
+    let map = new this.collection_class(this.options);
+    for (let entry of entries)
+      map.put(entry.key, entry.value);
+    return map;
+  }
+
+  test_constructor(test) {
+    it('() -> instance', function() {
+      let set = test.newInstance();
+      assert(set instanceof test.collection_class);
+    });
+  }
+
   test_clear(test) {
-    it('{1->2} -> (empty)', function() {
+    it('{1->2} -> {}', function() {
       let map = test.newInstance();
-      map.put(1,2);
       map.clear();
       assert(map.isEmpty());
     });
@@ -56,7 +69,7 @@ class MapTest extends CollectionTest {
     it('{1->2} contains 2 -> false', function() {
       let map = test.newInstance();
       map.put(1,2);
-      assert(!map.containsKey(2));
+      assert(map.containsKey(2) == false);
     });
   }
 
@@ -69,7 +82,7 @@ class MapTest extends CollectionTest {
     it('{1->2} contains 1 -> false', function() {
       let map = test.newInstance();
       map.put(1,2);
-      assert(!map.containsValue(1));
+      assert(map.containsValue(1) == false);
     });
   }
 
@@ -104,8 +117,8 @@ class MapTest extends CollectionTest {
       let map2 = test.newInstance();
       map2.put(1,2);
       map2.put(3,5);
-      assert(!map1.equals(map2));
-      assert(!map2.equals(map1));
+      assert(map1.equals(map2) == false);
+      assert(map2.equals(map1) == false);
     });
   }
 
@@ -125,12 +138,6 @@ class MapTest extends CollectionTest {
   }
 
   test_hashCode(test) {
-    it('{1->2,3->4} -> ', function() {
-      let map = test.newInstance();
-      map.put(1,2);
-      map.put(3,4);
-      assert(map.hashCode() == 1697693009220);
-    });
     it('hash code of {1->2,3->4} == hash code of {1->2,3->4}', function() {
       let map1 = test.newInstance();
       map1.put(1,2);
@@ -159,7 +166,7 @@ class MapTest extends CollectionTest {
     it('{1->2} -> false', function() {
       let map = test.newInstance();
       map.put(1,2);
-      assert(!map.isEmpty());
+      assert(map.isEmpty() == false);
     });
   }
 
@@ -267,37 +274,25 @@ class MapTest extends CollectionTest {
   }
 
   test_toString(test) {
-    let string_fn = function(map) {
-      let array = map.toArray();
-      let str = '{';
-      for (let i = 0; i != array.length; i++) {
-        let entry = array[i];
-        str += Util.toString(entry.key) + '->' + Util.toString(entry.value);
-        if (i < (array.length - 1))
-          str += ',';
-      }
-      str += '}';
-      return str;
-    }
-    it('(empty) -> (stringified empty)', function() {
+    it('[] -> "{}"', function() {
       let map = test.newInstance();
-      assert(map.toString() == string_fn(map));
+      assert(map.toString() == '{}');
     });
-    it('{1->2,"my_string"->"my_value",{a:1}->{b:2}} -> (stringified elements in iteration order)', function() {
+    it('{"1"->2,2->"3",3->{a:1}} -> "{3->{\"a\":2},2->\"3\",\"1\"->2}"', function() {
       let map = test.newInstance();
-      map.put(1,2);
-      map.put("my_string","my_value");
-      map.put({a:1},{b:2});
-      assert(map.toString() == string_fn(map));
+      map.put("1",2);
+      map.put(2,"3");
+      map.put(3,{a:2});
+      assert(map.toString() == '{3->{"a":2},2->"3","1"->2}');
     });
   }
 
   test_values(test) {
-    it('{} -> (empty collection)', function() {
+    it('{} -> []', function() {
       let map = test.newInstance();
       assert(map.values().isEmpty());
     });
-    it('{1->2,2->2,3->3} -> {2,2,3}', function() {
+    it('{1->2,2->2,3->3} -> {2,2,3} when sorted', function() {
       let map = test.newInstance();
       map.put(1,2);
       map.put(2,2);

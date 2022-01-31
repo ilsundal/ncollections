@@ -6,9 +6,9 @@ const Deque = require(__dirname + '/../main/Deque.js');
 const NoSuchElementException = require(__dirname + '/../main/NoSuchElementException.js');
 const Util = require(__dirname + '/../main/Util.js');
 
-const CollectionTest = require(__dirname + '/CollectionTest.js');
+const ListishTest = require(__dirname + '/ListishTest.js');
 
-class DequeTest extends CollectionTest {
+class DequeTest extends ListishTest {
 
   constructor(dequeClass=Deque, options) {
     super(dequeClass, options);
@@ -24,7 +24,7 @@ class DequeTest extends CollectionTest {
   ]);
 
   add_fn = function(deque, element) {
-    deque.addLast(element);
+    return deque.addLast(element);
   }
 
   test_addFirst(test) {
@@ -40,7 +40,7 @@ class DequeTest extends CollectionTest {
   }
 
   test_addLast(test) {
-    super.test_add_like_method(test, { add_method_name: 'addLast' });
+    super.test_add0(test);
   }
 
   test_peekFirst(test) {

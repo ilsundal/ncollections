@@ -27,14 +27,14 @@ class UnmodifiableCollection extends Collection {
   }
 
   clone() {
-    return this.#inner_collection.clone();
+    return this;
   }
 
   equals(collection) {
     let innermost_collection = collection;
     while (innermost_collection instanceof UnmodifiableCollection)
       innermost_collection = innermost_collection.inner_collection;
-    return this.#inner_collection.equals(innermost_collection);
+    return this.#inner_collection.equals(innermost_collection); // todo: this requires UnmodifiableCollection sub-class of inner_collection_class, e.g. an UnmodifiableSet for Set.
   }
 
   hashCode() {

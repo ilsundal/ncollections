@@ -6,9 +6,9 @@ const NoSuchElementException = require(__dirname + '/../main/NoSuchElementExcept
 const Stack = require(__dirname + '/../main/Stack.js');
 const Util = require(__dirname + '/../main/Util.js');
 
-const CollectionTest = require(__dirname + '/CollectionTest.js');
+const ListishTest = require(__dirname + '/ListishTest.js');
 
-class StackTest extends CollectionTest {
+class StackTest extends ListishTest {
 
   constructor(stackClass=Stack, options) {
     super(stackClass, options);
@@ -21,7 +21,7 @@ class StackTest extends CollectionTest {
   ]);
 
   add_fn = function(stack, element) {
-    stack.push(element);
+    return stack.push(element);
   }
 
   test_peek(test) {
@@ -51,7 +51,7 @@ class StackTest extends CollectionTest {
   }
 
   test_push(test) {
-    super.test_add_like_method(test, { add_method_name: 'push' });
+    super.test_add0(test);
   }
 }
 

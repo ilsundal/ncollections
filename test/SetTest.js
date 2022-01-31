@@ -17,12 +17,36 @@ class SetTest extends CollectionTest {
     'removeAll'
   ]);
 
-  constructor(setClass, options={}) {
-    super(setClass, options);
+  constructor(set_class, options={}) {
+    super(set_class, options);
+  }
+
+  newInstance(elements=[]) {
+    let set = new this.collection_class(this.options);
+    for (let element of elements)
+      set.add(element);
+    return set;
+  }
+
+  test_constructor(test) {
+    it('() -> instance', function() {
+      let set = test.newInstance();
+      assert(set instanceof test.collection_class);
+    });
   }
 
   test_add(test) {
-    super.test_add_like_method(test, { return_type: 'changed' });
+    it('{} + 1 -> true & {1}', function() {
+      let set = test.newInstance();
+      assert(set.add(1) == true);
+      assert(Util.equals(set.toArray(), [1]));
+    });
+    it('{1} + 2 -> true & {1,2}', function() {
+      let set = test.newInstance([1]);
+      assert(set.add(2) == true);
+      assert(Util.equals(set.toArray().sort(), [1,2]));
+    });
+
     it('{1,2} + 1 -> false & {1,2}', function() {
       let set = test.newInstance([1,2]);
       assert(set.add(1) == false);
@@ -31,7 +55,12 @@ class SetTest extends CollectionTest {
   }
 
   test_addAll(test) {
-    it('{} + {1,2} -> true & {1,2}', function() {
+    it('{} + [1,2] -> true & {1,2}', function() {
+      let set = test.newInstance();
+      assert(set.addAll([1,2]) == true);
+      assert(Util.equals(set.toArray().sort(), [1,2]));
+    });
+    it('{1} + [1,2] -> true & {1,2}', function() {
       let set = test.newInstance();
       assert(set.addAll([1,2]) == true);
       assert(Util.equals(set.toArray().sort(), [1,2]));
@@ -40,6 +69,29 @@ class SetTest extends CollectionTest {
       let set = test.newInstance([1,2]);
       assert(set.addAll([3,4]) == true);
       assert(Util.equals(set.toArray().sort(), [1,2,3,4]));
+    });
+    it('{1,2} + [1,2] -> false & {1,2}', function() {
+      let set = test.newInstance([1,2]);
+      assert(set.addAll([1,2]) == false);
+      assert(Util.equals(set.toArray().sort(), [1,2]));
+    });
+  }
+
+  test_clear(test) {
+    it('{1,2} -> {}', function() {
+      let set = test.newInstance([1,2]);
+      set.clear();
+      assert(set.isEmpty() == true);
+    });
+  }
+
+  test_clone(test) {
+    it('{1,2} == clone {1,2}', function() {
+      let set = test.newInstance([1,2]);
+      let set_clone = set.clone();
+      assert(set != set_clone);
+      assert(set.equals(set_clone));
+      assert(set_clone.equals(set));
     });
   }
 
@@ -74,12 +126,43 @@ class SetTest extends CollectionTest {
   }
 
   test_equals(test) {
-    super.test_equals(test);
     it('{1,2} == {2,1}', function() {
       let set1 = test.newInstance([1,2]);
       let set2 = test.newInstance([2,1]);
       assert(set1.equals(set2));
       assert(set2.equals(set1));
+    });
+  }
+
+  test_hashCode(test) {
+    it('hash code of {1,2} == hash code of {2,1}', function() {
+      let set1 = test.newInstance([1,2]);
+      let set2 = test.newInstance([2,1]);
+      assert(set1.hashCode() == set2.hashCode());
+    });
+  }
+
+  test_isEmpty(test) {
+    it('{} -> true', function() {
+      let set = test.newInstance();
+      assert(set.isEmpty() == true);
+    });
+    it('{1,2} -> false', function() {
+      let set = test.newInstance([1,2]);
+      assert(set.isEmpty() == false);
+    });
+  }
+
+  test_next(test) {
+    it('[] -> (no iterations)', function() {
+      let set = test.newInstance();
+      for (let element of set)
+        assert(false);
+    });
+    it('[1,2] -> 1 -> 2 (when sorted)', function() {
+      let set = test.newInstance([1,2]);
+      let array = Array.from(set);
+      assert(Util.equals(array.sort(), [1,2]));
     });
   }
 
@@ -103,8 +186,41 @@ class SetTest extends CollectionTest {
     });
   }
 
+  test_size(test) {
+    it('{} -> 0', function() {
+      let set = test.newInstance();
+      assert(set.size() == 0);
+    });
+    it('{1,2} -> 2', function() {
+      let set = test.newInstance([1,2]);
+      assert(set.size() == 2);
+    });
+  }
+
+  test_toArray(test) {
+    it('{} -> []', function() {
+      let set = test.newInstance();
+      assert(Util.equals(set.toArray(), []));
+    });
+    it('{1,2} -> [1,2] sorted', function() {
+      let set = test.newInstance([1,2]);
+      assert(Util.equals(set.toArray().sort(), [1,2]));
+    });
+  }
+
   test_toString(test) {
-    super.test_toString(test, { start: '{', end: '}' });
+    it('{} -> "{}"', function() {
+      let set = test.newInstance();
+      assert(set.toString() == '{}');
+    });
+    it('{1} -> "{1}"', function() {
+      let set = test.newInstance([1]);
+      assert(set.toString() == '{1}');
+    });
+    it('{1,2} -> "{1,2}" or "{2,1}"', function() {
+      let set = test.newInstance([1,2]);
+      assert(['{1,2}', '{2,1}'].includes(set.toString()));
+    });
   }
 }
 

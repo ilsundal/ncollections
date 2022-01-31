@@ -56,6 +56,14 @@ class Set extends Collection {
     return this.containsAll(collection);
   }
 
+  // Two sets with the same elements must have the same hash code regardless of iteration order.
+  hashCode() {
+    let hash = 17;
+    for (let element of this)
+      hash += Collection.hash_code_fn(element);
+    return hash;
+  }
+
   // Removes the element from the list.
   // Returns true if the element was removed, and false otherwise.
   remove(element) {

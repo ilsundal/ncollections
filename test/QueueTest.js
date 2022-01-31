@@ -6,9 +6,9 @@ const NoSuchElementException = require(__dirname + '/../main/NoSuchElementExcept
 const Queue = require(__dirname + '/../main/Queue.js');
 const Util = require(__dirname + '/../main/Util.js');
 
-const CollectionTest = require(__dirname + '/CollectionTest.js');
+const ListishTest = require(__dirname + '/ListishTest.js');
 
-class QueueTest extends CollectionTest {
+class QueueTest extends ListishTest {
 
   constructor(queueClass=Queue, options) {
     super(queueClass, options);
@@ -21,7 +21,7 @@ class QueueTest extends CollectionTest {
   ]);
 
   add_fn = function(queue, element) {
-    queue.enqueue(element);
+    return queue.enqueue(element);
   }
 
   test_dequeue(test) {
@@ -38,7 +38,7 @@ class QueueTest extends CollectionTest {
   }
 
   test_enqueue(test) {
-    super.test_add_like_method(test, { add_method_name: 'enqueue' });
+    super.test_add0(test);
   }
 
   test_peek(test) {
