@@ -9,19 +9,20 @@ const CollectionTest = require(__dirname + '/CollectionTest.js');
 
 // NOT USED CURRENTLY
 
+// Intended to be sub-classed into UnmodifiableListTest, UnmodifiableSetTest, etc.
 class UnmodifiableCollectionTest extends CollectionTest {
-  #unmodifiable_collection_class;
+  #inner_collection_class;
 
-  get unmodifiable_collection_class() { return this.#unmodifiable_collection_class; }
+  get inner_collection_class() { return this.#inner_collection_class; }
 
   constructor(unmodifiable_collection_class, inner_collection_class, options) {
-    super(inner_collection_class, options);
-    this.#unmodifiable_collection_class = unmodifiable_collection_class;
+    super(unmodifiable_collection_class, options);
+    this.#inner_collection_class = inner_collection_class;
   }
 
   newInstance(elements) {
-    let inner_collection = super.newInstance(elements);
-    return new this.#unmodifiable_collection_class(inner_collection, inner_collection.constructor, this.options);
+    let inner_collection = super.newInstance(elements, { collection_class: this.#inner_collection_class });
+    return new this.collection_class(inner_collection, this.#inner_collection_class, this.options);
   }
 
   test_clear(test) {

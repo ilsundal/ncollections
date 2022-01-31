@@ -52,8 +52,8 @@ class CollectionTest {
     collection.add(element);
   }
 
-  newInstance(elements) {
-    let collection = new this.#collection_class(this.#options);
+  newInstance(elements, options={}) {
+    let collection = options.collection_class ? new options.collection_class() : new this.#collection_class(this.options);
     if (elements) {
       for (let element of elements)
         this.add_fn(collection, element);
@@ -64,7 +64,7 @@ class CollectionTest {
   test_constructor(test) {
     it('() -> instance', function() {
       let collection = test.newInstance();
-      assert(collection instanceof Collection);
+      assert(collection instanceof test.collection_class);
     });
   }
 

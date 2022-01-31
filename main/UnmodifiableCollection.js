@@ -7,7 +7,7 @@ const UnsupportedOperationException = require(__dirname + '/UnsupportedOperation
 
 // NOT USED CURRENTLY
 
-// Should be sub-classed into UnmodifiableList, UnmodifiableSet, etc.
+// Intended to be sub-classed into UnmodifiableList, UnmodifiableSet, etc.
 class UnmodifiableCollection extends Collection {
   #inner_collection;
   #inner_collection_class;
