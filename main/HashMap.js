@@ -2,6 +2,7 @@
 
 const ArrayList = require(__dirname + '/ArrayList.js');
 const Collection = require(__dirname + '/Collection.js');
+const HashSet = require(__dirname + '/HashSet.js');
 const Map = require(__dirname + '/Map.js');
 
 // needs to be reviewed - and possible redone, so e.g. containsKey, containsValue, size, etc. can be fast
@@ -17,7 +18,7 @@ class HashMap extends Map {
   }
 
   entries() {
-    let entries = new ArrayList();
+    let entries = new HashSet();
     for (let values of Object.values(this.#map))
       entries.addAll(values);
     return entries;

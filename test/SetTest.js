@@ -21,6 +21,16 @@ class SetTest extends DefaultCollectionTest {
     });
   }
 
+  test_equals(test) {
+    super.test_equals(test);
+    it('[1,2] == [2,1]', function() {
+      let collection1 = test.newInstance([1,2]);
+      let collection2 = test.newInstance([2,1]);
+      assert(collection1.equals(collection2));
+      assert(collection2.equals(collection1));
+    });
+  }
+
   test_toString(test) {
     super.test_toString(test, { start: '{', end: '}' });
   }

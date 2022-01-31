@@ -7,11 +7,14 @@ const UnsupportedOperationException = require(__dirname + '/../main/UnsupportedO
 const Util = require(__dirname + '/../main/Util.js');
 
 class CollectionTest {
-  #collectionClass;
+  #collection_class;
   #options;
 
-  constructor(collectionClass, options={}) {
-    this.#collectionClass = collectionClass;
+  get collection_class() { return this.#collection_class };
+  get options() { return this.#options };
+
+  constructor(collection_class, options={}) {
+    this.#collection_class = collection_class;
   }
 
   class_method_names = [
@@ -50,7 +53,7 @@ class CollectionTest {
   }
 
   newInstance(elements) {
-    let collection = new this.#collectionClass(this.#options);
+    let collection = new this.#collection_class(this.#options);
     if (elements) {
       for (let element of elements)
         this.add_fn(collection, element);

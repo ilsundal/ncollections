@@ -87,13 +87,13 @@ class MapTest extends CollectionTest {
   }
 
   test_equals(test) {
-    it('{1->2,3->4} == {1->2,3->4}', function() {
+    it('{1->2,3->4} == {3->4,1->2}', function() {
       let map1 = test.newInstance();
       map1.put(1,2);
       map1.put(3,4);
       let map2 = test.newInstance();
-      map2.put(1,2);
       map2.put(3,4);
+      map2.put(1,2);
       assert(map1.equals(map2));
       assert(map2.equals(map1));
     });

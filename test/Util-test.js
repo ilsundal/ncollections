@@ -142,6 +142,15 @@ describe('Util', function() {
       assert(Util.hashCode([{a:1},"B",4,[true]]) == 32066268);
     });
 
+    it('hash of [1,2] != hash of [2,1]', function() {
+      assert(Util.hashCode([1,2]) != Util.hashCode([2,1]));
+    });
+
+    it('hash of [1,2] == hash of [2,1] (with ignore_object_key_order=true)', function() {
+      let options = { ignore_object_key_order: true };
+      assert(Util.hashCode([1,2], options) == Util.hashCode([2,1], options));
+    });
+
     it('hash of [{a:1},"B",4,[true]] == hash of [{a:1},"B",4,[true]]', function() {
       assert(Util.hashCode([{a:1},"B",4,[true]]) == Util.hashCode([{a:1},"B",4,[true]]));
     });

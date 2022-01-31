@@ -29,10 +29,21 @@ class Map extends Collection {
     return this.values().contains(value);
   }
 
-  // Returns a Collection of key-value pair objects.
+  // Returns a Set of key-value pair objects.
   // Implementation note: if the returned Collection is backed by the map then it should be wrapped as an UnmodifiableCollection to prevent modification.
   entries() {
     throw new UnsupportedOperationException();
+  }
+
+  // Two maps are equal if they contain the same entries (in any order).
+  equals(collection) {
+    if (this === collection)
+      return true;
+    if (!(collection instanceof Map))
+      return false;
+    if (this.size() != collection.size())
+      return false;
+    return this.entries().equals(collection.entries());
   }
 
   // Returns the value at key, or undefined if no value at key.
@@ -40,7 +51,7 @@ class Map extends Collection {
     throw new UnsupportedOperationException();
   }
 
-  // Returns a Collection (without duplicates since keys are unique).
+  // Returns a Set (without duplicates since keys are unique).
   // Implementation note: if the returned Collection is backed by the map then it should be wrapped as an UnmodifiableCollection to prevent modification.
   keys() {
     let keys = new HashSet();

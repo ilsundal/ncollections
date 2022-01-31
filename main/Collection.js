@@ -54,10 +54,15 @@ class Collection {
   }
 
   // Two collections are equal if they are both Collections and their iterators return "equal" elements in the same order.
+  // Sub-classes will typically overrride this to ensure the Collection class is the same (e.g. Deque or Stack), or shares the same super-class (e.g. List or Set), using the equals0 method.
   equals(collection) {
+    return this.equals0(collection, Collection);
+  }
+
+  equals0(collection, instance_of) {
     if (this == collection)
      return true;
-    if (!(collection instanceof Collection))
+    if (!(collection instanceof instance_of))
       return false;
     if (this.size() != collection.size())
       return false;
@@ -107,20 +112,22 @@ class Collection {
     return Array.from(this);
   }
 
-  // Returns a string representation of the collection.
+  // Returns a string representation of the collection in iteration order.
+  // Note that two collections (e.g. two sets) that are equal might not necessarily return the same string because their iteration order might be different.
   toString(options={}) {
     let start = options.start || '[';
     let separator = options.separator || ',';
     let end = options.end || ']';
     let element_fn = options.element_fn || function(element) { return Util.toString(element); };
     let str = start;
-    let elements = this.toArray();
-    for (let i = 0; i != elements.length; i++) {
-      let element = elements[i];
+    let index = 0;
+    let size = this.size();
+    for (let element of this) {
       str += element_fn(element);
-      if (i < (elements.length - 1))
+      if (index < (size - 1))
         str += separator;
-    }
+      index++;
+    };
     str += end;
     return str;
   }

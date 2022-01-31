@@ -29,6 +29,10 @@ class List extends DefaultCollection {
     throw new UnsupportedOperationException();
   }
 
+  equals(collection) {
+    return super.equals0(collection, List);
+  }
+
   // Returns the element at index.
   // Throws IndexOutOfBoundsException if index is not within bounds.
   getAt(index) {

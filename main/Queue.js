@@ -40,6 +40,10 @@ class Queue extends Collection {
     return this;
   }
 
+  equals(collection) {
+    return super.equals0(collection, Queue);
+  }
+
   next() {
     return this.#list.next();
   }

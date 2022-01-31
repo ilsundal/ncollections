@@ -20,6 +20,7 @@ function compare(obj1, obj2) {
   return toString(obj1).localeCompare(toString(obj2));
 }
 
+// Implementation note: Works for the both arrays and objects because array keys are indexes (and thus order matters) and object keys are property names (and thus order does not matter).
 function equals(obj1, obj2) {
   if (obj1 === obj2)
     return true;
@@ -37,16 +38,21 @@ function equals(obj1, obj2) {
   return false;
 }
 
-function hashCode(obj) {
+function hashCode(obj, options={}) {
+  let ignore_object_key_order = (typeof options.ignore_object_key_order == 'boolean') ? options.ignore_object_key_order : false;
   if (obj == null)
     return 0;
   if (typeof obj == 'object') {
     let keys = Object.keys(obj);
     let hash = 17;
     for (let key of keys) {
-      hash = hash * 23 + hashCode(obj[key]);
-      hash |= 0; // Convert to 32bit integer
+      if (ignore_object_key_order) {
+        hash = hash + 23 + hashCode(obj[key], options);
+      } else {
+        hash = hash * 23 + hashCode(obj[key], options);
+      }
     }
+    hash |= 0; // Convert to 32bit integer
     return hash;
   }
   let str = toString(obj);
@@ -56,8 +62,8 @@ function hashCode(obj) {
   for (let i = 0; i < str.length; i++) {
     let chr = str.charCodeAt(i);
     hash = ((hash << 5) - hash) + chr;
-    hash |= 0; // Convert to 32bit integer
   }
+  hash |= 0; // Convert to 32bit integer
   return hash;
 }
 

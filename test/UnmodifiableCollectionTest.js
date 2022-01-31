@@ -8,21 +8,18 @@ const UnsupportedOperationException = require(__dirname + '/../main/UnsupportedO
 const CollectionTest = require(__dirname + '/CollectionTest.js');
 
 class UnmodifiableCollectionTest extends CollectionTest {
-  #inner_collection_class;
+  #unmodifiable_collection_class;
 
-  // inner_collection_class must be a Collection with an "add" method.
-  constructor(inner_collection_class, options={}) {
-    super(UnmodifiableCollection, options);
-    this.#inner_collection_class = inner_collection_class;
+  get unmodifiable_collection_class() { return this.#unmodifiable_collection_class; }
+
+  constructor(unmodifiable_collection_class, inner_collection_class, options) {
+    super(inner_collection_class, options);
+    this.#unmodifiable_collection_class = unmodifiable_collection_class;
   }
 
   newInstance(elements) {
-    let inner_collection = new this.#inner_collection_class();
-    if (elements) {
-      for (let element of elements)
-        inner_collection.add(element);
-    }
-    return new UnmodifiableCollection(inner_collection);
+    let inner_collection = super.newInstance(elements);
+    return new this.#unmodifiable_collection_class(inner_collection, inner_collection.constructor, this.options);
   }
 
   test_clear(test) {

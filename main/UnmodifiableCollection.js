@@ -1,17 +1,24 @@
 'use strict'
 
 const Collection = require(__dirname + '/Collection.js');
+const List = require(__dirname + '/List.js');
+const Set = require(__dirname + '/Set.js');
 const UnsupportedOperationException = require(__dirname + '/UnsupportedOperationException.js');
 
+// Should be sub-classed into UnmodifiableList, UnmodifiableSet, etc.
 class UnmodifiableCollection extends Collection {
   #inner_collection;
+  #inner_collection_class;
 
-  constructor(inner_collection, options={}) {
+  constructor(inner_collection, inner_collection_class, options={}) {
     super(options);
+    if (!(inner_collection instanceof inner_collection_class))
+      throw new Error('inner_collection is not an instance of ' + inner_collection_class);
     this.#inner_collection = inner_collection;
   }
 
   get inner_collection() { return this.#inner_collection; }
+  get inner_collection_class() { return this.#inner_collection_class; }
 
   clear() {
     throw new UnsupportedOperationException();
@@ -22,7 +29,10 @@ class UnmodifiableCollection extends Collection {
   }
 
   equals(collection) {
-    return this.#inner_collection.equals(collection);
+    let innermost_collection = collection;
+    while (innermost_collection instanceof UnmodifiableCollection)
+      innermost_collection = innermost_collection.inner_collection;
+    return this.#inner_collection.equals(innermost_collection);
   }
 
   hashCode() {

@@ -4,6 +4,7 @@ require(__dirname + '/index-test.js');
 require(__dirname + '/Util-test.js');
 
 const HashSet = require(__dirname + '/../main/HashSet.js');
+const UnmodifiableCollection = require(__dirname + '/../main/UnmodifiableCollection.js');
 
 const ArrayListTest = require(__dirname + '/ArrayListTest.js');
 const DequeTest = require(__dirname + '/DequeTest.js');
@@ -23,5 +24,5 @@ describe('LinkedList', function() { new LinkedListTest().run(); });
 describe('PriorityQueue', function() { new PriorityQueueTest().run(); });
 describe('Queue', function() { new QueueTest().run(); });
 describe('Stack', function() { new StackTest().run(); });
-describe('UnmodifiableCollectionTest(HashSet)', function() { new UnmodifiableCollectionTest(HashSet).run(); });
+describe('UnmodifiableCollectionTest(HashSet)', function() { new UnmodifiableCollectionTest(UnmodifiableCollection, HashSet).run(); });
 

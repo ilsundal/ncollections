@@ -39,6 +39,10 @@ class Deque extends Collection {
     return super.clone0('addLast');
   }
 
+  equals(collection) {
+    return super.equals0(collection, Deque);
+  }
+
   next() {
     return this.#list.next();
   }
