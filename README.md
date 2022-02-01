@@ -241,7 +241,7 @@ A PriorityQueue is a Queue that orders its elements according to a *compare_fn* 
 ```javascript
 let priority_queue = Collections.newPriorityQueue({ compare_fn: your_compare_fn });
 ```
-If no *compare_fn* is provided then a default (natural) ordering is used. Note that keeping order in a LinkedList requires linear operations, which is not fast (but only really an issue with big queues). Ideally, the PriorityQueue should be backed by a TreeSet instead of a LinkedList, and maybe it will be one day.
+If no *compare_fn* is provided then a default (natural) ordering is used. Note that keeping order in a LinkedList requires linear operations, which is not fast (but only really an issue with big queues). When a sorted Set (such as a TreeSet) is added as a new collection type, the PriorityQueue will probably backed by that instead of by the LinkedList.
 
 # A note on *equals*, *hashCode* and *compare_fn*
 
