@@ -103,13 +103,13 @@ There are two List-types: ArrayList and LinkedList.
 
 All Lists implement the following methods:
 
-**add(element)** adds the argument element to the end of the list. The list itself is returned.
+**add(element)** adds the argument element to the end of the list. Returns the list itself.
 
-**addAll(elements)** adds all the argument elements (an iterable) to the end of the list, in iteration order. The list itself is returned.
+**addAll(elements)** adds all the argument elements (an iterable) to the end of the list, in iteration order. Returns the list itself.
 
-**addFirst(element)** adds the argument element to the front of the list. The list itself is returned.
+**addFirst(element)** adds the argument element to the front of the list. Returns the list itself.
 
-**addLast(element)** adds the argument element to the end of the list. The list itself is returned.
+**addLast(element)** adds the argument element to the end of the list. Returns the list itself.
 
 **contains(element)** returns true if the list contains the argument element, and false if not.
 
@@ -117,10 +117,35 @@ All Lists implement the following methods:
 
 **getAt(index)** returns the element at the argument index position. An IndexOutOfBoundsException is thrown if the index is out of bounds.
 
+**getFirst()** returns the first element of the list. A NoSuchElementException is thrown if the list is empty.
+
+**getLast()** returns the last element of the list. A NoSuchElementException is thrown if the list is empty.
+
+**indexOf(element)** returns the first occurrence of the argument element in the list, or undefined if the list does not contain the argument element.
+
+**insertAt(index, element)** inserts the argument element at the argument index position in the list. Returns the list itself.
+
+**lastIndexOf(element)** returns the last occurrence of the argument element in the list, or undefined if the list does not contain the argument element.
+
 **remove(element)** removes the argument element from the collection. Returns true if an element was removed from the list, and false if not. If the list contains several elements that are equal to the argument element then only the first such element will be removed.
 
 **removeAll(elements)** removes the argument elements (an iterable) from the collection. Returns true if any element was removed from the list, and false if not. If the list contains several elements that are equal to any of argument elements then only the first such element will be removed.
 
+**removeAt(index)** removes the element at the argument index position in the list. It returns the removed element. An IndexOutOfBoundsException is thrown if the index is out of bounds.
+
+**removeFirst()** removes the first element of the list. It returns the removed element. A NoSuchElementException is thrown if the list is empty.
+
+**removeLast()** removes the last element of the list. It returns the removed element. A NoSuchElementException is thrown if the list is empty.
+
+**reverse()** reverses the list in place. Returns the list itself.
+
+**setAt(index, element)** replaces the element at the argument index position in the list with the argument element. The replaced element is returned. An IndexOutOfBoundsException is thrown if the index is out of bounds.
+
+**setFirst(element)** replaces the first element of the list with the argument element. The replaced element is returned. A NoSuchElementException is thrown if the list is empty.
+
+**setLast(element)** replaces the last element of the list with the argument element. The replaced element is returned. A NoSuchElementException is thrown if the list is empty.
+
+**sort(compare_fn)** sorts the list in place, optionally with a custom compare function. Returns the list itself.
 
 ## Maps: HashMap
 
