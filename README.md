@@ -257,29 +257,47 @@ class Person {
     return this.first_name == other_person.first_name && this.last_name == other_person.last_name;
   }
 }
-
 ```
 
 Similary, to index elements efficiently within a collection, the collection must have a way of creating indexes (or hash codes) for the objects to be added to the collection. This is done by a *hashCode* function. If you do not provide a *hashCode* function on the objects that you add to the collection then a default implementation is used that (via object reflection) works in (by far) most cases. However, you might want to provide an *hashCode(obj)* function on your objects to speed up performance (since object reflection is not particularly fast). Note that if *a.equals(b)* is true then *a.hashCode() == b.hashCode()* must be true as well.
 
+Here is an example if a class that implements *equals*:
 
+```javascript
+class Person {
+  first_name;
+  last_name;
+  hashCode() {
+    let hash = 17;
+    hash = hash * 23 + this.hashCode0(this.first_name);
+    hash = hash * 23 + this.hashCode0(this.first_last);
+    hash |= 0; // Convert to 32bit integer
+    return hash;
+  }
+  hashCode0(str) {
+    var hash = 0, i, chr;
+    if (str.length === 0) return hash;
+    for (i = 0; i < str.length; i++) {
+      chr   = str.charCodeAt(i);
+      hash  = ((hash << 5) - hash) + chr;
+    }
+    hash |= 0; // Convert to 32bit integer
+    return hash;
+  }
+}
+```
+Writing a good *hashCode* function takes some skill, but you can use the above example as inspiration for most cases. You can find plenty of help online.
 
 Lastly, some collections need sorting. For example, the PriorityQueue keeps its elements in priority order. Such sorting is done by a "compare_fn" function. If you do not provide a "compare_fn" then a default implementation is used that uses a natural order (converting objects to strings if necessary). However, you might want to provide an *compare_fn(obj1, obj2)* function for greater flexibility and/or to speed up performance (since e.g. stringification is not particularly fast). The *compare_fn(obj1, obj2)* must return values as follows:
 - Less than 0 (zero) if obj1 comes before obj2.
 - 0 (zero) if obj1 and obj2 have the same sorting order. Normally, to be consistent with the *equals()* function mentioned above, then if *obj1.equals(obj2)* is true then *compare_fn(obj1, obj2) == 0* must be true as well.
 - Greater than 0 (zero) if obj1 comes after obj2.
 
+Here is an example if a *compare_fn* function implementation that reserves the natural integer sort order:
 
+```javascript
+compare_fn(int1, int2) {
+  return int2 - int1;
+}
 
-Some of the collections mentioned uses equality, hash code and comparison functions called *equals*, *hashCode* and *compare_fn, respectively.
-- *equals* is used by Lists, Maps and Sets.
-- *hashCode* is used by Sets and Maps.
-- *compare_fn* is used by PriorityQueue, and with Lists when sorted.
-
-Default implementations of *equals*, *hashCode*, and *compare_fn* are provided and they work just fine in most cases.
-
-The *equals* function 
-
-
-
-
+```
