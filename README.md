@@ -243,12 +243,25 @@ A PriorityQueue is a Queue that orders its elements according to a *compare_fn* 
 
 To figure out whether any given object is contained in a collection, the collection must have a way of testing whether two objects are equal to one another. This is done by an *equals* function. If you do not provide an *equals(obj)* function on the objects that you add to the collection then a default implementation is used that (via object reflection) works in (by far) most cases. However, you might want to provide an *equals(obj)* function on your objects to speed up performance (since object reflection is not particularly fast). Note that if *a.equals(b)* is true then *b.equals(a)* should also be true.
 
-Here is an example if a class that implements *equals*:
+Similary, to index elements efficiently within a collection, the collection must have a way of creating indexes (or hash codes) for the objects to be added to the collection. This is done by a *hashCode* function. If you do not provide a *hashCode* function on the objects that you add to the collection then a default implementation is used that (via object reflection) works in (by far) most cases. However, you might want to provide an *hashCode(obj)* function on your objects to speed up performance (since object reflection is not particularly fast). Note that if *a.equals(b)* is true then *a.hashCode() == b.hashCode()* must be true as well. Writing a good *hashCode* function takes some skill, but you can use the example below as inspiration. You can find plenty of help online.
+
+Lastly, some collections need sorting. For example, the PriorityQueue keeps its elements in priority order. Such sorting is done by a "compare_fn" function. If you do not provide a "compare_fn" then a default implementation is used that uses a natural order (converting objects to strings if necessary). However, you might want to provide an *compare_fn(obj1, obj2)* function for greater flexibility and/or to speed up performance (since e.g. stringification is not particularly fast). The *compare_fn(obj1, obj2)* must return values as follows:
+- Less than 0 (zero) if obj1 comes before obj2.
+- 0 (zero) if obj1 and obj2 have the same sorting order. Normally, to be consistent with the *equals()* function mentioned above, then if *obj1.equals(obj2)* is true then *compare_fn(obj1, obj2) == 0* must be true as well.
+- Greater than 0 (zero) if obj1 comes after obj2.
+
+Here is an example of *equals*, *hashCode* and *compare_fn* implementations:
 
 ```javascript
 class Person {
   first_name;
   last_name;
+  age;
+  constructor(first_name, last_name, age) {
+    this.first_name = first_name;
+    this.last_name = last_name;
+    this.age = age;
+  }
   equals(other_person) {
     if (this == other_person)
       return true;
@@ -256,27 +269,17 @@ class Person {
       return false;
     return this.first_name == other_person.first_name && this.last_name == other_person.last_name;
   }
-}
-```
-
-Similary, to index elements efficiently within a collection, the collection must have a way of creating indexes (or hash codes) for the objects to be added to the collection. This is done by a *hashCode* function. If you do not provide a *hashCode* function on the objects that you add to the collection then a default implementation is used that (via object reflection) works in (by far) most cases. However, you might want to provide an *hashCode(obj)* function on your objects to speed up performance (since object reflection is not particularly fast). Note that if *a.equals(b)* is true then *a.hashCode() == b.hashCode()* must be true as well.
-
-Here is an example if a class that implements *equals*:
-
-```javascript
-class Person {
-  first_name;
-  last_name;
   hashCode() {
     let hash = 17;
     hash = hash * 23 + this.hashCode0(this.first_name);
-    hash = hash * 23 + this.hashCode0(this.first_last);
+    hash = hash * 23 + this.hashCode0(this.last_name);
+    hash = hash * 23 + this.age;
     hash |= 0; // Convert to 32bit integer
     return hash;
   }
   hashCode0(str) {
     var hash = 0, i, chr;
-    if (str.length === 0) return hash;
+    if (!str) return hash;
     for (i = 0; i < str.length; i++) {
       chr   = str.charCodeAt(i);
       hash  = ((hash << 5) - hash) + chr;
@@ -285,19 +288,27 @@ class Person {
     return hash;
   }
 }
-```
-Writing a good *hashCode* function takes some skill, but you can use the above example as inspiration for most cases. You can find plenty of help online.
 
-Lastly, some collections need sorting. For example, the PriorityQueue keeps its elements in priority order. Such sorting is done by a "compare_fn" function. If you do not provide a "compare_fn" then a default implementation is used that uses a natural order (converting objects to strings if necessary). However, you might want to provide an *compare_fn(obj1, obj2)* function for greater flexibility and/or to speed up performance (since e.g. stringification is not particularly fast). The *compare_fn(obj1, obj2)* must return values as follows:
-- Less than 0 (zero) if obj1 comes before obj2.
-- 0 (zero) if obj1 and obj2 have the same sorting order. Normally, to be consistent with the *equals()* function mentioned above, then if *obj1.equals(obj2)* is true then *compare_fn(obj1, obj2) == 0* must be true as well.
-- Greater than 0 (zero) if obj1 comes after obj2.
+let person1 = new Person('Morten', 'Helles', 48);
+let person2 = new Person('Morten', 'Helles', 48);
+let person3 = new Person('Alexander', 'Helles', 15);
+let person4 = new Person('Alexander', 'Helles', 30);
 
-Here is an example if a *compare_fn* function implementation that reserves the natural integer sort order:
+console.log(person1.equals(person2)); // outputs true
+console.log(person1.equals(person3)); // outputs false
 
-```javascript
-compare_fn(int1, int2) {
-  return int2 - int1;
+console.log(person1.hashCode()); // outputs 558261857
+console.log(person4.hashCode()); // outputs 1493222392
+
+// sort by last name then first name then age
+let compare_fn = function(person1, person2) {
+  let compare = person1.last_name.localeCompare(person2.last_name);
+  if (compare != 0) return compare;
+  compare = person1.first_name.localeCompare(person2.first_name);
+  if (compare != 0) return compare;
+  return person1.age - person2.age;
 }
 
+let persons = [ person1, person2, person3, person4 ].sort(compare_fn);
+console.log(persons); // order: person3, person4, person1, person2
 ```
