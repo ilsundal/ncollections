@@ -13,9 +13,9 @@ The collections are
 Why use ncollections?
 - **More collections** With standard JavaScript, you only have maps (via objects), arrays and sets.
 - **Well-designed** ncollections is small and neat and easy-to-use, flexible and extendable. Works with both simple types and objects.
-- **Small foot-print** ncollections does not use any packages. The main directory is small and can be zipped to 13KB.
+- **Small foot-print** ncollections does not use any packages. The main directory is small and can be zipped to 15KB.
 - **Plain JavaScript** Use both in browsers and Node.js.
-- **Equals and hash code** Provide your own custom *equals* and *hashCode* methods for you own objects to boost performance and reliably use objects as keys and in sets.
+- **Equals and hash code** You can optinally provide your own custom *equals* and *hashCode* methods for you own objects e.g. to boost performance.
 
 The design has been inspired by the [Java Collections Framework](https://docs.oracle.com/javase/8/docs/technotes/guides/collections/overview.html). Default and solid implementations are provided for *equals* and *hashcode* to make ncollections even easier to use.
 
