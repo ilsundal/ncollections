@@ -67,7 +67,7 @@ console.log(set.toString()); // outputs {1,"my_object"}
 npm install ncollections
 ```
 
-## Client-side usage:
+## Client-side usage
 
 No distributables are yet provided, such as through a CDN.
 
@@ -87,7 +87,7 @@ All Collections implement the following methods:
 
 **size()** returns the collection size.
 
-**toArray()** returns an array of the collection elements in iteration order.
+**toArray()** returns an array of the collection elements in iteration order. This array might be backed directly by the collection and thus should not be changed unless noted otherwise in the collection description.
 
 **toString()** returns a string representation of the collection in iteration order.
 
@@ -98,8 +98,8 @@ All collections implement the [iteration and iterable protocols](https://develop
 A List is an ordered collection that allows for duplicates.
 
 There are two List-types: ArrayList and LinkedList.
-- The ArrayList is backed by a JavaScript array. Thus, the *getAt()*, *add()* and *addLast()* operations run in constant time, while inserting and removing elements within the list runs in linear time (due to element shifting).
-- The LinkedList is backed by a next-previous (double-linked) node structure. Thus, adding, retrieving and removing elements from the front or end of the list run in constant time, while indexed operations run in linear time. (Index searching automatically choses whether to search forwards or backwards depending on what is fastest.)
+- The ArrayList is backed by a JavaScript array. Thus, the *getAt()* and *setAt()* operations are fast, while list insertions and removals are slower (due to possible element shifting and array resizing). The *toAtray()* method returns the backed array directly which thus allows you to access and modify the ArrayList directly using any JavaScript array function, such as *splice()*.
+- The LinkedList is backed by a next-previous (double-linked) node structure. Thus, adding, retrieving and removing elements from the front or end of the list are fast, while indexed operations are slower due to linear search. (The linear search automatically chooses whether to search forwards from the first node or backwards from the last node depending on what is fastest.)
 
 All Lists implement the following methods:
 
@@ -149,9 +149,55 @@ All Lists implement the following methods:
 
 ## Maps: HashMap
 
+A Map is a key-value collection where a (unique) key is mapped to a value. Collectively, a key and its mapped-to value is called an entry and is simply an object with two properties: "key" and "value". Both keys and values can be objects.
+
+There is only one Map-type at the moment: HashMap.
+- The HashMap is backed by a JavaScript object. Thus, the *containsKey()*, *get()*, *remove()* and *set()* operations are indexed and fast.
+
+All Maps implement the following methods:
+
+**containsKey(key)** returns true if the map contains the argument key, and false if not.
+
+**containsValue(value)** returns true if the map contains the argument value, and false if not.
+
+**entries()** returns the map's key-value pairs as objects in a Set. The returned Set might be backed directly by the map and thus should not be modified.
+
+**get(key)** returns the value mapped-to by the argument key, or undefined if the map does not contain the argument key.
+
+**keys** returns map's keys in a Set. The returned Set might be backed directly by the map and thus should not be modified.
+
+**put(key, value)** maps the argument key to the argument value. Returns the value previously mapped-to by the argument key, or undefined if the map contained no such key before.
+
+**putAll(entries)** puts the argument entries (an iterable) into the map. Returns nothing.
+
+**remove(key)** removes the argument key and its mapped-to value from the map. Returns the mapped-to value of the argument key, or undefined if the map contained no such key before.
+
+**removeAll(keys)** removes the argument keys and their mapped-to values from the map. Returns the removed entries.
+
 ## Sets: HashSet
 
+A Set is collection without duplicates.
+
+There is only one Set-type at the moment: HashSet.
+- The HashSet is backed by a JavaScript object. Thus, the *add()*, *contains()*, *remove()* are indexed and fast. A HashSet is not ordered.
+
+All Sets implement the following methods:
+
+**add(element)** adds the argument element to the set. Returns true if the set was changed (i.e. the set did not already contain the argument element), and false if not.
+
+**addAll(elements)** adds the argument elements (an iterable) to the set. Returns true if the set was changed, and false if not.
+
+**contains(element)** returns true if the set contains the argument element, and false if not.
+
+**containsAll(elements)** returns true if the set contains all of the argument elements (an iterable), and false if not.
+
+**remove(element)** removes the argument elment from the set. Returns true if the set was changed (i.e. the set contained the argument element), and false if not.
+
+**removeAll(elements)** removes the argument elments (an iterable) from the set. Returns true if the set was changed, and false if not.
+
 ## Deque
+
+
 
 ## Stack
 
