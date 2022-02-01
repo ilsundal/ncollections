@@ -1,7 +1,7 @@
 'use strict'
 
-const ArrayList = require(__dirname + '/ArrayList.js');
 const Collection = require(__dirname + '/Collection.js');
+const LinkedList = require(__dirname + '/LinkedList.js');
 const List = require(__dirname + '/List.js');
 const NoSuchElementException = require(__dirname + '/NoSuchElementException.js');
 const UnsupportedOperationException = require(__dirname + '/UnsupportedOperationException.js');
@@ -12,7 +12,7 @@ class Stack extends Collection {
 
   constructor(options={}) {
     super(options);
-    let list_class = options.list_class ? options.list_class : ArrayList;
+    let list_class = options.list_class ? options.list_class : LinkedList;
     if (!(Util.isSubClassOf(list_class, List)))
       throw new Error('Not a List sub-class: ' + list_class);
     this.#list = new list_class();

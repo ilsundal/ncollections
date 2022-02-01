@@ -25,6 +25,7 @@ class MapTest extends CollectionTest {
     'put',
     'putAll',
     'remove',
+    'removeAll',
     'values'
   ]);
 
@@ -232,6 +233,21 @@ class MapTest extends CollectionTest {
       map.put(1,2);
       map.put(2,3);
       assert(map.remove(1) == 2);
+      assert(map.size() == 1);
+      assert(map.get(2) == 3);
+    });
+  }
+
+  test_removeAll(test) {
+    it('{1->2,2->3,3->4} - 1 -> {1->2,3->4} & {2->3}', function() {
+      let map = test.newInstance();
+      map.put(1,2);
+      map.put(2,3);
+      map.put(3,4);
+      let removed = map.removeAll([1,3]);
+      assert(removed.size() == 2);
+      assert(removed.contains({key:1,value:2}));
+      assert(removed.contains({key:3,value:4}));
       assert(map.size() == 1);
       assert(map.get(2) == 3);
     });

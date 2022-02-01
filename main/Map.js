@@ -91,6 +91,18 @@ class Map extends Collection {
     throw new UnsupportedOperationException();
   }
 
+  // Removes all the keys and their associated values from the map.
+  // Returns the removed entries.
+  removeAll(keys) {
+    let removed = new HashSet();
+    for (let key of keys) {
+      let value = this.remove(key);
+      if (value != undefined)
+        removed.add({ key: key, value: value });
+    }
+    return removed;
+  }
+
   size() {
     return this.entries().size();
   }

@@ -170,7 +170,7 @@ class List extends Collection {
   }
 
   // returns the previous first element
-  // throws NoSuchElementException if list is empty
+  // throws NoSuchElementException if list is empty.
   setFirst(element) {
     if (this.isEmpty())
       throw new NoSuchElementException();
