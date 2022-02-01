@@ -1,8 +1,8 @@
 TODO FEATURES
-- Drop DefaultCollection
 - Add List.indexOf(element) (first occurance)
 - Add List.lastIndexOf(element) (last occurance)
-- Drop constructor initiation via index?
+- Collections.toArray - do not modify unless explicity noted otherwise for the specified collection.
+- ArrayList.toArray - the internal array. if you modify this then you modify the ArrayList directly. Useful for cool native methods, such as splice.
 - TreeSet is a SortedSet is a Set
 - Improve HashSet iterator to make it incremental
   - requires that I can iterate incrementally over object keys.

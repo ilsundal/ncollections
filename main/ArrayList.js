@@ -39,6 +39,14 @@ class ArrayList extends List {
     return this;
   }
 
+  lastIndexOf(element) {
+    for (let index = this.#array.length - 1; index != -1; index--) {
+      if (Collection.equals_fn(element, this.#array[index]))
+        return index;
+    }
+    return undefined;
+  }
+
   next() {
     let array = this.#array;
     let next_index = 0;
@@ -55,9 +63,9 @@ class ArrayList extends List {
   }
 
   remove(element) {
-    for (let i = 0; i != this.#array.length; i++) {
-      if (Collection.equals_fn(element, this.#array[i])) {
-        this.#array.splice(i, 1);
+    for (let index = 0; index != this.#array.length; index++) {
+      if (Collection.equals_fn(element, this.#array[index])) {
+        this.#array.splice(index, 1);
         return true;
       }
     }

@@ -84,6 +84,16 @@ class LinkedList extends List {
     return this;
   }
 
+  lastIndexOf(element) {
+    let index = this.#length - 1;
+    for (let current_node = this.#last_node; current_node != null; current_node = current_node.previous_node) {
+      if (Collection.equals_fn(element, current_node.element))
+        return index;
+      index--;
+    }
+    return undefined;
+  }
+
   next() {
     let next_node = this.#first_node;
     return {

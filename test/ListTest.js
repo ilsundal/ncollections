@@ -20,7 +20,9 @@ class ListTest extends ListishTest {
     'getAt',
     'getFirst',
     'getLast',
+    'indexOf',
     'insertAt',
+    'lastIndexOf',
     'remove',
     'removeAll',
     'removeAt',
@@ -151,6 +153,17 @@ class ListTest extends ListishTest {
     });
   }
 
+  test_indexOf(test) {
+    it('[1,2,3,2,1] index 4 -> undefined', function() {
+      let list = test.newInstance([1,2,3,2,1]);
+      assert(list.indexOf(4) == undefined);
+    });
+    it('[1,2,3,2,1] index 2 -> 1', function() {
+      let list = test.newInstance([1,2,3,2,1]);
+      assert(list.indexOf(2) == 1);
+    });
+  }
+
   test_insertAt(test) {
     it('[] at 0 insert 1 -> IndexOutOfBoundsException', function() {
       let list = test.newInstance();
@@ -161,6 +174,17 @@ class ListTest extends ListishTest {
       let list = test.newInstance([1,2,4]);
       assert(list.insertAt(2, 3) === list);
       assert(Util.equals(list.toArray(), [1,2,3,4]));
+    });
+  }
+
+  test_lastIndexOf(test) {
+    it('[1,2,3,2,1] index 4 -> undefined', function() {
+      let list = test.newInstance([1,2,3,2,1]);
+      assert(list.lastIndexOf(4) == undefined);
+    });
+    it('[1,2,3,2,1] index 2 -> 3', function() {
+      let list = test.newInstance([1,2,3,2,1]);
+      assert(list.lastIndexOf(2) == 3);
     });
   }
 

@@ -11,13 +11,13 @@ class List extends Collection {
   }
 
   // Adds the element to the end of the list.
-  // Returns the List itself.
+  // Returns the list itself.
   add(element) {
     return this.addLast(element);
   }
 
   // Adds the elements to the end of the list.
-  // Returns the List itself.
+  // Returns the list itself.
   addAll(elements) {
     let changed = false;
     for (let element of elements)
@@ -26,13 +26,13 @@ class List extends Collection {
   }
 
   // Adds the element so it becomes the first element of the list.
-  // Returns the List itself.
+  // Returns the list itself.
   addFirst(element) {
     throw new UnsupportedOperationException();
   }
 
   // Adds the element so it becomes the last element of the list.
-  // Returns the List itself.
+  // Returns the list itself.
   addLast(element) {
     throw new UnsupportedOperationException();
   }
@@ -85,10 +85,36 @@ class List extends Collection {
     return this.getAt(this.size() - 1);
   }
 
-  // Returns the List itself.
+  // Returns the index of the first occurrence of the element in the list, or undefined if not in the list.
+  // Implementation note: The default implementation iterates the list, stopping at the first occurrence.
+  indexOf(element) {
+    let index = 0;
+    for (let list_element of this) {
+      if (Collection.equals_fn(list_element, element))
+        return index;
+      index++;
+    }
+    return undefined;
+  }
+
+  // Inserts the element at the index.
+  // Returns the list itself.
   // Throws IndexOutOfBoundsException if index is not within bounds.
   insertAt(index, element) {
     throw new UnsupportedOperationException();
+  }
+
+  // Returns the index of the last occurrence of the element in the list, or undefined if not in the list.
+  // Implementation note: The default implementation iterates the entire list, returning the last occurrence. A sub-class might do this more effectively by searching backends from the end of the list.
+  lastIndexOf(element) {
+    let index = 0;
+    let last_index = undefined;
+    for (let list_element of this) {
+      if (Collection.equals_fn(list_element, element))
+        last_index = index;
+      index++;
+    }
+    return last_index;
   }
 
   // Removes the element from the list. If the list contains multiple instances of the element then only the first instance will be removed.
