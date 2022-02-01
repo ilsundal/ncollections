@@ -197,18 +197,47 @@ All Sets implement the following methods:
 
 ## Deque
 
-A Deque is an ordered collection where you can add, peek and poll the first and last elements. It is backed by a LinkedList and thus the associated methods are fast.
+A Deque is an ordered collection where you can add, peek and poll the first (front) and last (end) elements. It is backed by a LinkedList and thus the associated methods are all fast.
 
 The Deque implements the following methods:
 
+**addFirst(element)** adds the argument element to the front of the deque. Returns the deque itself.
 
+**addLast(element)** adds the argument element to the end of the deque. Returns the deque itself.
 
+**peekFirst()** returns the first element of the deque, or undefined if the deque is empty.
 
+**peekLast()** returns the last element of the deque, or undefined if the deque is empty.
+
+**pollFirst()** removes the first element of the deque, if any. Returns the removed element, or undefined if the deque is empty.
+
+**pollLast()** removes the last element of the deque, if any. Returns the removed element, or undefined if the deque is empty.
 
 ## Stack
 
-## Queue
+A Stack is an ordered collection where you can pop and push elements in Last-In First-Out (LIFO) order.  It is backed by a LinkedList and thus the associated methods are all fast.
 
-## PriorityQueue
+The Stack implements the following methods:
+
+**peek()** returns the last-pushed element, or undefined if the stack is empty.
+
+**pop()** removes the last-pushed element. Returns the removed element, or undefined if the stack is empty.
+
+**push(element)** adds the argument element to (end of) the stack. Returns the stack itself.
+
+## Queue and PriorityQueue
+
+A Queue is an ordered collection where you can enqueue and dequeue elements First-In First-Out (FIFO) order. It is backed by a LinkedList and thus the associated methods are all fast.
+
+The Queue implements the following methods:
+
+**dequeue()** removes the front element of the queue. Returns the removed element, or undefined if the queue is empty.
+
+**enqueue(element)** adds the argument element to the end of the queue.
+
+**peek()** returns the front element of the queue, or undefined if the queue is empty.
+
+A PriorityQueue is a Queue that orders its elements according to a *compare_fn* provided during instantiation. If no *compare_fn* is provided then a default ordering is used.
 
 # A note on *equals*, *hashCode* and *compare*
+
