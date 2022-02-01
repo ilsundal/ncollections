@@ -241,3 +241,45 @@ A PriorityQueue is a Queue that orders its elements according to a *compare_fn* 
 
 # A note on *equals*, *hashCode* and *compare*
 
+To figure out whether any given object is contained in a collection, the collection must have a way of testing whether two objects are equal to one another. This is done by an *equals* function. If you do not provide an *equals(obj)* function on the objects that you add to the collection then a default implementation is used that (via object reflection) works in (by far) most cases. However, you might want to provide an *equals(obj)* function on your objects to speed up performance (since object reflection is not particularly fast). Note that if *a.equals(b)* is true then *b.equals(a)* should also be true.
+
+Here is an example if a class that implements *equals*:
+
+```javascript
+class Person {
+  first_name;
+  last_name;
+  equals(other_person) {
+    if (this == other_person)
+      return true;
+    if (!(this instanceof Person))
+      return false;
+    return this.first_name == other_person.first_name && this.last_name == other_person.last_name;
+  }
+}
+
+```
+
+Similary, to index elements efficiently within a collection, the collection must have a way of creating indexes (or hash codes) for the objects to be added to the collection. This is done by a *hashCode* function. If you do not provide a *hashCode* function on the objects that you add to the collection then a default implementation is used that (via object reflection) works in (by far) most cases. However, you might want to provide an *hashCode(obj)* function on your objects to speed up performance (since object reflection is not particularly fast). Note that if *a.equals(b)* is true then *a.hashCode() == b.hashCode()* must be true as well.
+
+
+
+Lastly, some collections need sorting. For example, the PriorityQueue keeps its elements in priority order. Such sorting is done by a "compare_fn" function. If you do not provide a "compare_fn" then a default implementation is used that uses a natural order (converting objects to strings if necessary). However, you might want to provide an *compare_fn(obj1, obj2)* function for greater flexibility and/or to speed up performance (since e.g. stringification is not particularly fast). The *compare_fn(obj1, obj2)* must return values as follows:
+- Less than 0 (zero) if obj1 comes before obj2.
+- 0 (zero) if obj1 and obj2 have the same sorting order. Normally, to be consistent with the *equals()* function mentioned above, then if *obj1.equals(obj2)* is true then *compare_fn(obj1, obj2) == 0* must be true as well.
+- Greater than 0 (zero) if obj1 comes after obj2.
+
+
+
+Some of the collections mentioned uses equality, hash code and comparison functions called *equals*, *hashCode* and *compare_fn, respectively.
+- *equals* is used by Lists, Maps and Sets.
+- *hashCode* is used by Sets and Maps.
+- *compare_fn* is used by PriorityQueue, and with Lists when sorted.
+
+Default implementations of *equals*, *hashCode*, and *compare_fn* are provided and they work just fine in most cases.
+
+The *equals* function 
+
+
+
+
