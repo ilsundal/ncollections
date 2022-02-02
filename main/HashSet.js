@@ -5,7 +5,7 @@ const Collection = require(__dirname + '/Collection.js');
 const Set = require(__dirname + '/Set.js');
 
 class HashSet extends Set {
-  #map = {};
+  #map = new Map(); // maps key hash code -> elements
   #size = 0;
 
   constructor(options={}) {
@@ -14,49 +14,49 @@ class HashSet extends Set {
 
   add(element) {
     let hash_code = Collection.hash_code_fn(element);
-    let map_key_list = this.#map[hash_code];
-    if (!map_key_list)
-      this.#map[hash_code] = map_key_list = new ArrayList();
-    if (map_key_list.contains(element))
+    let hash_code_elements = this.#map.get(hash_code);
+    if (!hash_code_elements) {
+      hash_code_elements = new ArrayList();
+      this.#map.set(hash_code, hash_code_elements);
+    }
+    if (hash_code_elements.contains(element))
       return false;
-    map_key_list.add(element);
+    hash_code_elements.add(element);
     this.#size++;
     return true;
   }
 
   clear() {
-    this.#map = {};
+    this.#map.clear();
     this.#size = 0;
   }
 
   contains(element) {
     let hash_code = Collection.hash_code_fn(element);
-    let map_key_list = this.#map[hash_code];
-    if (!map_key_list)
-      return false;
-    return map_key_list.contains(element);
+    let hash_code_elements = this.#map.get(hash_code);
+    return hash_code_elements ? hash_code_elements.contains(element) : false;
   }
 
   // inefficient if only iterating over a few of the elements
   // todo: a more efficient implementation is to iterate over the map values by key
   next() {
     let all = new ArrayList();
-    for (let [hash_code, elements] of Object.entries(this.#map))
+    for (let [hash_code, elements] of this.#map.entries())
       all.addAll(elements);
     return all.next();
   }
 
   remove(element) {
     let hash_code = Collection.hash_code_fn(element);
-    let map_key_list = this.#map[hash_code];
-    if (!map_key_list)
+    let hash_code_elements = this.#map.get(hash_code);
+    if (!hash_code_elements)
       return false;
-    let removed = map_key_list.remove(element);
+    let removed = hash_code_elements.remove(element);
     if (!removed)
       return false;
     this.#size -= 1;
-    if (map_key_list.isEmpty())
-      delete this.#map[hash_code]; // clean up
+    if (hash_code_elements.isEmpty())
+      this.#map.delete(hash_code); // clean up
     return true;
   }
 

@@ -103,6 +103,7 @@ class Map extends Collection {
     return removed;
   }
 
+  // Implementation note: The default implementation is inefficient.
   size() {
     return this.entries().size();
   }
