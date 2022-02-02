@@ -152,7 +152,7 @@ All Lists implement the following methods:
 A Map is a key-value collection where a (unique) key is mapped to a value. Collectively, a key and its mapped-to value is called an entry and is simply an object with two properties: "key" and "value". Both keys and values can be objects.
 
 There is only one Map-type at the moment: HashMap.
-- The HashMap is backed by a JavaScript object. Thus, the *containsKey()*, *get()*, *remove()* and *set()* methods are fast.
+- The HashMap is backed by JavaScript's built-in Map. Thus, the *containsKey()*, *get()*, *remove()* and *set()* methods are fast.
 
 All Maps implement the following methods:
 
@@ -179,7 +179,7 @@ All Maps implement the following methods:
 A Set is collection without duplicates.
 
 There is only one Set-type at the moment: HashSet.
-- The HashSet is backed by a JavaScript object. Thus, the *add()*, *contains()*, and *remove()* methods are fast. A HashSet is not ordered.
+- The HashSet is backed by JavaScript's built-in Map. Thus, the *add()*, *contains()*, and *remove()* methods are fast. A HashSet is not ordered.
 
 All Sets implement the following methods:
 
