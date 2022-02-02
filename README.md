@@ -12,7 +12,7 @@ The collections are
 
 Why use ncollections?
 - **More collections** With standard JavaScript, you only have maps (via objects), arrays and sets.
-- **Well-designed** ncollections is small and neat and easy-to-use, flexible and extendable. Works with both simple types and objects.
+- **Well-designed** ncollections is small and neat and easy-to-use, flexible and extendable. Elements can be any value, both primitive values and objects.
 - **Small foot-print** ncollections does not use any packages. The main directory is small and can be zipped to 15KB.
 - **Plain JavaScript** Use both in browsers and Node.js.
 - **Equals and hash code** You can optinally provide your own custom *equals* and *hashCode* methods for you own objects e.g. to boost performance.
@@ -149,10 +149,10 @@ All Lists implement the following methods:
 
 ## Maps: HashMap
 
-A Map is a key-value collection where a (unique) key is mapped to a value. Collectively, a key and its mapped-to value is called an entry and is simply an object with two properties: "key" and "value". Both keys and values can be objects.
+A Map is a key-value collection where a (unique) key is mapped to a value. Collectively, a key and its mapped-to value is called an entry and is simply an object with two properties: "key" and "value". Both keys and values can be primitive values or objects.
 
 There is only one Map-type at the moment: HashMap.
-- The HashMap is backed by JavaScript's built-in Map. Thus, the *containsKey()*, *get()*, *remove()* and *set()* methods are fast.
+- The HashMap is backed by JavaScript's built-in Map. Thus, the *containsKey()*, *get()*, *put()*, and *remove()* methods are fast.
 
 All Maps implement the following methods:
 
@@ -237,11 +237,13 @@ The Queue implements the following methods:
 
 **peek()** returns the front element of the queue, or undefined if the queue is empty.
 
-A PriorityQueue is a Queue that orders its elements according to a *compare_fn* provided during instantiation via an options object, e.g.:
+### PriorityQueue
+
+A PriorityQueue is (a sub-class of) a Queue that orders its elements according to a *compare_fn* provided during instantiation via an options object, e.g.:
 ```javascript
 let priority_queue = Collections.newPriorityQueue({ compare_fn: your_compare_fn });
 ```
-If no *compare_fn* is provided then a default (natural) ordering is used. Note that keeping order in a LinkedList requires linear operations, which is not fast (but only really an issue with big queues). When a sorted Set (such as a TreeSet) is added as a new collection type, the PriorityQueue will probably backed by that instead of by the LinkedList.
+If no *compare_fn* is provided then a default (natural) ordering is used. Note that keeping order in a LinkedList requires linear operations, which is not fast (but is only really an issue with big queues). When a sorted Set (such as a TreeSet) is added as a new collection type, the PriorityQueue may optionally be backed by that instead of by the LinkedList.
 
 # A note on *equals*, *hashCode* and *compare_fn*
 
