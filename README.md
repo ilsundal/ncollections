@@ -315,6 +315,6 @@ let compare_fn = function(person1, person2) {
   return person1.age - person2.age;
 }
 
-let persons = [ person1, person2, person3, person4 ].sort(compare_fn);
-console.log(persons); // order: person3, person4, person1, person2
+let persons = Collections.newArrayList().addAll([ person1, person2, person3, person4 ]).sort(compare_fn);
+console.log(persons.toString()); // order: person3, person4, person1, person2
 ```
