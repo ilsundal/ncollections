@@ -2,11 +2,11 @@
 ncollections provides a selection of neatly designed collections for JavaScript.
 
 The collections are
-- [Lists](#Lists): [ArrayList](#ArrayList) and [LinkedList](#linkedlist)
-- [Sets](#Sets): [HashSet](#hashset) and NativeSet
-- Maps: HashMap and NativeMap
-- Queue and PriorityQueue
-- Deque and Stack
+- [Lists](#Lists): [ArrayList](#ArrayList) and [LinkedList](#LinkedList)
+- [Sets](#Sets): [HashSet](#HashSet) and [NativeSet](#NativeSet)
+- [Maps](#Maps): [HashMap](#HashMap) and [NativeMap](#NativeMap)
+- [Queue](#Queue) and [PriorityQueue])(#PriorityQueue)
+- [Deque](Deque) and [Stack](Stack)
 
 Why use ncollections?
 - **More collections** With standard JavaScript, you only have maps (via objects), arrays and sets.
@@ -15,7 +15,7 @@ Why use ncollections?
 - **Plain JavaScript** Use both in browsers and Node.js.
 - **Equals and hash code** You can optionally provide your own custom *equals* and *hashCode* methods for you own objects e.g. to boost performance.
 
-The design has been inspired by the [Java Collections Framework](https://docs.oracle.com/javase/8/docs/technotes/guides/collections/overview.html). Robust and fast default implementations are provided for *equals* and *hashCode* functions to make ncollections even easier to use. (In most cases, you don't have to worry about value equality and hash codes at all; it just works.)
+The design has been inspired by the [Java Collections Framework](https://docs.oracle.com/javase/8/docs/technotes/guides/collections/overview.html). Robust and fast default implementations are provided for *equals* and *hashCode* functions to make ncollections even easier to use. (In most cases, you don't have to worry about value equality and hash codes at all; it just works. [Read more.](#A-Note-On-equals-hashcode-And-compare_fn))
 
 # Example
 
