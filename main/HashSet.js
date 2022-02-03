@@ -3,6 +3,7 @@
 const ArrayList = require(__dirname + '/ArrayList.js');
 const Collection = require(__dirname + '/Collection.js');
 const Set = require(__dirname + '/Set.js');
+const Util = require(__dirname + '/Util.js');
 
 class HashSet extends Set {
   #map = new Map(); // maps key hash code -> elements
@@ -37,13 +38,8 @@ class HashSet extends Set {
     return hash_code_elements ? hash_code_elements.contains(element) : false;
   }
 
-  // inefficient if only iterating over a few of the elements
-  // todo: a more efficient implementation is to iterate over the map values by key
   next() {
-    let all = new ArrayList();
-    for (let [hash_code, elements] of this.#map.entries())
-      all.addAll(elements);
-    return all.next();
+    return Util.mapIterator(this.#map);
   }
 
   remove(element) {

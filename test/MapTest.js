@@ -19,7 +19,6 @@ class MapTest extends CollectionTest {
   class_method_names = this.class_method_names.concat([
     'containsKey',
     'containsValue',
-    'entries',
     'get',
     'keys',
     'put',
@@ -84,19 +83,6 @@ class MapTest extends CollectionTest {
       let map = test.newInstance();
       map.put(1,2);
       assert(map.containsValue(1) == false);
-    });
-  }
-
-  test_entries(test) {
-    it('{1->2,3->4} -> {1->2,3->4}', function() {
-      let map = test.newInstance();
-      map.put(1,2);
-      map.put(3,4);
-      let set = new HashSet();
-      set.addAll(map.entries());
-      assert(set.contains({ key: 1, value: 2 }));
-      assert(set.contains({ key: 3, value: 4 }));
-      assert(set.size() == 2);
     });
   }
 

@@ -3,9 +3,10 @@
 const ArrayList = require(__dirname + '/ArrayList.js');
 const Collection = require(__dirname + '/Collection.js');
 const HashSet = require(__dirname + '/HashSet.js');
-const _Map = require(__dirname + '/Map.js');
+const Map_ = require(__dirname + '/Map.js');
+const Util = require(__dirname + '/Util.js');
 
-class HashMap extends _Map {
+class HashMap extends Map_ {
   #map = new Map(); // maps key hash code -> entry list, where each entry is a { key: ..., value: ... } object
   #size = 0;
 
@@ -37,14 +38,6 @@ class HashMap extends _Map {
     return false;
   }
 
-  // Todo: make incremental.
-  entries() {
-    let entries = new HashSet();
-    for (let key_hash_code_entries of this.#map.values())
-      entries.addAll(key_hash_code_entries);
-    return entries;
-  }
-
   get(key) {
     let key_hash_code = Collection.hash_code_fn(key);
     let key_hash_code_entries = this.#map.get(key_hash_code) || [];
@@ -55,16 +48,19 @@ class HashMap extends _Map {
     return undefined;
   }
 
-  // Todo: make incremental.
   keys() {
-    let keys = new ArrayList();
-    for (let entry of this)
-      keys.add(entry.key);
-    return keys;
+    let entries_iterator = this.next();
+    return {
+      next: function() {
+        let entries_iterator_next = entries_iterator.next();
+        return entries_iterator_next.done ? { done: true } : { value: entries_iterator_next.value.key, done: false };
+      },
+      [Symbol.iterator]: function() { return this; }
+    };
   }
 
   next() {
-    return this.entries().next();
+    return Util.mapIterator(this.#map);
   }
 
   put(key, value) {
@@ -114,12 +110,15 @@ class HashMap extends _Map {
     return this.#size;
   }
 
-  // Todo: make incremental.
   values() {
-    let values = new ArrayList();
-    for (let entry of this)
-      values.add(entry.value);
-    return values;
+    let entries_iterator = this.next();
+    return {
+      next: function() {
+        let entries_iterator_next = entries_iterator.next();
+        return entries_iterator_next.done ? { done: true } : { value: entries_iterator_next.value.value, done: false };
+      },
+      [Symbol.iterator]: function() { return this; }
+    };
   }
 }
 

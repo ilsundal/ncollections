@@ -29,11 +29,6 @@ class Map extends Collection {
     throw new UnsupportedOperationException();
   }
 
-  // Returns an iterable over the map's key-value pair objects.
-  entries() {
-    throw new UnsupportedOperationException();
-  }
-
   // Two maps are equal if they contain the same keys and values for each key (in any order).
   equals(collection) {
     if (this === collection)

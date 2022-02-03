@@ -28,14 +28,6 @@ class NativeMap extends _Map {
     return false;
   }
 
-  // Todo: Make incremental.
-  entries() {
-    let entries = new ArrayList();
-    for (let [key, value] of this.#map.entries())
-      entries.add({ key: key, value: value});
-    return entries;
-  }
-
   get(key) {
     return this.#map.get(key);
   }
@@ -45,7 +37,18 @@ class NativeMap extends _Map {
   }
 
   next() {
-    return this.entries().next();
+    let entries_iterator = this.#map.entries();
+    return {
+      next: function() {
+        let entries_iterator_next = entries_iterator.next();
+        if (entries_iterator_next.done)
+          return { done: true };
+        let key = entries_iterator_next.value[0];
+        let value = entries_iterator_next.value[1];
+        let entry = { key: key, value: value };
+        return { value: entry, done: false };
+      }
+    }
   }
 
   put(key, value) {

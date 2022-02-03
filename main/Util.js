@@ -71,11 +71,34 @@ function isSubClassOf(subClass, parentClass) {
   return subClass.prototype instanceof parentClass || (subClass === parentClass);
 }
 
+// returns an iterator of the native map where keys are hash codes and values are array lists of elements
+function mapIterator(map) {
+  let key_iterator = map.keys();
+  let current_key = null;
+  let current_key_values = null;
+  let current_key_values_index = null;
+  return {
+    next: function() {
+      if ((current_key_values == null) || (current_key_values_index >= current_key_values.size())) {
+        // move current_key to next (hash code) key
+        let key_iterator_next = key_iterator.next();
+        if (key_iterator_next.done) {
+          return { done: true };
+        }
+        current_key = key_iterator_next.value;
+        current_key_values = map.get(current_key);
+        current_key_values_index = 0;
+      }
+      let value = current_key_values.getAt(current_key_values_index);
+      current_key_values_index++;
+      return { value: value, done: false };
+    }
+  }
+}
+
 function toString(obj) {
   if (obj == null)
     return null;
-//  if (typeof obj == 'string')
-//    return obj;
   if ((typeof obj == 'object') && (obj.toString == 'function'))
     return obj.toString();
   return JSON.stringify(obj);
@@ -86,5 +109,6 @@ module.exports = {
   equals: equals,
   hashCode: hashCode,
   isSubClassOf: isSubClassOf,
+  mapIterator: mapIterator,
   toString: toString
 };
