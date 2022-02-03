@@ -15,7 +15,7 @@ Why use ncollections?
 - **Plain JavaScript** Use both in browsers and Node.js.
 - **Equals and hash code** You can optionally provide your own custom *equals* and *hashCode* methods for you own objects e.g. to boost performance.
 
-The design has been inspired by the [Java Collections Framework](https://docs.oracle.com/javase/8/docs/technotes/guides/collections/overview.html). Default and solid implementations are provided for *equals* and *hashcode* to make ncollections even easier to use.
+The design has been inspired by the [Java Collections Framework](https://docs.oracle.com/javase/8/docs/technotes/guides/collections/overview.html). Robust and fast default implementations are provided for *equals* and *hashCode* functions to make ncollections even easier to use. (In most cases, you don't have to worry about equality and hash codes at all; it just works.)
 
 # Example
 
