@@ -251,7 +251,7 @@ The Queue implements the following methods:
 
 ### PriorityQueue
 
-A PriorityQueue is (a sub-class of) a Queue that orders its elements according to a *compare_fn* provided during instantiation via an options object, e.g.:
+A PriorityQueue is a Queue that orders its elements according to a *compare_fn* provided during instantiation via an options object, e.g.:
 ```javascript
 let priority_queue = Collections.newPriorityQueue({ compare_fn: your_compare_fn });
 ```
