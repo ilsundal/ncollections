@@ -5,15 +5,13 @@ The collections are
 - ArrayList and LinkedList
 - HashSet and NativeSet
 - HashMap and NativeMap
-- Deque
-- Stack
-- Queue
-- PriorityQueue
+- Queue and PriorityQueue
+- Deque and Stack
 
 Why use ncollections?
 - **More collections** With standard JavaScript, you only have maps (via objects), arrays and sets.
 - **Well-designed** ncollections is small and neat and easy-to-use, flexible and extendable. Elements can be any value, both primitive values and objects.
-- **Small foot-print** ncollections does not use any packages. The main directory is small and can be zipped to 15KB.
+- **Small foot-print** ncollections does not use any packages. The main directory is small and can be zipped to ~16KB.
 - **Plain JavaScript** Use both in browsers and Node.js.
 - **Equals and hash code** You can optinally provide your own custom *equals* and *hashCode* methods for you own objects e.g. to boost performance. (Not possible with NativeMap and NativeSet, though.)
 
@@ -22,7 +20,7 @@ The design has been inspired by the [Java Collections Framework](https://docs.or
 # Example
 
 ```javascript
-const Collections = require('ncollections');
+const Collections = require(__dirname + '/../index.js');
 
 // There are two ways to instantiate a new Collection, for example for an ArrayList:
 let array_list1 = new Collections.ArrayList(); // using constructor
@@ -56,7 +54,7 @@ set.add(1); // a duplicate which will thus not be inserted into the set because 
 console.log(set.size()); // outputs 2
 console.log(set.toString()); // outputs {1,"my_object"}
 
-// The other Collections (Stack, Dequeu, Queue, etc.) are similarly designed.
+// The other Collections (Stack, Deque, Queue, etc.) are similarly designed.
 ```
 
 # Installation
@@ -510,9 +508,9 @@ If no *compare_fn* is provided then a default (natural) ordering is used. Note t
 
 # A note on *equals*, *hashCode* and *compare_fn*
 
-To figure out whether any given object is contained in a collection, the collection must have a way of testing whether two objects are equal to one another. This is done by an *equals* function. If you do not provide an *equals(obj)* function on the objects that you add to the collection then a default implementation is used that (via object reflection) works just fine (in most cases). However, you might want to provide an *equals(obj)* function on your objects to speed up performance (since object reflection is not particularly fast). Note that if *a.equals(b)* is true then *b.equals(a)* should also be true.
+To figure out whether any given object is contained in a collection, the collection must have a way of testing whether two objects are equal to one another. This is done by an *equals* function. If you do not provide an *equals(obj)* function on the objects that you add to the collection then a default implementation is used that (via object reflection) works just fine (in nearly all cases). However, you might want to provide an *equals(obj)* function on your objects to speed up performance (since object reflection is not particularly fast). Note that if *a.equals(b)* is true then *b.equals(a)* should also be true.
 
-Similary, to index elements efficiently within a collection, the collection must have a way of creating indexes (or hash codes) for the objects to be added to the collection. This is done by a *hashCode* function. If you do not provide a *hashCode* function on the objects that you add to the collection then a default implementation is used that (via object reflection) works just fine (in most cases). However, you might want to provide an *hashCode(obj)* function on your objects to speed up performance (since object reflection is not particularly fast). Note that if *a.equals(b)* is true then *a.hashCode() == b.hashCode()* must be true as well. Writing a good *hashCode* function takes some skill, but you can use the example below as inspiration. You can find plenty of help online.
+Similary, to index elements efficiently within a collection, the collection must have a way of creating indexes (or hash codes) for the objects to be added to the collection. This is done by a *hashCode* function. If you do not provide a *hashCode* function on the objects that you add to the collection then a default implementation is used that (via object reflection) works just fine (in nearly all cases). However, you might want to provide an *hashCode(obj)* function on your objects to speed up performance (since object reflection is not particularly fast). Note that if *a.equals(b)* is true then *a.hashCode() == b.hashCode()* must be true as well. Writing a good *hashCode* function takes some skill, but you can use the example below as inspiration. You can find plenty of help online.
 
 Lastly, some collections need sorting. For example, the PriorityQueue keeps its elements in priority order. Such sorting is done by a "compare_fn" function. If you do not provide a "compare_fn" then a default implementation is used that uses natural ordering (converting objects to strings if necessary). However, you might want to provide a *compare_fn(obj1, obj2)* function for greater flexibility and/or to speed up performance (since e.g. stringification is not particularly fast). The *compare_fn(obj1, obj2)* function must return a value as follows:
 - Less than 0 (zero) if obj1 comes before obj2.
