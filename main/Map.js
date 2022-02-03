@@ -21,21 +21,20 @@ class Map extends Collection {
 
   // Returns true if the key is a map key, and false otherwise.
   containsKey(key) {
-    return this.keys().contains(key);
+    throw new UnsupportedOperationException();
   }
 
   // Returns true if the value is a map value, i.e. if some key maps to it, and false otherwise.
   containsValue(value) {
-    return this.values().contains(value);
+    throw new UnsupportedOperationException();
   }
 
-  // Returns a Set of key-value pair objects.
-  // Implementation note: if the returned Collection is backed by the map then it should be wrapped as an UnmodifiableCollection to prevent modification.
+  // Returns an iterable over the map's key-value pair objects.
   entries() {
     throw new UnsupportedOperationException();
   }
 
-  // Two maps are equal if they contain the same entries (in any order).
+  // Two maps are equal if they contain the same keys and values for each key (in any order).
   equals(collection) {
     if (this === collection)
       return true;
@@ -43,7 +42,13 @@ class Map extends Collection {
       return false;
     if (this.size() != collection.size())
       return false;
-    return this.entries().equals(collection.entries());
+    for (let key of this.keys()) {
+      let this_key_value = this.get(key);
+      let other_key_value = collection.get(key);
+      if (!Collection.equals_fn(this_key_value, other_key_value))
+        return false;
+    }
+    return true;
   }
 
   // Two maps with the same entries must have the same hash code regardless of iteration order.
@@ -59,17 +64,14 @@ class Map extends Collection {
     throw new UnsupportedOperationException();
   }
 
-  // Returns a Set (without duplicates since keys are unique).
-  // Implementation note: if the returned Collection is backed by the map then it should be wrapped as an UnmodifiableCollection to prevent modification.
+  // Returns an iterable over the map's keys.
+  // Todo: make incremental.
   keys() {
-    let keys = new HashSet();
-    for (let entry of this.entries())
-      keys.add(entry.key);
-    return keys;
+    throw new UnsupportedOperationException();
   }
 
   next() {
-    return this.entries().next();
+    return this.entries();
   }
 
   // Puts the key and value into the map.
@@ -103,9 +105,8 @@ class Map extends Collection {
     return removed;
   }
 
-  // Implementation note: The default implementation is inefficient.
   size() {
-    return this.entries().size();
+    throw new UnsupportedOperationException();
   }
 
   toString() {
@@ -114,13 +115,10 @@ class Map extends Collection {
     }});
   }
 
-  // Returns an Collection (which may contain duplicate values). The collection size will equal size().
-  // Implementation note: if the returned Collection is backed by the map then it should be wrapped as an UnmodifiableCollection to prevent modification,
+  // Returns an iterable over the map's values.
+  // Todo: make incremental.
   values() {
-    let values = new ArrayList(); // duplicates are possible
-    for (let entry of this.entries())
-      values.add(entry.value);
-    return values;
+    throw new UnsupportedOperationException();
   }
 }
 

@@ -1,11 +1,9 @@
 TODO FEATURES
-- Add List.indexOf(element) (first occurance)
-- Add List.lastIndexOf(element) (last occurance)
-- Collections.toArray - do not modify unless explicity noted otherwise for the specified collection.
-- ArrayList.toArray - the internal array. if you modify this then you modify the ArrayList directly. Useful for cool native methods, such as splice.
-- TreeSet is a SortedSet is a Set
-- Improve HashSet iterator to make it incremental
-  - requires that I can iterate incrementally over object keys.
+- Map/HashMap/NativeMap - entries(), keys(), values() should return an iterable, not a collection.
+- List/Set/Map call inefficient default implementations for method0().
+- Add collection: TreeSet (which is a sorted Set).
+- Add collection: IndexStore.
+- HashSet iterator should be incremental.
 
 COLLECTION OVERVIEW
 
@@ -16,9 +14,11 @@ Collection
     LinkedList*
   Map
     HashMap*
+    NativeMap*
   Queue*
     PriorityQueue*
   Set
     HashSet*
+    NativeSet*
   Stack*
 * = instantiable

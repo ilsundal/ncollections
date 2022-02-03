@@ -8,6 +8,8 @@ const COLLECTIONS = {
   LinkedList: require(__dirname + '/main/LinkedList.js'),
   List: require(__dirname + '/main/ArrayList.js'), // default list: ArrayList
   Map: require(__dirname + '/main/HashMap.js'), // default map: HashMap
+  NativeMap: require(__dirname + '/main/NativeMap.js'),
+  NativeSet: require(__dirname + '/main/NativeSet.js'),
   PriorityQueue: require(__dirname + '/main/PriorityQueue.js'),
   Queue: require(__dirname + '/main/Queue.js'),
   Set: require(__dirname + '/main/HashSet.js'), // default set: HashSet

@@ -5,7 +5,6 @@ const Collection = require(__dirname + '/Collection.js');
 const HashSet = require(__dirname + '/HashSet.js');
 const _Map = require(__dirname + '/Map.js');
 
-// needs to be reviewed - and possible redone, so e.g. containsKey, containsValue, size, etc. can be fast
 class HashMap extends _Map {
   #map = new Map(); // maps key hash code -> entry list, where each entry is a { key: ..., value: ... } object
   #size = 0;
@@ -19,6 +18,26 @@ class HashMap extends _Map {
     this.#size = 0;
   }
 
+  containsKey(key) {
+    let key_hash_code = Collection.hash_code_fn(key);
+    let key_hash_code_entries = this.#map.get(key_hash_code) || [];
+    for (let key_hash_code_entry of key_hash_code_entries) {
+      if (Collection.equals_fn(key_hash_code_entry.key, key))
+        return true;
+    }
+    return false;
+  }
+
+  // inefficient
+  containsValue(value) {
+    for (let entry of this) {
+      if (Collection.equals_fn(entry.value, value))
+        return true;
+    }
+    return false;
+  }
+
+  // Todo: make incremental.
   entries() {
     let entries = new HashSet();
     for (let key_hash_code_entries of this.#map.values())
@@ -28,14 +47,24 @@ class HashMap extends _Map {
 
   get(key) {
     let key_hash_code = Collection.hash_code_fn(key);
-    let key_hash_code_entries = this.#map.get(key_hash_code);
-    if (key_hash_code_entries) {
-      for (let key_hash_code_entry of key_hash_code_entries) {
-        if (Collection.equals_fn(key, key_hash_code_entry.key))
-          return key_hash_code_entry.value;
-      }
+    let key_hash_code_entries = this.#map.get(key_hash_code) || [];
+    for (let key_hash_code_entry of key_hash_code_entries) {
+      if (Collection.equals_fn(key, key_hash_code_entry.key))
+        return key_hash_code_entry.value;
     }
     return undefined;
+  }
+
+  // Todo: make incremental.
+  keys() {
+    let keys = new ArrayList();
+    for (let entry of this)
+      keys.add(entry.key);
+    return keys;
+  }
+
+  next() {
+    return this.entries().next();
   }
 
   put(key, value) {
@@ -62,15 +91,13 @@ class HashMap extends _Map {
 
   remove(key) {
     let key_hash_code = Collection.hash_code_fn(key);
-    let key_hash_code_entries = this.#map.get(key_hash_code);
+    let key_hash_code_entries = this.#map.get(key_hash_code) || [];
     let key_hash_code_entry_to_remove_index = -1;
-    if (key_hash_code_entries) {
-      for (let i = 0; i != key_hash_code_entries.length; i++) {
-        let key_hash_code_entry = key_hash_code_entries.getAt(i);
-        if (Collection.equals_fn(key, key_hash_code_entry.key)) {
-          key_hash_code_entry_to_remove_index = i;
-          break;
-        }
+    for (let i = 0; i != key_hash_code_entries.length; i++) {
+      let key_hash_code_entry = key_hash_code_entries.getAt(i);
+      if (Collection.equals_fn(key, key_hash_code_entry.key)) {
+        key_hash_code_entry_to_remove_index = i;
+        break;
       }
     }
     if (key_hash_code_entry_to_remove_index >= 0) {
@@ -85,6 +112,14 @@ class HashMap extends _Map {
 
   size() {
     return this.#size;
+  }
+
+  // Todo: make incremental.
+  values() {
+    let values = new ArrayList();
+    for (let entry of this)
+      values.add(entry.value);
+    return values;
   }
 }
 

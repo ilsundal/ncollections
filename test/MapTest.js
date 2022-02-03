@@ -176,7 +176,7 @@ class MapTest extends CollectionTest {
       let map = test.newInstance();
       map.put(1,2);
       map.put(3,4);
-      assert(Util.equals(map.keys().toArray().sort(), [1,3]));
+      assert(Util.equals(new Array(...map.keys()).sort(), [1,3]));
     });
   }
 
@@ -306,14 +306,14 @@ class MapTest extends CollectionTest {
   test_values(test) {
     it('{} -> []', function() {
       let map = test.newInstance();
-      assert(map.values().isEmpty());
+      assert(new Array(...map.values()).length == 0);
     });
     it('{1->2,2->2,3->3} -> {2,2,3} when sorted', function() {
       let map = test.newInstance();
       map.put(1,2);
       map.put(2,2);
       map.put(3,3);
-      assert(Util.equals(map.values().toArray().sort(), [2,2,3]));
+      assert(Util.equals(new Array(...map.values()).sort(), [2,2,3]));
     });
   }
 }
