@@ -149,7 +149,7 @@ All Lists implement the following methods:
 
 ## Maps: HashMap
 
-A Map is a key-value collection where a (unique) key is mapped to a value. Collectively, a key and its mapped-to value is called an entry and is simply an object with two properties: "key" and "value". Both keys and values can be primitive values or objects.
+A Map is a key-value collection where a (unique) key is mapped to a value. Collectively, a key and its mapped-to value is called an entry and is simply an object with two properties: "key" and "value". Both keys and values can be primitive values or objects. To get all the entries of a map simply iterate over it; thus, there is no *entries* method.
 
 There are two Map-types: HashMap and NativeMap.
 - The HashMap is backed by [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map). Thus, the *containsKey()*, *get()*, *put()*, and *remove()* methods are fast.
@@ -160,8 +160,6 @@ All Maps implement the following methods:
 **containsKey(key)** returns true if the map contains the argument key, and false if not.
 
 **containsValue(value)** returns true if the map contains the argument value, and false if not.
-
-**entries()** returns an iterable over the map's entries.
 
 **get(key)** returns the value mapped-to by the argument key, or undefined if the map does not contain the key.
 
