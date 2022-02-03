@@ -3,8 +3,8 @@ ncollections provides a selection of neatly designed collections for JavaScript.
 
 The collections are
 - ArrayList and LinkedList
-- HashSet
-- HashMap
+- HashSet and NativeSet
+- HashMap and NativeMap
 - Deque
 - Stack
 - Queue
@@ -15,7 +15,7 @@ Why use ncollections?
 - **Well-designed** ncollections is small and neat and easy-to-use, flexible and extendable. Elements can be any value, both primitive values and objects.
 - **Small foot-print** ncollections does not use any packages. The main directory is small and can be zipped to 15KB.
 - **Plain JavaScript** Use both in browsers and Node.js.
-- **Equals and hash code** You can optinally provide your own custom *equals* and *hashCode* methods for you own objects e.g. to boost performance.
+- **Equals and hash code** You can optinally provide your own custom *equals* and *hashCode* methods for you own objects e.g. to boost performance. (Not possible with NativeMap and NativeSet, though.)
 
 The design has been inspired by the [Java Collections Framework](https://docs.oracle.com/javase/8/docs/technotes/guides/collections/overview.html). Default and solid implementations are provided for *equals* and *hashcode* to make ncollections even easier to use.
 
@@ -151,8 +151,9 @@ All Lists implement the following methods:
 
 A Map is a key-value collection where a (unique) key is mapped to a value. Collectively, a key and its mapped-to value is called an entry and is simply an object with two properties: "key" and "value". Both keys and values can be primitive values or objects.
 
-There is only one Map-type at the moment: HashMap.
+There are two Map-types: HashMap and NativeMap.
 - The HashMap is backed by [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map). Thus, the *containsKey()*, *get()*, *put()*, and *remove()* methods are fast.
+- The NativeMap is a thin wrapper around [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) and adapts it to the ncollections framework. NativeMap does not support custom *equals* and *hashCode* methods.
 
 All Maps implement the following methods:
 
@@ -180,8 +181,9 @@ All Maps implement the following methods:
 
 A Set is collection without duplicates.
 
-There is only one Set-type at the moment: HashSet.
+There are two Set-types: HashSet and NativeSet.
 - The HashSet is backed by [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map). Thus, the *add()*, *contains()*, and *remove()* methods are fast. A HashSet is not ordered.
+- The NativeSet is a thin wrapper around [JavaScript's built-in Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) and adapts it to the ncollections framework. NativeSet does not support custom *equals* and *hashCode* methods.
 
 All Sets implement the following methods:
 
