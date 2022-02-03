@@ -98,8 +98,8 @@ All collections implement the [iteration and iterable protocols](https://develop
 A List is an ordered collection that allows for duplicates.
 
 There are two List-types: ArrayList and LinkedList.
-- The ArrayList is backed by [JavaScript's built-in array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array). Thus, the *getAt()* and *setAt()* methods are fast, while list insertions and removals are slower (due to possible element shifting and array resizing). The *toAtray()* method returns the backed array directly which thus allows you to access and modify the ArrayList directly using any JavaScript array function, such as *splice()*.
-- The LinkedList is backed by a next-previous (double-linked) node structure. Thus, adding, retrieving and removing elements from the front or end of the list is fast, while *getAt()* and *setAt()* are slower due to linear search. (The linear search automatically chooses whether to search forwards from the first node or backwards from the last node depending on what is fastest.)
+- The ArrayList is backed by [JavaScript's built-in array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array). Thus, the *getAt* and *setAt* methods are fast, while list insertions and removals are slower (due to possible element shifting and array resizing). The *toAtray* method returns the backed array directly which thus allows you to access and modify the ArrayList directly using any JavaScript array function, such as *splice*.
+- The LinkedList is backed by a next-previous (double-linked) node structure. Thus, adding, retrieving and removing elements from the front or end of the list is fast, while *getAt* and *setAt* are slower due to linear search. (The linear search automatically chooses whether to search forwards from the first node or backwards from the last node depending on what is fastest.)
 
 All Lists implement the following methods:
 
@@ -152,7 +152,7 @@ All Lists implement the following methods:
 A Map is a key-value collection where a (unique) key is mapped to a value. Collectively, a key and its mapped-to value is called an entry and is simply an object with two properties: "key" and "value". Both keys and values can be primitive values or objects. To get all the entries of a map simply iterate over it; thus, there is no *entries* method.
 
 There are two Map-types: HashMap and NativeMap.
-- The HashMap is backed by [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map). Thus, the *containsKey()*, *get()*, *put()*, and *remove()* methods are fast.
+- The HashMap is backed by [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map). Thus, the *containsKey*, *get*, *put*, and *remove* methods are fast.
 - The NativeMap is a thin wrapper around [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) and adapts it to the ncollections framework. NativeMap does not support custom *equals* and *hashCode* methods.
 
 All Maps implement the following methods:
@@ -180,7 +180,7 @@ All Maps implement the following methods:
 A Set is collection without duplicates.
 
 There are two Set-types: HashSet and NativeSet.
-- The HashSet is backed by [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map). Thus, the *add()*, *contains()*, and *remove()* methods are fast. A HashSet is not ordered.
+- The HashSet is backed by [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map). Thus, the *add*, *contains*, and *remove* methods are fast. A HashSet is not ordered.
 - The NativeSet is a thin wrapper around [JavaScript's built-in Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) and adapts it to the ncollections framework. NativeSet does not support custom *equals* and *hashCode* methods.
 
 All Sets implement the following methods:
