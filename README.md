@@ -160,11 +160,11 @@ All Maps implement the following methods:
 
 **containsValue(value)** returns true if the map contains the argument value, and false if not.
 
-**entries()** returns the map's entries in a Set. The returned Set might be backed directly by the map and thus should not be modified.
+**entries()** returns an iterable over the map's entries.
 
 **get(key)** returns the value mapped-to by the argument key, or undefined if the map does not contain the key.
 
-**keys** returns map's keys in a Set. The returned Set might be backed directly by the map and thus should not be modified.
+**keys()** returns an iterable over the map's keys.
 
 **put(key, value)** maps the argument key to the argument value. Returns the value previously mapped-to by the key, or undefined if the map contained no such key before.
 
@@ -173,6 +173,8 @@ All Maps implement the following methods:
 **remove(key)** removes the argument key and its mapped-to value from the map. Returns the mapped-to value of the key, or undefined if the map contained no such key before.
 
 **removeAll(keys)** removes the argument keys and their mapped-to values from the map. Returns the removed map entries.
+
+**values()** returns an iterable over the map's values.
 
 ## Sets: HashSet
 
