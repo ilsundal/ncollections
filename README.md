@@ -2,9 +2,9 @@
 ncollections provides a selection of neatly designed collections for JavaScript.
 
 The collections are
-- [ArrayList](#arraylist) and LinkedList
-- HashSet and NativeSet
-- HashMap and NativeMap
+- [Lists](#Lists): [ArrayList](#ArrayList) and [LinkedList](#linkedlist)
+- [Sets](#Sets): [HashSet](#hashset) and NativeSet
+- Maps: HashMap and NativeMap
 - Queue and PriorityQueue
 - Deque and Stack
 
