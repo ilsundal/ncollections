@@ -34,5 +34,5 @@ set.add(1); // a duplicate which will thus not be inserted into the set because 
 console.log(set.size()); // outputs 2
 console.log(set.toString()); // outputs {1,"my_object"}
 
-// The other Collections (Stack, Dequeu, Queue, etc.) are similarly designed.
+// The other Collections (Stack, Deque, Queue, etc.) are similarly designed.
 

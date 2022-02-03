@@ -5,6 +5,7 @@ const COLLECTIONS = {
   Deque: require(__dirname + '/main/Deque.js'),
   HashMap: require(__dirname + '/main/HashMap.js'),
   HashSet: require(__dirname + '/main/HashSet.js'),
+  IndexSet: require(__dirname + '/main/IndexSet.js'),
   LinkedList: require(__dirname + '/main/LinkedList.js'),
   List: require(__dirname + '/main/ArrayList.js'), // default list: ArrayList
   Map: require(__dirname + '/main/HashMap.js'), // default map: HashMap
