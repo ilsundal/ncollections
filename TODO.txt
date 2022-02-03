@@ -1,7 +1,4 @@
 TODO FEATURES
-- Remove map.entries() ? returns the same as next() so not needed
-- HashMap entries(), keys(), values() should return an iterable, not a collection.
-- HashSet iterator should be incremental.
 - Add collection: TreeSet (which is a sorted Set).
 - Add collection: IndexStore.
 
