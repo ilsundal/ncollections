@@ -13,7 +13,7 @@ The collections are
 Why use ncollections?
 - **More collections** With standard JavaScript, you only have maps (via objects), arrays and sets.
 - **Well-designed** ncollections is small and neat and easy-to-use, flexible and extendable. Elements can be any value, both primitive values and objects.
-- **Small foot-print** ncollections does not use any packages. The main directory is small and can be zipped to 15KB.
+- **Small foot-print** ncollections does not use any packages. The main directory is small and can be zipped to ~16KB.
 - **Plain JavaScript** Use both in browsers and Node.js.
 - **Equals and hash code** You can optinally provide your own custom *equals* and *hashCode* methods for you own objects e.g. to boost performance. (Not possible with NativeMap and NativeSet, though.)
 
