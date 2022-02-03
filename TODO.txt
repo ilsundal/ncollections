@@ -1,6 +1,8 @@
 TODO FEATURES
+- Add collection: IndexSet.
+  - Rename to MatchSet?
+  - Test it.
 - Add collection: TreeSet (which is a sorted Set).
-- Add collection: IndexStore.
 
 COLLECTION OVERVIEW
 
@@ -16,28 +18,7 @@ Collection
     PriorityQueue*
   Set
     HashSet*
+    IndexSet*
     NativeSet*
   Stack*
 * = instantiable
-
-IndexSet design notes
-
-addIndex([]);
-addUniqueIndex([]);
-
-add
-addAll
-
-contains
-containsAll
-
-getWhere({ id: .. }); returns one (or the first) matching element, if any
-getAllWhere({ age: .. }); // returns an iterable of all matching elements
-
-remove
-removeAll
-
-getXXX use of indexes:
-1) check if there is a unique index that contains all the where-properties. if so use that to return the matching element (if any).
-2) check all indexes that contains at least one of the where-properties in it then filter linearly on the shortest index-lookup result.
-3) same as 2) but using the <empty> index / all_set (-> "full table scan").

@@ -68,47 +68,57 @@ class IndexSet extends Set_ {
     return this.#set.contains(element);
   }
 
-  #findIndexes(property_names) {
-    let indexes = new ArrayList();
-    for (let index of this.#indexes) {
-      for (let property_name of property_names) {
-        if (index.contains(property_name))
-          indexes.add(index);
-      }
-    }
-    return index;
-  }
-
   // Returns an iterable of the elements that match the (iterable) properties.
-  match(properties) {
+  find(properties) {
+    // find the index values with the least number of elements
     let property_names = Object.getPropertyNames(properties);
     let indexes = this.#findIndexes(property_names);
     let smallest_index_values_set = this.#set;
+    let chosen_index = null;
     for (let index of indexes) {
       let index_values = new HashSet();
       for (let property_name of index)
         index_values.add({ name: property_name, value: properties[property_name] });
       let index_values_set = this.#map.get(index_values);
-      if (index_values_set.size() < smallest_index_values_set.size())
+      if (index_values_set.size() < smallest_index_values_set.size()) {
         smallest_index_values_set = index_values_set;
-    }
-    let matches = new ArrayList();
-    for (let element of smallest_index_values_set) {
-      let element_matches = true;
-      for (let property of properties) {
-        let property_equals = Collection.equals_fn(property.value, element[property.name]);
-        if (!property_equals) {
-           element_matches = false;
-           break;
-        }
+        chosen_index = index;
       }
-      if (element_matches)
-        matches.add(element);
     }
-    return matches;
+    if (!chosen_index || (chosen_index.size() < property_names.length)) { // filter smallest_index_values_set linearly
+      let matches = new ArrayList();
+      for (let element of smallest_index_values_set) {
+        let element_matches = true;
+        for (let property of properties) {
+          let property_equals = Collection.equals_fn(property.value, element[property.name]);
+          if (!property_equals) {
+             element_matches = false;
+             break;
+          }
+        }
+        if (element_matches)
+          matches.add(element);
+      }
+      return matches;
+    } else {
+      return smallest_index_values_set;
+    }
   }
 
-  matchOne(properties) {
+  #findIndexes(property_names) {
+    let indexes = new ArrayList();
+    for (let index of this.#indexes) {
+      for (let property_name of property_names) {
+        if (index.contains(property_name)) {
+          indexes.add(index);
+          break;
+        }
+      }
+    }
+    return index;
+  }
+
+  findOne(properties) {
     let matches = this.match(properties);
     return matches.isEmpty() ? undefined : matches.getFirst();
   }
