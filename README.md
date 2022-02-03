@@ -10,10 +10,10 @@ The collections are
 
 Why use ncollections?
 - **More collections** With standard JavaScript, you only have maps (via objects), arrays and sets.
-- **Well-designed** ncollections is small and neat and easy-to-use, flexible and extendable. Elements can be any value, both primitive values and objects.
+- **Well-designed** ncollections is small and neat and easy-to-use, flexible and extendable. Elements (and keys) can be any value, both primitive values and objects.
 - **Small foot-print** ncollections does not use any packages. The main directory is small and can be zipped to ~16KB.
 - **Plain JavaScript** Use both in browsers and Node.js.
-- **Equals and hash code** You can optinally provide your own custom *equals* and *hashCode* methods for you own objects e.g. to boost performance. (Not possible with NativeMap and NativeSet, though.)
+- **Equals and hash code** You can optionally provide your own custom *equals* and *hashCode* methods for you own objects e.g. to boost performance.
 
 The design has been inspired by the [Java Collections Framework](https://docs.oracle.com/javase/8/docs/technotes/guides/collections/overview.html). Default and solid implementations are provided for *equals* and *hashcode* to make ncollections even easier to use.
 
@@ -91,13 +91,9 @@ All Collections implement the following methods:
 
 All collections implement the [iteration and iterable protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
 
-## Lists: ArrayList and LinkedList
+## Lists
 
 A List is an ordered collection that allows for duplicates.
-
-There are two List-types: ArrayList and LinkedList.
-- The ArrayList is backed by [JavaScript's built-in array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array). Thus, the *getAt* and *setAt* methods are fast, while list insertions and removals are slower (due to possible element shifting and array resizing). The *toAtray* method returns the backed array directly which thus allows you to access and modify the ArrayList directly using any JavaScript array function, such as *splice*.
-- The LinkedList is backed by a next-previous (double-linked) node structure. Thus, adding, retrieving and removing elements from the front or end of the list is fast, while *getAt* and *setAt* are slower due to linear search. (The linear search automatically chooses whether to search forwards from the first node or backwards from the last node depending on what is fastest.)
 
 All Lists implement the following methods:
 
@@ -145,13 +141,17 @@ All Lists implement the following methods:
 
 **sort(compare_fn)** sorts the list in place, optionally with a custom compare function. Returns the list itself.
 
-## Maps: HashMap
+### ArrayList
+
+The ArrayList is backed by [JavaScript's built-in array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array). Thus, the *getAt* and *setAt* methods are fast, while list insertions and removals are slower (due to possible element shifting and array resizing). The *toAtray* method returns the backed array directly which thus allows you to access and modify the ArrayList directly using any JavaScript array function, such as *splice*.
+
+### LinkedList
+
+The LinkedList is backed by a next-previous (double-linked) node structure. Thus, adding, retrieving and removing elements from the front or end of the list is fast, while *getAt* and *setAt* are slower due to linear search. (The linear search automatically chooses whether to search forwards from the first node or backwards from the last node depending on what is fastest.)
+
+## Maps
 
 A Map is a key-value collection where a (unique) key is mapped to a value. Collectively, a key and its mapped-to value is called an entry and is simply an object with two properties: "key" and "value". Both keys and values can be primitive values or objects. To get all the entries of a map simply iterate over it; thus, there is no *entries* method.
-
-There are two Map-types: HashMap and NativeMap.
-- The HashMap is backed by [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map). Thus, the *containsKey*, *get*, *put*, and *remove* methods are fast.
-- The NativeMap is a thin wrapper around [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) and adapts it to the ncollections framework. NativeMap does not support custom *equals* and *hashCode* methods.
 
 All Maps implement the following methods:
 
@@ -173,13 +173,17 @@ All Maps implement the following methods:
 
 **values()** returns an iterable over the map's values.
 
-## Sets: HashSet
+### HashMap
+
+The HashMap is backed by [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map). Thus, the *containsKey*, *get*, *put*, and *remove* methods are fast.
+
+### NativeMap
+
+The NativeMap is a thin wrapper around [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) and adapts it to the ncollections framework. NativeMap is (slightly) faster than HashMap but is based on == equality and thus does not support *equals* and *hashCode* methods.
+
+## Sets
 
 A Set is collection without duplicates.
-
-There are two Set-types: HashSet and NativeSet.
-- The HashSet is backed by [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map). Thus, the *add*, *contains*, and *remove* methods are fast. A HashSet is not ordered.
-- The NativeSet is a thin wrapper around [JavaScript's built-in Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) and adapts it to the ncollections framework. NativeSet does not support custom *equals* and *hashCode* methods.
 
 All Sets implement the following methods:
 
@@ -194,6 +198,14 @@ All Sets implement the following methods:
 **remove(element)** removes the argument elment from the set. Returns true if the set was changed (i.e. the set contained the element), and false if not.
 
 **removeAll(elements)** removes the argument elments (an iterable) from the set. Returns true if the set was changed, and false if not.
+
+### HashSet
+
+The HashSet is a Set that is backed by [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map). Thus, the *add*, *contains*, and *remove* methods are fast. A HashSet is not ordered.
+
+### NativeSet
+
+The NativeSet is a thin wrapper around [JavaScript's built-in Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) and adapts it to the ncollections framework. NativeSet is (slightly) faster than HashSet but is based on == equality and thus does not support *equals* and *hashCode* methods.
 
 ## Deque
 
@@ -225,7 +237,7 @@ The Stack implements the following methods:
 
 **push(element)** adds the argument element to the (end of, or top of) the stack. Returns the stack itself.
 
-## Queue and PriorityQueue
+## Queues
 
 A Queue is an ordered collection where you can enqueue and dequeue elements in First-In First-Out (FIFO) order. It is backed by a LinkedList and thus the associated methods are all fast.
 
