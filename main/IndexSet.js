@@ -72,6 +72,8 @@ class IndexSet extends Set_ {
   find(properties) {
     // find the index values with the least number of elements
     let property_names = Object.getPropertyNames(properties);
+    if (property_names.length == 0) // special case: find all
+      return this.#set;
     let indexes = this.#findIndexes(property_names);
     let smallest_index_values_set = this.#set;
     let chosen_index = null;
