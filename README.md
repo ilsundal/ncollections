@@ -5,8 +5,8 @@ The collections are
 - [Lists](#Lists): [ArrayList](#ArrayList) and [LinkedList](#LinkedList)
 - [Sets](#Sets): [HashSet](#HashSet) and [NativeSet](#NativeSet)
 - [Maps](#Maps): [HashMap](#HashMap) and [NativeMap](#NativeMap)
-- [Queue](#Queue) and [PriorityQueue])(#PriorityQueue)
-- [Deque](Deque) and [Stack](Stack)
+- [Queue](#Queue) and [PriorityQueue](#PriorityQueue)
+- [Deque](#Deque) and [Stack](#Stack)
 
 Why use ncollections?
 - **More collections** With standard JavaScript, you only have maps (via objects), arrays and sets.
