@@ -5,7 +5,7 @@ The collections are
 - [Lists](#Lists): [ArrayList](#ArrayList) and [LinkedList](#LinkedList)
 - [Sets](#Sets): [HashSet](#HashSet) and [NativeSet](#NativeSet)
 - [Maps](#Maps): [HashMap](#HashMap) and [NativeMap](#NativeMap)
-- [Queue](#Queue) and [PriorityQueue](#PriorityQueue)
+- [Queue](#Queues) and [PriorityQueue](#PriorityQueue)
 - [Deque](#Deque) and [Stack](#Stack)
 
 Why use ncollections?
