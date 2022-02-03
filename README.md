@@ -5,10 +5,8 @@ The collections are
 - ArrayList and LinkedList
 - HashSet and NativeSet
 - HashMap and NativeMap
-- Deque
-- Stack
-- Queue
-- PriorityQueue
+- Queue and PriorityQueue
+- Deque and Stack
 
 Why use ncollections?
 - **More collections** With standard JavaScript, you only have maps (via objects), arrays and sets.
