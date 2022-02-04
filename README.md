@@ -211,7 +211,7 @@ The HashSet is a Set that is backed by [JavaScript's built-in Map](https://devel
 
 ### IndexSet
 
-The HashSet is a Set that indexes the added elements based on their properties, much like an in-memory database. It is useful if you have a lot of objects in memory (normally of the same class or with the same property names) and need to retrieve them fast based on their property values.
+The HashSet is a Set that indexes the added elements based on their property values, much like an in-memory database. It is useful if you have a lot of objects in memory (normally of the same class or with the same property names) and need to retrieve them fast based on their property values. While adding many indexes will improve retrieval speed, they may consume too much memory, so a suitable balance must be found.
 
 The IndexSet also implements the following methods:
 
