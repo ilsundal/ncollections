@@ -171,6 +171,8 @@ All Maps implement the following methods:
 
 **put(key, value)** maps the argument key to the argument value. Returns the value previously mapped-to by the key, or undefined if the map contained no such key before.
 
+**putAll(entries)** puts the argument entries (an iterable) into the map. Returns nothing.
+
 **remove(key)** removes the argument key and its mapped-to value from the map. Returns the mapped-to value of the key, or undefined if the map contained no such key before.
 
 **removeAll(keys)** removes the argument keys and their mapped-to values from the map. Returns the removed map entries.
