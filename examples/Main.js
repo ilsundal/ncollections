@@ -29,10 +29,20 @@ console.log(map.toString()); // outputs {{"some":"key"}->{"some":"value"},"other
 // Example of using a Set
 let set = Collections.newSet(); // returns a HashSet which is the default Set
 set.add(1);
-set.add('my_object');
+set.add({ a: 1 });
 set.add(1); // a duplicate which will thus not be inserted into the set because it is already contained
+console.log(set.contains({ a: 1 })); // outputs true
 console.log(set.size()); // outputs 2
-console.log(set.toString()); // outputs {1,"my_object"}
+console.log(set.toString()); // outputs {1,{"a":1}}
 
-// The other Collections (Stack, Deque, Queue, etc.) are similarly designed.
+// The other ncollections (Stack, Deque, Queue, etc.) are similarly designed.
 
+// Note that the ncollections work naturally with object elements (and keys), unlike the built-in JavaScript array, Set and Map that are based on the == equality operator
+let native_array = [{ a: 1 }];
+console.log(native_array.includes({ a: 1 })); // outputs false
+let native_set = new Set();
+native_set.add({ a: 1 });
+console.log(native_set.has({ a: 1 })); // outputs false
+let native_map = new Map();
+native_map.set({ a: 1 }, 'some_value');
+console.log(native_map.get({ a: 1 })); // outputs undefined

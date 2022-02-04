@@ -68,13 +68,26 @@ class IndexSet extends Set_ {
     return this.#set.contains(element);
   }
 
+  #determineIndexes(property_names) {
+    let indexes = new ArrayList();
+    for (let index of this.#indexes) {
+      for (let property_name of property_names) {
+        if (index.contains(property_name)) {
+          indexes.add(index);
+          break;
+        }
+      }
+    }
+    return index;
+  }
+
   // Returns an iterable of the elements that match the (iterable) properties.
-  find(properties) {
+  findAll(properties) {
     // find the index values with the least number of elements
     let property_names = Object.getPropertyNames(properties);
     if (property_names.length == 0) // special case: find all
       return this.#set;
-    let indexes = this.#findIndexes(property_names);
+    let indexes = this.#determineIndexes(property_names);
     let smallest_index_values_set = this.#set;
     let chosen_index = null;
     for (let index of indexes) {
@@ -105,19 +118,6 @@ class IndexSet extends Set_ {
     } else {
       return smallest_index_values_set;
     }
-  }
-
-  #findIndexes(property_names) {
-    let indexes = new ArrayList();
-    for (let index of this.#indexes) {
-      for (let property_name of property_names) {
-        if (index.contains(property_name)) {
-          indexes.add(index);
-          break;
-        }
-      }
-    }
-    return index;
   }
 
   findOne(properties) {
