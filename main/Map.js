@@ -75,11 +75,11 @@ class Map extends Collection {
     throw new UnsupportedOperationException();
   }
 
-  // Puts the (iterable) key-value pairs into the map.
+  // Puts the (iterable) entries (of key-value pairs) into the map.
   // Returns nothing.
-  putAll(kvPairs) {
-    for (let kvPair of kvPairs)
-      this.put(kvPair.key, kvPair.value);
+  putAll(entries) {
+    for (let entry of entries)
+      this.put(entry.key, entry.value);
   }
 
   // Removes the key and its associated value from the map.

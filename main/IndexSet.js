@@ -1,6 +1,7 @@
 'use strict'
 
 const ArrayList = require(__dirname + '/ArrayList.js');
+const Collection = require(__dirname + '/Collection.js');
 const HashMap = require(__dirname + '/HashMap.js');
 const HashSet = require(__dirname + '/HashSet.js');
 const Set_ = require(__dirname + '/Set.js');
@@ -27,27 +28,27 @@ class IndexSet extends Set_ {
   #addMap(element, index) {
     let properties = new HashSet();
     for (let property_name of index) {
-      let property = { name: property_name, value: element[property_value] };
+      let property = { name: property_name, value: element[property_name] };
       properties.add(property);
     }
     let index_values = properties;
     let index_values_set = this.#map.get(index_values);
     if (!index_values_set) {
       index_values_set = new HashSet();
-      this.#map.set(index_values, index_values_set);
+      this.#map.put(index_values, index_values_set);
     }
     index_values_set.add(element);
   }
 
-  // Indexes the set elements according to the properties.
-  // Returns the set itself.
-  addIndex(property_names) {
-    let index = property_names;
+  // Adds a new index on the set elements.
+  // Returns true if the index was added, and false if not (i.e. the index already exists).
+  addIndex(index) {
     if (this.#indexes.contains(index))
-      return;
-    indexes.add(properties);
+      return false;
+    this.#indexes.add(index);
     for (let element of this.#set)
-      addMap(element, index);
+      this.#addMap(element, index);
+    return true;
   }
 
   clear() {
@@ -72,19 +73,19 @@ class IndexSet extends Set_ {
     let indexes = new ArrayList();
     for (let index of this.#indexes) {
       for (let property_name of property_names) {
-        if (index.contains(property_name)) {
+        if (index.includes(property_name)) {
           indexes.add(index);
           break;
         }
       }
     }
-    return index;
+    return indexes;
   }
 
-  // Returns an iterable of the elements that match the (iterable) properties.
-  findAll(properties) {
+  // Returns an iterable of the elements that match the (iterable) "where" properties.
+  findAll(where) {
     // find the index values with the least number of elements
-    let property_names = Object.getPropertyNames(properties);
+    let property_names = Object.keys(where);
     if (property_names.length == 0) // special case: find all
       return this.#set;
     let indexes = this.#determineIndexes(property_names);
@@ -93,19 +94,19 @@ class IndexSet extends Set_ {
     for (let index of indexes) {
       let index_values = new HashSet();
       for (let property_name of index)
-        index_values.add({ name: property_name, value: properties[property_name] });
-      let index_values_set = this.#map.get(index_values);
+        index_values.add({ name: property_name, value: where[property_name] });
+      let index_values_set = this.#map.get(index_values) || new HashSet();
       if (index_values_set.size() < smallest_index_values_set.size()) {
         smallest_index_values_set = index_values_set;
         chosen_index = index;
       }
     }
-    if (!chosen_index || (chosen_index.size() < property_names.length)) { // filter smallest_index_values_set linearly
+    if (!chosen_index || (chosen_index.length < property_names.length)) { // filter smallest_index_values_set linearly
       let matches = new ArrayList();
       for (let element of smallest_index_values_set) {
         let element_matches = true;
-        for (let property of properties) {
-          let property_equals = Collection.equals_fn(property.value, element[property.name]);
+        for (let [property_name, property_value] of Object.entries(where)) {
+          let property_equals = Collection.equals_fn(property_value, element[property_name]);
           if (!property_equals) {
              element_matches = false;
              break;
@@ -120,9 +121,10 @@ class IndexSet extends Set_ {
     }
   }
 
-  findOne(properties) {
-    let matches = this.match(properties);
-    return matches.isEmpty() ? undefined : matches.getFirst();
+  // Returns an element that matches the (iterable) "where" properties, or undefined if no match.
+  findOne(where) {
+    let matches = this.findAll(where);
+    return matches.isEmpty() ? undefined : matches.next().next().value;
   }
 
   next() {

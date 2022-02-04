@@ -57,11 +57,6 @@ class NativeMap extends _Map {
     return previous_value;
   }
 
-  putAll(kvPairs) {
-    for (let kvPair of kvPairs)
-      this.put(kvPair.key, kvPair.value);
-  }
-
   remove(key) {
     let previous_value = this.#map.get(key);
     this.#map.delete(key);
