@@ -209,6 +209,17 @@ All Sets implement the following methods:
 
 The HashSet is a Set that is backed by [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map). Thus, the *add*, *contains*, and *remove* methods are fast. A HashSet is not ordered.
 
+### IndexSet
+
+The HashSet is a Set that indexes the added elements based on their properties, much like an in-memory database. It is useful if you have a lot of objects in memory (normally of the same class or with the same properties) and need to retrieve them fast based on certain property values.
+
+Here is an example of how to use it:
+
+```javascript
+
+
+```
+
 ### NativeSet
 
 The NativeSet is a thin wrapper around [JavaScript's built-in Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) and adapts it to the ncollections framework. NativeSet is (slightly) faster than HashSet but is based on == equality and thus does not support *equals* and *hashCode* methods. A NativeSet follows insertion order.
@@ -277,6 +288,8 @@ Lastly, some collections need sorting. For example, the PriorityQueue keeps its 
 Here is an example of *equals*, *hashCode* and *compare_fn* implementations:
 
 ```javascript
+const Collections = require('ncollections');
+
 class Person {
   name;
   age;
