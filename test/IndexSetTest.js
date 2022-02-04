@@ -138,6 +138,12 @@ class IndexSetTest extends SetTest {
       let find_result = index_set.findOne({ name: 'name3' });
       assert(find_result == p3);
     });
+    it('...[["name"],["age"]] where name="name2" -> undefined', function() {
+      index_set.addIndex(['name']);
+      index_set.addIndex(['age']);
+      let find_result = index_set.findOne({ name: 'name2' });
+      assert(find_result == undefined);
+    });
   }
 }
 

@@ -35,16 +35,16 @@ class Person {
   }
 }
 
-let person1 = new Person('Morten Helles', 48);
-let person2 = new Person('Morten Helles', 48);
-let person3 = new Person('Alexander Helles', 15);
-let person4 = new Person('Alexander Helles', 30);
+let person1 = new Person('Morten', 48);
+let person2 = new Person('Morten', 48);
+let person3 = new Person('Alexander', 15);
+let person4 = new Person('Alexander', 30);
 
 console.log(person1.equals(person2)); // outputs true
 console.log(person1.equals(person3)); // outputs false
 
-console.log(person1.hashCode()); // outputs 1465413891
-console.log(person4.hashCode()); // outputs -2103045166
+console.log(person1.hashCode()); // outputs 1601127516
+console.log(person4.hashCode()); // outputs -1159287671
 
 // sort by name then age
 let compare_fn = function(person1, person2) {
@@ -54,4 +54,4 @@ let compare_fn = function(person1, person2) {
 }
 
 let persons = Collections.newArrayList().addAll([ person1, person2, person3, person4 ]).sort(compare_fn);
-console.log(persons.toString()); // outputs [{"name":"Alexander Helles","age":15},{"name":"Alexander Helles","age":30},{"name":"Morten Helles","age":48},{"name":"Morten Helles","age":48}]
+console.log(persons.toString()); // outputs [{"name":"Alexander","age":15},{"name":"Alexander","age":30},{"name":"Morten","age":48},{"name":"Morten","age":48}]

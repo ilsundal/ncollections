@@ -85,7 +85,7 @@ class IndexSet extends Set_ {
   // Returns an iterable of the elements that match the (iterable) "where" properties.
   findAll(where) {
     // find the index values with the least number of elements
-    let property_names = Object.keys(where);
+    let property_names = where ? Object.keys(where) : [];
     if (property_names.length == 0) // special case: find all
       return this.#set;
     let indexes = this.#determineIndexes(property_names);
@@ -102,7 +102,7 @@ class IndexSet extends Set_ {
       }
     }
     if (!chosen_index || (chosen_index.length < property_names.length)) { // filter smallest_index_values_set linearly
-      let matches = new ArrayList();
+      let matches = new HashSet();
       for (let element of smallest_index_values_set) {
         let element_matches = true;
         for (let [property_name, property_value] of Object.entries(where)) {
