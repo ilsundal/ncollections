@@ -17,8 +17,6 @@ Why use ncollections?
 
 The design has been inspired by the [Java Collections Framework](https://docs.oracle.com/javase/8/docs/technotes/guides/collections/overview.html). Robust and fast default implementations are provided for *equals* and *hashCode* functions to make ncollections even easier to use. (In most cases, you don't have to worry about value equality and hash codes at all; it just works. [Read more.](#A-Note-On-equals-hashcode-And-compare_fn))
 
-[Try ncollections on Runkit.](https://npm.runkit.com/ncollections)
-
 # Example
 
 ```javascript
@@ -61,15 +59,11 @@ console.log(set.toString()); // outputs {1,"my_object"}
 
 # Installation
 
-## Server-side usage
-
 ```
 npm install ncollections
 ```
 
-## Client-side usage
-
-No distributables are yet provided, such as through a CDN.
+[Try ncollections on Runkit.](https://npm.runkit.com/ncollections)
 
 # The Collections
 
