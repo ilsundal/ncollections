@@ -213,11 +213,36 @@ The HashSet is a Set that is backed by [JavaScript's built-in Map](https://devel
 
 The HashSet is a Set that indexes the added elements based on their properties, much like an in-memory database. It is useful if you have a lot of objects in memory (normally of the same class or with the same properties) and need to retrieve them fast based on certain property values.
 
-Here is an example of how to use it:
+Here is an example of how to use the IndexSet:
 
 ```javascript
+const Collections = require('ncollections');
 
+class Person {
+  name;
+  age;
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+}
 
+let index_set = new Collections.newIndexSet();
+index_set.addIndex(['name']); // adds an index on the (person) "name" property
+index_set.addAll([
+  new Person('Morten', 48),
+  new Person('Morten', 45),
+  new Person('Maximillian', 17)
+]);
+
+let all_named_morten = index_set.findAll({ name: 'Morten' }); // uses the added "name" index to quickly find both "Morten"s
+console.log(all_named_morten.toString()); // outputs {{"name":"Morten","age":48},{"name":"Morten","age":45}}
+
+let all_aged_48 = index_set.findAll({ age: 17 }); // no "age" index so scans all elements for a match
+console.log(all_aged_48.toString()); // outputs {{"name":"Maximillian","age":17}}
+
+let one_named_morten = index_set.findOne({ name: 'Morten', age: 48 }); // uses the added "name" index to find both "Morten"s then scans those for a single match
+console.log(one_named_morten); // outputs Person { name: 'Morten', age: 48 }
 ```
 
 ### NativeSet
