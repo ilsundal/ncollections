@@ -3,7 +3,7 @@ ncollections provides a selection of neatly designed collections for JavaScript.
 
 The collections are
 - [Lists](#Lists): [ArrayList](#ArrayList) and [LinkedList](#LinkedList)
-- [Sets](#Sets): [HashSet](#HashSet) and [NativeSet](#NativeSet)
+- [Sets](#Sets): [HashSet](#HashSet), [IndexSet](#IndexSet) and [NativeSet](#NativeSet)
 - [Maps](#Maps): [HashMap](#HashMap) and [NativeMap](#NativeMap)
 - [Queue](#Queues) and [PriorityQueue](#PriorityQueue)
 - [Deque](#Deque) and [Stack](#Stack)
@@ -211,7 +211,15 @@ The HashSet is a Set that is backed by [JavaScript's built-in Map](https://devel
 
 ### IndexSet
 
-The HashSet is a Set that indexes the added elements based on their properties, much like an in-memory database. It is useful if you have a lot of objects in memory (normally of the same class or with the same properties) and need to retrieve them fast based on certain property values.
+The HashSet is a Set that indexes the added elements based on their properties, much like an in-memory database. It is useful if you have a lot of objects in memory (normally of the same class or with the same property names) and need to retrieve them fast based on their property values.
+
+The IndexSet also implements the following methods:
+
+**addIndex(index)** adds the argument index. The index is simply an iterable of element property names. Returns true if the index was added, and false if not (because it already exists).
+
+**findAll(where)** returns an iterable of the set elements that matches the optional argument "where" which is an object of property names and values. If the argument "where" is omitted or is  empty then an iterable of all the set's elements will be returned.
+
+**findOne(where)** returns the single (first) element that matches the optional argument "where" which is an object of property names and values, or undefined if no match. If the argument "where" is omitted or is empty then one of the set's elements will be returned, or undefined if the set is empty.
 
 Here is an example of how to use the IndexSet:
 
