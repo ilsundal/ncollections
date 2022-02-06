@@ -65,37 +65,37 @@ class IndexSetTest extends SetTest {
       index_set = test.newInstance();
       index_set.addAll([p1,p2,p3,p4,p5]);
     });
-    it('...[] where {name:"name1"} -> {[],["name"],5,5}', function() {
+    it('...[] where {name:"name1"} -> {null,5,2}', function() {
       let examine_result = index_set.examine({ name: 'name1' });
-      assert(Util.equals(examine_result, { applicable_indexes: [], chosen_index: null, scan_count: 5, match_count: 2 }));
+      assert(Util.equals(examine_result, { chosen_index: null, scan_count: 5, match_count: 2 }));
     });
-    it('...[["name"]] where {name:"name1"} -> {[["name"]],["name"],0,2 }', function() {
+    it('...[["name"]] where {name:"name1"} -> {["name"],0,2}', function() {
       index_set.addIndex(['name']);
       let examine_result = index_set.examine({ name: 'name1' });
-      assert(Util.equals(examine_result, { applicable_indexes: [['name']], chosen_index: ['name'], scan_count: 0, match_count: 2 }));
+      assert(Util.equals(examine_result, { chosen_index: ['name'], scan_count: 0, match_count: 2 }));
     });
-    it('...[["name"],["age"]] where {name:"name5"} -> {[["name"]],["name"],0,1 }', function() {
+    it('...[["name"],["age"]] where {name:"name5"} -> {["name"],0,1 }', function() {
       index_set.addIndex(['name']);
       let examine_result = index_set.examine({ name: 'name5' });
-      assert(Util.equals(examine_result, { applicable_indexes: [['name']], chosen_index: ['name'], scan_count: 0, match_count: 1 }));
+      assert(Util.equals(examine_result, { chosen_index: ['name'], scan_count: 0, match_count: 1 }));
     });
-    it('...[["name"],["age"]] where {name:"name5",age:14} -> {[["name"]],["name"],1,0 }', function() {
+    it('...[["name"],["age"]] where {name:"name5",age:14} -> {["name"],1,0}', function() {
       index_set.addIndex(['name']);
       index_set.addIndex(['age']);
       let examine_result = index_set.examine({ name: 'name5', age: 14 });
-      assert(Util.equals(examine_result, { applicable_indexes: [['age'],['name']], chosen_index: ['name'], scan_count: 1, match_count: 0 }));
+      assert(Util.equals(examine_result, { chosen_index: ['name'], scan_count: 1, match_count: 0 }));
     });
-    it('...[["name","age"]] where {name:"name5"} -> {[],[],5,0 }', function() {
+    it('...[["name","age"]] where {name:"name5"} -> {null,5,1}', function() {
       index_set.addIndex(['name', 'age']);
       let examine_result = index_set.examine({ name: 'name5' });
-      assert(Util.equals(examine_result, { applicable_indexes: [], chosen_index: null, scan_count: 5, match_count: 1 }));
+      assert(Util.equals(examine_result, { chosen_index: null, scan_count: 5, match_count: 1 }));
     });
-    it('...[["name"],["age"],["name","age"]] where {name:"name5",age:14} -> {[["name","age"]],["name"],0,0 }', function() {
+    it('...[["name"],["age"],["name","age"]] where {name:"name5",age:14} -> {["age","name"],0,0}', function() {
       index_set.addIndex(['name']);
       index_set.addIndex(['age']);
       index_set.addIndex(['name', 'age']);
       let examine_result = index_set.examine({ name: 'name5', age: 14 });
-      assert(Util.equals(examine_result, { applicable_indexes: [['age', 'name'],['age'],['name']], chosen_index: ['age', 'name'], scan_count: 0, match_count: 0 })); // should only use ['name', 'age']
+      assert(Util.equals(examine_result, { chosen_index: ['age', 'name'], scan_count: 0, match_count: 0 })); // should only use ['name', 'age']
     });
   }
 

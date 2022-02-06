@@ -73,10 +73,10 @@ class IndexSet extends Set_ {
     return this.#set.contains(element);
   }
 
-  // Returns { applicable_indexes: ..., chosen_index: ..., scan_count: ..., match_count: ... };
+  // Returns { chosen_index: ..., scan_count: ..., match_count: ... };
   examine(where) {
     let query_result = this.#query(where);
-    return { applicable_indexes: query_result.applicable_indexes, chosen_index: query_result.chosen_index, scan_count: query_result.scan_count, match_count: query_result.matches.size() };
+    return { chosen_index: query_result.chosen_index, scan_count: query_result.scan_count, match_count: query_result.matches.size() };
   }
 
   // Returns an iterable of the elements that match the (iterable) "where" properties.
@@ -97,24 +97,26 @@ class IndexSet extends Set_ {
     return this.#set.next();
   }
 
-  // Returns { applicable_indexes: ..., chosen_index: ..., scan_count: ..., matches: smallest_index_values_set };
+  // Returns { chosen_index: ..., scan_count: ..., matches: smallest_index_values_set };
   #query(where) {
 
-    // find the index values with the least number of elements
+    // Find the index values with the least number of elements
     let property_names = where ? Object.keys(where) : [];
     if (property_names.length == 0) // special case: find all
-      return { applicable_indexes: [], chosen_index: null, scan_count: 0, matches: this.#set };
+      return { chosen_index: null, scan_count: 0, matches: this.#set };
 
-    // find applicable indexes
+    // Find applicable indexes
     let applicable_indexes = [];
     for (let index of this.#indexes) {
-      // use index only if all its property names are contained in the where clause property names
+      // use index only if all its property names are contained in the where clause property names, e.g. don't use index ['name','age'] if "where" is { name: 'some_name' }
       let containsAll = index.every(property_name => { return property_names.includes(property_name); });
       if (containsAll)
         applicable_indexes.push(index);
     }
 
-    // loop indexes to find the smallest index values set
+    // Note that we don't filter away shorter indexes because the loop below essentially does this. For example, if "where" is { name: 'some_name', age: 14 } and we have indexes [['name','age'],['name']] then we don't filter away ['name'] index.
+
+    // Loop indexes to find the smallest index values set
     let smallest_index_values_set = this.#set;
     let chosen_index = null;
     for (let index of applicable_indexes) {
@@ -130,7 +132,7 @@ class IndexSet extends Set_ {
 
     // Check for perfect index match
     if (chosen_index && (chosen_index.length >= property_names.length))
-      return { applicable_indexes: applicable_indexes, chosen_index: chosen_index, scan_count: 0, matches: smallest_index_values_set };
+      return { chosen_index: chosen_index, scan_count: 0, matches: smallest_index_values_set };
 
     // Scan smallest index values set
     let matches = new HashSet();
@@ -148,7 +150,7 @@ class IndexSet extends Set_ {
       if (element_matches)
         matches.add(element);
     }
-    return { applicable_indexes: applicable_indexes, chosen_index: chosen_index, scan_count: smallest_index_values_set.size(), matches: matches };
+    return { chosen_index: chosen_index, scan_count: smallest_index_values_set.size(), matches: matches };
   }
 
   remove(element) {
