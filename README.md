@@ -211,15 +211,21 @@ The HashSet is a Set that is backed by [JavaScript's built-in Map](https://devel
 
 ### IndexSet
 
-The HashSet is a Set that indexes the added elements based on their property values, much like an in-memory database. It is useful if you have a lot of objects in memory (normally of the same class or with the same property names) and need to retrieve them fast based on their property values. While adding many indexes will improve retrieval speed, they may consume too much memory, so a suitable balance must be found.
+The IndexSet is a Set that indexes the added elements based on their property values, much like a simple in-memory database. It is useful if you have a lot of objects in memory (normally of the same class or with the same property names) and need to retrieve them fast based on their property values. While adding many indexes will improve retrieval speed, they may consume too much memory, so a suitable balance must be found.
 
-The IndexSet also implements the following methods:
+Retrieval is based on a "where" object, which is just an object of properties.
+
+The IndexSet adds implementations of the following methods:
 
 **addIndex(index)** adds the argument index. The index is simply an iterable of element property names. Returns true if the index was added, and false if not (because it already exists).
 
-**findAll(where)** returns an iterable of the set elements that matches the optional argument "where" which is an object of property names and values. If the argument "where" is omitted or is  empty then an iterable of all the set's elements will be returned.
+**examine(where)** examines the execution of the argument "where". It returns an object with three properties: *chosen_index* is the chosen index (or null if none), *scan_count* is the number of elements scanned, and *match_count* is the number of matching elements.
 
-**findOne(where)** returns the single (first) element that matches the optional argument "where" which is an object of property names and values, or undefined if no match. If the argument "where" is omitted or is empty then one of the set's elements will be returned, or undefined if the set is empty.
+**findAll(where)** returns an iterable of the set elements that matches the optional argument "where". If the argument "where" is omitted or is empty then an iterable of all the set's elements will be returned.
+
+**findOne(where)** returns the single (first) element that matches the optional argument "where", or undefined if no match. If the argument "where" is omitted or is empty then one of the set's elements will be returned, or undefined if the set is empty.
+
+**indexes** returns the added indexes.
 
 Here is an example of how to use the IndexSet:
 
@@ -245,12 +251,15 @@ index_set.addAll([
 
 let all_named_morten = index_set.findAll({ name: 'Morten' }); // uses the added "name" index to quickly find both "Morten"s
 console.log(all_named_morten.toString()); // outputs {{"name":"Morten","age":48},{"name":"Morten","age":45}}
+console.log(index_set.examine({ name: 'Morten' })); // outputs { chosen_index: [ 'name' ], scan_count: 0, match_count: 2 }
 
 let all_aged_48 = index_set.findAll({ age: 17 }); // no "age" index so scans all elements for a match
 console.log(all_aged_48.toString()); // outputs {{"name":"Maximillian","age":17}}
+console.log(index_set.examine({ age: 17 })); // { chosen_index: null, scan_count: 3, match_count: 1 }
 
 let one_named_morten = index_set.findOne({ name: 'Morten', age: 48 }); // uses the added "name" index to find both "Morten"s then scans those for a single match
 console.log(one_named_morten); // outputs Person { name: 'Morten', age: 48 }
+console.log(index_set.examine({ name: 'Morten', age: 48 })); // outputs { chosen_index: [ 'name' ], scan_count: 2, match_count: 1 }
 ```
 
 ### NativeSet
