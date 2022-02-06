@@ -9,7 +9,7 @@ const Set_ = require(__dirname + '/Set.js');
 class IndexSet extends Set_ {
   #set = new HashSet(); // contains all added elements
   #map = new HashMap(); // maps indexed property values to elements
-  #indexes = new HashSet(); // contains all added indexes, each index being an array of sorted (element) property names
+  #indexes = new ArrayList(); // contains all added indexes (sorted), each index being an array of sorted (element) property names
 
   constructor(options={}) {
     super(options);
@@ -41,14 +41,15 @@ class IndexSet extends Set_ {
   }
 
   // Adds a new index on the set elements.
-  // Returns the added index, or null if not added (because the index already exists).
+  // Returns the added index, or undefined if not added (because the index already exists).
   addIndex(index) {
     let property_names_set = new HashSet();
     property_names_set.addAll(index); // remove duplicate property names
     let property_names = new ArrayList().addAll(property_names_set).sort().toArray(); // sort to ignore property name order
     if (this.#indexes.contains(property_names))
-      return null;
+      return undefined;
     this.#indexes.add(property_names);
+    this.#indexes.sort();
     for (let element of this.#set)
       this.#addMap(element, property_names);
     return property_names;
@@ -89,8 +90,8 @@ class IndexSet extends Set_ {
     return matches.isEmpty() ? undefined : matches.next().next().value;
   }
 
-  // Returns the added indexes as a sorted array
-  get indexes() { return new ArrayList().addAll(this.#indexes).sort().toArray(); }
+  // Returns the added indexes as an array
+  get indexes() { return this.#indexes.toArray(); }
 
   next() {
     return this.#set.next();

@@ -33,10 +33,10 @@ class IndexSetTest extends SetTest {
       assert(Util.equals(index_set.addIndex(['name', 'name', 'age']), ['age', 'name']));
       assert(Util.equals(index_set.indexes, [['age', 'name']]));
     });
-    it('{}[["name]] + ["name"] -> null & [["name"]]', function() {
+    it('{}[["name]] + ["name"] -> undefined & [["name"]]', function() {
       let index_set = test.newInstance();
       index_set.addIndex(['name']);
-      assert(index_set.addIndex(['name']) === null);
+      assert(index_set.addIndex(['name']) === undefined);
       assert(Util.equals(index_set.indexes, [['name']]));
     });
     it('{}[["name]] + ["age"] -> ["age"] & [["name"],["age"]]', function() {
@@ -83,44 +83,15 @@ class IndexSetTest extends SetTest {
       index_set.addIndex(['name']);
       index_set.addIndex(['age']);
       let examine_result = index_set.examine({ name: 'name5', age: 14 });
-      assert(Util.equals(examine_result, { applicable_indexes: [['name'],['age']], chosen_index: ['name'], scan_count: 1, match_count: 0 }));
+      assert(Util.equals(examine_result, { applicable_indexes: [['age'],['name']], chosen_index: ['name'], scan_count: 1, match_count: 0 }));
     });
     it('...[["name"],["age"],["name","age"]] where {name:"name5",age:14} -> {[["name","age"]],["name"],0,0 }', function() {
       index_set.addIndex(['name']);
       index_set.addIndex(['age']);
       index_set.addIndex(['name', 'age']);
       let examine_result = index_set.examine({ name: 'name5', age: 14 });
-      assert(Util.equals(examine_result, { applicable_indexes: [['name'],['age'],['age', 'name']], chosen_index: ['age', 'name'], scan_count: 0, match_count: 0 })); // should only use ['name', 'age']
+      assert(Util.equals(examine_result, { applicable_indexes: [['age', 'name'],['age'],['name']], chosen_index: ['age', 'name'], scan_count: 0, match_count: 0 })); // should only use ['name', 'age']
     });
-/*
-    });
-    it('...[["name"],["age"]] where name="name5" and age=14 -> {}', function() {
-      index_set.addIndex(['name']);
-      index_set.addIndex(['age']);
-      let find_result = index_set.findAll({ name: 'name5', age: 14 });
-      let find_result_set = new HashSet();
-      find_result_set.addAll(find_result);
-      assert(find_result_set.size() === 0);
-    });
-    it('...[["name"],["age"]] where name="name5" and age=15 -> {p5}', function() {
-      index_set.addIndex(['name']);
-      index_set.addIndex(['age']);
-      let find_result = index_set.findAll({ name: 'name5', age: 15 });
-      let find_result_set = new HashSet();
-      find_result_set.addAll(find_result);
-      assert(find_result_set.size() === 1);
-      assert(find_result_set.containsAll([p5]));
-    });
-    it('...[["name"],["age"]] where age=14 -> {p3,p4}', function() {
-      index_set.addIndex(['name']);
-      index_set.addIndex(['age']);
-      let find_result = index_set.findAll({ age: 14 });
-      let find_result_set = new HashSet();
-      find_result_set.addAll(find_result);
-      assert(find_result_set.size() === 2);
-      assert(find_result_set.containsAll([p3, p4]));
-    });
-*/
   }
 
   test_findAll(test) {
