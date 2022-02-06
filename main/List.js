@@ -19,10 +19,9 @@ class List extends Collection {
   // Adds the elements to the end of the list.
   // Returns the list itself.
   addAll(elements) {
-    let changed = false;
     for (let element of elements)
-      changed = this.add(element) || changed;
-    return changed;
+      this.add(element);
+    return this;
   }
 
   // Adds the element so it becomes the first element of the list.

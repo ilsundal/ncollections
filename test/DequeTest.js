@@ -46,33 +46,33 @@ class DequeTest extends ListishTest {
   test_peekFirst(test) {
     it('[] -> undefined', function() {
       let deque = test.newInstance();
-      assert(deque.peekFirst() == undefined);
+      assert(deque.peekFirst() === undefined);
     });
     it('[1,2,3] -> 1', function() {
       let deque = test.newInstance([1,2,3]);
-      assert(deque.peekFirst() == 1);
+      assert(deque.peekFirst() === 1);
     });
   }
 
   test_peekLast(test) {
     it('[] -> undefined', function() {
       let deque = test.newInstance();
-      assert(deque.peekLast() == undefined);
+      assert(deque.peekLast() === undefined);
     });
     it('[1,2,3] -> 2', function() {
       let deque = test.newInstance([1,2,3]);
-      assert(deque.peekLast() == 3);
+      assert(deque.peekLast() === 3);
     });
   }
 
   test_pollFirst(test) {
     it('[] -> undefined', function() {
       let deque = test.newInstance();
-      assert(deque.pollFirst() == undefined);
+      assert(deque.pollFirst() === undefined);
     });
     it('[1,2,3] -> 1', function() {
       let deque = test.newInstance([1,2,3]);
-      assert(deque.pollFirst() == 1);
+      assert(deque.pollFirst() === 1);
       Util.equals(deque.toArray(), [2,3]);
     });
   }
@@ -80,11 +80,11 @@ class DequeTest extends ListishTest {
   test_pollLast(test) {
     it('[] -> undefined', function() {
       let deque = test.newInstance();
-      assert(deque.pollLast() == undefined);
+      assert(deque.pollLast() === undefined);
     });
     it('[1,2,3] -> 1', function() {
       let deque = test.newInstance([1,2,3]);
-      assert(deque.pollLast() == 3);
+      assert(deque.pollLast() === 3);
       Util.equals(deque.toArray(), [1,2]);
     });
   }

@@ -27,13 +27,13 @@ class QueueTest extends ListishTest {
   test_dequeue(test) {
     it('[] -> undefined', function() {
       let queue = test.newInstance();
-      assert(queue.dequeue() == undefined);
+      assert(queue.dequeue() === undefined);
     });
     it('[1,2] -> 1', function() {
       let queue = test.newInstance();
       queue.enqueue(1);
       queue.enqueue(2);
-      assert(queue.dequeue() == 1);
+      assert(queue.dequeue() === 1);
     });
   }
 
@@ -44,13 +44,13 @@ class QueueTest extends ListishTest {
   test_peek(test) {
     it('[] -> undefined', function() {
       let queue = test.newInstance();
-      assert(queue.peek() == undefined);
+      assert(queue.peek() === undefined);
     });
     it('[1,2] -> 1', function() {
       let queue = test.newInstance();
       queue.enqueue(1);
       queue.enqueue(2);
-      assert(queue.peek() == 1);
+      assert(queue.peek() === 1);
     });
   }
 }

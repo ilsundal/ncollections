@@ -27,11 +27,11 @@ class StackTest extends ListishTest {
   test_peek(test) {
     it('[] -> undefined', function() {
       let stack = test.newInstance();
-      assert(stack.peek() == undefined);
+      assert(stack.peek() === undefined);
     });
     it('[1] -> 1', function() {
       let stack = test.newInstance([1]);
-      assert(stack.peek() == 1);
+      assert(stack.peek() === 1);
     });
   }
 
@@ -40,7 +40,7 @@ class StackTest extends ListishTest {
       let stack = test.newInstance();
       stack.push(1);
       stack.push(2);
-      assert(stack.pop() == 2);
+      assert(stack.pop() === 2);
       assert(Util.equals(stack.toArray(), [1]));
     });
     it('[] -> NoSuchElementException', function() {

@@ -45,7 +45,7 @@ class UnmodifiableCollectionTest extends CollectionTest {
   }
 
   test_clone(test) {
-    it('[1,2] == clone [1,2]', function() {
+    it('[1,2] === clone [1,2]', function() {
       let collection = test.newInstance([1,2]);
       let collection_clone = collection.clone();
       assert(collection === collection_clone);
@@ -55,40 +55,40 @@ class UnmodifiableCollectionTest extends CollectionTest {
   }
 
   test_equals(test) {
-    it('[1,2] == [1,2]', function() {
+    it('[1,2] === [1,2]', function() {
       let collection = test.newInstance([1,2]);
-      assert(collection.equals(collection) == true);
-      assert(collection.equals(collection.inner_collection) == true);
+      assert(collection.equals(collection) === true);
+      assert(collection.equals(collection.inner_collection) === true);
       // note that inner_collection.equals(collection) is false until we implement UnmodifiableSet
     });
-    it('[1,2] != [1,2]', function() {
+    it('[1,2] !== [1,2]', function() {
       let collection1 = test.newInstance([1,2]);
       let collection2 = test.newInstance([1,3]);
-      assert(collection1.equals(collection2) == false);
-      assert(collection2.equals(collection1) == false);
+      assert(collection1.equals(collection2) === false);
+      assert(collection2.equals(collection1) === false);
     });
   }
 
   test_hashCode(test) {
-    it('hash code of [1,2] == inner hash code of [1,2]', function() {
+    it('hash code of [1,2] === inner hash code of [1,2]', function() {
       let collection = test.newInstance([1,2]);
-      assert(collection.hashCode() == collection.inner_collection.hashCode());
+      assert(collection.hashCode() === collection.inner_collection.hashCode());
     });
   }
 
   test_isEmpty(test) {
-    it('[] == inner []', function() {
+    it('[] === inner []', function() {
       let collection = test.newInstance();
-      assert(collection.isEmpty() == collection.inner_collection.isEmpty());
+      assert(collection.isEmpty() === collection.inner_collection.isEmpty());
     });
-    it('[1,2] == inner [1,2]', function() {
+    it('[1,2] === inner [1,2]', function() {
       let collection = test.newInstance([1,2]);
-      assert(collection.isEmpty() == collection.inner_collection.isEmpty());
+      assert(collection.isEmpty() === collection.inner_collection.isEmpty());
     });
   }
 
   test_next(test) {
-    it('[1,2] == inner [1,2]', function() {
+    it('[1,2] === inner [1,2]', function() {
       let collection = test.newInstance([1,2]);
       let array_collection = Array.from(collection);
       let array_inner_collection = Array.from(collection.inner_collection);
@@ -97,13 +97,13 @@ class UnmodifiableCollectionTest extends CollectionTest {
   }
 
   test_size(test) {
-    it('[] == inner []', function() {
+    it('[] === inner []', function() {
       let collection = test.newInstance();
-      assert(collection.size() == collection.inner_collection.size());
+      assert(collection.size() === collection.inner_collection.size());
     });
-    it('[1,2] == inner [1,2]', function() {
+    it('[1,2] === inner [1,2]', function() {
       let collection = test.newInstance([1,2]);
-      assert(collection.size() == collection.inner_collection.size());
+      assert(collection.size() === collection.inner_collection.size());
     });
   }
 
@@ -115,13 +115,13 @@ class UnmodifiableCollectionTest extends CollectionTest {
   }
 
   test_toString(test) {
-    it('[] == inner []', function() {
+    it('[] === inner []', function() {
       let collection = test.newInstance();
-      assert(collection.toString() == collection.inner_collection.toString());
+      assert(collection.toString() === collection.inner_collection.toString());
     });
-    it('[1,"my_string",{some:"value"}] == inner [1,"my_string",{"some":"value"}]', function() {
+    it('[1,"my_string",{some:"value"}] === inner [1,"my_string",{"some":"value"}]', function() {
       let collection = test.newInstance([1,"my_string",{some:"value"}]);
-      assert(collection.toString() == collection.inner_collection.toString());
+      assert(collection.toString() === collection.inner_collection.toString());
     });
   }
 }

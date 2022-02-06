@@ -36,7 +36,7 @@ class ListishTest extends CollectionTest {
     it('[1] -> (empty)', function() {
       let collection = test.newInstance([1]);
       collection.clear();
-      assert(collection.isEmpty() == true);
+      assert(collection.isEmpty() === true);
     });
   }
 
@@ -48,13 +48,13 @@ class ListishTest extends CollectionTest {
   }
 
   test_equals(test) {
-    it('[1,2] == [1,2]', function() {
+    it('[1,2] === [1,2]', function() {
       let collection1 = test.newInstance([1,2]);
       let collection2 = test.newInstance([1,2]);
       assert(collection1.equals(collection2));
       assert(collection2.equals(collection1));
     });
-    it('[1,2] != [1,3]', function() {
+    it('[1,2] !== [1,3]', function() {
       let collection1 = test.newInstance([1,2]);
       let collection2 = test.newInstance([1,3]);
       assert(!collection1.equals(collection2));
@@ -65,28 +65,28 @@ class ListishTest extends CollectionTest {
   test_hashCode(test) {
     it('[1,2] -> 40025650', function() {
       let collection = test.newInstance([1,2]);
-      assert(collection.hashCode() == 40025650);
+      assert(collection.hashCode() === 40025650);
     });
-    it('hash code of [1,2] == hash code of [1,2]', function() {
+    it('hash code of [1,2] === hash code of [1,2]', function() {
       let collection1 = test.newInstance([1,2]);
       let collection2 = test.newInstance([1,2]);
-      assert(collection1.hashCode() == collection2.hashCode());
+      assert(collection1.hashCode() === collection2.hashCode());
     });
-    it('hash code of [1,2] != hash code of [1,3]', function() {
+    it('hash code of [1,2] !== hash code of [1,3]', function() {
       let collection1 = test.newInstance([1,2]);
       let collection2 = test.newInstance([1,3]);
-      assert(collection1.hashCode() != collection2.hashCode());
+      assert(collection1.hashCode() !== collection2.hashCode());
     });
   }
 
   test_isEmpty(test) {
     it('[] -> true', function() {
       let collection = test.newInstance();
-      assert(collection.isEmpty() == true);
+      assert(collection.isEmpty() === true);
     });
     it('[1] -> false', function() {
       let collection = test.newInstance([1]);
-      assert(collection.isEmpty() == false);
+      assert(collection.isEmpty() === false);
     });
   }
 
@@ -106,11 +106,11 @@ class ListishTest extends CollectionTest {
   test_size(test) {
     it('[] -> 0', function() {
       let collection = test.newInstance();
-      assert(collection.size() == 0);
+      assert(collection.size() === 0);
     });
     it('[1,2] -> 2', function() {
       let collection = test.newInstance([1,2]);
-      assert(collection.size() == 2);
+      assert(collection.size() === 2);
     });
   }
 
@@ -124,11 +124,11 @@ class ListishTest extends CollectionTest {
   test_toString(test) {
     it('{} -> "[]"', function() {
       let collection = test.newInstance();
-      assert(collection.toString() == '[]');
+      assert(collection.toString() === '[]');
     });
     it('["1",2,3] -> "[\"1\",2,3]"', function() {
       let collection = test.newInstance(["1",2,3]);
-      assert(collection.toString() == '["1",2,3]');
+      assert(collection.toString() === '["1",2,3]');
     });
   }
 

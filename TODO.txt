@@ -1,7 +1,4 @@
 TODO FEATURES
-- Add collection: IndexSet.
-  - Rename to MatchSet?
-  - Test it.
 - Add collection: TreeSet (which is a sorted Set).
 
 COLLECTION OVERVIEW
@@ -22,3 +19,84 @@ Collection
     NativeSet*
   Stack*
 * = instantiable
+
+TreeSet design notes:
+
+class TreeSet extends Set {
+  #root_node = null;
+}
+
+node {
+  parent_node: ...,
+  less_node: ...,
+  more_node: ...,
+  element: ...
+}
+
+add(element) {
+  if (this.#root_node == null) {
+    this.#root_node = { parent_node: null, less_node: null, more_node: null, element: element };
+    return true;
+  }
+  return this.#addAt(this.#root_node, element); // might this should return the node? and then we can call rebalance(node)
+}
+
+#addAt(node, element) {
+  let compare = Collections.compare_fn(element, node.element);
+  if (compare == 0)
+    return false; // already contained
+  if (compare < 0) {
+    if (node.left_node == null) {
+      node.left_node = { parent_node: node, less_node: null, more_node: null, element: element };
+      return true;
+    } else
+      return this.#addAt(node.less_node);
+  } else {
+    if (node.more_node == null) {
+      node.more_node = { parent_node: node, less_node: null, more_node: null, element: element };
+      return true;
+    } else
+      return this.#addAt(node.more_node, element);
+  }
+}
+
+and similar for remove(element) and contains(element)
+
+the issue now is to keep the tree balanced. this affects both add and remove.
+
+balance(node) { // balances the 
+  if (node.less_node == null) {
+    if (node.more_node == null)
+      return;
+    
+  
+  } else if (node.more_node == null) {
+  
+  } else {
+  
+  }
+}
+
+  1  ->  1
+
+  1      1
+   2 ->   2
+
+ 2       2
+1 3  -> 1 3
+
+   3     2
+  2  -> 1 3
+ 1
+
+  3      2
+ 1   -> 1 3
+  2
+
+  1      2
+   2 -> 1 3
+    3
+
+  1      2
+   3 -> 1 3
+  2

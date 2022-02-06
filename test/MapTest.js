@@ -69,7 +69,7 @@ class MapTest extends CollectionTest {
     it('{1->2} contains 2 -> false', function() {
       let map = test.newInstance();
       map.put(1,2);
-      assert(map.containsKey(2) == false);
+      assert(map.containsKey(2) === false);
     });
   }
 
@@ -82,12 +82,12 @@ class MapTest extends CollectionTest {
     it('{1->2} contains 1 -> false', function() {
       let map = test.newInstance();
       map.put(1,2);
-      assert(map.containsValue(1) == false);
+      assert(map.containsValue(1) === false);
     });
   }
 
   test_equals(test) {
-    it('{1->2,3->4} == {3->4,1->2}', function() {
+    it('{1->2,3->4} === {3->4,1->2}', function() {
       let map1 = test.newInstance();
       map1.put(1,2);
       map1.put(3,4);
@@ -97,15 +97,15 @@ class MapTest extends CollectionTest {
       assert(map1.equals(map2));
       assert(map2.equals(map1));
     });
-    it('{1->2,3->4} == {1->2,3->5}', function() {
+    it('{1->2,3->4} === {1->2,3->5}', function() {
       let map1 = test.newInstance();
       map1.put(1,2);
       map1.put(3,4);
       let map2 = test.newInstance();
       map2.put(1,2);
       map2.put(3,5);
-      assert(map1.equals(map2) == false);
-      assert(map2.equals(map1) == false);
+      assert(map1.equals(map2) === false);
+      assert(map2.equals(map1) === false);
     });
   }
 
@@ -114,34 +114,34 @@ class MapTest extends CollectionTest {
       let map = test.newInstance();
       map.put(1,2);
       map.put(3,4);
-      assert(map.get(1) == 2);
+      assert(map.get(1) === 2);
     });
     it('{1->2,3->4} get 5 -> undefined', function() {
       let map = test.newInstance();
       map.put(1,2);
       map.put(3,4);
-      assert(map.get(5) == undefined);
+      assert(map.get(5) === undefined);
     });
   }
 
   test_hashCode(test) {
-    it('hash code of {1->2,3->4} == hash code of {1->2,3->4}', function() {
+    it('hash code of {1->2,3->4} === hash code of {1->2,3->4}', function() {
       let map1 = test.newInstance();
       map1.put(1,2);
       map1.put(3,4);
       let map2 = test.newInstance();
       map2.put(1,2);
       map2.put(3,4);
-      assert(map1.hashCode() == map2.hashCode());
+      assert(map1.hashCode() === map2.hashCode());
     });
-    it('hash code of {1->2,3->4} != hash code of {1->2,3->5}', function() {
+    it('hash code of {1->2,3->4} !== hash code of {1->2,3->5}', function() {
       let map1 = test.newInstance();
       map1.put(1,2);
       map1.put(3,4);
       let map2 = test.newInstance();
       map2.put(1,2);
       map2.put(3,5);
-      assert(map1.hashCode() != map2.hashCode());
+      assert(map1.hashCode() !== map2.hashCode());
     });
   }
 
@@ -153,7 +153,7 @@ class MapTest extends CollectionTest {
     it('{1->2} -> false', function() {
       let map = test.newInstance();
       map.put(1,2);
-      assert(map.isEmpty() == false);
+      assert(map.isEmpty() === false);
     });
   }
 
@@ -173,7 +173,7 @@ class MapTest extends CollectionTest {
       map.put(3,4);
       let entries = new ArrayList();
       entries.addAll(map);
-      assert(entries.size() == 2);
+      assert(entries.size() === 2);
       assert(entries.contains({key:1,value:2}));
       assert(entries.contains({key:3,value:4}));
     });
@@ -182,16 +182,16 @@ class MapTest extends CollectionTest {
   test_put(test) {
     it('{} + (1->2) -> undefined & {1->2}', function() {
       let map = test.newInstance();
-      assert(map.put(1,2) == undefined);
-      assert(map.size() == 1);
-      assert(map.get(1) == 2);
+      assert(map.put(1,2) === undefined);
+      assert(map.size() === 1);
+      assert(map.get(1) === 2);
     });
     it('{1.>2} + (1->3) -> 2 & {1->3}', function() {
       let map = test.newInstance();
       map.put(1,2);
-      assert(map.put(1,3) == 2);
-      assert(map.size() == 1);
-      assert(map.get(1) == 3);
+      assert(map.put(1,3) === 2);
+      assert(map.size() === 1);
+      assert(map.get(1) === 3);
     });
   }
 
@@ -200,9 +200,9 @@ class MapTest extends CollectionTest {
       let map = test.newInstance();
       map.put(1,2);
       map.putAll([{key:1,value:3},{key:2,value:3}]);
-      assert(map.size() == 2);
-      assert(map.get(1) == 3);
-      assert(map.get(2) == 3);
+      assert(map.size() === 2);
+      assert(map.get(1) === 3);
+      assert(map.get(2) === 3);
     });
   }
 
@@ -210,17 +210,17 @@ class MapTest extends CollectionTest {
     it('{1->2} - 2 -> undefined & {1->2}', function() {
       let map = test.newInstance();
       map.put(1,2);
-      assert(map.remove(2) == undefined);
-      assert(map.size() == 1);
-      assert(map.get(1) == 2);
+      assert(map.remove(2) === undefined);
+      assert(map.size() === 1);
+      assert(map.get(1) === 2);
     });
     it('{1->2,2->3} - 1 -> 2 & {2->3}', function() {
       let map = test.newInstance();
       map.put(1,2);
       map.put(2,3);
-      assert(map.remove(1) == 2);
-      assert(map.size() == 1);
-      assert(map.get(2) == 3);
+      assert(map.remove(1) === 2);
+      assert(map.size() === 1);
+      assert(map.get(2) === 3);
     });
   }
 
@@ -231,24 +231,24 @@ class MapTest extends CollectionTest {
       map.put(2,3);
       map.put(3,4);
       let removed = map.removeAll([1,3]);
-      assert(removed.size() == 2);
+      assert(removed.size() === 2);
       assert(removed.contains({key:1,value:2}));
       assert(removed.contains({key:3,value:4}));
-      assert(map.size() == 1);
-      assert(map.get(2) == 3);
+      assert(map.size() === 1);
+      assert(map.get(2) === 3);
     });
   }
 
   test_size(test) {
     it('{} -> 0', function() {
       let map = test.newInstance();
-      assert(map.size() == 0);
+      assert(map.size() === 0);
     });
     it('{1->2,2->3} -> 2', function() {
       let map = test.newInstance();
       map.put(1,2);
       map.put(2,3);
-      assert(map.size() == 2);
+      assert(map.size() === 2);
     });
   }
 
@@ -267,7 +267,7 @@ class MapTest extends CollectionTest {
       map.put(1,2);
       map.put(3,4);
       let array = map.toArray();
-      assert(array.length == 2);
+      assert(array.length === 2);
       let list = new ArrayList();
       list.addAll(map.toArray());
       assert(list.contains({key:1,value:2}));
@@ -278,21 +278,21 @@ class MapTest extends CollectionTest {
   test_toString(test) {
     it('[] -> "{}"', function() {
       let map = test.newInstance();
-      assert(map.toString() == '{}');
+      assert(map.toString() === '{}');
     });
     it('{"1"->2,2->"3",3->{a:1}} -> "{\"1\"->2,2->\"3\",3->{\"a\":2}}"', function() {
       let map = test.newInstance();
       map.put("1",2);
       map.put(2,"3");
       map.put(3,{a:2});
-      assert(map.toString() == '{"1"->2,2->"3",3->{"a":2}}');
+      assert(map.toString() === '{"1"->2,2->"3",3->{"a":2}}');
     });
   }
 
   test_values(test) {
     it('{} -> []', function() {
       let map = test.newInstance();
-      assert(new Array(...map.values()).length == 0);
+      assert(new Array(...map.values()).length === 0);
     });
     it('{1->2,2->2,3->3} -> {2,2,3} when sorted', function() {
       let map = test.newInstance();
