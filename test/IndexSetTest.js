@@ -85,6 +85,11 @@ class IndexSetTest extends SetTest {
       let examine_result = index_set.examine({ name: 'name5', age: 14 });
       assert(Util.equals(examine_result, { applicable_indexes: [['age'],['name']], chosen_index: ['name'], scan_count: 1, match_count: 0 }));
     });
+    it('...[["name","age"]] where {name:"name5"} -> {[],[],5,0 }', function() {
+      index_set.addIndex(['name', 'age']);
+      let examine_result = index_set.examine({ name: 'name5' });
+      assert(Util.equals(examine_result, { applicable_indexes: [], chosen_index: null, scan_count: 5, match_count: 1 }));
+    });
     it('...[["name"],["age"],["name","age"]] where {name:"name5",age:14} -> {[["name","age"]],["name"],0,0 }', function() {
       index_set.addIndex(['name']);
       index_set.addIndex(['age']);
@@ -169,6 +174,14 @@ class IndexSetTest extends SetTest {
       find_result_set.addAll(find_result);
       assert(find_result_set.size() === 2);
       assert(find_result_set.containsAll([p3, p4]));
+    });
+    it('...[["name","age"]] where {name:"name5"} -> {p5}', function() {
+      index_set.addIndex(['name', 'age']);
+      let find_result = index_set.findAll({ name: 'name5' });
+      let find_result_set = new HashSet();
+      find_result_set.addAll(find_result);
+      assert(find_result_set.size() === 1);
+      assert(find_result_set.containsAll([p5]));
     });
   }
 

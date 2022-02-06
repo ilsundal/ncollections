@@ -105,17 +105,13 @@ class IndexSet extends Set_ {
     if (property_names.length == 0) // special case: find all
       return { applicable_indexes: [], chosen_index: null, scan_count: 0, matches: this.#set };
 
-// TODO: only use "longest" indexes
-
     // find applicable indexes
     let applicable_indexes = [];
     for (let index of this.#indexes) {
-      for (let property_name of property_names) {
-        if (index.includes(property_name)) {
-          applicable_indexes.push(index);
-          break;
-        }
-      }
+      // use index only if all its property names are contained in the where clause property names
+      let containsAll = index.every(property_name => { return property_names.includes(property_name); });
+      if (containsAll)
+        applicable_indexes.push(index);
     }
 
     // loop indexes to find the smallest index values set
