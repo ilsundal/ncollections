@@ -47,24 +47,24 @@ class Deque extends Collection {
     return this.#list.next();
   }
 
-  // returns the first element, or undefined if the deque is empty.
+  // Returns the first element, or undefined if the deque is empty.
   peekFirst() {
     return this.#list.isEmpty() ? undefined : this.#list.getFirst();
   }
 
-  // returns the last element, or undefined if the deque is empty.
+  // Returns the last element, or undefined if the deque is empty.
   peekLast() {
     return this.#list.isEmpty() ? undefined : this.#list.getLast();
   }
 
-  // removes the first element
-  // returns the removed element, or undefined if the deque is empty.
+  // Removes the first element.
+  // Returns the removed element, or undefined if the deque is empty.
   pollFirst() {
     return this.#list.isEmpty() ? undefined : this.#list.removeFirst();
   }
 
-  // removes the last element
-  // returns the removed element, or undefined if the deque is empty.
+  // Removes the last element.
+  // Returns the removed element, or undefined if the deque is empty.
   pollLast() {
     return this.#list.isEmpty() ? undefined : this.#list.removeLast();
   }

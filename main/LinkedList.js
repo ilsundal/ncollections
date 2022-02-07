@@ -59,18 +59,18 @@ class LinkedList extends List {
 
   #insert(element, index) {
     if (this.#length == 0) { // new first/last
-      this.#first_node = this.#last_node = { next_node: null, previous_node: null, element: element };
+      this.#first_node = this.#last_node = new Node(null, null, element);
     } else if (index == 0) { // new first
-      let new_first_node = { next_node: this.#first_node, previous_node: null, element: element }; 
+      let new_first_node = new Node(this.#first_node, null, element); 
       this.#first_node.previous_node = new_first_node;
       this.#first_node = new_first_node;
     } else if (index == this.#length) { // new last
-      let new_last_node = { next_node: null, previous_node: this.#last_node, element: element }; 
+      let new_last_node = new Node(null, this.#last_node, element); 
       this.#last_node.next_node = new_last_node;
       this.#last_node = new_last_node;
     } else { // between first and last
       let old_node = this.#getNode(index);
-      let new_node = { next_node: old_node, previous_node: old_node.previous_node, element: element };
+      let new_node = new Node(old_node, old_node.previous_node, element);
       old_node.previous_node.next_node = new_node;
       old_node.previous_node = new_node;
     }
@@ -148,6 +148,18 @@ class LinkedList extends List {
 
   size() {
     return this.#length;
+  }
+}
+
+class Node {
+  next_node; // null only for first node
+  previous_node; // null only for last node
+  element;
+
+  constructor(next_node, previous_node, element) {
+    this.next_node = next_node;
+    this.previous_node = previous_node;
+    this.element = element;
   }
 }
 
