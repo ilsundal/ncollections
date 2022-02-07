@@ -45,7 +45,7 @@ class UnmodifiableCollectionTest extends CollectionTest {
   }
 
   test_clone(test) {
-    it('[1,2] === clone [1,2]', function() {
+    it('[1,2] -> [1,2]', function() {
       let collection = test.newInstance([1,2]);
       let collection_clone = collection.clone();
       assert(collection === collection_clone);

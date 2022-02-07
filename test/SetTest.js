@@ -86,7 +86,7 @@ class SetTest extends CollectionTest {
   }
 
   test_clone(test) {
-    it('{1,2} === clone {1,2}', function() {
+    it('{1,2} -> {1,2}', function() {
       let set = test.newInstance([1,2]);
       let set_clone = set.clone();
       assert(set !== set_clone);

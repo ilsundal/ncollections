@@ -102,9 +102,16 @@ class Collection {
   // See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols
   [Symbol.iterator]() { return this.next(); }
 
-  // In principle a basic implementation based on next() could be done here, but that is too inefficient to be useful; So, in practice, this method should always be overridden.
+  // Returns the number of elements in the collection.
   size() {
     throw new UnsupportedOperationException();
+  }
+
+  size0() {
+    let size = 0;
+    for (let element of this)
+      size++;
+    return size;
   }
 
   // Returns the collection as an array.

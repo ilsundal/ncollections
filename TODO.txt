@@ -1,5 +1,6 @@
 TODO FEATURES
 - Add collection: TreeSet (which is a sorted Set).
+  - TODO: Keep balenced as nodes are added and removed.
   When ready:
     - In IndexSet, replace indexes ArrayList with TreeSet
     - In PriorityQueue, add option to use TreeSet instead of LinkedList (note: duplicates are no longer possible!)
