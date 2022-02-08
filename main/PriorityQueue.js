@@ -12,7 +12,7 @@ class PriorityQueue extends Queue {
   // options.compare_fn = the compare_fn (to override default)
   constructor(options={}) {
     super(Object.assign({ list_class: ArrayList }, options));
-    this.#compare_fn = options.compare_fn ? options.compare_fn : Collection.compare_fn;
+    this.#compare_fn = options.compare_fn || Collection.compare_fn;
   }
 
   // O(n) - therefore not suitable for big queues

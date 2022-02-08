@@ -89,7 +89,7 @@ class Collection {
 
   // Returns true if the collection size is 0.
   isEmpty() {
-    return this.size() == 0;
+    return this.size() === 0;
   }
 
   // Implement iterator protocol.

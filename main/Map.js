@@ -89,9 +89,6 @@ class Map extends Collection {
     };
   }
 
-  next() {
-    return this.entries();
-  }
 
   // Puts the key and value into the map.
   // Returns the previous value at key, or undefined if no value at key.

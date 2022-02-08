@@ -148,7 +148,7 @@ class MapTest extends CollectionTest {
   test_isEmpty(test) {
     it('{} -> true', function() {
       let map = test.newInstance();
-      assert(map.isEmpty());
+      assert(map.isEmpty() === true);
     });
     it('{1->2} -> false', function() {
       let map = test.newInstance();
@@ -225,7 +225,7 @@ class MapTest extends CollectionTest {
   }
 
   test_removeAll(test) {
-    it('{1->2,2->3,3->4} - 1 -> {1->2,3->4} & {2->3}', function() {
+    it('{1->2,2->3,3->4} - [1,3] -> {1->2,3->4} & {2->3}', function() {
       let map = test.newInstance();
       map.put(1,2);
       map.put(2,3);
@@ -280,12 +280,12 @@ class MapTest extends CollectionTest {
       let map = test.newInstance();
       assert(map.toString() === '{}');
     });
-    it('{"1"->2,2->"3",3->{a:1}} -> "{\"1\"->2,2->\"3\",3->{\"a\":2}}"', function() {
+    it('{1->2,2->"3",3->{a:1}} -> "{1->2,2->\"3\",3->{\"a\":2}}"', function() {
       let map = test.newInstance();
-      map.put("1",2);
+      map.put(1,2);
       map.put(2,"3");
       map.put(3,{a:2});
-      assert(map.toString() === '{"1"->2,2->"3",3->{"a":2}}');
+      assert(map.toString() === '{1->2,2->"3",3->{"a":2}}');
     });
   }
 
