@@ -4,9 +4,9 @@ const assert = require('assert');
 
 const Util = require(__dirname + '/../main/Util.js');
 
-const SetTest = require(__dirname + '/SetTest.js');
+const MapTest = require(__dirname + '/MapTest.js');
 
-class SortedSetTest extends SetTest {
+class SortedMapTest extends MapTest {
 
   class_method_names = this.class_method_names.concat([
     'peekFirst',
@@ -20,36 +20,44 @@ class SortedSetTest extends SetTest {
   }
 
   test_peekFirst(test) {
+/*
     it('{1,2,3} -> 1', function() {
       let set = test.newInstance([1,2,3]);
       assert(set.peekFirst() === 1);
       assert(set.size() === 3);
     });
+*/
   }
 
   test_peekLast(test) {
+/*
     it('{1,2,3} -> 3', function() {
       let set = test.newInstance([1,2,3]);
       assert(set.peekLast() === 3);
       assert(set.size() === 3);
     });
+*/
   }
 
   test_pollFirst(test) {
+/*
     it('{1,2,3} -> 1 & {2,3}', function() {
       let set = test.newInstance([1,2,3]);
       assert(set.pollFirst() === 1);
       assert(Util.equals(set.toArray(), [2,3]));
     });
+*/
   }
 
   test_pollLast(test) {
+/*
     it('{1,2,3} -> 3 & {2,3}', function() {
       let set = test.newInstance([1,2,3]);
       assert(set.pollLast() === 3);
       assert(Util.equals(set.toArray(), [1,2]));
     });
+*/
   }
 }
 
-module.exports = SortedSetTest;
+module.exports = SortedMapTest;

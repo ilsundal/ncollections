@@ -14,9 +14,11 @@ const COLLECTIONS = {
   PriorityQueue: require(__dirname + '/main/PriorityQueue.js'),
   Queue: require(__dirname + '/main/Queue.js'),
   Set: require(__dirname + '/main/HashSet.js'), // default set: HashSet
-  SortedSet: require(__dirname + '/main/TreeSet.js'), // default set: TreeSet
+  SortedMap: require(__dirname + '/main/TreeSet.js'), // default set: TreeSet
+  //SortedSet: require(__dirname + '/main/TreeSet.js'), // default set: TreeSet
   Stack: require(__dirname + '/main/Stack.js'),
-  TreeSet: require(__dirname + '/main/TreeSet.js')
+  TreeMap: require(__dirname + '/main/TreeMap.js')
+  //TreeSet: require(__dirname + '/main/TreeSet.js')
 }
 
 module.exports = {};

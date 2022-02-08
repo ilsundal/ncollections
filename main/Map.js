@@ -24,9 +24,27 @@ class Map extends Collection {
     throw new UnsupportedOperationException();
   }
 
+  // Basic implementation of containsKey for use by sub-classes.
+  containsKey0(key) {
+    for (let entry of this) {
+      if (Collection.equals_fn(entry.key, key))
+        return true;
+    }
+    return false;
+  }
+
   // Returns true if the value is a map value, i.e. if some key maps to it, and false otherwise.
   containsValue(value) {
     throw new UnsupportedOperationException();
+  }
+
+  // Basic implementation of containsKey for use by sub-classes.
+  containsValue0(value) {
+    for (let entry of this) {
+      if (Collection.equals_fn(entry.value, value))
+        return true;
+    }
+    return false;
   }
 
   // Two maps are equal if they contain the same keys and values for each key (in any order).
@@ -60,9 +78,15 @@ class Map extends Collection {
   }
 
   // Returns an iterable over the map's keys.
-  // Todo: make incremental.
   keys() {
-    throw new UnsupportedOperationException();
+    let entries_iterator = this.next();
+    return {
+      next: function() {
+        let entries_iterator_next = entries_iterator.next();
+        return entries_iterator_next.done ? { done: true } : { value: entries_iterator_next.value.key, done: false };
+      },
+      [Symbol.iterator]: function() { return this; }
+    };
   }
 
   next() {
@@ -111,9 +135,15 @@ class Map extends Collection {
   }
 
   // Returns an iterable over the map's values.
-  // Todo: make incremental.
   values() {
-    throw new UnsupportedOperationException();
+    let entries_iterator = this.next();
+    return {
+      next: function() {
+        let entries_iterator_next = entries_iterator.next();
+        return entries_iterator_next.done ? { done: true } : { value: entries_iterator_next.value.value, done: false };
+      },
+      [Symbol.iterator]: function() { return this; }
+    };
   }
 }
 

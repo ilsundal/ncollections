@@ -64,16 +64,16 @@ class TreeSet extends SortedSet {
   }
 
   #firstNode(from_node) {
-    if (from_node === null)
+    if (from_node == null)
       return undefined;
     let current_node = from_node;
-    while (current_node.left_node != null)
-      current_node = current_node.left_node;
+    while (current_node.less_node != null)
+      current_node = current_node.less_node;
     return current_node;
   }
 
   #lastNode(from_node) {
-    if (from_node === null)
+    if (from_node == null)
       return undefined;
     let current_node = from_node;
     while (current_node.more_node != null)
@@ -110,7 +110,7 @@ class TreeSet extends SortedSet {
   // Returns the last element, or undefined if the set is empty.
   peekLast() {
     let last_node = this.#lastNode(this.#root_node);
-    return first_node ? first_node.element : undefined;
+    return last_node ? last_node.element : undefined;
   }
 
   // Removes the first element.

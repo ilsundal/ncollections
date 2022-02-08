@@ -48,17 +48,6 @@ class HashMap extends Map_ {
     return undefined;
   }
 
-  keys() {
-    let entries_iterator = this.next();
-    return {
-      next: function() {
-        let entries_iterator_next = entries_iterator.next();
-        return entries_iterator_next.done ? { done: true } : { value: entries_iterator_next.value.key, done: false };
-      },
-      [Symbol.iterator]: function() { return this; }
-    };
-  }
-
   next() {
     return Util.mapIterator(this.#map);
   }
@@ -108,17 +97,6 @@ class HashMap extends Map_ {
 
   size() {
     return this.#size;
-  }
-
-  values() {
-    let entries_iterator = this.next();
-    return {
-      next: function() {
-        let entries_iterator_next = entries_iterator.next();
-        return entries_iterator_next.done ? { done: true } : { value: entries_iterator_next.value.value, done: false };
-      },
-      [Symbol.iterator]: function() { return this; }
-    };
   }
 }
 
