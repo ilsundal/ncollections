@@ -5,7 +5,7 @@ The collections are
 - [Lists](#Lists): [ArrayList](#ArrayList) and [LinkedList](#LinkedList)
 - [Sets](#Sets): [HashSet](#HashSet), [SortedSet](#SortedSet) ([TreeSet](#TreeSet)), [IndexSet](#IndexSet) and [NativeSet](#NativeSet)
 - [Maps](#Maps): [HashMap](#HashMap), [SortedMap](#SortedMap) ([TreeMap](#TreeMap)) and [NativeMap](#NativeMap)
-- [Queue](#Queues) and [PriorityQueue](#PriorityQueue)
+- [Queues](#Queues): [SimpleQueue](#SimpleQueue) and [PriorityQueue](#PriorityQueue)
 - [Deque](#Deque) and [Stack](#Stack)
 
 Why use ncollections?
@@ -174,86 +174,6 @@ To instantiate a LinkedList:
 let linked_list = Collections.newLinkedList();
 ```
 
-## Maps
-
-A Map is a key-value collection where a (unique) key is mapped to a value. Collectively, a key and its mapped-to value is called an entry and is simply an object with two properties: "key" and "value". Both keys and values can be primitive values or objects. To get all the entries of a map simply iterate over it; thus, there is no *entries* method.
-
-To instantiate the default Map (which is a [HashMap](#HashMap)):
-
-```javascript
-let map = Collections.newMap();
-```
-
-A Map implements the following methods:
-
-**containsKey(key)** returns true if the map contains the argument key, and false if not.
-
-**containsValue(value)** returns true if the map contains the argument value, and false if not.
-
-**get(key)** returns the value mapped-to by the argument key, or undefined if the map does not contain the key.
-
-**keys()** returns an iterable over the map's keys.
-
-**put(key, value)** maps the argument key to the argument value. Returns the value previously mapped-to by the key, or undefined if the map contained no such key before.
-
-**putAll(entries)** puts the argument entries (an iterable) into the map. Returns nothing.
-
-**remove(key)** removes the argument key and its mapped-to value from the map. Returns the mapped-to value of the key, or undefined if the map contained no such key before.
-
-**removeAll(keys)** removes the argument keys and their mapped-to values from the map. Returns the removed map entries.
-
-**values()** returns an iterable over the map's values.
-
-### HashMap
-
-The HashMap is backed by [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map). Thus, the *containsKey*, *get*, *put*, and *remove* methods are fast.
-
-To instantiate a HashMap:
-
-```javascript
-let hash_map = Collections.newHashMap();
-```
-
-### NativeMap
-
-The NativeMap is a thin wrapper around [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) and adapts it to the ncollections framework. NativeMap is (slightly) faster than HashMap but is based on == equality and thus does not support *equals* and *hashCode* methods.
-
-To instantiate a NativeMap:
-
-```javascript
-let native_map = Collections.newNativeMap();
-```
-
-### SortedMap
-
-The SortedMap is a Maps that orders its keys according to a *compare_fn*, which can be provided during instantiation via an options object. (See [TreeMap](#TreeMap) below for an example.) If no *compare_fn* is provided then a default (natural) ordering is used.
-
-To instantiate the default SortedMap (which is a [TreeMap](#TreeMap)):
-
-```javascript
-let tree_map = Collections.newSortedMap({ compare_fn: your_compare_fn }); // compare_fn is optional
-```
-
-A SortedMap implements the following methods:
-
-**getFirst()** returns the entry (element) with the lowest key in the map. A NoSuchElementException is thrown if the map is empty.
-
-**getLast()** returns the entry (element) with the greatest key in the map. A NoSuchElementException is thrown if the map is empty.
-
-**removeFirst()** removes the entry (element) with the lowest key in the map. Returns the removed entry. A NoSuchElementException is thrown if the map is empty.
-
-**removeLast()** removes the entry (element) with the greatest key in the map. Returns the removed entry. A NoSuchElementException is thrown if the map is empty.
-
-#### TreeMap
-
-The TreeMap is a SortedMap that is backed by a self-balanced binary tree structure.
-
-To instantiate a TreeMap:
-
-```javascript
-let tree_map = Collections.newTreeMap({ compare_fn: your_compare_fn }); // compare_fn is optional
-```
-
 ## Sets
 
 A Set is collection without duplicates.
@@ -387,6 +307,123 @@ To instantiate a TreeSet:
 let tree_set = Collections.newTreeSet({ compare_fn: your_compare_fn }); // compare_fn is optional
 ```
 
+## Maps
+
+A Map is a key-value collection where a (unique) key is mapped to a value. Collectively, a key and its mapped-to value is called an entry and is simply an object with two properties: "key" and "value". Both keys and values can be primitive values or objects. To get all the entries of a map simply iterate over it; thus, there is no *entries* method.
+
+To instantiate the default Map (which is a [HashMap](#HashMap)):
+
+```javascript
+let map = Collections.newMap();
+```
+
+A Map implements the following methods:
+
+**containsKey(key)** returns true if the map contains the argument key, and false if not.
+
+**containsValue(value)** returns true if the map contains the argument value, and false if not.
+
+**get(key)** returns the value mapped-to by the argument key, or undefined if the map does not contain the key.
+
+**keys()** returns an iterable over the map's keys.
+
+**put(key, value)** maps the argument key to the argument value. Returns the value previously mapped-to by the key, or undefined if the map contained no such key before.
+
+**putAll(entries)** puts the argument entries (an iterable) into the map. Returns nothing.
+
+**remove(key)** removes the argument key and its mapped-to value from the map. Returns the mapped-to value of the key, or undefined if the map contained no such key before.
+
+**removeAll(keys)** removes the argument keys and their mapped-to values from the map. Returns the removed map entries.
+
+**values()** returns an iterable over the map's values.
+
+### HashMap
+
+The HashMap is backed by [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map). Thus, the *containsKey*, *get*, *put*, and *remove* methods are fast.
+
+To instantiate a HashMap:
+
+```javascript
+let hash_map = Collections.newHashMap();
+```
+
+### NativeMap
+
+The NativeMap is a thin wrapper around [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) and adapts it to the ncollections framework. NativeMap is (slightly) faster than HashMap but is based on == equality and thus does not support *equals* and *hashCode* methods.
+
+To instantiate a NativeMap:
+
+```javascript
+let native_map = Collections.newNativeMap();
+```
+
+### SortedMap
+
+The SortedMap is a Maps that orders its keys according to a *compare_fn*, which can be provided during instantiation via an options object. (See [TreeMap](#TreeMap) below for an example.) If no *compare_fn* is provided then a default (natural) ordering is used.
+
+To instantiate the default SortedMap (which is a [TreeMap](#TreeMap)):
+
+```javascript
+let tree_map = Collections.newSortedMap({ compare_fn: your_compare_fn }); // compare_fn is optional
+```
+
+A SortedMap implements the following methods:
+
+**getFirst()** returns the entry (element) with the lowest key in the map. A NoSuchElementException is thrown if the map is empty.
+
+**getLast()** returns the entry (element) with the greatest key in the map. A NoSuchElementException is thrown if the map is empty.
+
+**removeFirst()** removes the entry (element) with the lowest key in the map. Returns the removed entry. A NoSuchElementException is thrown if the map is empty.
+
+**removeLast()** removes the entry (element) with the greatest key in the map. Returns the removed entry. A NoSuchElementException is thrown if the map is empty.
+
+#### TreeMap
+
+The TreeMap is a SortedMap that is backed by a self-balanced binary tree structure.
+
+To instantiate a TreeMap:
+
+```javascript
+let tree_map = Collections.newTreeMap({ compare_fn: your_compare_fn }); // compare_fn is optional
+```
+## Queues
+
+A Queue is an ordered collection where you can enqueue and dequeue elements.
+
+To instantiate the default Queue (which is a [SimpleQueue](#SimpleQueue)):
+
+```javascript
+let queue = Collections.newQueue();
+```
+
+A Queue implements the following methods:
+
+**dequeue()** removes the front element of the queue. Returns the removed element, or undefined if the queue is empty.
+
+**enqueue(element)** adds the argument element to the end of the queue.
+
+**peek()** returns the front element of the queue, or undefined if the queue is empty.
+
+### SimpleQueue
+
+A SimpleQueue is Queue that enqueues and dequeues elements in First-In First-Out (FIFO) order. It is backed by a [LinkedList](#LinkedList) and thus the associated methods are all fast.
+
+To instantiate a SimpleQueue:
+
+```javascript
+let simple_queue = Collections.newSimpleQueue();
+```
+
+### PriorityQueue
+
+A PriorityQueue is a Queue that orders its elements according to a *compare_fn*, which can be provided during instantiation via an options object. If no *compare_fn* is provided then a default (natural) ordering is used. A PriorityQueue is backed by both a [TreeMap](#TreeMap) (for fast sorting order) and [LinkedList](#LinkedList) (to allow elements with the same priority, dequeued in FIFO order). Thus, all associated methods are fast.
+
+To instantiate a PriorityQueue:
+
+```javascript
+let priority_queue = Collections.newPriorityQueue({ compare_fn: your_compare_fn }); // compare_fn is optional
+```
+
 ## Deque
 
 A Deque is an ordered collection where you can add, peek and poll the first (front) and last (end) elements. It is backed by a LinkedList and thus the associated methods are all fast.
@@ -428,34 +465,6 @@ A Stack implements the following methods:
 **pop()** removes the last-pushed element. Returns the removed element, or undefined if the stack is empty.
 
 **push(element)** adds the argument element to the (end of, or top of) the stack. Returns the stack itself.
-
-## Queues
-
-A Queue is an ordered collection where you can enqueue and dequeue elements in First-In First-Out (FIFO) order. It is backed by a LinkedList and thus the associated methods are all fast.
-
-To instantiate a Queue:
-
-```javascript
-let queue = Collections.newQueue();
-```
-
-A Queue implements the following methods:
-
-**dequeue()** removes the front element of the queue. Returns the removed element, or undefined if the queue is empty.
-
-**enqueue(element)** adds the argument element to the end of the queue.
-
-**peek()** returns the front element of the queue, or undefined if the queue is empty.
-
-### PriorityQueue
-
-A PriorityQueue is a Queue that orders its elements according to a *compare_fn*, which can be provided during instantiation via an options object. If no *compare_fn* is provided then a default (natural) ordering is used.
-
-To instantiate a To instantiate a Queue:
-
-```javascript
-let priority_queue = Collections.newPriorityQueue({ compare_fn: your_compare_fn }); // compare_fn is optional
-```
 
 # A note on *equals*, *hashCode* and *compare_fn*
 
