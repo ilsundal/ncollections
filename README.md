@@ -3,8 +3,8 @@ ncollections provides a selection of neatly designed collections for JavaScript.
 
 The collections are
 - [Lists](#Lists): [ArrayList](#ArrayList) and [LinkedList](#LinkedList)
-- [Sets](#Sets): [HashSet](#HashSet), [IndexSet](#IndexSet) and [NativeSet](#NativeSet)
-- [Maps](#Maps): [HashMap](#HashMap) and [NativeMap](#NativeMap)
+- [Sets](#Sets): [HashSet](#HashSet), [SortedSet](#SortedSet) ([TreeSet](#TreeSet)), [IndexSet](#IndexSet) and [NativeSet](#NativeSet)
+- [Maps](#Maps): [HashMap](#HashMap),[SortedMap](#SortedMap) ([TreeMap](#TreeMap)) and [NativeMap](#NativeMap)
 - [Queue](#Queues) and [PriorityQueue](#PriorityQueue)
 - [Deque](#Deque) and [Stack](#Stack)
 
@@ -266,6 +266,30 @@ console.log(index_set.examine({ name: 'Morten', age: 48 })); // outputs { chosen
 
 The NativeSet is a thin wrapper around [JavaScript's built-in Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) and adapts it to the ncollections framework. NativeSet is (slightly) faster than HashSet but is based on == equality and thus does not support *equals* and *hashCode* methods. A NativeSet follows insertion order.
 
+### SortedSet
+
+The SortedSet is a Set that orders its elements according to a *compare_fn*, which can be provided during instantiation via an options object. (See [TreeSet](#TreeSet)] below for an example.) If no *compare_fn* is provided then a default (natural) ordering is used.
+
+All SortedSets also implements the following methods:
+
+**getFirst()** returns the first element of the set. A NoSuchElementException is thrown if the set is empty.
+
+**getLast()** returns the last element of the set. A NoSuchElementException is thrown if the set is empty.
+
+**removeFirst()** removes the first element of the set. Returns the removed element. A NoSuchElementException is thrown if the set is empty.
+
+**removeLast()** removes the last element of the set. Returns the removed element. A NoSuchElementException is thrown if the set is empty.
+
+#### TreeSet
+
+The TreeSet is a SortedSet that is backed by a [TreeMap](#TreeMap).
+
+A TreeSet instance can be created as follows:
+
+```javascript
+let tree_set = Collections.newTreeSet({ compare_fn: your_compare_fn });
+```
+
 ## Deque
 
 A Deque is an ordered collection where you can add, peek and poll the first (front) and last (end) elements. It is backed by a LinkedList and thus the associated methods are all fast.
@@ -310,7 +334,7 @@ The Queue implements the following methods:
 
 ### PriorityQueue
 
-A PriorityQueue is a Queue that orders its elements according to a *compare_fn* provided during instantiation via an options object, e.g.:
+A PriorityQueue is a Queue that orders its elements according to a *compare_fn*, which can be provided during instantiation via an options object, e.g.:
 ```javascript
 let priority_queue = Collections.newPriorityQueue({ compare_fn: your_compare_fn });
 ```
