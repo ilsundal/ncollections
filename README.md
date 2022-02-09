@@ -406,7 +406,7 @@ A Queue implements the following methods:
 
 ### SimpleQueue
 
-A SimpleQueue is Queue that enqueues and dequeues elements in First-In First-Out (FIFO) order. It is backed by a [LinkedList](#LinkedList) and thus the associated methods are all fast.
+A SimpleQueue is Queue that enqueues and dequeues elements in First-In First-Out (FIFO) order. It is backed by a [LinkedList](#LinkedList) and thus its methods are all fast.
 
 To instantiate a SimpleQueue:
 
@@ -416,7 +416,7 @@ let simple_queue = Collections.newSimpleQueue();
 
 ### PriorityQueue
 
-A PriorityQueue is a Queue that orders its elements according to a *compare_fn*, which can be provided during instantiation via an options object. If no *compare_fn* is provided then a default (natural) ordering is used. A PriorityQueue is backed by both a [TreeMap](#TreeMap) (for fast sorting order) and [LinkedList](#LinkedList) (to allow elements with the same priority, dequeued in FIFO order). Thus, all associated methods are fast.
+A PriorityQueue is a Queue that orders its elements according to a *compare_fn*, which can be provided during instantiation via an options object. If no *compare_fn* is provided then a default (natural) ordering is used. A PriorityQueue is backed by a [TreeMap](#TreeMap) (to keep priority order efficiently) and several [LinkedList](#LinkedList) instances (to allow for elements with the same priority, dequeued in FIFO order). Thus, its methods are all fast.
 
 To instantiate a PriorityQueue:
 
@@ -426,7 +426,7 @@ let priority_queue = Collections.newPriorityQueue({ compare_fn: your_compare_fn 
 
 ## Deque
 
-A Deque is an ordered collection where you can add, peek and poll the first (front) and last (end) elements. It is backed by a LinkedList and thus the associated methods are all fast.
+A Deque is an ordered collection where you can add, peek and poll the first (front) and last (end) elements. It is backed by a [LinkedList](#LinkedList) and thus its methods are all fast.
 
 To instantiate a Deque:
 
@@ -450,7 +450,7 @@ A Deque implements the following methods:
 
 ## Stack
 
-A Stack is an ordered collection where you can pop and push elements in Last-In First-Out (LIFO) order.  It is backed by a LinkedList and thus the associated methods are all fast.
+A Stack is an ordered collection where you can pop and push elements in Last-In First-Out (LIFO) order.  It is backed by a [LinkedList](#LinkedList) and thus its methods are all fast.
 
 To instantiate a Stack:
 
