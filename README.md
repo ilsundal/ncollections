@@ -156,7 +156,7 @@ A List implements the following methods:
 
 ### ArrayList
 
-An ArrayList is backed by [JavaScript's built-in array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array). Thus, the *getAt* and *setAt* methods are fast, while list insertions and removals are slower (due to possible element shifting and array resizing). The *toAtray* method returns the backed array directly which thus allows you to access and modify the ArrayList directly using any JavaScript array function, such as *splice*.
+An ArrayList is a [List](#List) backed by [JavaScript's built-in array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array). Thus, the *getAt* and *setAt* methods are fast, while list insertions and removals are slower (due to possible element shifting and array resizing). The *toAtray* method returns the backed array directly which thus allows you to access and modify the ArrayList directly using any JavaScript array function, such as *splice*.
 
 To instantiate an ArrayList:
 
@@ -166,7 +166,7 @@ let array_list = Collections.newArrayList();
 
 ### LinkedList
 
-A LinkedList is backed by a next-previous (double-linked) node structure. Thus, adding, retrieving and removing elements from the front or end of the list is fast, while *getAt* and *setAt* are slower due to linear search. (The linear search automatically chooses whether to search forwards from the first node or backwards from the last node depending on what is fastest.)
+A LinkedList is a [List](#List) backed by a next-previous (double-linked) node structure. Thus, adding, retrieving and removing elements from the front or end of the list is fast, while *getAt* and *setAt* are slower due to linear search. (The linear search automatically chooses whether to search forwards from the first node or backwards from the last node depending on what is fastest.)
 
 To instantiate a LinkedList:
 
@@ -200,7 +200,7 @@ A Set implements the following methods:
 
 ### HashSet
 
-A HashSet is a Set that is backed by [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map). Thus, the *add*, *contains*, and *remove* methods are fast. A HashSet is not ordered.
+A HashSet is a [Set](#Set) backed by [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map). Thus, the *add*, *contains*, and *remove* methods are fast. A HashSet is not ordered.
 
 To instantiate a HashSet:
 
@@ -210,7 +210,7 @@ let hash_set = Collections.newHashSet();
 
 ### IndexSet
 
-An IndexSet is a Set that indexes the added elements based on their property values, much like a simple in-memory database. It is useful if you have a lot of objects in memory (normally of the same class or with the same property names) and need to retrieve them fast based on their property values. While adding many indexes will improve retrieval speed, they may consume too much memory, so a suitable balance must be found.
+An IndexSet is a [Set](#Set) that indexes the added elements based on their property values, much like a simple in-memory database. It is useful if you have a lot of objects in memory (normally of the same class or with the same property names) and need to retrieve them fast based on their property values. While adding many indexes will improve retrieval speed, they may consume too much memory, so a suitable balance must be found.
 
 Retrieval is based on a "where" object, which is just an object of properties.
 
@@ -269,7 +269,7 @@ console.log(index_set.examine({ name: 'Morten', age: 48 })); // outputs { chosen
 
 ### NativeSet
 
-A NativeSet is a thin wrapper around [JavaScript's built-in Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) and adapts it to the ncollections framework. NativeSet is (slightly) faster than HashSet but is based on == equality and thus does not support *equals* and *hashCode* methods. A NativeSet follows insertion order.
+A NativeSet is a [Set](#Set) that adapts the [JavaScript's built-in Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) to the ncollections framework. NativeSet is (slightly) faster than [HashSet](#HashSet) but is based on == equality and thus does not support *equals* and *hashCode* methods. A NativeSet follows insertion order.
 
 To instantiate a NativeSet:
 
@@ -279,7 +279,7 @@ let native_set = Collections.newNativeSet();
 
 ### SortedSet
 
-A SortedSet is a Set that orders its elements according to a *compare_fn*, which can be provided during instantiation via an options object. If no *compare_fn* is provided then a default (natural) ordering is used.
+A SortedSet is a [Set](#Set) that orders its elements according to a *compare_fn*, which can be provided during instantiation via an options object. If no *compare_fn* is provided then a default (natural) ordering is used.
 
 To instantiate the default SortedSet (which is a [TreeSet](#TreeSet)):
 
@@ -299,7 +299,7 @@ A SortedSet implements the following methods:
 
 #### TreeSet
 
-A TreeSet is a SortedSet that is backed by a [TreeMap](#TreeMap).
+A TreeSet is a [SortedSet](#SortedSet) that is backed by a [TreeMap](#TreeMap).
 
 To instantiate a TreeSet:
 
@@ -339,7 +339,7 @@ A Map implements the following methods:
 
 ### HashMap
 
-A HashMap is backed by [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map). Thus, the *containsKey*, *get*, *put*, and *remove* methods are fast.
+A HashMap is a [Map](#Map) backed by [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map). Thus, the *containsKey*, *get*, *put*, and *remove* methods are fast.
 
 To instantiate a HashMap:
 
@@ -349,7 +349,7 @@ let hash_map = Collections.newHashMap();
 
 ### NativeMap
 
-A NativeMap is a thin wrapper around [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) and adapts it to the ncollections framework. NativeMap is (slightly) faster than HashMap but is based on == equality and thus does not support *equals* and *hashCode* methods.
+A NativeMap is a [Map](#Map) that adapts the [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) to the ncollections framework. NativeMap is (slightly) faster than [HashMap](#HashMap) but is based on == equality and thus does not support *equals* and *hashCode* methods.
 
 To instantiate a NativeMap:
 
@@ -359,7 +359,7 @@ let native_map = Collections.newNativeMap();
 
 ### SortedMap
 
-A SortedMap is a Map that orders its keys according to a *compare_fn*, which can be provided during instantiation via an options object. If no *compare_fn* is provided then a default (natural) ordering is used.
+A SortedMap is a [Map](#Map) that orders its keys according to a *compare_fn*, which can be provided during instantiation via an options object. If no *compare_fn* is provided then a default (natural) ordering is used.
 
 To instantiate the default SortedMap (which is a [TreeMap](#TreeMap)):
 
@@ -379,13 +379,14 @@ A SortedMap implements the following methods:
 
 #### TreeMap
 
-A TreeMap is a SortedMap that is backed by a self-balanced binary tree structure.
+A TreeMap is a [SortedMap](#SortedMap) backed by a self-balanced (Red-Black) binary tree structure.
 
 To instantiate a TreeMap:
 
 ```javascript
 let tree_map = Collections.newTreeMap({ compare_fn: your_compare_fn }); // compare_fn is optional
 ```
+
 ## Queues
 
 A Queue is an ordered collection where you can enqueue and dequeue elements.
@@ -406,7 +407,7 @@ A Queue implements the following methods:
 
 ### SimpleQueue
 
-A SimpleQueue is Queue that enqueues and dequeues elements in First-In First-Out (FIFO) order. It is backed by a [LinkedList](#LinkedList) and thus its methods are all fast.
+A SimpleQueue is [Queue](#Queue) that enqueues and dequeues elements in First-In First-Out (FIFO) order. It is backed by a [LinkedList](#LinkedList) and thus its methods are all fast.
 
 To instantiate a SimpleQueue:
 
@@ -416,7 +417,7 @@ let simple_queue = Collections.newSimpleQueue();
 
 ### PriorityQueue
 
-A PriorityQueue is a Queue that orders its elements according to a *compare_fn*, which can be provided during instantiation via an options object. If no *compare_fn* is provided then a default (natural) ordering is used. A PriorityQueue is backed by a [TreeMap](#TreeMap) (to keep priority order efficiently) and several [LinkedList](#LinkedList) instances (to allow for elements with the same priority, dequeued in FIFO order). Thus, its methods are all fast.
+A PriorityQueue is a [Queue](#Queue) that orders its elements according to a *compare_fn*, which can be provided during instantiation via an options object. If no *compare_fn* is provided then a default (natural) ordering is used. A PriorityQueue is backed by a [TreeMap](#TreeMap) (to keep priority order efficiently) and several [LinkedList](#LinkedList) instances (to allow for elements with the same priority, dequeued in FIFO order). Thus, its methods are all fast.
 
 To instantiate a PriorityQueue:
 
@@ -450,7 +451,7 @@ A Deque implements the following methods:
 
 ## Stack
 
-A Stack is an ordered collection where you can pop and push elements in Last-In First-Out (LIFO) order.  It is backed by a [LinkedList](#LinkedList) and thus its methods are all fast.
+A Stack is an ordered collection where you can pop and push elements in Last-In First-Out (LIFO) order. It is backed by a [LinkedList](#LinkedList) and thus its methods are all fast.
 
 To instantiate a Stack:
 
@@ -472,7 +473,7 @@ To figure out whether any given object is contained in a collection, the collect
 
 Similary, to index elements efficiently within a collection, the collection must have a way of creating indexes (or hash codes) for the objects to be added to the collection. This is done by a *hashCode* function. If you do not provide a *hashCode* function on the objects that you add to the collection then a default implementation is used that (via object reflection) works just fine (in most cases). However, you might want to provide an *hashCode(obj)* function on your objects to speed up performance (since object reflection is not particularly fast). Note that if *a.equals(b)* is true then *a.hashCode() === b.hashCode()* must be true as well. Writing a good *hashCode* function takes some skill, but you can use the example below as inspiration. You can also find plenty of help online.
 
-Lastly, some collections need sorting. For example, the PriorityQueue keeps its elements in priority order. Such sorting is done by a "compare_fn" function. If you do not provide a "compare_fn" then a default implementation is used that uses natural ordering (converting objects to strings if necessary). However, you might want to provide a *compare_fn(obj1, obj2)* function for greater flexibility and/or to speed up performance (since e.g. stringification is not particularly fast). The *compare_fn(obj1, obj2)* function must return a value as follows:
+Lastly, some collections need sorting. For example, the [PriorityQueue](#PriorityQueue) keeps its elements in priority order. Such sorting is done by a "compare_fn" function. If you do not provide a "compare_fn" then a default implementation is used that uses natural ordering (converting objects to strings if necessary). However, you might want to provide a *compare_fn(obj1, obj2)* function for greater flexibility and/or to speed up performance (since e.g. stringification is not particularly fast). The *compare_fn(obj1, obj2)* function must return a value as follows:
 - Less than 0 (zero) if obj1 comes before obj2.
 - 0 (zero) if obj1 and obj2 have the same sorting order. Normally, to be consistent with the *equals()* function mentioned above, then if *obj1.equals(obj2)* is true then *compare_fn(obj1, obj2) == 0* must be true as well.
 - Greater than 0 (zero) if obj1 comes after obj2.
