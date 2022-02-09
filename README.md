@@ -187,6 +187,30 @@ The HashMap is backed by [JavaScript's built-in Map](https://developer.mozilla.o
 
 The NativeMap is a thin wrapper around [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) and adapts it to the ncollections framework. NativeMap is (slightly) faster than HashMap but is based on == equality and thus does not support *equals* and *hashCode* methods.
 
+### SortedMap
+
+The SortedMap is a Maps that orders its keys according to a *compare_fn*, which can be provided during instantiation via an options object. (See [TreeMap](#TreeMap) below for an example.) If no *compare_fn* is provided then a default (natural) ordering is used.
+
+All SortedMaps implements the following methods:
+
+**getFirst()** returns the entry (element) with the lowest key in the map. A NoSuchElementException is thrown if the map is empty.
+
+**getLast()** returns the entry (element) with the greatest key in the map. A NoSuchElementException is thrown if the map is empty.
+
+**removeFirst()** removes the entry (element) with the lowest key in the map. Returns the removed entry. A NoSuchElementException is thrown if the map is empty.
+
+**removeLast()** removes the entry (element) with the greatest key in the map. Returns the removed entry. A NoSuchElementException is thrown if the map is empty.
+
+#### TreeMap
+
+The TreeMap is a SortedMap that is backed by a self-balanced binary tree structure.
+
+A TreeMap instance can be created as follows:
+
+```javascript
+let tree_map = Collections.newTreeMap({ compare_fn: your_compare_fn }); // compare_fn is optional
+```
+
 ## Sets
 
 A Set is collection without duplicates.
@@ -268,9 +292,9 @@ The NativeSet is a thin wrapper around [JavaScript's built-in Set](https://devel
 
 ### SortedSet
 
-The SortedSet is a Set that orders its elements according to a *compare_fn*, which can be provided during instantiation via an options object. (See [TreeSet](#TreeSet)] below for an example.) If no *compare_fn* is provided then a default (natural) ordering is used.
+The SortedSet is a Set that orders its elements according to a *compare_fn*, which can be provided during instantiation via an options object. (See [TreeSet](#TreeSet) below for an example.) If no *compare_fn* is provided then a default (natural) ordering is used.
 
-All SortedSets also implements the following methods:
+All SortedSets implements the following methods:
 
 **getFirst()** returns the first element of the set. A NoSuchElementException is thrown if the set is empty.
 
@@ -287,7 +311,7 @@ The TreeSet is a SortedSet that is backed by a [TreeMap](#TreeMap).
 A TreeSet instance can be created as follows:
 
 ```javascript
-let tree_set = Collections.newTreeSet({ compare_fn: your_compare_fn });
+let tree_set = Collections.newTreeSet({ compare_fn: your_compare_fn }); // compare_fn is optional
 ```
 
 ## Deque
@@ -336,7 +360,7 @@ The Queue implements the following methods:
 
 A PriorityQueue is a Queue that orders its elements according to a *compare_fn*, which can be provided during instantiation via an options object, e.g.:
 ```javascript
-let priority_queue = Collections.newPriorityQueue({ compare_fn: your_compare_fn });
+let priority_queue = Collections.newPriorityQueue({ compare_fn: your_compare_fn }); // compare_fn is optional
 ```
 If no *compare_fn* is provided then a default (natural) ordering is used. Note that keeping order in a LinkedList requires linear operations, which is not fast (but is only really an issue with big queues). When a sorted Set (such as a TreeSet) is added as a new collection type, the PriorityQueue may optionally be backed by that instead of by the LinkedList.
 
