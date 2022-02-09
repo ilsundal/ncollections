@@ -3,8 +3,8 @@ ncollections provides a selection of neatly designed collections for JavaScript.
 
 The collections are
 - [Lists](#Lists): [ArrayList](#ArrayList) and [LinkedList](#LinkedList)
-- [Sets](#Sets): [HashSet](#HashSet), [IndexSet](#IndexSet) and [NativeSet](#NativeSet)
-- [Maps](#Maps): [HashMap](#HashMap) and [NativeMap](#NativeMap)
+- [Sets](#Sets): [HashSet](#HashSet), [SortedSet](#SortedSet) ([TreeSet](#TreeSet)), [IndexSet](#IndexSet) and [NativeSet](#NativeSet)
+- [Maps](#Maps): [HashMap](#HashMap), [SortedMap](#SortedMap) ([TreeMap](#TreeMap)) and [NativeMap](#NativeMap)
 - [Queue](#Queues) and [PriorityQueue](#PriorityQueue)
 - [Deque](#Deque) and [Stack](#Stack)
 
@@ -36,6 +36,7 @@ console.log(list.toString()); // outputs [1,2,3]
 // Example of using a List with object types
 list.add({ my: 'object' });
 console.log(list.contains({ my: 'object' })); // outputs true
+console.log(list); // outputs ArrayList { array: [ 1, 2, 3, { my: 'object' } ] }
 console.log(list.toString()); // outputs [1,2,3,{"my":"object"}]
 
 // Example of using a Map with both basic types and objects
@@ -57,7 +58,7 @@ console.log(set.toString()); // outputs {1,{"a":1}}
 
 // The other ncollections (Stack, Deque, Queue, etc.) are similarly designed.
 
-// Note that the ncollections work naturally with object elements (and keys), unlike the native (built-in) JavaScript array, Set and Map that are based on the == equality operator
+// Note that the ncollections work naturally with object elements (and keys), unlike the built-in JavaScript array, Set and Map that are based on the == equality operator
 let native_array = [{ a: 1 }];
 console.log(native_array.includes({ a: 1 })); // outputs false
 let native_set = new Set();
@@ -101,7 +102,13 @@ All collections implement the [iteration and iterable protocols](https://develop
 
 A List is an ordered collection that allows for duplicates.
 
-All Lists implement the following methods:
+To instantiate the default List (which is an [ArrayList](#ArrayList)):
+
+```javascript
+let list = Collections.newList();
+```
+
+A List implements the following methods:
 
 **add(element)** adds the argument element to the end of the list. Returns the list itself.
 
@@ -151,15 +158,33 @@ All Lists implement the following methods:
 
 The ArrayList is backed by [JavaScript's built-in array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array). Thus, the *getAt* and *setAt* methods are fast, while list insertions and removals are slower (due to possible element shifting and array resizing). The *toAtray* method returns the backed array directly which thus allows you to access and modify the ArrayList directly using any JavaScript array function, such as *splice*.
 
+To instantiate an ArrayList:
+
+```javascript
+let array_list = Collections.newArrayList();
+```
+
 ### LinkedList
 
 The LinkedList is backed by a next-previous (double-linked) node structure. Thus, adding, retrieving and removing elements from the front or end of the list is fast, while *getAt* and *setAt* are slower due to linear search. (The linear search automatically chooses whether to search forwards from the first node or backwards from the last node depending on what is fastest.)
+
+To instantiate a LinkedList:
+
+```javascript
+let linked_list = Collections.newLinkedList();
+```
 
 ## Maps
 
 A Map is a key-value collection where a (unique) key is mapped to a value. Collectively, a key and its mapped-to value is called an entry and is simply an object with two properties: "key" and "value". Both keys and values can be primitive values or objects. To get all the entries of a map simply iterate over it; thus, there is no *entries* method.
 
-All Maps implement the following methods:
+To instantiate the default Map (which is a [HashMap](#HashMap)):
+
+```javascript
+let map = Collections.newMap();
+```
+
+A Map implements the following methods:
 
 **containsKey(key)** returns true if the map contains the argument key, and false if not.
 
@@ -183,15 +208,63 @@ All Maps implement the following methods:
 
 The HashMap is backed by [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map). Thus, the *containsKey*, *get*, *put*, and *remove* methods are fast.
 
+To instantiate a HashMap:
+
+```javascript
+let hash_map = Collections.newHashMap();
+```
+
 ### NativeMap
 
 The NativeMap is a thin wrapper around [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) and adapts it to the ncollections framework. NativeMap is (slightly) faster than HashMap but is based on == equality and thus does not support *equals* and *hashCode* methods.
+
+To instantiate a NativeMap:
+
+```javascript
+let native_map = Collections.newNativeMap();
+```
+
+### SortedMap
+
+The SortedMap is a Maps that orders its keys according to a *compare_fn*, which can be provided during instantiation via an options object. (See [TreeMap](#TreeMap) below for an example.) If no *compare_fn* is provided then a default (natural) ordering is used.
+
+To instantiate the default SortedMap (which is a [TreeMap](#TreeMap)):
+
+```javascript
+let tree_map = Collections.newSortedMap({ compare_fn: your_compare_fn }); // compare_fn is optional
+```
+
+A SortedMap implements the following methods:
+
+**getFirst()** returns the entry (element) with the lowest key in the map. A NoSuchElementException is thrown if the map is empty.
+
+**getLast()** returns the entry (element) with the greatest key in the map. A NoSuchElementException is thrown if the map is empty.
+
+**removeFirst()** removes the entry (element) with the lowest key in the map. Returns the removed entry. A NoSuchElementException is thrown if the map is empty.
+
+**removeLast()** removes the entry (element) with the greatest key in the map. Returns the removed entry. A NoSuchElementException is thrown if the map is empty.
+
+#### TreeMap
+
+The TreeMap is a SortedMap that is backed by a self-balanced binary tree structure.
+
+To instantiate a TreeMap:
+
+```javascript
+let tree_map = Collections.newTreeMap({ compare_fn: your_compare_fn }); // compare_fn is optional
+```
 
 ## Sets
 
 A Set is collection without duplicates.
 
-All Sets implement the following methods:
+To instantiate the default Set (which is a [HashSet](#HashSet)):
+
+```javascript
+let set = Collections.newSet();
+```
+
+A Set implements the following methods:
 
 **add(element)** adds the argument element to the set. Returns true if the set was changed (i.e. the set did not already contain the element), and false if not.
 
@@ -209,11 +282,23 @@ All Sets implement the following methods:
 
 The HashSet is a Set that is backed by [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map). Thus, the *add*, *contains*, and *remove* methods are fast. A HashSet is not ordered.
 
+To instantiate a HashSet:
+
+```javascript
+let hash_set = Collections.newHashSet();
+```
+
 ### IndexSet
 
 The IndexSet is a Set that indexes the added elements based on their property values, much like a simple in-memory database. It is useful if you have a lot of objects in memory (normally of the same class or with the same property names) and need to retrieve them fast based on their property values. While adding many indexes will improve retrieval speed, they may consume too much memory, so a suitable balance must be found.
 
 Retrieval is based on a "where" object, which is just an object of properties.
+
+To instantiate an IndexSet:
+
+```javascript
+let index_set = Collections.newIndexSet();
+```
 
 The IndexSet adds implementations of the following methods:
 
@@ -266,11 +351,53 @@ console.log(index_set.examine({ name: 'Morten', age: 48 })); // outputs { chosen
 
 The NativeSet is a thin wrapper around [JavaScript's built-in Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) and adapts it to the ncollections framework. NativeSet is (slightly) faster than HashSet but is based on == equality and thus does not support *equals* and *hashCode* methods. A NativeSet follows insertion order.
 
+To instantiate a NativeSet:
+
+```javascript
+let native_set = Collections.newNativeSet();
+```
+
+### SortedSet
+
+The SortedSet is a Set that orders its elements according to a *compare_fn*, which can be provided during instantiation via an options object. If no *compare_fn* is provided then a default (natural) ordering is used.
+
+To instantiate the default SortedSet (which is a [TreeSet](#TreeSet)):
+
+```javascript
+let sorted_set = Collections.newSortedSet({ compare_fn: your_compare_fn }); // compare_fn is optional
+```
+
+A SortedSet implements the following methods:
+
+**getFirst()** returns the first element of the set. A NoSuchElementException is thrown if the set is empty.
+
+**getLast()** returns the last element of the set. A NoSuchElementException is thrown if the set is empty.
+
+**removeFirst()** removes the first element of the set. Returns the removed element. A NoSuchElementException is thrown if the set is empty.
+
+**removeLast()** removes the last element of the set. Returns the removed element. A NoSuchElementException is thrown if the set is empty.
+
+#### TreeSet
+
+The TreeSet is a SortedSet that is backed by a [TreeMap](#TreeMap).
+
+To instantiate a TreeSet:
+
+```javascript
+let tree_set = Collections.newTreeSet({ compare_fn: your_compare_fn }); // compare_fn is optional
+```
+
 ## Deque
 
 A Deque is an ordered collection where you can add, peek and poll the first (front) and last (end) elements. It is backed by a LinkedList and thus the associated methods are all fast.
 
-The Deque implements the following methods:
+To instantiate a Deque:
+
+```javascript
+let deque = Collections.newDeque();
+```
+
+A Deque implements the following methods:
 
 **addFirst(element)** adds the argument element to the front of the deque. Returns the deque itself.
 
@@ -288,7 +415,13 @@ The Deque implements the following methods:
 
 A Stack is an ordered collection where you can pop and push elements in Last-In First-Out (LIFO) order.  It is backed by a LinkedList and thus the associated methods are all fast.
 
-The Stack implements the following methods:
+To instantiate a Stack:
+
+```javascript
+let stack = Collections.newStack();
+```
+
+A Stack implements the following methods:
 
 **peek()** returns the last-pushed element, or undefined if the stack is empty.
 
@@ -300,7 +433,13 @@ The Stack implements the following methods:
 
 A Queue is an ordered collection where you can enqueue and dequeue elements in First-In First-Out (FIFO) order. It is backed by a LinkedList and thus the associated methods are all fast.
 
-The Queue implements the following methods:
+To instantiate a Queue:
+
+```javascript
+let queue = Collections.newQueue();
+```
+
+A Queue implements the following methods:
 
 **dequeue()** removes the front element of the queue. Returns the removed element, or undefined if the queue is empty.
 
@@ -310,11 +449,13 @@ The Queue implements the following methods:
 
 ### PriorityQueue
 
-A PriorityQueue is a Queue that orders its elements according to a *compare_fn* provided during instantiation via an options object, e.g.:
+A PriorityQueue is a Queue that orders its elements according to a *compare_fn*, which can be provided during instantiation via an options object. If no *compare_fn* is provided then a default (natural) ordering is used.
+
+To instantiate a To instantiate a Queue:
+
 ```javascript
-let priority_queue = Collections.newPriorityQueue({ compare_fn: your_compare_fn });
+let priority_queue = Collections.newPriorityQueue({ compare_fn: your_compare_fn }); // compare_fn is optional
 ```
-If no *compare_fn* is provided then a default (natural) ordering is used. Note that keeping order in a LinkedList requires linear operations, which is not fast (but is only really an issue with big queues). When a sorted Set (such as a TreeSet) is added as a new collection type, the PriorityQueue may optionally be backed by that instead of by the LinkedList.
 
 # A note on *equals*, *hashCode* and *compare_fn*
 
