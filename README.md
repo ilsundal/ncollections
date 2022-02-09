@@ -78,7 +78,7 @@ npm install ncollections
 
 # The Collections
 
-All Collections implement the following methods:
+A Collection implements the following methods:
 
 **clear()** clears (empties) the collection.
 
@@ -156,7 +156,7 @@ A List implements the following methods:
 
 ### ArrayList
 
-The ArrayList is backed by [JavaScript's built-in array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array). Thus, the *getAt* and *setAt* methods are fast, while list insertions and removals are slower (due to possible element shifting and array resizing). The *toAtray* method returns the backed array directly which thus allows you to access and modify the ArrayList directly using any JavaScript array function, such as *splice*.
+An ArrayList is backed by [JavaScript's built-in array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array). Thus, the *getAt* and *setAt* methods are fast, while list insertions and removals are slower (due to possible element shifting and array resizing). The *toAtray* method returns the backed array directly which thus allows you to access and modify the ArrayList directly using any JavaScript array function, such as *splice*.
 
 To instantiate an ArrayList:
 
@@ -166,7 +166,7 @@ let array_list = Collections.newArrayList();
 
 ### LinkedList
 
-The LinkedList is backed by a next-previous (double-linked) node structure. Thus, adding, retrieving and removing elements from the front or end of the list is fast, while *getAt* and *setAt* are slower due to linear search. (The linear search automatically chooses whether to search forwards from the first node or backwards from the last node depending on what is fastest.)
+A LinkedList is backed by a next-previous (double-linked) node structure. Thus, adding, retrieving and removing elements from the front or end of the list is fast, while *getAt* and *setAt* are slower due to linear search. (The linear search automatically chooses whether to search forwards from the first node or backwards from the last node depending on what is fastest.)
 
 To instantiate a LinkedList:
 
@@ -200,7 +200,7 @@ A Set implements the following methods:
 
 ### HashSet
 
-The HashSet is a Set that is backed by [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map). Thus, the *add*, *contains*, and *remove* methods are fast. A HashSet is not ordered.
+A HashSet is a Set that is backed by [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map). Thus, the *add*, *contains*, and *remove* methods are fast. A HashSet is not ordered.
 
 To instantiate a HashSet:
 
@@ -210,7 +210,7 @@ let hash_set = Collections.newHashSet();
 
 ### IndexSet
 
-The IndexSet is a Set that indexes the added elements based on their property values, much like a simple in-memory database. It is useful if you have a lot of objects in memory (normally of the same class or with the same property names) and need to retrieve them fast based on their property values. While adding many indexes will improve retrieval speed, they may consume too much memory, so a suitable balance must be found.
+An IndexSet is a Set that indexes the added elements based on their property values, much like a simple in-memory database. It is useful if you have a lot of objects in memory (normally of the same class or with the same property names) and need to retrieve them fast based on their property values. While adding many indexes will improve retrieval speed, they may consume too much memory, so a suitable balance must be found.
 
 Retrieval is based on a "where" object, which is just an object of properties.
 
@@ -269,7 +269,7 @@ console.log(index_set.examine({ name: 'Morten', age: 48 })); // outputs { chosen
 
 ### NativeSet
 
-The NativeSet is a thin wrapper around [JavaScript's built-in Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) and adapts it to the ncollections framework. NativeSet is (slightly) faster than HashSet but is based on == equality and thus does not support *equals* and *hashCode* methods. A NativeSet follows insertion order.
+A NativeSet is a thin wrapper around [JavaScript's built-in Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) and adapts it to the ncollections framework. NativeSet is (slightly) faster than HashSet but is based on == equality and thus does not support *equals* and *hashCode* methods. A NativeSet follows insertion order.
 
 To instantiate a NativeSet:
 
@@ -279,7 +279,7 @@ let native_set = Collections.newNativeSet();
 
 ### SortedSet
 
-The SortedSet is a Set that orders its elements according to a *compare_fn*, which can be provided during instantiation via an options object. If no *compare_fn* is provided then a default (natural) ordering is used.
+A SortedSet is a Set that orders its elements according to a *compare_fn*, which can be provided during instantiation via an options object. If no *compare_fn* is provided then a default (natural) ordering is used.
 
 To instantiate the default SortedSet (which is a [TreeSet](#TreeSet)):
 
@@ -299,7 +299,7 @@ A SortedSet implements the following methods:
 
 #### TreeSet
 
-The TreeSet is a SortedSet that is backed by a [TreeMap](#TreeMap).
+A TreeSet is a SortedSet that is backed by a [TreeMap](#TreeMap).
 
 To instantiate a TreeSet:
 
@@ -339,7 +339,7 @@ A Map implements the following methods:
 
 ### HashMap
 
-The HashMap is backed by [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map). Thus, the *containsKey*, *get*, *put*, and *remove* methods are fast.
+A HashMap is backed by [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map). Thus, the *containsKey*, *get*, *put*, and *remove* methods are fast.
 
 To instantiate a HashMap:
 
@@ -349,7 +349,7 @@ let hash_map = Collections.newHashMap();
 
 ### NativeMap
 
-The NativeMap is a thin wrapper around [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) and adapts it to the ncollections framework. NativeMap is (slightly) faster than HashMap but is based on == equality and thus does not support *equals* and *hashCode* methods.
+A NativeMap is a thin wrapper around [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) and adapts it to the ncollections framework. NativeMap is (slightly) faster than HashMap but is based on == equality and thus does not support *equals* and *hashCode* methods.
 
 To instantiate a NativeMap:
 
@@ -359,7 +359,7 @@ let native_map = Collections.newNativeMap();
 
 ### SortedMap
 
-The SortedMap is a Maps that orders its keys according to a *compare_fn*, which can be provided during instantiation via an options object. (See [TreeMap](#TreeMap) below for an example.) If no *compare_fn* is provided then a default (natural) ordering is used.
+A SortedMap is a Map that orders its keys according to a *compare_fn*, which can be provided during instantiation via an options object. If no *compare_fn* is provided then a default (natural) ordering is used.
 
 To instantiate the default SortedMap (which is a [TreeMap](#TreeMap)):
 
@@ -379,7 +379,7 @@ A SortedMap implements the following methods:
 
 #### TreeMap
 
-The TreeMap is a SortedMap that is backed by a self-balanced binary tree structure.
+A TreeMap is a SortedMap that is backed by a self-balanced binary tree structure.
 
 To instantiate a TreeMap:
 
