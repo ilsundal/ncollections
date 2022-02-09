@@ -10,7 +10,7 @@ const ListishTest = require(__dirname + '/ListishTest.js');
 
 class QueueTest extends ListishTest {
 
-  constructor(queueClass=Queue, options) {
+  constructor(queueClass, options) {
     super(queueClass, options);
   }
 

@@ -3,24 +3,25 @@
 - Added new collections:
   - SortedSet super-class.
   - SortedMap super-class.
-  - TreeSet collection as an implementation of a SortedSet.
-  - TreeMap collection as an implementation of a SortedMap.
-- Map keys() and values() iterators are now incremental.
+  - TreeSet as an implementation of a SortedSet.
+  - TreeMap as an implementation of a SortedMap.
+- Queue is now a super-class and SimpleQueue is an implementation thereof.
+- Map keys() and values() iterators are now also incremental.
+- Added IllegalArgumentException.
+- Updated README.md.
 
-1.2.0
+1.2.x
 -----
 - In README.md
-  - Restructured collecton description.
+  - Restructured collection description.
   - Added ability to try out ncollections.
 - Added new collection: IndexSet.
   
-1.1.0
+1.1.x
 -----
 - Added new collection: NativeSet.
 - Added new collection: NativeMap.
-- Improved README.md:
-  - Added description of NativeSet collection.
-  - Added description of NativeMap collection.
+- Updated README.md.
 
 1.0.3
 -----

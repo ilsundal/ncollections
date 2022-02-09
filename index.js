@@ -12,8 +12,9 @@ const COLLECTIONS = {
   NativeMap: require(__dirname + '/main/NativeMap.js'),
   NativeSet: require(__dirname + '/main/NativeSet.js'),
   PriorityQueue: require(__dirname + '/main/PriorityQueue.js'),
-  Queue: require(__dirname + '/main/Queue.js'),
+  Queue: require(__dirname + '/main/Queue.js'), // default queue: SimpleQueue
   Set: require(__dirname + '/main/HashSet.js'), // default set: HashSet
+  SimpleQueue: require(__dirname + '/main/SimpleQueue.js'),
   SortedMap: require(__dirname + '/main/TreeSet.js'), // default set: TreeSet
   SortedSet: require(__dirname + '/main/TreeSet.js'), // default set: TreeSet
   Stack: require(__dirname + '/main/Stack.js'),
