@@ -37,6 +37,20 @@ class TreeMap extends SortedMap {
     return this.rbbst.get(key);
   }
 
+  getFirst() {
+    if (this.isEmpty())
+      throw new NoSuchElementException();
+    let min_node = this.rbbst.minNode();
+    return { key: min_node.key, value: min_node.val };
+  }
+
+  getLast() {
+    if (this.isEmpty())
+      throw new NoSuchElementException();
+    let max_node = this.rbbst.maxNode();
+    return { key: max_node.key, value: max_node.val };
+  }
+
   next() {
     let node_stack = new Stack();
     for (let node = this.rbbst.root; node != null; node = node.left)
@@ -54,20 +68,6 @@ class TreeMap extends SortedMap {
         return { done: true };
       }
     }
-  }
-
-  peekFirst() {
-    if (this.isEmpty())
-      return undefined;
-    let min_node = this.rbbst.minNode();
-    return { key: min_node.key, value: min_node.val };
-  }
-
-  peekLast() {
-    if (this.isEmpty())
-      return undefined;
-    let max_node = this.rbbst.maxNode();
-    return { key: max_node.key, value: max_node.val };
   }
 
   put(key, value) {

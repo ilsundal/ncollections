@@ -18,7 +18,7 @@ const PriorityQueueTest = require(__dirname + '/PriorityQueueTest.js');
 const QueueTest = require(__dirname + '/QueueTest.js');
 const StackTest = require(__dirname + '/StackTest.js');
 const TreeMapTest = require(__dirname + '/TreeMapTest.js');
-//const TreeSetTest = require(__dirname + '/TreeSetTest.js');
+const TreeSetTest = require(__dirname + '/TreeSetTest.js');
 const UnmodifiableCollectionTest = require(__dirname + '/UnmodifiableCollectionTest.js');
 
 describe('ArrayList', function() { new ArrayListTest().run(); });
@@ -33,6 +33,6 @@ describe('PriorityQueue', function() { new PriorityQueueTest().run(); });
 describe('Queue', function() { new QueueTest().run(); });
 describe('Stack', function() { new StackTest().run(); });
 describe('TreeMap', function() { new TreeMapTest().run(); });
-//describe('TreeSet', function() { new TreeSetTest().run(); });
+describe('TreeSet', function() { new TreeSetTest().run(); });
 describe('UnmodifiableCollectionTest(UnmodifiableCollection,HashSet)', function() { new UnmodifiableCollectionTest(UnmodifiableCollection, HashSet).run(); });
 

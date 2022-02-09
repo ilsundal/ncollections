@@ -25,21 +25,6 @@ class IndexSet extends Set_ {
     return true;
   }
 
-  #addMap(element, index) {
-    let properties = new HashSet();
-    for (let property_name of index) {
-      let property = { name: property_name, value: element[property_name] };
-      properties.add(property);
-    }
-    let index_values = properties;
-    let index_values_set = this.#map.get(index_values);
-    if (!index_values_set) {
-      index_values_set = new HashSet();
-      this.#map.put(index_values, index_values_set);
-    }
-    index_values_set.add(element);
-  }
-
   // Adds a new index on the set elements.
   // Returns the added index, or undefined if not added (because the index already exists).
   addIndex(index) {
@@ -53,6 +38,21 @@ class IndexSet extends Set_ {
     for (let element of this.#set)
       this.#addMap(element, property_names);
     return property_names;
+  }
+
+  #addMap(element, index) {
+    let properties = new HashSet();
+    for (let property_name of index) {
+      let property = { name: property_name, value: element[property_name] };
+      properties.add(property);
+    }
+    let index_values = properties;
+    let index_values_set = this.#map.get(index_values);
+    if (!index_values_set) {
+      index_values_set = new HashSet();
+      this.#map.put(index_values, index_values_set);
+    }
+    index_values_set.add(element);
   }
 
   clear() {

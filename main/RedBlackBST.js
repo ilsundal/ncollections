@@ -182,7 +182,7 @@ class RedBlackBST {
    * @throws IllegalArgumentException if {@code key} is {@code null}
    */
   contains(key) {
-      return this.get(key) != undefined; // CHANGED by Morten Helles
+      return this.get(key) !== undefined; // CHANGED by Morten Helles
 //      return this.get(key) != null;
   }
 

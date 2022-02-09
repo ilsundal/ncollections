@@ -1,9 +1,5 @@
 TODO FEATURES
-- Add collection: TreeSet (which is a sorted Set).
-  - TODO: Keep balenced as nodes are added and removed.
-  When ready:
-    - In IndexSet, replace indexes ArrayList with TreeSet
-    - In PriorityQueue, add option to use TreeSet instead of LinkedList (note: duplicates are no longer possible!)
+- In PriorityQueue, add option to use TreeSet instead of LinkedList (note: duplicates are no longer possible!)
 - Add collection: SortedList, using divide-and-conquer for a fast indexOf / lastIndexOf?
   - Also, contains (and perhaps List.contains) should call indexOf rather than iterating?
 - Set.add+addAll and Map.put/putAll to return self.

@@ -10,23 +10,27 @@ class SortedMap extends Map {
   }
 
   // Returns the entry with the smallest key, or undefined if the map is empty.
-  peekFirst() {
+  // Throws NoSuchElementException if list is empty.
+  getFirst() {
     throw new UnsupportedOperationException();
   }
 
   // Returns the entry with the largest key, or undefined if the map is empty.
-  peekLast() {
+  // Throws NoSuchElementException if list is empty.
+  getLast() {
     throw new UnsupportedOperationException();
   }
 
   // Removes the entry with the smallest key.
   // Returns the removed entry, or undefined if the map is empty.
+  // Throws NoSuchElementException if list is empty.
   removeFirst() {
     throw new UnsupportedOperationException();
   }
 
   // Removes the entry with the largest key.
   // Returns the removed entry, or undefined if the map is empty.
+  // Throws NoSuchElementException if list is empty.
   removeLast() {
     throw new UnsupportedOperationException();
   }
