@@ -36,17 +36,17 @@ class StackTest extends ListishTest {
   }
 
   test_pop(test) {
+    it('[] -> NoSuchElementException', function() {
+      let stack = test.newInstance();
+      let methodCall = () => stack.pop();
+      assert.throws(methodCall, NoSuchElementException);
+    });
     it('[1,2] -> 2 & [1]', function() {
       let stack = test.newInstance();
       stack.push(1);
       stack.push(2);
       assert(stack.pop() === 2);
       assert(Util.equals(stack.toArray(), [1]));
-    });
-    it('[] -> NoSuchElementException', function() {
-      let stack = test.newInstance();
-      let methodCall = () => stack.pop();
-      assert.throws(methodCall, NoSuchElementException);
     });
   }
 

@@ -1,3 +1,27 @@
+1.3.0
+-----
+- Added new collections:
+  - SortedSet super-class.
+  - SortedMap super-class.
+  - TreeSet collection as an implementation of a SortedSet.
+  - TreeMap collection as an implementation of a SortedMap.
+- Map keys() and values() iterators are now incremental.
+
+1.2.0
+-----
+- In README.md
+  - Restructured collecton description.
+  - Added ability to try out ncollections.
+- Added new collection: IndexSet.
+  
+1.1.0
+-----
+- Added new collection: NativeSet.
+- Added new collection: NativeMap.
+- Improved README.md:
+  - Added description of NativeSet collection.
+  - Added description of NativeMap collection.
+
 1.0.3
 -----
 First release.

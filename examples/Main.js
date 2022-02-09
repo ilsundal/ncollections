@@ -16,6 +16,7 @@ console.log(list.toString()); // outputs [1,2,3]
 // Example of using a List with object types
 list.add({ my: 'object' });
 console.log(list.contains({ my: 'object' })); // outputs true
+console.log(list); // outputs ArrayList { array: [ 1, 2, 3, { my: 'object' } ] }
 console.log(list.toString()); // outputs [1,2,3,{"my":"object"}]
 
 // Example of using a Map with both basic types and objects

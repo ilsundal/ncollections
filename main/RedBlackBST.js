@@ -1,5 +1,8 @@
 'use strict'
 
+// based on https://algs4.cs.princeton.edu/33balanced/RedBlackBST.java.html
+// as referenced on https://algs4.cs.princeton.edu/33balanced/
+
 /******************************************************************************
  *  Compilation:  javac RedBlackBST.java
  *  Execution:    java RedBlackBST < input.txt
@@ -29,7 +32,7 @@
  *
  ******************************************************************************/
 
-//const Collection = require(__dirname + '/Collection.js');
+const IllegalArgumentException = require(__dirname + '/IllegalArgumentException.js');
 const NoSuchElementException = require(__dirname + '/NoSuchElementException.js');
 
 /**
@@ -76,14 +79,6 @@ const NoSuchElementException = require(__dirname + '/NoSuchElementException.js')
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
  */
-
-class IllegalArgumentException extends Error {
-
-  constructor(message) {
-    super(message)
-    this.name = 'IllegalArgumentException';
-  }
-}
 
 // BST helper node data type
 class Node {
@@ -251,17 +246,17 @@ class RedBlackBST {
   deleteMin() {
       if (this.isEmpty()) throw new NoSuchElementException("BST underflow");
 
-      let min = this.min(); // ADDED by Morten Helles
+      let min_node = this.minNode(); // ADDED by Morten Helles
 
       // if both children of root are black, set root to red
       if (!this.isRed(this.root.left) && !this.isRed(this.root.right))
           this.root.color = RedBlackBST.RED;
 
       this.root = this.deleteMin0(this.root);
-      if (!isEmpty()) this.root.color = RedBlackBST.BLACK;
+      if (!this.isEmpty()) this.root.color = RedBlackBST.BLACK;
       
       // assert check();
-      return min; // ADDED by Morten Helles
+      return min_node; // ADDED by Morten Helles
   }
 
   // delete the key-value pair with the minimum key rooted at h
@@ -269,11 +264,11 @@ class RedBlackBST {
       if (h.left == null)
           return null;
 
-      if (!this.isRed(h.left) && !isRed(h.left.left))
+      if (!this.isRed(h.left) && !this.isRed(h.left.left))
           h = this.moveRedLeft(h);
 
       h.left = this.deleteMin0(h.left);
-      return balance(h);
+      return this.balance(h);
   }
 
 
@@ -284,17 +279,17 @@ class RedBlackBST {
   deleteMax() {
       if (this.isEmpty()) throw new NoSuchElementException("BST underflow");
 
-      let max = this.max(); // ADDED by Morten Helles
+      let max_node = this.maxNode(); // ADDED by Morten Helles
 
       // if both children of root are black, set root to red
-      if (!this.isRed(this.root.left) && !isRed(this.root.right))
+      if (!this.isRed(this.root.left) && !this.isRed(this.root.right))
           this.root.color = RedBlackBST.RED;
 
       this.root = this.deleteMax0(this.root);
       if (!this.isEmpty()) this.root.color = RedBlackBST.BLACK;
 
       // assert check();
-      return max; // ADDED by Morten Helles
+      return max_node; // ADDED by Morten Helles
   }
 
   // delete the key-value pair with the maximum key rooted at h
@@ -482,7 +477,14 @@ class RedBlackBST {
   min() {
       if (this.isEmpty()) throw new NoSuchElementException("calls min() with empty symbol table");
       return this.min0(this.root).key;
-  } 
+  }
+
+// ADDED by Morten Helles - start
+  minNode() {
+      if (this.isEmpty()) throw new NoSuchElementException("calls min() with empty symbol table");
+      return this.min0(this.root);
+  }
+// ADDED by Morten Helles - end
 
   // the smallest key in subtree rooted at x; null if no such key
   min0(x) { 
@@ -501,8 +503,15 @@ class RedBlackBST {
       return this.max0(this.root).key;
   } 
 
+// ADDED by Morten Helles - start
+  maxNode() {
+      if (this.isEmpty()) throw new NoSuchElementException("calls max() with empty symbol table");
+      return this.max0(this.root);
+  }
+// ADDED by Morten Helles - end
+
   // the largest key in the subtree rooted at x; null if no such key
-  max(x) { 
+  max0(x) { 
       // assert x != null;
       if (x.right == null) return x; 
       else                 return this.max0(x.right); 

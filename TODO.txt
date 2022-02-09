@@ -7,6 +7,7 @@ TODO FEATURES
 - Add collection: SortedList, using divide-and-conquer for a fast indexOf / lastIndexOf?
   - Also, contains (and perhaps List.contains) should call indexOf rather than iterating?
 - Set.add+addAll and Map.put/putAll to return self.
+- Added IllegalArgumentException?
 
 COLLECTION OVERVIEW
 

@@ -21,13 +21,13 @@ class SortedMap extends Map {
 
   // Removes the entry with the smallest key.
   // Returns the removed entry, or undefined if the map is empty.
-  pollFirst() {
+  removeFirst() {
     throw new UnsupportedOperationException();
   }
 
   // Removes the entry with the largest key.
   // Returns the removed entry, or undefined if the map is empty.
-  pollLast() {
+  removeLast() {
     throw new UnsupportedOperationException();
   }
 }
