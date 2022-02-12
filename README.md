@@ -32,7 +32,7 @@ Why use ncollections?
 - **Small foot-print** ncollections does not use any packages. The main directory is small and can be zipped to ~33KB (without any minifying).
 - **Plain JavaScript** Use both in browsers and Node.js.
 
-The design has been inspired by the [Java Collections Framework](https://docs.oracle.com/javase/8/docs/technotes/guides/collections/overview.html). To work out-of-the-box with objects, robust and fast default implementations are provided for *equals* and *hashCode* functions to make ncollections even easier to use. (In most cases, you don't have to worry about value equality and hash codes at all; it just works. [Read more.](#A-Note-On-equals-hashcode-And-compare_fn))
+The design has been inspired by the [Java Collections Framework](https://docs.oracle.com/javase/8/docs/technotes/guides/collections/overview.html). To work out-of-the-box with objects, robust and fast default implementations are provided for `equals` and `hashCode` functions to make ncollections even easier to use. (In most cases, you don't have to worry about value equality and hash codes at all; it just works. [Read more.](#A-Note-On-equals-hashcode-And-compare_fn))
 
 # Example
 
@@ -97,23 +97,21 @@ npm install ncollections
 
 A Collection implements the following methods:
 
-**clear()** clears (empties) the collection.
+`clear()` clears (empties) the collection.
 
-**clone()** returns a shallow clone of the collection.
+`clone()` returns a shallow clone of the collection.
 
-**equals(collection)** returns true if the collection is equal to the argument collection, and false if not.
+`equals(collection)` returns true if the collection is equal to the argument collection, and false if not.
 
-**hashCode()** returns an integer hash code for the collection.
+`hashCode()` returns an integer hash code for the collection.
 
-**isEmpty()** returns true if the collection is empty, and false if not.
+`isEmpty()` returns true if the collection is empty, and false if not.
 
-**size()** returns the collection size, i.e. the number of elements in the collection.
+`size()` returns the collection size, i.e. the number of elements in the collection.
 
-**toArray()** returns an array of the collection elements in iteration order. This array might be backed directly by the collection and thus should not be changed unless noted otherwise in the collection description.
+`toArray()` returns an array of the collection elements in iteration order. This array might be backed directly by the collection and thus should not be changed unless noted otherwise in the collection description.
 
-**toString()** returns a string representation of the collection in iteration order.
-
-A Collection implements the [iteration and iterable protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols) so you can easily loop over their elements.
+`toString()` returns a string representation of the collection in iteration order.
 
 A Collection is normally instantiated in one of two ways:
 
@@ -133,6 +131,14 @@ In both cases, an option object can be provided as an argument to further custom
 let tree_set = new TreeSet({ compare_fn : your_compare_fn });
 ```
 
+A Collection implements the [iteration and iterable protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols) so you can easily loop over their elements. For example:
+
+```javascript
+let list = new ArrayList().addAll(1, 2, 3);
+for (let element of list)
+  console.log(element);
+```
+
 ## List
 
 A List is an ordered collection that allows for duplicates.
@@ -147,7 +153,7 @@ A List implements the following methods:
 
 `add(element)` adds the argument element to the end of the list. Returns the list itself.
 
-**addAll(elements)** adds all the argument elements (an iterable) to the end of the list, in iteration order. Returns the list itself.
+`addAll(elements)` adds all the argument elements (an iterable) to the end of the list, in iteration order. Returns the list itself.
 
 **addFirst(element)** adds the argument element to the front of the list. Returns the list itself.
 
