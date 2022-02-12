@@ -31,8 +31,12 @@ class IndexSet extends Set_ {
   // Adds a new index on the set elements.
   // Returns the added index, or undefined if not added (because the index already exists).
   addIndex(index) {
-    if (typeof index !== 'object')
+    if ((typeof index !== 'object') || (typeof index[Symbol.iterator] !== 'function'))
       throw new IllegalArgumentException('index is not an iterable');
+    for (let property_name of index) {
+      if (typeof property_name !== 'string')
+        throw new IllegalArgumentException('index contains a name that is not a string: ' + JSON.stringify(property_name));
+    }
     let property_names_set = new HashSet();
     property_names_set.addAll(index); // remove duplicate property names
     let property_names = new ArrayList().addAll(property_names_set).sort().toArray(); // sort to ignore property name order
@@ -75,22 +79,30 @@ class IndexSet extends Set_ {
   }
 
   contains(element) {
+    if (element === undefined)
+      throw new IllegalArgumentException('element is undefined');
     return this.#set.contains(element);
   }
 
   // Returns { chosen_index: ..., scan_count: ..., match_count: ... };
   examine(where) {
+    if (typeof where !== 'object')
+      throw new IllegalArgumentException('where is not an object');
     let query_result = this.#query(where);
     return { chosen_index: query_result.chosen_index, scan_count: query_result.scan_count, match_count: query_result.matches.size() };
   }
 
   // Returns an iterable of the elements that match the (iterable) "where" properties.
   findAll(where) {
+    if (typeof where !== 'object')
+      throw new IllegalArgumentException('where is not an object');
     return this.#query(where).matches;
   }
 
   // Returns an element that matches the (iterable) "where" properties, or undefined if no match.
   findOne(where) {
+    if (typeof where !== 'object')
+      throw new IllegalArgumentException('where is not an object');
     let matches = this.findAll(where);
     return matches.isEmpty() ? undefined : matches.next().next().value;
   }
@@ -159,6 +171,8 @@ class IndexSet extends Set_ {
   }
 
   remove(element) {
+    if (element === undefined)
+      throw new IllegalArgumentException('element is undefined');
     let removed = this.#set.remove(element);
     if (!removed)
       return false;

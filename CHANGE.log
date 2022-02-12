@@ -8,7 +8,7 @@
 - Queue is now a super-class and SimpleQueue is an implementation thereof.
 - Map keys() and values() iterators are now also incremental.
 - Removed NativeSet and NativeMap collections.
-- Added IllegalArgumentException.
+- Added and applied IllegalArgumentException throughout.
 - Updated README.md.
 
 1.2.x

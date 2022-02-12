@@ -3,7 +3,7 @@
 const assert = require('assert');
 
 const Deque = require(__dirname + '/../main/Deque.js');
-const NoSuchElementException = require(__dirname + '/../main/NoSuchElementException.js');
+const IllegalArgumentException = require(__dirname + '/../main/IllegalArgumentException.js');
 const Util = require(__dirname + '/../main/Util.js');
 
 const ListishTest = require(__dirname + '/ListishTest.js');
@@ -28,6 +28,11 @@ class DequeTest extends ListishTest {
   }
 
   test_addFirst(test) {
+    it('[] + undefined -> IllegalArgumentException', function() {
+      let deque = test.newInstance();
+      let methodCall = () => deque.addFirst(undefined);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
     it('[] + 1 -> true & [1]', function() {
       let deque = test.newInstance();
       assert(deque.addFirst(1));

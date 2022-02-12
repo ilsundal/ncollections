@@ -3,6 +3,7 @@
 const assert = require('assert');
 
 const HashSet = require(__dirname + '/../main/HashSet.js');
+const IllegalArgumentException = require(__dirname + '/../main/IllegalArgumentException.js');
 const IndexSet = require(__dirname + '/../main/IndexSet.js');
 const Util = require(__dirname + '/../main/Util.js');
 
@@ -23,6 +24,16 @@ class IndexSetTest extends SetTest {
   }
   
   test_addIndex(test) {
+    it('{}[] + undefined -> IllegalArgumentException', function() {
+      let index_set = test.newInstance();
+      let methodCall = () => index_set.addIndex(undefined);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
+    it('{}[] + [1] -> IllegalArgumentException', function() {
+      let index_set = test.newInstance();
+      let methodCall = () => index_set.addIndex(1);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
     it('{}[] + ["name"] -> ["name"] & [["name"]]', function() {
       let index_set = test.newInstance();
       assert(Util.equals(index_set.addIndex(['name']), ['name']));
@@ -64,6 +75,10 @@ class IndexSetTest extends SetTest {
     beforeEach('init {p1,...,p5}...', function() {
       index_set = test.newInstance();
       index_set.addAll([p1,p2,p3,p4,p5]);
+    });
+    it('...[] where undefined -> IllegalArgumentException', function() {
+      let methodCall = () => index_set.examine(undefined);
+      assert.throws(methodCall, IllegalArgumentException);
     });
     it('...[] where {name:"name1"} -> {null,5,2}', function() {
       let examine_result = index_set.examine({ name: 'name1' });
@@ -109,6 +124,10 @@ class IndexSetTest extends SetTest {
     beforeEach('init {p1,...,p5}...', function() {
       index_set = test.newInstance();
       index_set.addAll([p1,p2,p3,p4,p5]);
+    });
+    it('...[] where undefined -> IllegalArgumentException', function() {
+      let methodCall = () => index_set.findAll(undefined);
+      assert.throws(methodCall, IllegalArgumentException);
     });
     it('...[] where {name:"name1"} -> {p1,p2}', function() {
       let find_result = index_set.findAll({ name: 'name1' });
@@ -195,6 +214,10 @@ class IndexSetTest extends SetTest {
     beforeEach('init {p1,...,p5}...', function() {
       index_set = test.newInstance();
       index_set.addAll([p1,p2,p3,p4,p5]);
+    });
+    it('...[] where undefined -> IllegalArgumentException', function() {
+      let methodCall = () => index_set.findOne(undefined);
+      assert.throws(methodCall, IllegalArgumentException);
     });
     it('...[["name"],["age"]] where {name:"name3"} -> p3', function() {
       index_set.addIndex(['name']);

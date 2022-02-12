@@ -1,5 +1,6 @@
 TODO FEATURES
 - Added IllegalArgumentException? Should use to check for undefined element, key and values.
-- For each collection, replace instantiation code with expandable example code.
-  - NativeSet and NativeMap to show their "problem" with using ==. Maybe delete at all? If keep, why not have a NativeArray as well?
+  - Add test for all. (Reached IndexSet so far, inclusive.)
+  - Add @throws comment on all methods that throws it.
+  - Possible to manage this via super class?
 
