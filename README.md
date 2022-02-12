@@ -1,5 +1,5 @@
 # ncollections - neat collections for JavaScript
-ncollections provides a selection of neatly designed collections for JavaScript where elements, key and values can be any value (primitive or object).
+ncollections provides a selection of neatly designed collections for JavaScript where elements, keys and values can be any value (primitive or object).
 
 Collection overview and hierarchy:
 
@@ -24,10 +24,10 @@ Collection overview and hierarchy:
 
 Why use ncollections?
 - **More collections** With standard JavaScript, you only have arrays, maps and sets.
-- **Objects as values** Elements (and keys and values for maps) can be any value, both primitive values and objects.
+- **Objects as values** Elements (and keys and values for maps) can be any value, both primitive values and objects, backed by deep equality rather than just `==` operator equality.
 - **Well-designed** ncollections has standardized interfaces for all collections that are consistent, easy-to-use, flexible and extendable.
-- **Effective** Collection implementations are all based on best-practice data structures and algorithms.
-- **Small foot-print** ncollections does not use any packages. The main directory is small and can be zipped to ~33KB (without any minifying).
+- **Effective** All collection implementations are based on state-of-the-art data structures and algorithms.
+- **Small foot-print** ncollections does not use any packages. Its small, self-contained and... neat.
 - **Plain JavaScript** Use both in browsers and Node.js.
 
 The design has been inspired by the [Java Collections Framework](https://docs.oracle.com/javase/8/docs/technotes/guides/collections/overview.html). To work out-of-the-box with objects, robust and fast default implementations are provided for `equals` and `hashCode` functions to make ncollections even easier to use. (In most cases, you don't have to worry about value equality and hash codes at all; it just works. [Read more.](#A-Note-On-equals-hashcode-And-compare_fn))
@@ -125,7 +125,7 @@ const HashSet = require('ncollections').HashSet;
 let hash_set1 = new HashSet();
 ```
 
-In both cases, an optional `options` object can be provided as an argument to further customize how the collection should work. For example, sorted collections (such as the [TreeSet](#TreeSet))) uses a *compare_fn* to provide a custom sorting. (The default sorting is always based on natural ordering, converting non-numbers to strings as needed.) For example:
+In both cases, an optional `options` object can be provided as an argument to further customize how the collection should work. For example, sorted collections (such as the [TreeSet](#TreeSet)) uses a `compare_fn` to facilitate custom sorting. (The default sorting is always based on natural ordering, converting non-numbers to strings as needed.) For example:
 
 ```javascript
 let tree_set = new TreeSet({ compare_fn : your_compare_fn });
