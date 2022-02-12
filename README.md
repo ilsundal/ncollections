@@ -24,7 +24,7 @@ Collection overview and hierarchy:
 
 Why use ncollections?
 - **More collections** With standard JavaScript, you only have arrays, maps and sets.
-- **Objects as values** Elements (and keys and values for maps) can be any value, both primitive values and objects.
+- **Objects as values** Elements (and keys and values for maps) can be any value, both primitive values and objects, backed by deep equality rather than just `==` operator equality.
 - **Well-designed** ncollections has standardized interfaces for all collections that are consistent, easy-to-use, flexible and extendable.
 - **Effective** Collection implementations are all based on best-practice data structures and algorithms.
 - **Small foot-print** ncollections does not use any packages. The main directory is small and can be zipped to ~33KB (without any minifying).
