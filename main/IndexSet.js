@@ -30,12 +30,13 @@ class IndexSet extends Set_ {
 
   // Adds a new index on the set elements.
   // Returns the added index, or undefined if not added (because the index already exists).
+  // Throws IllegalArgumentException if index is undefined or contains a non-string.
   addIndex(index) {
     if ((typeof index !== 'object') || (typeof index[Symbol.iterator] !== 'function'))
       throw new IllegalArgumentException('index is not an iterable');
     for (let property_name of index) {
       if (typeof property_name !== 'string')
-        throw new IllegalArgumentException('index contains a name that is not a string: ' + JSON.stringify(property_name));
+        throw new IllegalArgumentException('index contains a non-string: ' + JSON.stringify(property_name));
     }
     let property_names_set = new HashSet();
     property_names_set.addAll(index); // remove duplicate property names
@@ -85,6 +86,7 @@ class IndexSet extends Set_ {
   }
 
   // Returns { chosen_index: ..., scan_count: ..., match_count: ... };
+  // Throws IllegalArgumentException if "where" is not an object.
   examine(where) {
     if (typeof where !== 'object')
       throw new IllegalArgumentException('where is not an object');
@@ -93,6 +95,7 @@ class IndexSet extends Set_ {
   }
 
   // Returns an iterable of the elements that match the (iterable) "where" properties.
+  // Throws IllegalArgumentException if "where" is not an object.
   findAll(where) {
     if (typeof where !== 'object')
       throw new IllegalArgumentException('where is not an object');
@@ -100,6 +103,7 @@ class IndexSet extends Set_ {
   }
 
   // Returns an element that matches the (iterable) "where" properties, or undefined if no match.
+  // Throws IllegalArgumentException if "where" is not an object.
   findOne(where) {
     if (typeof where !== 'object')
       throw new IllegalArgumentException('where is not an object');

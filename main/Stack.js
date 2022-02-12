@@ -51,6 +51,7 @@ class Stack extends Collection {
 
   // Pushes the element to the top of the stack.
   // Returns the stack itself.
+  // Throws IllegalArgumentException if element is undefined.
   push(element) {
     if (element === undefined)
       throw new IllegalArgumentException('element is undefined');

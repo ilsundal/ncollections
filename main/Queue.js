@@ -25,6 +25,7 @@ class Queue extends Collection {
 
   // Adds the element to the end of the queue.
   // Returns the queue itself.
+  // Throws IllegalArgumentException if element is undefined.
   enqueue(element) {
     throw new UnsupportedOperationException();
   }

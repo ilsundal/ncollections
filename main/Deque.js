@@ -20,6 +20,7 @@ class Deque extends Collection {
 
   // Adds the element so it becomes the first element of the deque.
   // Returns the deque itself.
+  // Throws IllegalArgumentException if element is undefined.
   addFirst(element) {
     if (element === undefined)
       throw new IllegalArgumentException('element is undefined');
@@ -29,6 +30,7 @@ class Deque extends Collection {
 
   // Adds the element so it becomes the last element of the deque.
   // Returns the deque itself.
+  // Throws IllegalArgumentException if element is undefined.
   addLast(element) {
     if (element === undefined)
       throw new IllegalArgumentException('element is undefined');

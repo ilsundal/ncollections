@@ -21,11 +21,13 @@ class Map extends Collection {
   }
 
   // Returns true if the key is a map key, and false otherwise.
+  // Throws IllegalArgumentException if key is undefined.
   containsKey(key) {
     throw new UnsupportedOperationException();
   }
 
   // Basic implementation of containsKey for use by sub-classes.
+  // Throws IllegalArgumentException if key is undefined.
   containsKey0(key) {
     if (key === undefined)
       throw new IllegalArgumentException('key is undefined');
@@ -37,11 +39,13 @@ class Map extends Collection {
   }
 
   // Returns true if the value is a map value, i.e. if some key maps to it, and false otherwise.
+  // Throws IllegalArgumentException if value is undefined.
   containsValue(value) {
     throw new UnsupportedOperationException();
   }
 
   // Basic implementation of containsKey for use by sub-classes.
+  // Throws IllegalArgumentException if value is undefined.
   containsValue0(value) {
     if (value === undefined)
       throw new IllegalArgumentException('value is undefined');
@@ -78,6 +82,7 @@ class Map extends Collection {
   }
 
   // Returns the value at key, or undefined if no value at key.
+  // Throws IllegalArgumentException if key is undefined.
   get(key) {
     throw new UnsupportedOperationException();
   }
@@ -97,12 +102,14 @@ class Map extends Collection {
 
   // Puts the key and value into the map.
   // Returns the previous value at key, or undefined if no value at key.
+  // Throws IllegalArgumentException if key or value is undefined.
   put(key, value) {
     throw new UnsupportedOperationException();
   }
 
   // Puts the (iterable) entries (of key-value pairs) into the map.
   // Returns nothing.
+  // Throws IllegalArgumentException if entries is not an iterable or contains a non-object.
   putAll(entries) {
     if ((typeof entries !== 'object') || (typeof entries[Symbol.iterator] !== 'function'))
       throw new IllegalArgumentException('entries is not an iterable');
@@ -115,12 +122,14 @@ class Map extends Collection {
 
   // Removes the key and its associated value from the map.
   // Returns the previous value at key, or undefined if no value at key.
+  // Throws IllegalArgumentException if key is undefined.
   remove(key) {
     throw new UnsupportedOperationException();
   }
 
   // Removes all the keys and their associated values from the map.
   // Returns the removed entries.
+  // Throws IllegalArgumentException if keys is not an iterable or contains a non-object.
   removeAll(keys) {
     if ((typeof keys !== 'object') || (typeof keys[Symbol.iterator] !== 'function'))
       throw new IllegalArgumentException('keys is not an iterable');

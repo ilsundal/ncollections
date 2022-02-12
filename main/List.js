@@ -13,6 +13,7 @@ class List extends Collection {
 
   // Adds the element to the end of the list.
   // Returns the list itself.
+  // Throws IllegalArgumentException if element is undefined.
   add(element) {
     if (element === undefined)
       throw new IllegalArgumentException('element is undefined');
@@ -21,6 +22,7 @@ class List extends Collection {
 
   // Adds the elements to the end of the list.
   // Returns the list itself.
+  // Throws IllegalArgumentException if elements is not an iterable or contains an undefined element.
   addAll(elements) {
     if ((typeof elements !== 'object') || (typeof elements[Symbol.iterator] !== 'function'))
       throw new IllegalArgumentException('elements is not an iterable');
@@ -31,12 +33,14 @@ class List extends Collection {
 
   // Adds the element so it becomes the first element of the list.
   // Returns the list itself.
+  // Throws IllegalArgumentException if element is undefined.
   addFirst(element) {
     throw new UnsupportedOperationException();
   }
 
   // Adds the element so it becomes the last element of the list.
   // Returns the list itself.
+  // Throws IllegalArgumentException if element is undefined.
   addLast(element) {
     throw new UnsupportedOperationException();
   }
@@ -46,6 +50,7 @@ class List extends Collection {
   }
 
   // Returns true if list contains the element, and false otherwise.
+  // Throws IllegalArgumentException if element is undefined.
   contains(element) {
     if (element === undefined)
       throw new IllegalArgumentException('element is undefined');
@@ -57,6 +62,7 @@ class List extends Collection {
   }
 
   // Returns true if list contains all the elements, and false otherwise.
+  // Throws IllegalArgumentException if elements is not an iterable or contains an undefined element.
   containsAll(elements) {
     if ((typeof elements !== 'object') || (typeof elements[Symbol.iterator] !== 'function'))
       throw new IllegalArgumentException('elements is not an iterable');
@@ -72,6 +78,7 @@ class List extends Collection {
   }
 
   // Returns the element at index.
+  // Throws IllegalArgumentException if index is not an integer.
   // Throws IndexOutOfBoundsException if index is not within bounds.
   getAt(index) {
     throw new UnsupportedOperationException();
@@ -95,6 +102,7 @@ class List extends Collection {
 
   // Returns the index of the first occurrence of the element in the list, or undefined if not in the list.
   // Implementation note: The default implementation iterates the list, stopping at the first occurrence.
+  // Throws IllegalArgumentException if element is undefined.
   indexOf(element) {
     if (element === undefined)
       throw new IllegalArgumentException('element is undefined');
@@ -109,6 +117,7 @@ class List extends Collection {
 
   // Inserts the element at the index.
   // Returns the list itself.
+  // Throws IllegalArgumentException if index is not an integer or the element is undefined.
   // Throws IndexOutOfBoundsException if index is not within bounds.
   insertAt(index, element) {
     throw new UnsupportedOperationException();
@@ -116,6 +125,7 @@ class List extends Collection {
 
   // Returns the index of the last occurrence of the element in the list, or undefined if not in the list.
   // Implementation note: The default implementation iterates the entire list, returning the last occurrence. A sub-class might do this more effectively by searching backends from the end of the list.
+  // Throws IllegalArgumentException if element is undefined.
   lastIndexOf(element) {
     if (element === undefined)
       throw new IllegalArgumentException('element is undefined');
@@ -131,12 +141,14 @@ class List extends Collection {
 
   // Removes the element from the list. If the list contains multiple instances of the element then only the first instance will be removed.
   // Returns true if the element was removed, and false otherwise.
+  // Throws IllegalArgumentException if element is undefined.
   remove(element) {
     throw new UnsupportedOperationException();
   }
 
   // Removes all the elements from the list. If the list contains multiple instances of any of the elements then only the first such instance will be removed for each element.
   // Returns true if any element was removed, and false otherwise.
+  // Throws IllegalArgumentException if elements is not an iterable or contains an undefined element.
   removeAll(elements) {
     if ((typeof elements !== 'object') || (typeof elements[Symbol.iterator] !== 'function'))
       throw new IllegalArgumentException('elements is not an iterable');
@@ -147,6 +159,7 @@ class List extends Collection {
   }
 
   // Returns the removed element previous at index.
+  // Throws IllegalArgumentException if index is not an integer.
   // Throws IndexOutOfBoundsException if index is not within bounds.
   removeAt(index) {
     throw new UnsupportedOperationException();
@@ -178,12 +191,14 @@ class List extends Collection {
   }
 
   // Returns the previous element at index.
+  // Throws IllegalArgumentException if index is not an integer or the element is undefined.
   // Throws IndexOutOfBoundsException if index is not within bounds.
   setAt(index, element) {
     throw new UnsupportedOperationException();
   }
 
   // returns the previous first element
+  // Throws IllegalArgumentException if element is undefined.
   // throws NoSuchElementException if list is empty.
   setFirst(element) {
     if (element === undefined)
@@ -194,6 +209,7 @@ class List extends Collection {
   }
 
   // Returns the previous last element.
+  // Throws IllegalArgumentException if element is undefined.
   // Throws NoSuchElementException if list is empty.
   setLast(element) {
     if (element === undefined)
@@ -205,6 +221,7 @@ class List extends Collection {
 
   // Sorts the list in place.
   // Returns the list itself.
+  // Throws IllegalArgumentException if compare_fn is not a function.
   sort(compare_fn=Collection.compare_fn) {
     if (typeof compare_fn !== 'function')
       throw new IllegalArgumentException('compare_fn is not a function');
