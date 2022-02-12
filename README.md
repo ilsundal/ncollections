@@ -320,7 +320,7 @@ let native_set = Collections.newNativeSet();
 
 ### SortedSet
 
-A SortedSet is a [Set](#Set) that orders its elements according to a `compare_fn`, which can be provided during instantiation via an options object. If no `compare_fn` is provided then a default (natural) ordering is used.
+A SortedSet is a [Set](#Set) that orders its elements according to a `compare_fn`, which can be provided during instantiation via an `options` object. If no `compare_fn` is provided then a default (natural) ordering is used.
 
 To instantiate the default SortedSet (which is a [TreeSet](#TreeSet)):
 
@@ -458,7 +458,7 @@ let simple_queue = Collections.newSimpleQueue();
 
 ### PriorityQueue
 
-A PriorityQueue is a [Queue](#Queue) that orders its elements according to a `compare_fn`, which can be provided during instantiation via an options object. If no `compare_fn` is provided then a default (natural) ordering is used. A PriorityQueue is backed by a [TreeMap](#TreeMap) (to keep priority order efficiently) and several [LinkedList](#LinkedList) instances (to allow for elements with the same priority, dequeued in FIFO order). Thus, `dequeue`, `enqueue`, and `peek` are all fast.
+A PriorityQueue is a [Queue](#Queue) that orders its elements according to a `compare_fn`, which can be provided during instantiation via an `options` object. If no `compare_fn` is provided then a default (natural) ordering is used. A PriorityQueue is backed by a [TreeMap](#TreeMap) (to keep priority order efficiently) and several [LinkedList](#LinkedList) instances (to allow for elements with the same priority, dequeued in FIFO order). Thus, `dequeue`, `enqueue`, and `peek` are all fast.
 
 To instantiate a PriorityQueue:
 
