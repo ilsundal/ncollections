@@ -1,6 +1,2 @@
 TODO FEATURES
-- Added IllegalArgumentException? Should use to check for undefined element, key and values.
-  - Add test for all. (Reached IndexSet so far, inclusive.)
-  - Add @throws comment on all methods that throws it.
-  - Possible to manage this via super class?
-
+- Heaps?
