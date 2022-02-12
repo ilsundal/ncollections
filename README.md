@@ -3,16 +3,26 @@ ncollections provides a selection of neatly designed collections for JavaScript.
 
 Collection overview and hierarchy:
 
-Collection
-- [Lists](#Lists)
+[Collection](#Collection)
+- [List](#List)
   - [ArrayList](#ArrayList)
   - [LinkedList](#LinkedList)
-
-- [Lists](#Lists): [ArrayList](#ArrayList) and [LinkedList](#LinkedList)
-- [Sets](#Sets): [HashSet](#HashSet), [SortedSet](#SortedSet) ([TreeSet](#TreeSet)), [IndexSet](#IndexSet) and [NativeSet](#NativeSet)
-- [Maps](#Maps): [HashMap](#HashMap), [SortedMap](#SortedMap) ([TreeMap](#TreeMap)) and [NativeMap](#NativeMap)
-- [Queues](#Queues): [SimpleQueue](#SimpleQueue) and [PriorityQueue](#PriorityQueue)
-- [Deque](#Deque) and [Stack](#Stack)
+- [Set](#Set)
+  - [HashSet](#HashSet)
+  - [IndexSet](#IndexSet)
+  - [NativeSet](#NativeSet)
+  - [SortedSet](#SortedSet)
+    - [TreeSet](#TreeSet)
+- [Map](#Map)
+  - [HashMap](#HashMap)
+  - [NativeMap](#NativeMap)
+  - [SortedMap](#SortedMap)
+    - [TreeMap](#TreeMap)
+- [Queue](#Queue)
+  - [SimpleQueue](#SimpleQueue)
+  - [PriorityQueue](#PriorityQueue)
+- [Deque](#Deque)
+- [Stack](#Stack)
 
 Why use ncollections?
 - **More collections** With standard JavaScript, you only have maps (via objects), arrays and sets.
@@ -82,7 +92,7 @@ console.log(native_map.get({ a: 1 })); // outputs undefined
 npm install ncollections
 ```
 
-# The Collections
+# Collection
 
 A Collection implements the following methods:
 
@@ -104,7 +114,7 @@ A Collection implements the following methods:
 
 All collections implement the [iteration and iterable protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
 
-## Lists
+## List
 
 A List is an ordered collection that allows for duplicates.
 
@@ -180,7 +190,7 @@ To instantiate a LinkedList:
 let linked_list = Collections.newLinkedList();
 ```
 
-## Sets
+## Set
 
 A Set is collection without duplicates.
 
@@ -313,7 +323,7 @@ To instantiate a TreeSet:
 let tree_set = Collections.newTreeSet({ compare_fn: your_compare_fn }); // compare_fn is optional
 ```
 
-## Maps
+## Map
 
 A Map is a key-value collection where a (unique) key is mapped to a value. Collectively, a key and its mapped-to value is called an entry and is simply an object with two properties: "key" and "value". Both keys and values can be primitive values or objects. To get all the entries of a map simply iterate over it; thus, there is no *entries* method.
 
@@ -393,7 +403,7 @@ To instantiate a TreeMap:
 let tree_map = Collections.newTreeMap({ compare_fn: your_compare_fn }); // compare_fn is optional
 ```
 
-## Queues
+## Queue
 
 A Queue is an ordered collection where you can enqueue and dequeue elements.
 
