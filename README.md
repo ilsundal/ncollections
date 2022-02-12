@@ -131,7 +131,7 @@ In both cases, an optional `options` object can be provided as an argument to fu
 let tree_set = new TreeSet({ compare_fn : your_compare_fn });
 ```
 
-A Collection implements the [iteration and iterable protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols) so you can easily loop over their elements. For example:
+A Collection implements the [iteration and iterable protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols) so you can easily loop over its elements. For example:
 
 ```javascript
 let list = new ArrayList().addAll(1, 2, 3);
