@@ -1,5 +1,5 @@
 # ncollections - neat collections for JavaScript
-ncollections provides a selection of neatly designed collections for JavaScript where elements, key and values can be any value (primitive or object).
+ncollections provides a selection of neatly designed collections for JavaScript where elements, keys and values can be any value (primitive or object).
 
 Collection overview and hierarchy:
 
