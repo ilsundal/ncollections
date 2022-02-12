@@ -38,7 +38,7 @@ console.log(set.toString()); // outputs {1,{"a":1}}
 
 // The other ncollections (Stack, Deque, Queue, etc.) are similarly designed.
 
-// Note that the ncollections work naturally with object elements (and keys), unlike the built-in JavaScript array, Set and Map that are based on the == equality operator
+// Note that the ncollections works naturally with object elements (and keys), unlike the built-in JavaScript array, Set and Map that are based on the == equality operator
 let native_array = [{ a: 1 }];
 console.log(native_array.includes({ a: 1 })); // outputs false
 let native_set = new Set();
