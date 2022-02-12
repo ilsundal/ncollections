@@ -197,7 +197,7 @@ A List implements the following methods:
 
 ### ArrayList
 
-An ArrayList is a [List](#List) backed by [JavaScript's built-in array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array). Thus, indexing methods (such as `getAt` and `setAt`) are fast, while list insertions and removals are slower (due to possible element shifting and array resizing). The `toAtray` method returns the backed array directly which thus allows you to access and modify the ArrayList directly using any JavaScript array function, such as `splice`.
+An ArrayList is a [List](#List) backed by [JavaScript's built-in array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array). Thus, indexing methods (such as `getAt` and `setAt`) are fast, while list insertions and removals are slower (due to possible element shifting and array resizing). The `toArray` method returns the backed array directly which thus allows you to access and modify the ArrayList directly using any JavaScript array function, such as `splice`.
 
 To instantiate an ArrayList:
 
