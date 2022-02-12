@@ -1,6 +1,7 @@
 'use strict'
 
 const Collection = require(__dirname + '/Collection.js');
+const IllegalArgumentException = require(__dirname + '/IllegalArgumentException.js');
 const NoSuchElementException = require(__dirname + '/NoSuchElementException.js');
 const SortedMap = require(__dirname + '/SortedMap.js');
 const Stack = require(__dirname + '/Stack.js');
@@ -26,14 +27,20 @@ class TreeMap extends SortedMap {
   }
 
   containsKey(key) {
+    if (key === undefined)
+      throw new IllegalArgumentException('key is undefined');
     return this.rbbst.contains(key);
   }
 
   containsValue(value) {
+    if (value === undefined)
+      throw new IllegalArgumentException('value is undefined');
     return super.containsValue0(value);
   }
 
   get(key) {
+    if (key === undefined)
+      throw new IllegalArgumentException('key is undefined');
     return this.rbbst.get(key);
   }
 
@@ -71,10 +78,16 @@ class TreeMap extends SortedMap {
   }
 
   put(key, value) {
+    if (key === undefined)
+      throw new IllegalArgumentException('key is undefined');
+    if (value === undefined)
+      throw new IllegalArgumentException('value is undefined');
     return this.rbbst.put(key, value);
   }
 
   remove(key) {
+    if (key === undefined)
+      throw new IllegalArgumentException('key is undefined');
     return this.rbbst.delete(key);
   }
 

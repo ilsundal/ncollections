@@ -1,6 +1,7 @@
 'use strict'
 
 const Collection = require(__dirname + '/Collection.js');
+const IllegalArgumentException = require(__dirname + '/IllegalArgumentException.js');
 const LinkedList = require(__dirname + '/LinkedList.js');
 const List = require(__dirname + '/List.js');
 const NoSuchElementException = require(__dirname + '/NoSuchElementException.js');
@@ -51,6 +52,8 @@ class Stack extends Collection {
   // Pushes the element to the top of the stack.
   // Returns the stack itself.
   push(element) {
+    if (element === undefined)
+      throw new IllegalArgumentException('element is undefined');
     this.#list.addLast(element);
     return this;
   }

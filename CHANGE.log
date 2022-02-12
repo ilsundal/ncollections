@@ -7,6 +7,7 @@
   - TreeMap as an implementation of a SortedMap.
 - Queue is now a super-class and SimpleQueue is an implementation thereof.
 - Map keys() and values() iterators are now also incremental.
+- Removed NativeSet and NativeMap collections.
 - Added IllegalArgumentException.
 - Updated README.md.
 

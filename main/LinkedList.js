@@ -1,6 +1,7 @@
 'use strict'
 
 const Collection = require(__dirname + '/Collection.js');
+const IllegalArgumentException = require(__dirname + '/IllegalArgumentException.js');
 const IndexOutOfBoundsException = require(__dirname + '/IndexOutOfBoundsException.js');
 const List = require(__dirname + '/List.js');
 
@@ -14,11 +15,15 @@ class LinkedList extends List {
   }
 
   addFirst(element) {
+    if (element === undefined)
+      throw new IllegalArgumentException('element is undefined');
     this.#insert(element, 0);
     return this;
   }
 
   addLast(element) {
+    if (element === undefined)
+      throw new IllegalArgumentException('element is undefined');
     this.#insert(element, this.#length);
     return this;
   }
@@ -30,6 +35,8 @@ class LinkedList extends List {
   }
 
   getAt(index) {
+    if (!Number.isInteger(index))
+      throw new IllegalArgumentException('index is not an integer');
     if ((index < 0) || (index >= this.#length))
       throw new IndexOutOfBoundsException(index);
     return this.#getNode(index).element;
@@ -78,6 +85,10 @@ class LinkedList extends List {
   }
 
   insertAt(index, element) {
+    if (!Number.isInteger(index))
+      throw new IllegalArgumentException('index is not an integer');
+    if (element === undefined)
+      throw new IllegalArgumentException('element is undefined');
     if ((index < 0) || (index >= this.#length))
       throw new IndexOutOfBoundsException(index);
     this.#insert(element, index);
@@ -85,6 +96,8 @@ class LinkedList extends List {
   }
 
   lastIndexOf(element) {
+    if (element === undefined)
+      throw new IllegalArgumentException('element is undefined');
     let index = this.#length - 1;
     for (let current_node = this.#last_node; current_node != null; current_node = current_node.previous_node) {
       if (Collection.equals_fn(element, current_node.element))
@@ -118,6 +131,8 @@ class LinkedList extends List {
   }
 
   removeAt(index) {
+    if (!Number.isInteger(index))
+      throw new IllegalArgumentException('index is not an integer');
     if ((index < 0) || (index >= this.#length))
       throw new IndexOutOfBoundsException(index);
     return this.#removeNode(this.#getNode(index)).element;
@@ -141,6 +156,10 @@ class LinkedList extends List {
   }
 
   setAt(index, element) {
+    if (!Number.isInteger(index))
+      throw new IllegalArgumentException('index is not an integer');
+    if (element === undefined)
+      throw new IllegalArgumentException('element is undefined');
     if ((index < 0) || (index >= this.#length))
       throw new IndexOutOfBoundsException(index);
     this.#getNode(index).element = element;

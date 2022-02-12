@@ -3,6 +3,7 @@
 const ArrayList = require(__dirname + '/ArrayList.js');
 const Collection = require(__dirname + '/Collection.js');
 const HashSet = require(__dirname + '/HashSet.js');
+const IllegalArgumentException = require(__dirname + '/IllegalArgumentException.js');
 const UnsupportedOperationException = require(__dirname + '/UnsupportedOperationException.js');
 const Util = require(__dirname + '/Util.js');
 
@@ -26,6 +27,8 @@ class Map extends Collection {
 
   // Basic implementation of containsKey for use by sub-classes.
   containsKey0(key) {
+    if (key === undefined)
+      throw new IllegalArgumentException('key is undefined');
     for (let entry of this) {
       if (Collection.equals_fn(entry.key, key))
         return true;
@@ -40,6 +43,8 @@ class Map extends Collection {
 
   // Basic implementation of containsKey for use by sub-classes.
   containsValue0(value) {
+    if (value === undefined)
+      throw new IllegalArgumentException('value is undefined');
     for (let entry of this) {
       if (Collection.equals_fn(entry.value, value))
         return true;
@@ -99,6 +104,8 @@ class Map extends Collection {
   // Puts the (iterable) entries (of key-value pairs) into the map.
   // Returns nothing.
   putAll(entries) {
+    if ((typeof entries !== 'object') || (typeof entries[Symbol.iterator] !== 'function'))
+      throw new IllegalArgumentException('entries is not an iterable');
     for (let entry of entries)
       this.put(entry.key, entry.value);
   }
@@ -112,6 +119,8 @@ class Map extends Collection {
   // Removes all the keys and their associated values from the map.
   // Returns the removed entries.
   removeAll(keys) {
+    if ((typeof keys !== 'object') || (typeof keys[Symbol.iterator] !== 'function'))
+      throw new IllegalArgumentException('keys is not an iterable');
     let removed = new HashSet();
     for (let key of keys) {
       let value = this.remove(key);

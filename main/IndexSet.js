@@ -4,6 +4,7 @@ const ArrayList = require(__dirname + '/ArrayList.js');
 const Collection = require(__dirname + '/Collection.js');
 const HashMap = require(__dirname + '/HashMap.js');
 const HashSet = require(__dirname + '/HashSet.js');
+const IllegalArgumentException = require(__dirname + '/IllegalArgumentException.js');
 const Set_ = require(__dirname + '/Set.js');
 
 class IndexSet extends Set_ {
@@ -16,6 +17,8 @@ class IndexSet extends Set_ {
   }
 
   add(element) {
+    if (element === undefined)
+      throw new IllegalArgumentException('element is undefined');
     let added = this.#set.add(element);
     if (!added)
       return false;
@@ -28,6 +31,8 @@ class IndexSet extends Set_ {
   // Adds a new index on the set elements.
   // Returns the added index, or undefined if not added (because the index already exists).
   addIndex(index) {
+    if (typeof index !== 'object')
+      throw new IllegalArgumentException('index is not an iterable');
     let property_names_set = new HashSet();
     property_names_set.addAll(index); // remove duplicate property names
     let property_names = new ArrayList().addAll(property_names_set).sort().toArray(); // sort to ignore property name order

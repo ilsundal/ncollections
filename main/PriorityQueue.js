@@ -1,6 +1,7 @@
 'use strict'
 
 const ArrayList = require(__dirname + '/ArrayList.js');
+const IllegalArgumentException = require(__dirname + '/IllegalArgumentException.js');
 const LinkedList = require(__dirname + '/LinkedList.js');
 const Queue = require(__dirname + '/Queue.js');
 const TreeMap = require(__dirname + '/TreeMap.js');
@@ -31,6 +32,8 @@ class PriorityQueue extends Queue {
   }
 
   enqueue(element) {
+    if (element === undefined)
+      throw new IllegalArgumentException('element is undefined');
     let list = this.#tree_map.get(element);
     if (!list) {
       list = new LinkedList();

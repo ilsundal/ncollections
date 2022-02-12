@@ -3,6 +3,7 @@
 const ArrayList = require(__dirname + '/ArrayList.js');
 const Collection = require(__dirname + '/Collection.js');
 const HashSet = require(__dirname + '/HashSet.js');
+const IllegalArgumentException = require(__dirname + '/IllegalArgumentException.js');
 const Map_ = require(__dirname + '/Map.js');
 const Util = require(__dirname + '/Util.js');
 
@@ -20,6 +21,8 @@ class HashMap extends Map_ {
   }
 
   containsKey(key) {
+    if (key === undefined)
+      throw new IllegalArgumentException('key is undefined');
     let key_hash_code = Collection.hash_code_fn(key);
     let key_hash_code_entries = this.#map.get(key_hash_code) || [];
     for (let key_hash_code_entry of key_hash_code_entries) {
@@ -53,6 +56,10 @@ class HashMap extends Map_ {
   }
 
   put(key, value) {
+    if (key === undefined)
+      throw new IllegalArgumentException('key is undefined');
+    if (value === undefined)
+      throw new IllegalArgumentException('value is undefined');
     let key_hash_code = Collection.hash_code_fn(key);
     let key_hash_code_entries = this.#map.get(key_hash_code);
     if (!key_hash_code_entries) {
@@ -75,6 +82,8 @@ class HashMap extends Map_ {
   }
 
   remove(key) {
+    if (key === undefined)
+      throw new IllegalArgumentException('key is undefined');
     let key_hash_code = Collection.hash_code_fn(key);
     let key_hash_code_entries = this.#map.get(key_hash_code) || [];
     let key_hash_code_entry_to_remove_index = -1;

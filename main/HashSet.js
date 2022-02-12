@@ -2,6 +2,7 @@
 
 const ArrayList = require(__dirname + '/ArrayList.js');
 const Collection = require(__dirname + '/Collection.js');
+const IllegalArgumentException = require(__dirname + '/IllegalArgumentException.js');
 const Set = require(__dirname + '/Set.js');
 const Util = require(__dirname + '/Util.js');
 
@@ -14,6 +15,8 @@ class HashSet extends Set {
   }
 
   add(element) {
+    if (element === undefined)
+      throw new IllegalArgumentException('element is undefined');
     let hash_code = Collection.hash_code_fn(element);
     let hash_code_elements = this.map.get(hash_code);
     if (!hash_code_elements) {
@@ -33,6 +36,8 @@ class HashSet extends Set {
   }
 
   contains(element) {
+    if (element === undefined)
+      throw new IllegalArgumentException('element is undefined');
     let hash_code = Collection.hash_code_fn(element);
     let hash_code_elements = this.map.get(hash_code);
     return hash_code_elements ? hash_code_elements.contains(element) : false;
@@ -43,6 +48,8 @@ class HashSet extends Set {
   }
 
   remove(element) {
+    if (element === undefined)
+      throw new IllegalArgumentException('element is undefined');
     let hash_code = Collection.hash_code_fn(element);
     let hash_code_elements = this.map.get(hash_code);
     if (!hash_code_elements)

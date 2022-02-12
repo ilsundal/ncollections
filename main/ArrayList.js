@@ -1,6 +1,7 @@
 'use strict'
 
 const Collection = require(__dirname + '/Collection.js');
+const IllegalArgumentException = require(__dirname + '/IllegalArgumentException.js');
 const IndexOutOfBoundsException = require(__dirname + '/IndexOutOfBoundsException.js');
 const List = require(__dirname + '/List.js');
 const NoSuchElementException = require(__dirname + '/NoSuchElementException.js');
@@ -13,11 +14,15 @@ class ArrayList extends List {
   }
 
   addFirst(element) {
+    if (element === undefined)
+      throw new IllegalArgumentException('element is undefined');
     this.array.splice(0, 0, element);
     return this;
   }
 
   addLast(element) {
+    if (element === undefined)
+      throw new IllegalArgumentException('element is undefined');
     this.array.push(element);
     return this;
   }
@@ -27,12 +32,18 @@ class ArrayList extends List {
   }
 
   getAt(index) {
+    if (!Number.isInteger(index))
+      throw new IllegalArgumentException('index is not an integer');
     if ((index < 0) || (index >= this.array.length))
       throw new IndexOutOfBoundsException(index);
     return this.array[index];
   }
 
   insertAt(index, element) {
+    if (!Number.isInteger(index))
+      throw new IllegalArgumentException('index is not an integer');
+    if (element === undefined)
+      throw new IllegalArgumentException('element is undefined');
     if ((index < 0) || (index >= this.array.length))
       throw new IndexOutOfBoundsException(index);
     this.array.splice(index, 0, element);
@@ -40,6 +51,8 @@ class ArrayList extends List {
   }
 
   lastIndexOf(element) {
+    if (element === undefined)
+      throw new IllegalArgumentException('element is undefined');
     for (let index = this.array.length - 1; index != -1; index--) {
       if (Collection.equals_fn(element, this.array[index]))
         return index;
@@ -63,6 +76,8 @@ class ArrayList extends List {
   }
 
   remove(element) {
+    if (element === undefined)
+      throw new IllegalArgumentException('element is undefined');
     for (let index = 0; index != this.array.length; index++) {
       if (Collection.equals_fn(element, this.array[index])) {
         this.array.splice(index, 1);
@@ -73,6 +88,8 @@ class ArrayList extends List {
   }
 
   removeAt(index) {
+    if (!Number.isInteger(index))
+      throw new IllegalArgumentException('index is not an integer');
     if ((index < 0) || (index >= this.array.length))
       throw new IndexOutOfBoundsException(index);
     return this.array.splice(index, 1)[0];
@@ -84,6 +101,10 @@ class ArrayList extends List {
   }
 
   setAt(index, element) {
+    if (!Number.isInteger(index))
+      throw new IllegalArgumentException('index is not an integer');
+    if (element === undefined)
+      throw new IllegalArgumentException('element is undefined');
     if ((index < 0) || (index >= this.array.length))
       throw new IndexOutOfBoundsException(index);
     this.array[index] = element;

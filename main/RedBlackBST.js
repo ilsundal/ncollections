@@ -316,7 +316,7 @@ class RedBlackBST {
    * @throws IllegalArgumentException if {@code key} is {@code null}
    */
   delete(key) { 
-      if (key == null) throw new IllegalArgumentException("argument to delete() is null");
+      if (key == undefined) throw new IllegalArgumentException("argument to delete() is undefined"); // CHANGED from null to undefined by Morten Helles
 
 //    if (!this.contains(key)) return; COMMENTED OUT by Morten Helles
 

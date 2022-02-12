@@ -1,6 +1,7 @@
 'use strict'
 
 const Collection = require(__dirname + '/Collection.js');
+const IllegalArgumentException = require(__dirname + '/IllegalArgumentException.js');
 
 class Set extends Collection {
 
@@ -17,6 +18,8 @@ class Set extends Collection {
   // Adds the elements to the collection.
   // Returns true if the collection was changed, and false otherwise.
   addAll(elements) {
+    if ((typeof elements !== 'object') || (typeof elements[Symbol.iterator] !== 'function'))
+      throw new IllegalArgumentException('elements is not an iterable');
     let changed = false;
     for (let element of elements)
       changed = this.add(element) || changed;
@@ -29,6 +32,8 @@ class Set extends Collection {
 
   // Returns true if set contains the element, and false otherwise.
   contains(element) {
+    if (element === undefined)
+      throw new IllegalArgumentException('element is undefined');
     for (let thisElement of this) {
       if (Collection.equals_fn(element, thisElement))
         return true;
@@ -38,6 +43,8 @@ class Set extends Collection {
 
   // Returns true if set contains all the elements, and false otherwise.
   containsAll(elements) {
+    if ((typeof elements !== 'object') || (typeof elements[Symbol.iterator] !== 'function'))
+      throw new IllegalArgumentException('elements is not an iterable');
     for (let element of elements) {
       if (!this.contains(element))
         return false;
@@ -73,6 +80,8 @@ class Set extends Collection {
   // Removes all the elements from the collection.
   // Returns true if any element was removed, and false otherwise.
   removeAll(elements) {
+    if ((typeof elements !== 'object') || (typeof elements[Symbol.iterator] !== 'function'))
+      throw new IllegalArgumentException('elements is not an iterable');
     let removed = false;
     for (let element of elements)
       removed = this.remove(element) || removed;

@@ -1,6 +1,7 @@
 'use strict'
 
 const Collection = require(__dirname + '/Collection.js');
+const IllegalArgumentException = require(__dirname + '/IllegalArgumentException.js');
 const NoSuchElementException = require(__dirname + '/NoSuchElementException.js');
 const UnsupportedOperationException = require(__dirname + '/UnsupportedOperationException.js');
 
@@ -13,12 +14,16 @@ class List extends Collection {
   // Adds the element to the end of the list.
   // Returns the list itself.
   add(element) {
+    if (element === undefined)
+      throw new IllegalArgumentException('element is undefined');
     return this.addLast(element);
   }
 
   // Adds the elements to the end of the list.
   // Returns the list itself.
   addAll(elements) {
+    if ((typeof elements !== 'object') || (typeof elements[Symbol.iterator] !== 'function'))
+      throw new IllegalArgumentException('elements is not an iterable');
     for (let element of elements)
       this.add(element);
     return this;
@@ -42,6 +47,8 @@ class List extends Collection {
 
   // Returns true if list contains the element, and false otherwise.
   contains(element) {
+    if (element === undefined)
+      throw new IllegalArgumentException('element is undefined');
     for (let thisElement of this) {
       if (Collection.equals_fn(element, thisElement))
         return true;
@@ -51,6 +58,8 @@ class List extends Collection {
 
   // Returns true if list contains all the elements, and false otherwise.
   containsAll(elements) {
+    if ((typeof elements !== 'object') || (typeof elements[Symbol.iterator] !== 'function'))
+      throw new IllegalArgumentException('elements is not an iterable');
     for (let element of elements) {
       if (!this.contains(element))
         return false;
@@ -87,6 +96,8 @@ class List extends Collection {
   // Returns the index of the first occurrence of the element in the list, or undefined if not in the list.
   // Implementation note: The default implementation iterates the list, stopping at the first occurrence.
   indexOf(element) {
+    if (element === undefined)
+      throw new IllegalArgumentException('element is undefined');
     let index = 0;
     for (let list_element of this) {
       if (Collection.equals_fn(list_element, element))
@@ -106,6 +117,8 @@ class List extends Collection {
   // Returns the index of the last occurrence of the element in the list, or undefined if not in the list.
   // Implementation note: The default implementation iterates the entire list, returning the last occurrence. A sub-class might do this more effectively by searching backends from the end of the list.
   lastIndexOf(element) {
+    if (element === undefined)
+      throw new IllegalArgumentException('element is undefined');
     let index = 0;
     let last_index = undefined;
     for (let list_element of this) {
@@ -125,6 +138,8 @@ class List extends Collection {
   // Removes all the elements from the list. If the list contains multiple instances of any of the elements then only the first such instance will be removed for each element.
   // Returns true if any element was removed, and false otherwise.
   removeAll(elements) {
+    if ((typeof elements !== 'object') || (typeof elements[Symbol.iterator] !== 'function'))
+      throw new IllegalArgumentException('elements is not an iterable');
     let removed = false;
     for (let element of elements)
       removed = this.remove(element) || removed;
@@ -171,6 +186,8 @@ class List extends Collection {
   // returns the previous first element
   // throws NoSuchElementException if list is empty.
   setFirst(element) {
+    if (element === undefined)
+      throw new IllegalArgumentException('element is undefined');
     if (this.isEmpty())
       throw new NoSuchElementException();
     return this.setAt(0, element);
@@ -179,6 +196,8 @@ class List extends Collection {
   // Returns the previous last element.
   // Throws NoSuchElementException if list is empty.
   setLast(element) {
+    if (element === undefined)
+      throw new IllegalArgumentException('element is undefined');
     if (this.isEmpty())
       throw new NoSuchElementException();
     return this.setAt(this.size() - 1, element);
@@ -187,6 +206,8 @@ class List extends Collection {
   // Sorts the list in place.
   // Returns the list itself.
   sort(compare_fn=Collection.compare_fn) {
+    if (typeof compare_fn !== 'function')
+      throw new IllegalArgumentException('compare_fn is not a function');
     let sortedArray = Array.from(this).sort(compare_fn);
     this.clear();
     this.addAll(sortedArray);

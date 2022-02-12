@@ -1,6 +1,7 @@
 'use strict'
 
 const Collection = require(__dirname + '/Collection.js');
+const IllegalArgumentException = require(__dirname + '/IllegalArgumentException.js');
 const LinkedList = require(__dirname + '/LinkedList.js');
 const List = require(__dirname + '/List.js');
 const UnsupportedOperationException = require(__dirname + '/UnsupportedOperationException.js');

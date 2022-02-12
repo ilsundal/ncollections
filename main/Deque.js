@@ -1,6 +1,7 @@
 'use strict'
 
 const Collection = require(__dirname + '/Collection.js');
+const IllegalArgumentException = require(__dirname + '/IllegalArgumentException.js');
 const LinkedList = require(__dirname + '/LinkedList.js');
 const List = require(__dirname + '/List.js');
 const UnsupportedOperationException = require(__dirname + '/UnsupportedOperationException.js');
@@ -20,6 +21,8 @@ class Deque extends Collection {
   // Adds the element so it becomes the first element of the deque.
   // Returns the deque itself.
   addFirst(element) {
+    if (element === undefined)
+      throw new IllegalArgumentException('element is undefined');
     this.#list.addFirst(element);
     return this;
   }
@@ -27,6 +30,8 @@ class Deque extends Collection {
   // Adds the element so it becomes the last element of the deque.
   // Returns the deque itself.
   addLast(element) {
+    if (element === undefined)
+      throw new IllegalArgumentException('element is undefined');
     this.#list.addLast(element);
     return this;
   }

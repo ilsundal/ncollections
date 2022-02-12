@@ -1,5 +1,6 @@
 'use strict'
 
+const IllegalArgumentException = require(__dirname + '/IllegalArgumentException.js');
 const SortedSet = require(__dirname + '/SortedSet.js');
 const TreeMap = require(__dirname + '/TreeMap.js');
 
@@ -12,6 +13,8 @@ class TreeSet extends SortedSet {
   }
 
   add(element) {
+    if (element === undefined)
+      throw new IllegalArgumentException('element is undefined');
     if (this.contains(element))
       return false;
     this.#tree_map.put(element, true);
@@ -23,6 +26,8 @@ class TreeSet extends SortedSet {
   }
 
   contains(element) {
+    if (element === undefined)
+      throw new IllegalArgumentException('element is undefined');
     return this.#tree_map.containsKey(element);
   }
 
@@ -39,6 +44,8 @@ class TreeSet extends SortedSet {
   }
 
   remove(element) {
+    if (element === undefined)
+      throw new IllegalArgumentException('element is undefined');
     return this.#tree_map.remove(element) === true; // true because we always put "true" as the entry value
   }
 
