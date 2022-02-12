@@ -125,7 +125,7 @@ const HashSet = require('ncollections').HashSet;
 let hash_set1 = new HashSet();
 ```
 
-In both cases, an optional `options` object can be provided as an argument to further customize how the collection should work. For example, sorted collections (such as the [TreeSet](#TreeSet)) uses a *compare_fn* to provide a custom sorting. (The default sorting is always based on natural ordering, converting non-numbers to strings as needed.) For example:
+In both cases, an optional `options` object can be provided as an argument to further customize how the collection should work. For example, sorted collections (such as the [TreeSet](#TreeSet)) uses a `compare_fn` to provide a custom sorting. (The default sorting is always based on natural ordering, converting non-numbers to strings as needed.) For example:
 
 ```javascript
 let tree_set = new TreeSet({ compare_fn : your_compare_fn });
