@@ -1,7 +1,13 @@
 # ncollections - neat collections for JavaScript
 ncollections provides a selection of neatly designed collections for JavaScript.
 
-The collections are
+Collection overview and hierarchy:
+
+Collection
+- [Lists](#Lists)
+  - [ArrayList](#ArrayList)
+  - [LinkedList](#LinkedList)
+
 - [Lists](#Lists): [ArrayList](#ArrayList) and [LinkedList](#LinkedList)
 - [Sets](#Sets): [HashSet](#HashSet), [SortedSet](#SortedSet) ([TreeSet](#TreeSet)), [IndexSet](#IndexSet) and [NativeSet](#NativeSet)
 - [Maps](#Maps): [HashMap](#HashMap), [SortedMap](#SortedMap) ([TreeMap](#TreeMap)) and [NativeMap](#NativeMap)
