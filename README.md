@@ -111,6 +111,8 @@ A Collection implements the following methods:
 
 `toString()` returns a string representation of the collection in iteration order.
 
+In general, an `IllegalArgumentException` is thrown if a method argument is invalid. Notably, elements (and a [Map](#Map)'s keys and values) cannot be `undefined`.
+
 A Collection is normally instantiated in one of two ways:
 
 ```javascript
