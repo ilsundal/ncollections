@@ -10,12 +10,10 @@ Collection overview and hierarchy:
 - [Set](#Set)
   - [HashSet](#HashSet)
   - [IndexSet](#IndexSet)
-  - [NativeSet](#NativeSet)
   - [SortedSet](#SortedSet)
     - [TreeSet](#TreeSet)
 - [Map](#Map)
   - [HashMap](#HashMap)
-  - [NativeMap](#NativeMap)
   - [SortedMap](#SortedMap)
     - [TreeMap](#TreeMap)
 - [Queue](#Queue)
@@ -308,16 +306,6 @@ console.log(one_named_morten); // outputs Person { name: 'Morten', age: 48 }
 console.log(index_set.examine({ name: 'Morten', age: 48 })); // outputs { chosen_index: [ 'name' ], scan_count: 2, match_count: 1 }
 ```
 
-### NativeSet
-
-A NativeSet is a [Set](#Set) that adapts the [JavaScript's built-in Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) to the ncollections framework. NativeSet is (slightly) faster than [HashSet](#HashSet) because it is based on `==` equality and thus does not work as you might expect with object elements.
-
-To instantiate a NativeSet:
-
-```javascript
-let native_set = Collections.newNativeSet();
-```
-
 ### SortedSet
 
 A SortedSet is a [Set](#Set) that orders its elements according to a `compare_fn`, which can be provided during instantiation via an `options` object. If no `compare_fn` is provided then a default (natural) ordering is used.
@@ -386,16 +374,6 @@ To instantiate a HashMap:
 
 ```javascript
 let hash_map = Collections.newHashMap();
-```
-
-### NativeMap
-
-A NativeMap is a [Map](#Map) that adapts the [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) to the ncollections framework. NativeMap is (slightly) faster than [HashMap](#HashMap) because it is based on `==` equality and thus does not work as you might expect with object keys.
-
-To instantiate a NativeMap:
-
-```javascript
-let native_map = Collections.newNativeMap();
 ```
 
 ### SortedMap
