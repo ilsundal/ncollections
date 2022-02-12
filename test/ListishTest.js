@@ -2,6 +2,7 @@
 
 const assert = require('assert');
 
+const IllegalArgumentException = require(__dirname + '/../main/IllegalArgumentException.js');
 const Util = require(__dirname + '/../main/Util.js');
 
 const CollectionTest = require(__dirname + '/CollectionTest.js');
@@ -134,6 +135,11 @@ class ListishTest extends CollectionTest {
 
   // callback for collections with an add-like method (e.g. "push" for a Stack, or "enqueue" for a Queue), using add_fn
   test_add0(test) {
+    it('[] + undefined -> IllegalArgumentException', function() {
+      let collection = test.newInstance();
+      let methodCall = () => test.add_fn(collection, undefined);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
     it('[] + 1 -> [1]', function() {
       let collection = test.newInstance();
       assert(test.add_fn(collection, 1) === collection);

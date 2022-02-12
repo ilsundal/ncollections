@@ -34,6 +34,8 @@ class HashMap extends Map_ {
 
   // inefficient
   containsValue(value) {
+    if (value === undefined)
+      throw new IllegalArgumentException('value is undefined');
     for (let entry of this) {
       if (Collection.equals_fn(entry.value, value))
         return true;
@@ -42,6 +44,8 @@ class HashMap extends Map_ {
   }
 
   get(key) {
+    if (key === undefined)
+      throw new IllegalArgumentException('key is undefined');
     let key_hash_code = Collection.hash_code_fn(key);
     let key_hash_code_entries = this.#map.get(key_hash_code) || [];
     for (let key_hash_code_entry of key_hash_code_entries) {

@@ -30,7 +30,6 @@ class SortedSetTest extends SetTest {
   test_getLast(test) {
     it('{1,2,3} -> 3', function() {
       let set = test.newInstance([1,2,3]);
-console.log(set.getLast());
       assert(set.getLast() === 3);
       assert(set.size() === 3);
     });

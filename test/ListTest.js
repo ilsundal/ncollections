@@ -2,6 +2,7 @@
 
 const assert = require('assert');
 
+const IllegalArgumentException = require(__dirname + '/../main/IllegalArgumentException.js');
 const IndexOutOfBoundsException = require(__dirname + '/../main/IndexOutOfBoundsException.js');
 const NoSuchElementException = require(__dirname + '/../main/NoSuchElementException.js');
 const Util = require(__dirname + '/../main/Util.js');
@@ -49,6 +50,16 @@ class ListTest extends ListishTest {
   }
 
   test_addAll(test) {
+    it('[] + undefined -> IllegalArgumentException', function() {
+      let list = test.newInstance();
+      let methodCall = () => list.addAll(undefined);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
+    it('[] + [1,undefined] -> IllegalArgumentException', function() {
+      let list = test.newInstance();
+      let methodCall = () => list.addAll(1, undefined);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
     it('[] + [1,2] -> this & [1,2]', function() {
       let list = test.newInstance();
       assert(list.addAll([1,2]) === list);
@@ -62,6 +73,11 @@ class ListTest extends ListishTest {
   }
 
   test_addFirst(test) {
+    it('[] + undefined -> IllegalArgumentException', function() {
+      let list = test.newInstance();
+      let methodCall = () => list.addFirst(undefined);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
     it('[] + 1 -> this & [1]', function() {
       let list = test.newInstance();
       assert(list.addFirst(1) === list);
@@ -75,6 +91,11 @@ class ListTest extends ListishTest {
   }
 
   test_addLast(test) {
+    it('[] + undefined -> IllegalArgumentException', function() {
+      let list = test.newInstance();
+      let methodCall = () => list.addLast(undefined);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
     it('[] + 1 -> this & [1]', function() {
       let list = test.newInstance();
       assert(list.addLast(1) === list);
@@ -88,6 +109,11 @@ class ListTest extends ListishTest {
   }
 
   test_contains(test) {
+    it('[] contains undefined -> IllegalArgumentException', function() {
+      let list = test.newInstance();
+      let methodCall = () => list.contains(undefined);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
     it('[] contains 1 -> false', function() {
       let list = test.newInstance();
       assert(list.contains(1) === false);
@@ -103,21 +129,36 @@ class ListTest extends ListishTest {
   }
 
   test_containsAll(test) {
-    it('[] contains all of [1] -> false', function() {
+    it('[] contains undefined -> IllegalArgumentException', function() {
+      let list = test.newInstance();
+      let methodCall = () => list.containsAll(undefined);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
+    it('[] contains [undefined] -> IllegalArgumentException', function() {
+      let list = test.newInstance();
+      let methodCall = () => list.containsAll([undefined]);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
+    it('[] contains [1] -> false', function() {
       let list = test.newInstance();
       assert(list.containsAll([1]) === false);
     });
-    it('[1,2] contains all of [2] -> true', function() {
+    it('[1,2] contains [2] -> true', function() {
       let list = test.newInstance([1,2]);
       assert(list.containsAll([2]) === true);
     });
-    it('[1,2,3] contains all of [1,3] -> true', function() {
+    it('[1,2,3] contains [1,3] -> true', function() {
       let list = test.newInstance([1,2,3]);
       assert(list.containsAll([1,3]) === true);
     });
   }
 
   test_getAt(test) {
+    it('[] at undefined -> IllegalArgumentException', function() {
+      let list = test.newInstance();
+      let methodCall = () => list.getAt(undefined);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
     it('[1,2,3] at 1 -> 2', function() {
       let list = test.newInstance([1,2,3]);
       assert(list.getAt(1) === 2);
@@ -154,6 +195,11 @@ class ListTest extends ListishTest {
   }
 
   test_indexOf(test) {
+    it('[] index undefined -> IllegalArgumentException', function() {
+      let list = test.newInstance();
+      let methodCall = () => list.indexOf(undefined);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
     it('[1,2,3,2,1] index 4 -> undefined', function() {
       let list = test.newInstance([1,2,3,2,1]);
       assert(list.indexOf(4) === undefined);
@@ -165,6 +211,16 @@ class ListTest extends ListishTest {
   }
 
   test_insertAt(test) {
+    it('[1,2] at undefined insert 1 -> IllegalArgumentException', function() {
+      let list = test.newInstance([1,2]);
+      let methodCall = () => list.insertAt(undefined, 1);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
+    it('[1,2] at 0 insert undefined -> IllegalArgumentException', function() {
+      let list = test.newInstance([1,2]);
+      let methodCall = () => list.insertAt(0, undefined);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
     it('[] at 0 insert 1 -> IndexOutOfBoundsException', function() {
       let list = test.newInstance();
       let methodCall = () => list.insertAt(0, 1);
@@ -178,6 +234,11 @@ class ListTest extends ListishTest {
   }
 
   test_lastIndexOf(test) {
+    it('[] index undefined -> IllegalArgumentException', function() {
+      let list = test.newInstance();
+      let methodCall = () => list.lastIndexOf(undefined);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
     it('[1,2,3,2,1] index 4 -> undefined', function() {
       let list = test.newInstance([1,2,3,2,1]);
       assert(list.lastIndexOf(4) === undefined);
@@ -189,6 +250,11 @@ class ListTest extends ListishTest {
   }
 
   test_removeAt(test) {
+    it('[] at undefined -> IllegalArgumentException', function() {
+      let list = test.newInstance();
+      let methodCall = () => list.removeAt(undefined);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
     it('[] at 0 -> IndexOutOfBoundsException', function() {
       let list = test.newInstance();
       let methodCall = () => list.removeAt(0);
@@ -202,6 +268,11 @@ class ListTest extends ListishTest {
   }
 
   test_remove(test) {
+    it('[] - undefined -> IllegalArgumentException', function() {
+      let list = test.newInstance();
+      let methodCall = () => list.remove(undefined);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
     it('[] - 1 -> false', function() {
       let list = test.newInstance();
       assert(list.remove(1) === false);
@@ -214,6 +285,16 @@ class ListTest extends ListishTest {
   }
 
   test_removeAll(test) {
+    it('[] - undefined -> IllegalArgumentException', function() {
+      let list = test.newInstance();
+      let methodCall = () => list.removeAll(undefined);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
+    it('[] - [1,undefined] -> IllegalArgumentException', function() {
+      let list = test.newInstance();
+      let methodCall = () => list.removeAll([1, undefined]);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
     it('[1,2,3,4] - [1,2,5] -> truish & [3,4]', function() {
       let list = test.newInstance([1,2,3,4]);
       assert(list.removeAll([1,2,5]));
@@ -256,6 +337,16 @@ class ListTest extends ListishTest {
   }
 
   test_setAt(test) {
+    it('[1,2] at undefined set 1 -> IllegalArgumentException', function() {
+      let list = test.newInstance([1,2]);
+      let methodCall = () => list.setAt(undefined, 1);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
+    it('[1,2] at 0 set undefined -> IllegalArgumentException', function() {
+      let list = test.newInstance([1,2]);
+      let methodCall = () => list.setAt(1, undefined);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
     it('[] at 0 set 1 -> IndexOutOfBoundsException', function() {
       let list = test.newInstance();
       let methodCall = () => list.setAt(0, 1);
@@ -269,6 +360,11 @@ class ListTest extends ListishTest {
   }
 
   test_setFirst(test) {
+    it('[] set undefined -> IllegalArgumentException', function() {
+      let list = test.newInstance();
+      let methodCall = () => list.setFirst(undefined);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
     it('[] set 1 -> NoSuchElementException', function() {
       let list = test.newInstance();
       let methodCall = () => list.setFirst(1);
@@ -282,6 +378,11 @@ class ListTest extends ListishTest {
   }
 
   test_setLast(test) {
+    it('[] set undefined -> IllegalArgumentException', function() {
+      let list = test.newInstance();
+      let methodCall = () => list.setLast(undefined);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
     it('[] set 1 -> NoSuchElementException', function() {
       let list = test.newInstance();
       let methodCall = () => list.setLast(1);

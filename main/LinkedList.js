@@ -121,6 +121,8 @@ class LinkedList extends List {
   }
 
   remove(element) {
+    if (element === undefined)
+      throw new IllegalArgumentException('element is undefined');
     for (let current_node = this.#first_node; current_node != null; current_node = current_node.next_node) {
       if (Collection.equals_fn(element, current_node.element)) {
         this.#removeNode(current_node);

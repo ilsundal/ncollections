@@ -4,6 +4,7 @@ const assert = require('assert');
 
 const ArrayList = require(__dirname + '/../main/ArrayList.js');
 const HashSet = require(__dirname + '/../main/HashSet.js');
+const IllegalArgumentException = require(__dirname + '/../main/IllegalArgumentException.js');
 const Map = require(__dirname + '/../main/Map.js');
 const UnsupportedOperationException = require(__dirname + '/../main/UnsupportedOperationException.js');
 const Util = require(__dirname + '/../main/Util.js');
@@ -61,6 +62,11 @@ class MapTest extends CollectionTest {
   }
 
   test_containsKey(test) {
+    it('{1->2} contains undefined -> IllegalArgumentException', function() {
+      let map = test.newInstance();
+      let methodCall = () => map.containsKey(undefined);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
     it('{1->2} contains 1 -> true', function() {
       let map = test.newInstance();
       map.put(1,2);
@@ -74,7 +80,12 @@ class MapTest extends CollectionTest {
   }
 
   test_containsValue(test) {
-    it('{1->2 contains 2 -> true', function() {
+    it('{1->2} contains undefined -> IllegalArgumentException', function() {
+      let map = test.newInstance();
+      let methodCall = () => map.containsValue(undefined);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
+    it('{1->2} contains 2 -> true', function() {
       let map = test.newInstance();
       map.put(1,2);
       assert(map.containsValue(2));
@@ -110,6 +121,11 @@ class MapTest extends CollectionTest {
   }
 
   test_get(test) {
+    it('{1->2} get undefined -> IllegalArgumentException', function() {
+      let map = test.newInstance();
+      let methodCall = () => map.get(undefined);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
     it('{1->2,3->4} get 1 -> 2', function() {
       let map = test.newInstance();
       map.put(1,2);
@@ -180,6 +196,16 @@ class MapTest extends CollectionTest {
   }
 
   test_put(test) {
+    it('{} + (undefined->2) -> IllegalArgumentException', function() {
+      let map = test.newInstance();
+      let methodCall = () => map.put(undefined, 2);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
+    it('{} + (1->undefined) -> IllegalArgumentException', function() {
+      let map = test.newInstance();
+      let methodCall = () => map.put(1, undefined);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
     it('{} + (1->2) -> undefined & {1->2}', function() {
       let map = test.newInstance();
       assert(map.put(1,2) === undefined);
@@ -196,6 +222,16 @@ class MapTest extends CollectionTest {
   }
 
   test_putAll(test) {
+    it('{} + undefined -> IllegalArgumentException', function() {
+      let map = test.newInstance();
+      let methodCall = () => map.putAll(undefined);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
+    it('{} + [undefined] -> IllegalArgumentException', function() {
+      let map = test.newInstance();
+      let methodCall = () => map.putAll([undefined]);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
     it('{1->2} + [{1->3},{2->3}] -> & {1->3,2->3}', function() {
       let map = test.newInstance();
       map.put(1,2);
@@ -207,6 +243,12 @@ class MapTest extends CollectionTest {
   }
 
   test_remove(test) {
+    it('{1->2} - undefined -> IllegalArgumentException', function() {
+      let map = test.newInstance();
+      map.put(1,2);
+      let methodCall = () => map.remove(undefined);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
     it('{1->2} - 2 -> undefined & {1->2}', function() {
       let map = test.newInstance();
       map.put(1,2);
@@ -225,6 +267,18 @@ class MapTest extends CollectionTest {
   }
 
   test_removeAll(test) {
+    it('{1->2} - undefined -> IllegalArgumentException', function() {
+      let map = test.newInstance();
+      map.put(1,2);
+      let methodCall = () => map.removeAll(undefined);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
+    it('{1->2} - [undefined] -> IllegalArgumentException', function() {
+      let map = test.newInstance();
+      map.put(1,2);
+      let methodCall = () => map.removeAll([undefined]);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
     it('{1->2,2->3,3->4} - [1,3] -> {1->2,3->4} & {2->3}', function() {
       let map = test.newInstance();
       map.put(1,2);

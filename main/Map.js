@@ -106,8 +106,11 @@ class Map extends Collection {
   putAll(entries) {
     if ((typeof entries !== 'object') || (typeof entries[Symbol.iterator] !== 'function'))
       throw new IllegalArgumentException('entries is not an iterable');
-    for (let entry of entries)
+    for (let entry of entries) {
+      if (typeof entry !== 'object')
+        throw new IllegalArgumentException('entries contains an entry that is not an object: ' + JSON.stringify(entry));
       this.put(entry.key, entry.value);
+    }
   }
 
   // Removes the key and its associated value from the map.

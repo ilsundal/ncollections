@@ -2,6 +2,7 @@
 
 const assert = require('assert');
 
+const IllegalArgumentException = require(__dirname + '/../main/IllegalArgumentException.js');
 const Util = require(__dirname + '/../main/Util.js');
 
 const CollectionTest = require(__dirname + '/CollectionTest.js');
@@ -36,6 +37,11 @@ class SetTest extends CollectionTest {
   }
 
   test_add(test) {
+    it('{} + undefined -> IllegalArgumentException', function() {
+      let set = test.newInstance();
+      let methodCall = () => set.add(undefined);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
     it('{} + 1 -> true & {1}', function() {
       let set = test.newInstance();
       assert(set.add(1) === true);
@@ -55,6 +61,16 @@ class SetTest extends CollectionTest {
   }
 
   test_addAll(test) {
+    it('{} + undefined -> IllegalArgumentException', function() {
+      let set = test.newInstance();
+      let methodCall = () => set.addAll(undefined);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
+    it('{} + [undefined] -> IllegalArgumentException', function() {
+      let set = test.newInstance();
+      let methodCall = () => set.addAll([undefined]);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
     it('{} + [1,2] -> true & {1,2}', function() {
       let set = test.newInstance();
       assert(set.addAll([1,2]) === true);
@@ -96,6 +112,11 @@ class SetTest extends CollectionTest {
   }
 
   test_contains(test) {
+    it('{1} contains undefined -> IllegalArgumentException', function() {
+      let set = test.newInstance([1]);
+      let methodCall = () => set.contains(undefined);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
     it('{} contains 1 -> false', function() {
       let set = test.newInstance();
       assert(set.contains(1) === false);
@@ -111,15 +132,25 @@ class SetTest extends CollectionTest {
   }
 
   test_containsAll(test) {
-    it('{} contains all of [1] -> false', function() {
+    it('{1} contains undefined -> IllegalArgumentException', function() {
+      let set = test.newInstance([1]);
+      let methodCall = () => set.contains(undefined);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
+    it('{1} contains [undefined] -> IllegalArgumentException', function() {
+      let set = test.newInstance([1]);
+      let methodCall = () => set.containsAll([undefined]);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
+    it('{} contains [1] -> false', function() {
       let set = test.newInstance();
       assert(set.containsAll([1]) === false);
     });
-    it('{1,2} contains all of [2] -> true', function() {
+    it('{1,2} contains [2] -> true', function() {
       let set = test.newInstance([1,2]);
       assert(set.containsAll([2]) === true);
     });
-    it('{1,2,3} contains all of [1,3] -> true', function() {
+    it('{1,2,3} contains [1,3] -> true', function() {
       let set = test.newInstance([1,2,3]);
       assert(set.containsAll([1,3]) === true);
     });
@@ -167,6 +198,11 @@ class SetTest extends CollectionTest {
   }
 
   test_remove(test) {
+    it('{1} - undefined -> IllegalArgumentException', function() {
+      let set = test.newInstance([1]);
+      let methodCall = () => set.remove(undefined);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
     it('{} - 1 -> false', function() {
       let set = test.newInstance();
       assert(set.remove(1) === false);
@@ -179,6 +215,16 @@ class SetTest extends CollectionTest {
   }
 
   test_removeAll(test) {
+    it('{1} - undefined -> IllegalArgumentException', function() {
+      let set = test.newInstance([1]);
+      let methodCall = () => set.removeAll(undefined);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
+    it('{1} - [undefined] -> IllegalArgumentException', function() {
+      let set = test.newInstance([1]);
+      let methodCall = () => set.removeAll([undefined]);
+      assert.throws(methodCall, IllegalArgumentException);
+    });
     it('{1,2,3,4} - [1,2,5] -> true & {3,4}', function() {
       let set = test.newInstance([1,2,3,4]);
       assert(set.removeAll([1,2,5]) === true);
