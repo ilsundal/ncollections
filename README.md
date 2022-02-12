@@ -27,7 +27,7 @@ Why use ncollections?
 - **Objects as values** Elements (and keys and values for maps) can be any value, both primitive values and objects, backed by deep equality rather than just `==` operator equality.
 - **Well-designed** ncollections has standardized interfaces for all collections that are consistent, easy-to-use, flexible and extendable.
 - **Effective** All collection implementations are based on state-of-the-art data structures and algorithms.
-- **Small foot-print** ncollections does not use any packages. The main directory is small and can be zipped to ~33KB (without any minifying).
+- **Small foot-print** ncollections does not use any packages. Its small, self-contained and... neat.
 - **Plain JavaScript** Use both in browsers and Node.js.
 
 The design has been inspired by the [Java Collections Framework](https://docs.oracle.com/javase/8/docs/technotes/guides/collections/overview.html). To work out-of-the-box with objects, robust and fast default implementations are provided for `equals` and `hashCode` functions to make ncollections even easier to use. (In most cases, you don't have to worry about value equality and hash codes at all; it just works. [Read more.](#A-Note-On-equals-hashcode-And-compare_fn))
