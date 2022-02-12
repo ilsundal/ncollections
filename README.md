@@ -25,8 +25,10 @@ Collection overview and hierarchy:
 - [Stack](#Stack)
 
 Why use ncollections?
-- **More collections** With standard JavaScript, you only have array, maps and sets.
-- **Well-designed** ncollections has standardized interfaces for all collections that are neat and easy-to-use, flexible and extendable. Elements (and keys and values for maps) can be any value, both primitive values and objects.
+- **More collections** With standard JavaScript, you only have arrays, maps and sets.
+- **Objects as values** Elements (and keys and values for maps) can be any value, both primitive values and objects.
+- **Well-designed** ncollections has standardized interfaces for all collections that are consistent, easy-to-use, flexible and extendable.
+- **Effective** Collection implementations uses best-practice approaches and algorithms.
 - **Small foot-print** ncollections does not use any packages. The main directory is small and can be zipped to ~33KB (without any minifying).
 - **Plain JavaScript** Use both in browsers and Node.js.
 
@@ -111,21 +113,21 @@ A Collection implements the following methods:
 
 **toString()** returns a string representation of the collection in iteration order.
 
-All collections implement the [iteration and iterable protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+A Collection implements the [iteration and iterable protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols) so you can easily loop over their elements.
 
 A Collection is normally instantiated in one of two ways:
 
 ```javascript
-// method 1: using builder method
+// Method 1: Using builder method
 const Collections = require('ncollections');
 let hash_set1 = new Collections.newHashSet();
 
-// method 2: using constructor directly
+// Method 2: Using constructor directly
 const HashSet = require('ncollections').HashSet;
 let hash_set1 = new HashSet();
 ```
 
-In both cases, an option object can be provided as an argument to further customize how the collection should work. For example, sorted collections, such as [TreeSet](#TreeSet)), uses a compare_fn to provide a custom sorting. (The default sorting is always based on natural ordering, converting non-numbers to strings as needed.) For example:
+In both cases, an option object can be provided as an argument to further customize how the collection should work. For example, sorted collections (such as [TreeSet](#TreeSet))) uses a *compare_fn* to provide a custom sorting. (The default sorting is always based on natural ordering, converting non-numbers to strings as needed.) For example:
 
 ```javascript
 let tree_set = new TreeSet({ compare_fn : your_compare_fn });
@@ -143,7 +145,7 @@ let list = Collections.newList();
 
 A List implements the following methods:
 
-**add(element)** adds the argument element to the end of the list. Returns the list itself.
+`add(element)` adds the argument element to the end of the list. Returns the list itself.
 
 **addAll(elements)** adds all the argument elements (an iterable) to the end of the list, in iteration order. Returns the list itself.
 
