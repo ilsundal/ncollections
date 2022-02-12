@@ -155,49 +155,49 @@ A List implements the following methods:
 
 `addAll(elements)` adds all the argument elements (an iterable) to the end of the list, in iteration order. Returns the list itself.
 
-**addFirst(element)** adds the argument element to the front of the list. Returns the list itself.
+`addFirst(element)` adds the argument element to the front of the list. Returns the list itself.
 
-**addLast(element)** adds the argument element to the end of the list. Returns the list itself.
+`addLast(element)` adds the argument element to the end of the list. Returns the list itself.
 
-**contains(element)** returns true if the list contains the argument element, and false if not.
+`contains(element)` returns true if the list contains the argument element, and false if not.
 
-**containsAll(elements)** returns true if the list contains all of the argument elements (an iterable), and false if not.
+`containsAll(elements)` returns true if the list contains all of the argument elements (an iterable), and false if not.
 
-**getAt(index)** returns the element at the argument index position. An IndexOutOfBoundsException is thrown if the index is out of bounds.
+`getAt(index)` returns the element at the argument index position. An `IndexOutOfBoundsException` is thrown if the index is out of bounds.
 
-**getFirst()** returns the first element of the list. A NoSuchElementException is thrown if the list is empty.
+`getFirst()` returns the first element of the list. A `NoSuchElementException` is thrown if the list is empty.
 
-**getLast()** returns the last element of the list. A NoSuchElementException is thrown if the list is empty.
+`getLast()` returns the last element of the list. A `NoSuchElementException` is thrown if the list is empty.
 
-**indexOf(element)** returns the first occurrence of the argument element in the list, or undefined if the list does not contain the element.
+ indexOf(element)` returns the first occurrence of the argument element in the list, or undefined if the list does not contain the element.
 
-**insertAt(index, element)** inserts the argument element at the argument index position in the list. Returns the list itself. An IndexOutOfBoundsException is thrown if the index is out of bounds.
+`insertAt(index, element)` inserts the argument element at the argument index position in the list. Returns the list itself. An `IndexOutOfBoundsException` is thrown if the index is out of bounds.
 
-**lastIndexOf(element)** returns the last occurrence of the argument element in the list, or undefined if the list does not contain the element.
+`lastIndexOf(element)` returns the last occurrence of the argument element in the list, or undefined if the list does not contain the element.
 
-**remove(element)** removes the argument element from the collection. Returns true if an element was removed from the list, and false if not. If the list contains several elements that are equal to the argument element then only the first such element will be removed.
+`remove(element)` removes the argument element from the collection. Returns true if an element was removed from the list, and false if not. If the list contains several elements that are equal to the argument element then only the first such element will be removed.
 
-**removeAll(elements)** removes the argument elements (an iterable) from the collection. Returns true if any element was removed from the list, and false if not. For each element to be removed, if the list contains several elements that are equal to it, then only the first such element will be removed.
+`removeAll(elements)` removes the argument elements (an iterable) from the collection. Returns true if any element was removed from the list, and false if not. For each element to be removed, if the list contains several elements that are equal to it, then only the first such element will be removed.
 
-**removeAt(index)** removes the element at the argument index position in the list. It returns the removed element. An IndexOutOfBoundsException is thrown if the index is out of bounds.
+`removeAt(index)` removes the element at the argument index position in the list. It returns the removed element. An `IndexOutOfBoundsException` is thrown if the index is out of bounds.
 
-**removeFirst()** removes the first element of the list. It returns the removed element. A NoSuchElementException is thrown if the list is empty.
+`removeFirst()` removes the first element of the list. It returns the removed element. A `NoSuchElementException` is thrown if the list is empty.
 
-**removeLast()** removes the last element of the list. It returns the removed element. A NoSuchElementException is thrown if the list is empty.
+`removeLast()` removes the last element of the list. It returns the removed element. A `NoSuchElementException` is thrown if the list is empty.
 
-**reverse()** reverses the list in place. Returns the list itself.
+`reverse()` reverses the list in place. Returns the list itself.
 
-**setAt(index, element)** replaces the element at the argument index position in the list with the argument element. The replaced element is returned. An IndexOutOfBoundsException is thrown if the index is out of bounds.
+`setAt(index, element)` replaces the element at the argument index position in the list with the argument element. The replaced element is returned. An `IndexOutOfBoundsException` is thrown if the index is out of bounds.
 
-**setFirst(element)** replaces the first element of the list with the argument element. The replaced element is returned. A NoSuchElementException is thrown if the list is empty.
+`setFirst(element)` replaces the first element of the list with the argument element. The replaced element is returned. A `NoSuchElementException` is thrown if the list is empty.
 
-**setLast(element)** replaces the last element of the list with the argument element. The replaced element is returned. A NoSuchElementException is thrown if the list is empty.
+`setLast(element)` replaces the last element of the list with the argument element. The replaced element is returned. A `NoSuchElementException` is thrown if the list is empty.
 
-**sort(compare_fn)** sorts the list in place, optionally with a custom compare function. Returns the list itself.
+`sort(compare_fn)` sorts the list in place, optionally with a custom compare function. Returns the list itself.
 
 ### ArrayList
 
-An ArrayList is a [List](#List) backed by [JavaScript's built-in array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array). Thus, the *getAt* and *setAt* methods are fast, while list insertions and removals are slower (due to possible element shifting and array resizing). The *toAtray* method returns the backed array directly which thus allows you to access and modify the ArrayList directly using any JavaScript array function, such as *splice*.
+An ArrayList is a [List](#List) backed by [JavaScript's built-in array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array). Thus, indexing methods (such as `getAt` and `setAt`) are fast, while list insertions and removals are slower (due to possible element shifting and array resizing). The `toAtray` method returns the backed array directly which thus allows you to access and modify the ArrayList directly using any JavaScript array function, such as `splice`.
 
 To instantiate an ArrayList:
 
@@ -207,7 +207,7 @@ let array_list = Collections.newArrayList();
 
 ### LinkedList
 
-A LinkedList is a [List](#List) backed by a next-previous (double-linked) node structure. Thus, adding, retrieving and removing elements from the front or end of the list is fast, while *getAt* and *setAt* are slower due to linear search. (The linear search automatically chooses whether to search forwards from the first node or backwards from the last node depending on what is fastest.)
+A LinkedList is a [List](#List) backed by a next-previous (double-linked) node structure. Thus, adding, retrieving and removing elements from the front or end of the list is fast, while indexing methods (such as `getAt` and `setAt`) are slower due to linear search. (The linear search automatically chooses whether to search forwards from the first node or backwards from the last node depending on what is fastest.)
 
 To instantiate a LinkedList:
 
@@ -227,21 +227,21 @@ let set = Collections.newSet();
 
 A Set implements the following methods:
 
-**add(element)** adds the argument element to the set. Returns true if the set was changed (i.e. the set did not already contain the element), and false if not.
+`add(element)` adds the argument element to the set. Returns true if the set was changed (i.e. the set did not already contain the element), and false if not.
 
-**addAll(elements)** adds the argument elements (an iterable) to the set. Returns true if the set was changed, and false if not.
+`addAll(elements)` adds the argument elements (an iterable) to the set. Returns true if the set was changed, and false if not.
 
-**contains(element)** returns true if the set contains the argument element, and false if not.
+`contains(element)` returns true if the set contains the argument element, and false if not.
 
-**containsAll(elements)** returns true if the set contains all of the argument elements (an iterable), and false if not.
+`containsAll(elements)` returns true if the set contains all of the argument elements (an iterable), and false if not.
 
-**remove(element)** removes the argument elment from the set. Returns true if the set was changed (i.e. the set contained the element), and false if not.
+`remove(element)` removes the argument elment from the set. Returns true if the set was changed (i.e. the set contained the element), and false if not.
 
-**removeAll(elements)** removes the argument elments (an iterable) from the set. Returns true if the set was changed, and false if not.
+`removeAll(elements)` removes the argument elments (an iterable) from the set. Returns true if the set was changed, and false if not.
 
 ### HashSet
 
-A HashSet is a [Set](#Set) backed by [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map). Thus, the *add*, *contains*, and *remove* methods are fast. A HashSet is not ordered.
+A HashSet is a [Set](#Set) backed by [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map). Thus, the `add`, `contains`, and `remove` methods are fast. A HashSet is not ordered.
 
 To instantiate a HashSet:
 
@@ -263,15 +263,15 @@ let index_set = Collections.newIndexSet();
 
 The IndexSet adds implementations of the following methods:
 
-**addIndex(index)** adds the argument index. The index is simply an iterable of element property names. Returns true if the index was added, and false if not (because it already exists).
+`addIndex(index)` adds the argument index. The index is simply an iterable of element property names. Returns true if the index was added, and false if not (because it already exists).
 
-**examine(where)** examines the execution of the argument "where". It returns an object with three properties: *chosen_index* is the chosen index (or null if none), *scan_count* is the number of elements scanned, and *match_count* is the number of matching elements.
+`examine(where)` examines the execution of the argument *where*. It returns an object with three properties: *chosen_index* is the chosen index (or null if none), *scan_count* is the number of elements scanned, and *match_count* is the number of matching elements.
 
-**findAll(where)** returns an iterable of the set elements that matches the optional argument "where". If the argument "where" is omitted or is empty then an iterable of all the set's elements will be returned.
+`findAll(where)` returns an iterable of the set elements that matches the optional argument *where*. If the argument *where* is omitted or is empty then an iterable of all the set's elements will be returned.
 
-**findOne(where)** returns the single (first) element that matches the optional argument "where", or undefined if no match. If the argument "where" is omitted or is empty then one of the set's elements will be returned, or undefined if the set is empty.
+`findOne(where)` returns the single (first) element that matches the optional argument *where*, or undefined if no match. If the argument *where* is omitted or is empty then one of the set's elements will be returned, or undefined if the set is empty.
 
-**indexes** returns the added indexes.
+`indexes` returns the added indexes.
 
 Here is an example of how to use the IndexSet:
 
@@ -310,7 +310,7 @@ console.log(index_set.examine({ name: 'Morten', age: 48 })); // outputs { chosen
 
 ### NativeSet
 
-A NativeSet is a [Set](#Set) that adapts the [JavaScript's built-in Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) to the ncollections framework. NativeSet is (slightly) faster than [HashSet](#HashSet) but is based on == equality and thus does not support *equals* and *hashCode* methods. A NativeSet follows insertion order.
+A NativeSet is a [Set](#Set) that adapts the [JavaScript's built-in Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) to the ncollections framework. NativeSet is (slightly) faster than [HashSet](#HashSet) because it is based on `==` equality and thus does not work as you might expect with object elements.
 
 To instantiate a NativeSet:
 
@@ -320,7 +320,7 @@ let native_set = Collections.newNativeSet();
 
 ### SortedSet
 
-A SortedSet is a [Set](#Set) that orders its elements according to a *compare_fn*, which can be provided during instantiation via an options object. If no *compare_fn* is provided then a default (natural) ordering is used.
+A SortedSet is a [Set](#Set) that orders its elements according to a `compare_fn`, which can be provided during instantiation via an options object. If no `compare_fn` is provided then a default (natural) ordering is used.
 
 To instantiate the default SortedSet (which is a [TreeSet](#TreeSet)):
 
@@ -330,13 +330,13 @@ let sorted_set = Collections.newSortedSet({ compare_fn: your_compare_fn }); // c
 
 A SortedSet implements the following methods:
 
-**getFirst()** returns the first element of the set. A NoSuchElementException is thrown if the set is empty.
+`getFirst()` returns the first element of the set. A `NoSuchElementException` is thrown if the set is empty.
 
-**getLast()** returns the last element of the set. A NoSuchElementException is thrown if the set is empty.
+`getLast()` returns the last element of the set. A `NoSuchElementException` is thrown if the set is empty.
 
-**removeFirst()** removes the first element of the set. Returns the removed element. A NoSuchElementException is thrown if the set is empty.
+`removeFirst()` removes the first element of the set. Returns the removed element. A `NoSuchElementException` is thrown if the set is empty.
 
-**removeLast()** removes the last element of the set. Returns the removed element. A NoSuchElementException is thrown if the set is empty.
+`removeLast()` removes the last element of the set. Returns the removed element. A `NoSuchElementException` is thrown if the set is empty.
 
 #### TreeSet
 
@@ -360,27 +360,27 @@ let map = Collections.newMap();
 
 A Map implements the following methods:
 
-**containsKey(key)** returns true if the map contains the argument key, and false if not.
+`containsKey(key)` returns true if the map contains the argument key, and false if not.
 
-**containsValue(value)** returns true if the map contains the argument value, and false if not.
+`containsValue(value)` returns true if the map contains the argument value, and false if not.
 
-**get(key)** returns the value mapped-to by the argument key, or undefined if the map does not contain the key.
+`get(key)` returns the value mapped-to by the argument key, or undefined if the map does not contain the key.
 
-**keys()** returns an iterable over the map's keys.
+`keys()` returns an iterable over the map's keys.
 
-**put(key, value)** maps the argument key to the argument value. Returns the value previously mapped-to by the key, or undefined if the map contained no such key before.
+`put(key, value)` maps the argument key to the argument value. Returns the value previously mapped-to by the key, or undefined if the map contained no such key before.
 
-**putAll(entries)** puts the argument entries (an iterable) into the map. Returns nothing.
+`putAll(entries)` puts the argument entries (an iterable) into the map. Returns nothing.
 
-**remove(key)** removes the argument key and its mapped-to value from the map. Returns the mapped-to value of the key, or undefined if the map contained no such key before.
+`remove(key)` removes the argument key and its mapped-to value from the map. Returns the mapped-to value of the key, or undefined if the map contained no such key before.
 
-**removeAll(keys)** removes the argument keys and their mapped-to values from the map. Returns the removed map entries.
+`removeAll(keys)` removes the argument keys and their mapped-to values from the map. Returns the removed map entries.
 
-**values()** returns an iterable over the map's values.
+`values()` returns an iterable over the map's values.
 
 ### HashMap
 
-A HashMap is a [Map](#Map) backed by [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map). Thus, the *containsKey*, *get*, *put*, and *remove* methods are fast.
+A HashMap is a [Map](#Map) backed by [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map). Thus, the `containsKey`, `get`, `put`, and `remove` methods are fast.
 
 To instantiate a HashMap:
 
@@ -390,7 +390,7 @@ let hash_map = Collections.newHashMap();
 
 ### NativeMap
 
-A NativeMap is a [Map](#Map) that adapts the [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) to the ncollections framework. NativeMap is (slightly) faster than [HashMap](#HashMap) but is based on == equality and thus does not support *equals* and *hashCode* methods.
+A NativeMap is a [Map](#Map) that adapts the [JavaScript's built-in Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) to the ncollections framework. NativeMap is (slightly) faster than [HashMap](#HashMap) because it is based on `==` equality and thus does not work as you might expect with object keys.
 
 To instantiate a NativeMap:
 
@@ -400,7 +400,7 @@ let native_map = Collections.newNativeMap();
 
 ### SortedMap
 
-A SortedMap is a [Map](#Map) that orders its keys according to a *compare_fn*, which can be provided during instantiation via an options object. If no *compare_fn* is provided then a default (natural) ordering is used.
+A SortedMap is a [Map](#Map) that orders its keys according to a `compare_fn`, which can be provided during instantiation via an options object. If no `compare_fn` is provided then a default (natural) ordering is used.
 
 To instantiate the default SortedMap (which is a [TreeMap](#TreeMap)):
 
@@ -410,17 +410,17 @@ let tree_map = Collections.newSortedMap({ compare_fn: your_compare_fn }); // com
 
 A SortedMap implements the following methods:
 
-**getFirst()** returns the entry (element) with the lowest key in the map. A NoSuchElementException is thrown if the map is empty.
+`getFirst()` returns the entry (element) with the lowest key in the map. A `NoSuchElementException` is thrown if the map is empty.
 
-**getLast()** returns the entry (element) with the greatest key in the map. A NoSuchElementException is thrown if the map is empty.
+`getLast()` returns the entry (element) with the greatest key in the map. A `NoSuchElementException` is thrown if the map is empty.
 
-**removeFirst()** removes the entry (element) with the lowest key in the map. Returns the removed entry. A NoSuchElementException is thrown if the map is empty.
+`removeFirst()` removes the entry (element) with the lowest key in the map. Returns the removed entry. A `NoSuchElementException` is thrown if the map is empty.
 
-**removeLast()** removes the entry (element) with the greatest key in the map. Returns the removed entry. A NoSuchElementException is thrown if the map is empty.
+`removeLast()` removes the entry (element) with the greatest key in the map. Returns the removed entry. A `NoSuchElementException` is thrown if the map is empty.
 
 #### TreeMap
 
-A TreeMap is a [SortedMap](#SortedMap) backed by a self-balanced (Red-Black) binary tree structure.
+A TreeMap is a [SortedMap](#SortedMap) backed by a self-balanced (red-black) binary tree structure.
 
 To instantiate a TreeMap:
 
@@ -432,7 +432,7 @@ let tree_map = Collections.newTreeMap({ compare_fn: your_compare_fn }); // compa
 
 A Queue is an ordered collection where you can enqueue and dequeue elements.
 
-To instantiate the default Queue (which is a [SimpleQueue](#SimpleQueue)):
+To instantiate a default Queue (which is a [SimpleQueue](#SimpleQueue)):
 
 ```javascript
 let queue = Collections.newQueue();
@@ -440,15 +440,15 @@ let queue = Collections.newQueue();
 
 A Queue implements the following methods:
 
-**dequeue()** removes the front element of the queue. Returns the removed element, or undefined if the queue is empty.
+`dequeue()` removes the front element of the queue. Returns the removed element, or undefined if the queue is empty.
 
-**enqueue(element)** adds the argument element to the end of the queue.
+`enqueue(element)` adds the argument element to the end of the queue.
 
-**peek()** returns the front element of the queue, or undefined if the queue is empty.
+`peek()` returns the front element of the queue, or undefined if the queue is empty.
 
 ### SimpleQueue
 
-A SimpleQueue is [Queue](#Queue) that enqueues and dequeues elements in First-In First-Out (FIFO) order. It is backed by a [LinkedList](#LinkedList) and thus its methods are all fast.
+A SimpleQueue is [Queue](#Queue) that enqueues and dequeues elements in First-In First-Out (FIFO) order. It is backed by a [LinkedList](#LinkedList) and thus `dequeue`, `enqueue`, and `peek` are all fast.
 
 To instantiate a SimpleQueue:
 
@@ -458,7 +458,7 @@ let simple_queue = Collections.newSimpleQueue();
 
 ### PriorityQueue
 
-A PriorityQueue is a [Queue](#Queue) that orders its elements according to a *compare_fn*, which can be provided during instantiation via an options object. If no *compare_fn* is provided then a default (natural) ordering is used. A PriorityQueue is backed by a [TreeMap](#TreeMap) (to keep priority order efficiently) and several [LinkedList](#LinkedList) instances (to allow for elements with the same priority, dequeued in FIFO order). Thus, its methods are all fast.
+A PriorityQueue is a [Queue](#Queue) that orders its elements according to a `compare_fn`, which can be provided during instantiation via an options object. If no `compare_fn` is provided then a default (natural) ordering is used. A PriorityQueue is backed by a [TreeMap](#TreeMap) (to keep priority order efficiently) and several [LinkedList](#LinkedList) instances (to allow for elements with the same priority, dequeued in FIFO order). Thus, `dequeue`, `enqueue`, and `peek` are all fast.
 
 To instantiate a PriorityQueue:
 
@@ -468,7 +468,7 @@ let priority_queue = Collections.newPriorityQueue({ compare_fn: your_compare_fn 
 
 ## Deque
 
-A Deque is an ordered collection where you can add, peek and poll the first (front) and last (end) elements. It is backed by a [LinkedList](#LinkedList) and thus its methods are all fast.
+A Deque is an ordered collection where you can add, peek and poll the first (front) and last (end) elements. It is backed by a [LinkedList](#LinkedList) and thus all its methods below are fast.
 
 To instantiate a Deque:
 
@@ -478,21 +478,21 @@ let deque = Collections.newDeque();
 
 A Deque implements the following methods:
 
-**addFirst(element)** adds the argument element to the front of the deque. Returns the deque itself.
+`addFirst(element)` adds the argument element to the front of the deque. Returns the deque itself.
 
-**addLast(element)** adds the argument element to the end of the deque. Returns the deque itself.
+`addLast(element)` adds the argument element to the end of the deque. Returns the deque itself.
 
-**peekFirst()** returns the first element of the deque, or undefined if the deque is empty.
+`peekFirst()` returns the first element of the deque, or undefined if the deque is empty.
 
-**peekLast()** returns the last element of the deque, or undefined if the deque is empty.
+`peekLast()` returns the last element of the deque, or undefined if the deque is empty.
 
-**pollFirst()** removes the first element of the deque, if any. Returns the removed element, or undefined if the deque is empty.
+`pollFirst()` removes the first element of the deque, if any. Returns the removed element, or undefined if the deque is empty.
 
-**pollLast()** removes the last element of the deque, if any. Returns the removed element, or undefined if the deque is empty.
+`pollLast()` removes the last element of the deque, if any. Returns the removed element, or undefined if the deque is empty.
 
 ## Stack
 
-A Stack is an ordered collection where you can pop and push elements in Last-In First-Out (LIFO) order. It is backed by a [LinkedList](#LinkedList) and thus its methods are all fast.
+A Stack is an ordered collection where you can pop and push elements in Last-In First-Out (LIFO) order. It is backed by a [LinkedList](#LinkedList) and thus its methods below are fast.
 
 To instantiate a Stack:
 
@@ -502,24 +502,24 @@ let stack = Collections.newStack();
 
 A Stack implements the following methods:
 
-**peek()** returns the last-pushed element, or undefined if the stack is empty.
+`peek()` returns the last-pushed element, or undefined if the stack is empty.
 
-**pop()** removes the last-pushed element. Returns the removed element, or undefined if the stack is empty.
+`pop()` removes the last-pushed element. Returns the removed element, or undefined if the stack is empty.
 
-**push(element)** adds the argument element to the (end of, or top of) the stack. Returns the stack itself.
+`push(element)` adds the argument element to the (end of, or top of) the stack. Returns the stack itself.
 
-# A note on *equals*, *hashCode* and *compare_fn*
+# A note on `equals`, `hashCode` and `compare_fn`
 
-To figure out whether any given object is contained in a collection, the collection must have a way of testing whether two objects are equal to one another. This is done by an *equals* function. If you do not provide an *equals(obj)* function on the objects that you add to the collection then a default implementation is used that (via object reflection) works just fine (in most cases). However, you might want to provide an *equals(obj)* function on your objects to speed up performance (since object reflection is not particularly fast). Note that *a.equals(b)* and *b.equals(a)* must return the same value.
+To figure out whether any given object is contained in a collection, the collection must have a way of testing whether two objects are equal to one another. This is done by an `equals` function. If you do not provide an `equals(obj)` function on the objects that you add to the collection then a default implementation is used that (via object reflection) works just fine (in most cases). However, you might want to provide an `equals(obj)` function on your objects to speed up performance (since object reflection is not particularly fast). Note that `a.equals(b)` and `b.equals(a)` must return the same value.
 
-Similary, to index elements efficiently within a collection, the collection must have a way of creating indexes (or hash codes) for the objects to be added to the collection. This is done by a *hashCode* function. If you do not provide a *hashCode* function on the objects that you add to the collection then a default implementation is used that (via object reflection) works just fine (in most cases). However, you might want to provide an *hashCode(obj)* function on your objects to speed up performance (since object reflection is not particularly fast). Note that if *a.equals(b)* is true then *a.hashCode() === b.hashCode()* must be true as well. Writing a good *hashCode* function takes some skill, but you can use the example below as inspiration. You can also find plenty of help online.
+Similary, to index elements efficiently within a collection, the collection must have a way of creating indexes (or hash codes) for the objects to be added to the collection. This is done by a `hashCode` function. If you do not provide a `hashCode` function on the objects that you add to the collection then a default implementation is used that (via object reflection) works just fine (in most cases). However, you might want to provide an `hashCode(obj)*` function on your objects to speed up performance (since object reflection is not particularly fast). Note that if `a.equals(b)` is true then `a.hashCode() === b.hashCode()` must be true as well. Writing a good `hashCode` function takes some skill, but you can use the example below as inspiration. You can also find plenty of help online.
 
-Lastly, some collections need sorting. For example, the [PriorityQueue](#PriorityQueue) keeps its elements in priority order. Such sorting is done by a "compare_fn" function. If you do not provide a "compare_fn" then a default implementation is used that uses natural ordering (converting objects to strings if necessary). However, you might want to provide a *compare_fn(obj1, obj2)* function for greater flexibility and/or to speed up performance (since e.g. stringification is not particularly fast). The *compare_fn(obj1, obj2)* function must return a value as follows:
+Lastly, some collections are sorted. For example, the [PriorityQueue](#PriorityQueue) keeps its elements in priority order. Such sorting is done by a `compare_fn` function. If you do not provide a `compare_fn` then a default implementation is used that uses natural ordering (converting non-numbers to strings as necessary). However, you might want to provide a `compare_fn(obj1, obj2)` function for greater flexibility and/or to speed up performance (since e.g. stringification might not be fast enough for your needs). The `compare_fn(obj1, obj2)` function must return a value as follows:
 - Less than 0 (zero) if obj1 comes before obj2.
-- 0 (zero) if obj1 and obj2 have the same sorting order. Normally, to be consistent with the *equals()* function mentioned above, then if *obj1.equals(obj2)* is true then *compare_fn(obj1, obj2) == 0* must be true as well.
+- 0 (zero) if obj1 and obj2 have the same sorting order. Normally, to be consistent with the `equals()` function mentioned above, then if `obj1.equals(obj2)` is true then `compare_fn(obj1, obj2) === 0` must be true as well.
 - Greater than 0 (zero) if obj1 comes after obj2.
 
-Here is an example of *equals*, *hashCode* and *compare_fn* implementations:
+Here is an example of `equals`, `hashCode` and `compare_fn` implementations:
 
 ```javascript
 const Collections = require('ncollections');
