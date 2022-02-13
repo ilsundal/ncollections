@@ -200,6 +200,10 @@ class ListTest extends ListishTest {
       let methodCall = () => list.indexOf(undefined);
       assert.throws(methodCall, IllegalArgumentException);
     });
+    it('[1,null,2] index null -> 1', function() {
+      let list = test.newInstance([1,null,2]);
+      assert(list.indexOf(null) === 1);
+    });
     it('[1,2,3,2,1] index 4 -> undefined', function() {
       let list = test.newInstance([1,2,3,2,1]);
       assert(list.indexOf(4) === undefined);
@@ -272,6 +276,15 @@ class ListTest extends ListishTest {
       let list = test.newInstance();
       let methodCall = () => list.remove(undefined);
       assert.throws(methodCall, IllegalArgumentException);
+    });
+    it('[] - null -> false', function() {
+      let list = test.newInstance();
+      assert(list.remove(null) === false);
+    });
+    it('[1,null,2] - null -> true & [1,2]', function() {
+      let list = test.newInstance([1,null,2]);
+      assert(list.remove(null) === true);
+      assert(Util.equals(list.toArray(), [1,2]));
     });
     it('[] - 1 -> false', function() {
       let list = test.newInstance();

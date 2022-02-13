@@ -67,10 +67,20 @@ class MapTest extends CollectionTest {
       let methodCall = () => map.containsKey(undefined);
       assert.throws(methodCall, IllegalArgumentException);
     });
+    it('{1->2} contains null -> false', function() {
+      let map = test.newInstance();
+      map.put(1,2);
+      assert(map.containsKey(null) === false);
+    });
+    it('{null->2} contains null -> false', function() {
+      let map = test.newInstance();
+      map.put(null,2);
+      assert(map.containsKey(null) === true);
+    });
     it('{1->2} contains 1 -> true', function() {
       let map = test.newInstance();
       map.put(1,2);
-      assert(map.containsKey(1));
+      assert(map.containsKey(1) === true);
     });
     it('{1->2} contains 2 -> false', function() {
       let map = test.newInstance();
@@ -84,6 +94,16 @@ class MapTest extends CollectionTest {
       let map = test.newInstance();
       let methodCall = () => map.containsValue(undefined);
       assert.throws(methodCall, IllegalArgumentException);
+    });
+    it('{1->2} contains null -> false', function() {
+      let map = test.newInstance();
+      map.put(1,2);
+      assert(map.containsValue(null) === false);
+    });
+    it('{1->null} contains null -> false', function() {
+      let map = test.newInstance();
+      map.put(1,null);
+      assert(map.containsValue(null) === true);
     });
     it('{1->2} contains 2 -> true', function() {
       let map = test.newInstance();
@@ -212,6 +232,18 @@ class MapTest extends CollectionTest {
       assert(map.size() === 1);
       assert(map.get(1) === 2);
     });
+    it('{} + (null->2) -> undefined & {null->2}', function() {
+      let map = test.newInstance();
+      assert(map.put(null,2) === undefined);
+      assert(map.size() === 1);
+      assert(map.get(null) === 2);
+    });
+    it('{} + (1->null) -> undefined & {1->null}', function() {
+      let map = test.newInstance();
+      assert(map.put(1,null) === undefined);
+      assert(map.size() === 1);
+      assert(map.get(1) === null);
+    });
     it('{1.>2} + (1->3) -> 2 & {1->3}', function() {
       let map = test.newInstance();
       map.put(1,2);
@@ -248,6 +280,12 @@ class MapTest extends CollectionTest {
       map.put(1,2);
       let methodCall = () => map.remove(undefined);
       assert.throws(methodCall, IllegalArgumentException);
+    });
+    it('{null->2} - null -> 2 & {}', function() {
+      let map = test.newInstance();
+      map.put(null,2);
+      assert(map.remove(null) === 2);
+      assert(map.size() === 0);
     });
     it('{1->2} - 2 -> undefined & {1->2}', function() {
       let map = test.newInstance();

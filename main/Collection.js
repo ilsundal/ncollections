@@ -7,23 +7,23 @@ const Util = require(__dirname + '/Util.js');
 class Collection {
 
   static equals_fn = function(element1, element2) {
-    if ((typeof element1 == 'object') && (typeof element1.equals == 'function'))
+    if ((typeof element1 === 'object') && (element1 != null)&& (typeof element1.equals === 'function'))
       return element1.equals(element2);
-    if ((typeof element2 == 'object') && (typeof element2.equals == 'function'))
+    if ((typeof element2 === 'object') && (element2 != null)&& (typeof element2.equals === 'function'))
       return element2.equals(element1);
     return Util.equals(element1, element2);
   }
 
   static hash_code_fn = function(element) {
-    if ((typeof element == 'object') && (typeof element.hashCode == 'function'))
+    if ((typeof element === 'object') && (element != null) && (typeof element.hashCode === 'function'))
       return element.hashCode();
     return Util.hashCode(element);
   }
 
   static compare_fn = function(element1, element2) {
-    if ((typeof element1 == 'object') && (typeof element1.compare == 'function'))
+    if ((typeof element1 === 'object') && (element1 != null) && (typeof element1.compare === 'function'))
       return element1.compare(element2);
-    if ((typeof element2 == 'object') && (typeof element2.compare == 'function'))
+    if ((typeof element2 === 'object') && (element2 != null) && (typeof element2.compare === 'function'))
       return element2.compare(element1);
     return Util.compare(element1, element2);
   }

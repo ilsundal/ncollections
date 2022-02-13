@@ -25,7 +25,6 @@ class RedBlackBST {
   static BLACK = false;
 
   root; // root of the BST
-
   compare_fn;
 
   constructor(compare_fn) {
@@ -36,28 +35,24 @@ class RedBlackBST {
     if (this.isRed(h.right) && !this.isRed(h.left))    h = this.rotateLeft(h);
     if (this.isRed(h.left) && this.isRed(h.left.left)) h = this.rotateRight(h);
     if (this.isRed(h.left) && this.isRed(h.right))     this.flipColors(h);
-
     h.size = this.size0(h.left) + this.size0(h.right) + 1;
     return h;
   }
 
   contains(key) {
-    if (key == undefined) throw new Error("key is undefined");
+    if (key === undefined) throw new Error("key is undefined");
     return this.get(key) !== undefined;
   }
 
   delete(key) { 
-    if (key == undefined) throw new Error("key is undefined");
+    if (key === undefined) throw new Error("key is undefined");
     let old_value = this.get(key);
     if (old_value === undefined)
       return undefined;
-
     if (!this.isRed(this.root.left) && !this.isRed(this.root.right))
       this.root.color = RedBlackBST.RED;
-
     this.root = this.delete0(this.root, key);
     if (!this.isEmpty()) this.root.color = RedBlackBST.BLACK;
-
     return old_value;
   }
 
@@ -67,8 +62,7 @@ class RedBlackBST {
       if (!this.isRed(h.left) && !this.isRed(h.left.left))
         h = this.moveRedLeft(h);
       h.left = this.delete0(h.left, key);
-    }
-    else {
+    } else {
       if (this.isRed(h.left))
         h = this.rotateRight(h);
       if (this.compare_fn(key, h.key) == 0 && (h.right == null))
@@ -88,55 +82,41 @@ class RedBlackBST {
 
   deleteMin() {
     if (this.isEmpty()) throw new Error("empty");
-
     let min_node = this.min();
-
     if (!this.isRed(this.root.left) && !this.isRed(this.root.right))
       this.root.color = RedBlackBST.RED;
-
     this.root = this.deleteMin0(this.root);
     if (!this.isEmpty()) this.root.color = RedBlackBST.BLACK;
-    
     return min_node;
   }
 
   deleteMin0(h) { 
     if (h.left == null)
       return null;
-
     if (!this.isRed(h.left) && !this.isRed(h.left.left))
       h = this.moveRedLeft(h);
-
     h.left = this.deleteMin0(h.left);
     return this.balance(h);
   }
 
   deleteMax() {
     if (this.isEmpty()) throw new Error("empty");
-
     let max_node = this.max();
-
     if (!this.isRed(this.root.left) && !this.isRed(this.root.right))
       this.root.color = RedBlackBST.RED;
-
     this.root = this.deleteMax0(this.root);
     if (!this.isEmpty()) this.root.color = RedBlackBST.BLACK;
-
     return max_node;
   }
 
   deleteMax0(h) { 
     if (this.isRed(h.left))
       h = this.rotateRight(h);
-
     if (h.right == null)
       return null;
-
     if (!this.isRed(h.right) && !this.isRed(h.right.left))
       h = this.moveRedRight(h);
-
     h.right = this.deleteMax0(h.right);
-
     return this.balance(h);
   }
 
@@ -147,7 +127,7 @@ class RedBlackBST {
   }
 
   get(key) {
-    if (key == undefined) throw new Error("key is undefined");
+    if (key === undefined) throw new Error("key is undefined");
     return this.get0(this.root, key);
   }
 
@@ -207,27 +187,23 @@ class RedBlackBST {
   }
 
   put(key, val) {
+    if (key === undefined) throw new Error("key is undefined");
     let old_value = this.get(key);
-
     this.root = this.put0(this.root, key, val);
     this.root.color = RedBlackBST.BLACK;
-    
     return old_value;
   }
 
   put0(h, key, val) { 
     if (h == null) return new Node(key, val, RedBlackBST.RED, 1);
-
     let cmp = this.compare_fn(key, h.key);
     if      (cmp < 0) h.left  = this.put0(h.left,  key, val); 
     else if (cmp > 0) h.right = this.put0(h.right, key, val); 
     else              h.val   = val;
-
     if (this.isRed(h.right) && !this.isRed(h.left))      h = this.rotateLeft(h);
     if (this.isRed(h.left)  &&  this.isRed(h.left.left)) h = this.rotateRight(h);
     if (this.isRed(h.left)  &&  this.isRed(h.right))     this.flipColors(h);
     h.size = this.size0(h.left) + this.size0(h.right) + 1;
-
     return h;
   }
 

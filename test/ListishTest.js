@@ -127,6 +127,10 @@ class ListishTest extends CollectionTest {
       let collection = test.newInstance();
       assert(collection.toString() === '[]');
     });
+    it('{null} -> "[null]"', function() {
+      let collection = test.newInstance([null]);
+      assert(collection.toString() === '[null]');
+    });
     it('["1",2,3] -> "[\"1\",2,3]"', function() {
       let collection = test.newInstance(["1",2,3]);
       assert(collection.toString() === '["1",2,3]');
@@ -139,6 +143,11 @@ class ListishTest extends CollectionTest {
       let collection = test.newInstance();
       let methodCall = () => test.add_fn(collection, undefined);
       assert.throws(methodCall, IllegalArgumentException);
+    });
+    it('[] + null ->  [null]', function() {
+      let collection = test.newInstance();
+      assert(test.add_fn(collection, null) === collection);
+      assert(Util.equals(collection.toArray(), [null]));
     });
     it('[] + 1 -> [1]', function() {
       let collection = test.newInstance();

@@ -7,10 +7,10 @@
     A values greather than 1 if obj1 is greater than obj2
 */
 function compare(obj1, obj2) {
-  if ((obj1 == null) && (obj2 == null))
+  if ((obj1 === null) && (obj2 === null))
     return 0;
-  if ((obj1 == null) || (obj2 == null))
-    throw new Error('null value');
+  if ((obj1 === null) || (obj2 === null))
+    return (obj1 === null) ? -1 : 1; // null is less than non-value
   if ((typeof obj1 == 'number') && (typeof obj2 == 'number'))
     return obj1 - obj2;
   if ((typeof obj1 == 'string') && (typeof obj2 == 'string'))

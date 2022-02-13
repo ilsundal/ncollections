@@ -42,6 +42,11 @@ class SetTest extends CollectionTest {
       let methodCall = () => set.add(undefined);
       assert.throws(methodCall, IllegalArgumentException);
     });
+    it('{} + null -> true & {null}', function() {
+      let set = test.newInstance();
+      assert(set.add(null) === true);
+      assert(Util.equals(set.toArray(), [null]));
+    });
     it('{} + 1 -> true & {1}', function() {
       let set = test.newInstance();
       assert(set.add(1) === true);
@@ -116,6 +121,14 @@ class SetTest extends CollectionTest {
       let set = test.newInstance([1]);
       let methodCall = () => set.contains(undefined);
       assert.throws(methodCall, IllegalArgumentException);
+    });
+    it('{} contains null -> false', function() {
+      let set = test.newInstance();
+      assert(set.contains(null) === false);
+    });
+    it('{null} contains null -> true', function() {
+      let set = test.newInstance([null]);
+      assert(set.contains(null) === true);
     });
     it('{} contains 1 -> false', function() {
       let set = test.newInstance();
@@ -202,6 +215,15 @@ class SetTest extends CollectionTest {
       let set = test.newInstance([1]);
       let methodCall = () => set.remove(undefined);
       assert.throws(methodCall, IllegalArgumentException);
+    });
+    it('{} - null -> false', function() {
+      let set = test.newInstance();
+      assert(set.remove(null) === false);
+    });
+    it('{1,null,2} - null -> true & {1,2}', function() {
+      let set = test.newInstance([1,null,2]);
+      assert(set.remove(null) === true);
+      assert(Util.equals(set.toArray().sort(), [1,2]));
     });
     it('{} - 1 -> false', function() {
       let set = test.newInstance();
