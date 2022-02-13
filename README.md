@@ -131,7 +131,7 @@ In both cases, an optional `options` object can be provided as an argument to fu
 let tree_set = new TreeSet({ compare_fn : your_compare_fn });
 ```
 
-The default element sorting is based on natural ordering. Number elemeents are ordered ascending, and non-number elements are converted to strings and then ordered according to their ascending lexocographic order. Finally, a `null` value iess considered less than non-`null` value.
+The default element sorting is based on natural ordering: Number elements are ordered ascending, while non-number elements are converted to strings and then ordered according to their ascending lexocographic order. Finally, a `null` element is considered less than non-`null` element.
 
 A Collection implements the [iteration and iterable protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols) so you can easily loop over its elements. For example:
 
