@@ -1,2 +1,3 @@
 TODO FEATURES
-- Heaps?
+- Bags
+- Heaps? (could also be used by PriorityQueue)

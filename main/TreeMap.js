@@ -6,12 +6,11 @@ const NoSuchElementException = require(__dirname + '/NoSuchElementException.js')
 const SortedMap = require(__dirname + '/SortedMap.js');
 const Stack = require(__dirname + '/Stack.js');
 
-const RedBlackBST = require(__dirname + '/RedBlackBST.js');
+const RedBlackBST = require(__dirname + '/ds/RedBlackBST.js');
 
 // based on https://algs4.cs.princeton.edu/33balanced/RedBlackBST.java.html
 // as referenced on https://algs4.cs.princeton.edu/33balanced/
 
-// RedBlackBST
 class TreeMap extends SortedMap {
 
   rbbst;
@@ -47,14 +46,14 @@ class TreeMap extends SortedMap {
   getFirst() {
     if (this.isEmpty())
       throw new NoSuchElementException();
-    let min_node = this.rbbst.minNode();
+    let min_node = this.rbbst.min();
     return { key: min_node.key, value: min_node.val };
   }
 
   getLast() {
     if (this.isEmpty())
       throw new NoSuchElementException();
-    let max_node = this.rbbst.maxNode();
+    let max_node = this.rbbst.max();
     return { key: max_node.key, value: max_node.val };
   }
 
