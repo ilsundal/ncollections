@@ -122,7 +122,7 @@ let hash_set1 = new Collections.newHashSet();
 
 // Method 2: Using constructor directly
 const HashSet = require('ncollections').HashSet;
-let hash_set1 = new HashSet();
+let hash_set2 = new HashSet();
 ```
 
 In both cases, an optional `options` object can be provided as an argument to further customize how the collection should work. For example, sorted collections (such as the [TreeSet](#TreeSet)) uses a `compare_fn` to facilitate custom sorting. For example:
