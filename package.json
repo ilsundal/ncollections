@@ -44,6 +44,6 @@
   },
   "homepage": "https://github.com/ilsundal/ncollections#readme",
   "devDependencies": {
-    "mocha": "^9.2.0"
+    "mocha": "^10.2.0"
   }
 }
